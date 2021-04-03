@@ -1,4 +1,4 @@
-FROM php:7.3.6-fpm-stretch
+FROM php:8.0.3-fpm-buster
 
 ARG xdebug=false
 ARG tinker=false
