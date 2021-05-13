@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Requests\Game;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class CreateGameRequest extends FormRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'userName' => 'required|string',
+            'expansionIds' => 'required|array',
+            'expansionIds.*' => 'exists:expansions,id'
+        ];
+    }
+}

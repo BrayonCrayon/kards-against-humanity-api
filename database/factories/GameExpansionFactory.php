@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Game;
+use App\Models\GameExpansion;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class GameExpansionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = GameExpansion::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +23,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'remember_token' => Str::random(10),
+            'game_id' => Game::factory(),
         ];
     }
-
 }

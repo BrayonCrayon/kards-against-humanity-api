@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Game;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use Nubs\RandomNameGenerator\All;
 
-class UserFactory extends Factory
+class GameFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Game::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,9 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $generator = All::create();
         return [
-            'name' => $this->faker->name,
-            'remember_token' => Str::random(10),
+            'name' => $generator->getName()
         ];
     }
-
 }
