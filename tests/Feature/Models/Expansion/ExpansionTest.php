@@ -1,14 +1,22 @@
 <?php
 
-namespace Tests\Unit\Expansion;
+namespace Tests\Feature\Models\Expansion;
 
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\WhiteCard;
-use tests\TestCase;
+use Tests\TestCase;
 
-class ExpansionRelationshipTest extends TestCase
+class ExpansionTest extends TestCase
 {
+    /** @test */
+    public function scope_query_ids_in_brings_back_correct_expansion()
+    {
+        $expansion = Expansion::first();
+        $this->assertEquals(1, Expansion::idsIn([$expansion->id])->count());
+        $this->assertEquals($expansion->id, Expansion::idsIn([$expansion->id])->first()->id);
+    }
+
 
     /** @test */
     public function white_cards_relationship_brings_back_white_card_type()

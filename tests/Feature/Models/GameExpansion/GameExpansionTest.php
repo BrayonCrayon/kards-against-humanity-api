@@ -1,15 +1,14 @@
 <?php
 
-namespace Tests\Unit\GameExpansion;
+namespace Tests\Feature\Models\GameExpansion;
 
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameExpansion;
-use tests\TestCase;
+use Tests\TestCase;
 
-class GameExpansionRelationshipTest extends TestCase
+class GameExpansionTest extends TestCase
 {
-
     /** @test */
     public function game_relationship_brings_back_game_type()
     {

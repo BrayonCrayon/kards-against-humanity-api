@@ -1,14 +1,13 @@
 <?php
 
-namespace Tests\Unit\BlackCard;
+namespace Tests\Feature\Models\BlackCard;
 
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use Tests\TestCase;
 
-class BlackCardRelationshipTest extends TestCase
+class BlackCardTest extends TestCase
 {
-
     /** @test */
     public function expansion_relationship_brings_back_expansion_type()
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\WhiteCard;
+namespace Tests\Feature\Models\WhiteCard;
 
 use App\Models\Expansion;
 use App\Models\WhiteCard;
-use tests\TestCase;
+use Tests\TestCase;
 
-class WhiteCardRelationshipTest extends TestCase
+class WhiteCardTest extends TestCase
 {
 
     /** @test */

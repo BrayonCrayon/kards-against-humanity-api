@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\User;
+namespace Tests\Feature\Models\User;
 
 use App\Models\Game;
 use App\Models\User;
-use tests\TestCase;
+use Tests\TestCase;
 
-class UserRelationshipTest extends TestCase
+class UserTest extends TestCase
 {
 
     /** @test */
