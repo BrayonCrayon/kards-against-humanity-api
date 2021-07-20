@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Game\CreateGameController;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
+/*
+ *****************************
+ **** Game Routes         ****
+ *****************************
+ */
+Route::post('/game/store', CreateGameController::class)->name('game.store');

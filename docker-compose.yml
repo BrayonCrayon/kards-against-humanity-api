@@ -27,7 +27,7 @@ services:
   database:
     image: 'postgres:latest'
     volumes:
-      - 'dbdata:/var/lib/postgresql/data'
+      - '/dbData:/var/lib/postgresql/data'
     ports:
       - '3307:5432'
     environment:

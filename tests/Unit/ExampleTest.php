@@ -6,13 +6,10 @@ use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    /** @test */
+    public function it_tests_something()
     {
         $this->assertTrue(true);
     }
+
 }
