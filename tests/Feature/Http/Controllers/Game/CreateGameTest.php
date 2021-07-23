@@ -76,7 +76,7 @@ class CreateGameTest extends TestCase
     public function it_assigns_users_when_game_is_created()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $expansionIds = Expansion::first()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
             'userName'   => $userName,
             'expansionIds' => $expansionIds->toArray()
@@ -92,14 +92,16 @@ class CreateGameTest extends TestCase
     /** @test */
     public function it_gives_users_cards_when_a_game_is_created()
     {
-        $userName = 'jDoe';
+        $userName = $this->faker->userName;
+        $expansionIds = Expansion::first()->pluck('id');
 
         $this->postJson(route('api.game.store'), [
-            'userName' => $userName
-        ]);
+            'userName' => $userName,
+            'expansionIds' => $expansionIds
+        ])->assertOk();
         $createdUser = User::where('name', $userName)->first();
 
-        $this->assertCount(7, $createdUser->cards);
+        $this->assertCount(7, $createdUser->whiteCards);
     }
 
     /** @test */
@@ -138,7 +140,12 @@ class CreateGameTest extends TestCase
                 'game' => [
                     'id',
                     'name'
-                ]
+                ],
+                'cards' => [
+                    'id',
+                    'text',
+                    'expansion_id'
+                ],
             ]);
     }
 }

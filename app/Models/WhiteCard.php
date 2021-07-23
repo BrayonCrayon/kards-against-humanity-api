@@ -22,4 +22,9 @@ class WhiteCard extends Model
     {
         return $this->belongsTo(Expansion::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_game_white_cards');
+    }
 }
