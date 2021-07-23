@@ -25,9 +25,12 @@ class CreateGameController extends Controller
             'name' => $request->get('userName')
         ]);
         Auth::login($user);
+        $game = $this->gameService->createGame($user, $request->get('expansionIds'));
+        $user->load('whiteCards');
+
         return response()->json([
             'user' => $user,
-            'game' => $this->gameService->createGame($user, $request->get('expansionIds'))
+            'game' => $game
         ]);
     }
 }
