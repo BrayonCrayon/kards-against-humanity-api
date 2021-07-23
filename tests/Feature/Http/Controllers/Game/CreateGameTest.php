@@ -90,6 +90,19 @@ class CreateGameTest extends TestCase
     }
 
     /** @test */
+    public function it_gives_users_cards_when_a_game_is_created()
+    {
+        $userName = 'jDoe';
+
+        $this->postJson(route('api.game.store'), [
+            'userName' => $userName
+        ]);
+        $createdUser = User::where('name', $userName)->first();
+
+        $this->assertCount(7, $createdUser->cards);
+    }
+
+    /** @test */
     public function it_assigns_selected_expansions_when_game_is_created()
     {
         $userName = $this->faker->userName;
