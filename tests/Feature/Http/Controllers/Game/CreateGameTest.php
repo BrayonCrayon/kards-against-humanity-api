@@ -93,15 +93,18 @@ class CreateGameTest extends TestCase
     public function it_gives_users_cards_when_a_game_is_created()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::first()->pluck('id');
+        $expansionId = Expansion::first()->id;
+        dd($expansionId);
 
         $this->postJson(route('api.game.store'), [
             'userName' => $userName,
-            'expansionIds' => $expansionIds
+            'expansionIds' => $expansionId
         ])->assertOk();
         $createdUser = User::where('name', $userName)->first();
 
         $this->assertCount(7, $createdUser->whiteCards);
+        dd($createdUser->whiteCards->pluck('expansion_id'), $expansionId);
+        $createdUser->whiteCards->each(fn ($item) => $this->equal($expansionId, $item->expansion_id));
     }
 
     /** @test */
