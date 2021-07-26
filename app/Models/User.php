@@ -42,4 +42,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(WhiteCard::class, 'user_game_white_cards');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function blackCards()
+    {
+        return $this->belongsToMany(BlackCard::class, 'user_game_black_cards');
+    }
 }
