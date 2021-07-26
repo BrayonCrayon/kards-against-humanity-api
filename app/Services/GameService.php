@@ -28,14 +28,15 @@ class GameService
 
         $game->expansions()->saveMany(Expansion::idsIn($expansionIds)->get());
 
-        $this->grabWhiteCards($user, $game);
+        $this->grabWhiteCards($user, $game, $expansionIds);
 
         return $game;
     }
 
-    public function grabWhiteCards($user, $game)
+    public function grabWhiteCards($user, $game, $expansionIds)
     {
-        $pickedCards = WhiteCard::inRandomOrder()->limit(Game::HAND_LIMIT)->get();
+        $pickedCards = WhiteCard::whereIn('expansion_id', $expansionIds)
+            ->inRandomOrder()->limit(Game::HAND_LIMIT)->get();
 
         $pickedCards->each(fn ($item) =>
             UserGameWhiteCards::create([
