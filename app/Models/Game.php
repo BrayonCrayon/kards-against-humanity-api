@@ -20,6 +20,8 @@ class Game extends Model
 
     protected $primaryKey = 'id';
 
+    const HAND_LIMIT = 7;
+
     /*
      ********************************
      *        Relationships         *

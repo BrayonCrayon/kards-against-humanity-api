@@ -4,8 +4,12 @@
 namespace App\Services;
 
 
+use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
+use App\Models\UserGameBlackCards;
+use App\Models\UserGameWhiteCards;
+use App\Models\WhiteCard;
 use Nubs\RandomNameGenerator\All as NameGenerator;
 
 class GameService
@@ -26,6 +30,35 @@ class GameService
 
         $game->expansions()->saveMany(Expansion::idsIn($expansionIds)->get());
 
+        $this->grabWhiteCards($user, $game, $expansionIds);
+        $this->grabBlackCards($user, $game, $expansionIds);
+
         return $game;
+    }
+
+    public function grabWhiteCards($user, $game, $expansionIds)
+    {
+        $pickedCards = WhiteCard::whereIn('expansion_id', $expansionIds)
+            ->inRandomOrder()->limit(Game::HAND_LIMIT)->get();
+
+        $pickedCards->each(fn ($item) =>
+            UserGameWhiteCards::create([
+                'game_id' => $game->id,
+                'user_id' => $user->id,
+                'white_card_id' => $item->id
+            ])
+        );
+    }
+
+    public function grabBlackCards($user, $game, $expansionIds)
+    {
+        $pickedCard = BlackCard::whereIn('expansion_id', $expansionIds)
+            ->inRandomOrder()->first();
+
+        UserGameBlackCards::create([
+            'game_id' => $game->id,
+            'user_id' => $user->id,
+            'black_card_id' => $pickedCard->id
+        ]);
     }
 }

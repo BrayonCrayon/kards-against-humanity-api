@@ -76,7 +76,7 @@ class CreateGameTest extends TestCase
     public function it_assigns_users_when_game_is_created()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $expansionIds = Expansion::first()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
             'userName'   => $userName,
             'expansionIds' => $expansionIds->toArray()
@@ -87,6 +87,24 @@ class CreateGameTest extends TestCase
             'game_id' => $response['game']->id,
             'user_id' => $response['user']->id
         ]);
+    }
+
+    /** @test */
+    public function it_gives_users_cards_when_a_game_is_created()
+    {
+        $userName = $this->faker->userName;
+        $expansionId = Expansion::query()->orderByDesc('id')->first()->id;
+
+        $this->postJson(route('api.game.store'), [
+            'userName' => $userName,
+            'expansionIds' => [$expansionId]
+        ])->assertOk();
+        $createdUser = User::where('name', $userName)->first();
+
+        $this->assertCount(7, $createdUser->whiteCards);
+        $createdUser->whiteCards->each(function ($item) use ($expansionId) {
+            $this->assertEquals($expansionId, $item->expansion_id);
+        });
     }
 
     /** @test */
@@ -113,19 +131,51 @@ class CreateGameTest extends TestCase
     {
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
-        $this->postJson(route('api.game.store'), [
+        $response = $this->postJson(route('api.game.store'), [
             'userName'   => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk()
             ->assertJsonStructure([
                 'user' => [
                     'id',
-                    'name'
+                    'name',
+                    'white_cards' => [
+                        [
+                            'id',
+                            'text',
+                            'expansion_id'
+                        ],
+                    ],
+                    'black_cards' => [
+                        [
+                            'id',
+                            'text',
+                            'expansion_id'
+                        ],
+                    ]
                 ],
                 'game' => [
                     'id',
                     'name'
-                ]
+                ],
             ]);
+    }
+
+    /** @test */
+    public function it_gives_user_black_card_when_game_is_created()
+    {
+        $userName = $this->faker->userName;
+        $expansionId = Expansion::query()->orderByDesc('id')->first()->id;
+
+        $this->postJson(route('api.game.store'), [
+            'userName' => $userName,
+            'expansionIds' => [$expansionId]
+        ])->assertOk();
+        $createdUser = User::where('name', $userName)->first();
+
+        $this->assertCount(1, $createdUser->blackCards);
+        $createdUser->blackCards->each(function ($item) use ($expansionId) {
+            $this->assertEquals($expansionId, $item->expansion_id);
+        });
     }
 }
