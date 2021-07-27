@@ -145,6 +145,13 @@ class CreateGameTest extends TestCase
                             'text',
                             'expansion_id'
                         ],
+                    ],
+                    'black_cards' => [
+                        [
+                            'id',
+                            'text',
+                            'expansion_id'
+                        ],
                     ]
                 ],
                 'game' => [
