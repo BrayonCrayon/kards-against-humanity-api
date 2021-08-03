@@ -16,10 +16,11 @@ class JoinGameTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $expansionIds = Expansion::first()->pluck('id');
+        $expansionIds = Expansion::all()->pluck('id')->toArray();
         $user = User::factory()->create();
         $this->game = Game::factory()->create();
         $this->game->users()->save($user);
+        $this->game->expansions()->saveMany(Expansion::idsIn($expansionIds)->get());
     }
 
     /** @test */
@@ -34,6 +35,9 @@ class JoinGameTest extends TestCase
     /** @test */
     public function it_gives_a_user_white_cards_when_joining_a_game()
     {
-
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+            'userName' => $this->faker->userName
+        ])->assertOK();
+        $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse['user']['id'])->whiteCards);
     }
 }

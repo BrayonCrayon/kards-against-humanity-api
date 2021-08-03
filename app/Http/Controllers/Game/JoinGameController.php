@@ -21,6 +21,7 @@ class JoinGameController extends Controller
         ]);
         Auth::login($user);
 
+        $this->gameService->grabWhiteCards($user, $game, $game->expansions->pluck('id')->toArray());
         $this->gameService->joinGame($game, $user);
 
         $user->load('whiteCards');
