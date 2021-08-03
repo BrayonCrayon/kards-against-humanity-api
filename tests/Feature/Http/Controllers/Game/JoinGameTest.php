@@ -10,23 +10,30 @@ use Tests\TestCase;
 
 class JoinGameTest extends TestCase
 {
-    /** @test */
-    public function it_adds_a_user_to_a_game()
+    private $game;
+    protected function setUp(): void
     {
-        $this->withoutExceptionHandling();
+        parent::setUp();
         $expansionIds = Expansion::first()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
             'userName'   => $this->faker->userName,
             'expansionIds' => $expansionIds->toArray()
-        ])->assertOk()
-        ->getOriginalContent();
+        ])->getOriginalContent();
+        $this->game = $response['game'];
+    }
 
-        $gameId = $response['game']->id;
-
-        // new user joins the game
-        $joinGameResponse = $this->postJson(route('api.game.join', $response['game']->id), [
+    /** @test */
+    public function it_adds_a_user_to_a_game()
+    {
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
             'userName' => $this->faker->userName
         ])->assertOK();
-        $this->assertCount(1, GameUser::where('game_id', $gameId)->where('user_id', $joinGameResponse['user']['id'])->get());
+        $this->assertCount(1, GameUser::where('game_id', $this->game->id)->where('user_id', $joinGameResponse['user']['id'])->get());
+    }
+
+    /** @test */
+    public function it_gives_a_user_white_cards_when_joining_a_game()
+    {
+
     }
 }
