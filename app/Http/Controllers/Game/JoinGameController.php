@@ -21,10 +21,14 @@ class JoinGameController extends Controller
         ]);
         Auth::login($user);
 
-//        $gameService->joinGame($game, $user);
+        $this->gameService->joinGame($game, $user);
 
-        $game = $this->gameService->createGame($user, $request->get('expansionIds'));
         $user->load('whiteCards');
         $user->load('blackCards');
+
+        return response()->json([
+            'user' => $user,
+            'game' => $game
+        ]);
     }
 }
