@@ -6,6 +6,7 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
+use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -21,6 +22,9 @@ class JoinGameTest extends TestCase
         $this->game = Game::factory()->create();
         $this->game->users()->save($user);
         $this->game->expansions()->saveMany(Expansion::idsIn($expansionIds)->get());
+
+        $gameService = new GameService();
+        $gameService->grabBlackCards($user, $this->game, $expansionIds);
     }
 
     /** @test */
