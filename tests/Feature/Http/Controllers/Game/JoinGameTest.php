@@ -3,7 +3,9 @@
 namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Models\Expansion;
+use App\Models\Game;
 use App\Models\GameUser;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,11 +17,9 @@ class JoinGameTest extends TestCase
     {
         parent::setUp();
         $expansionIds = Expansion::first()->pluck('id');
-        $response = $this->postJson(route('api.game.store'), [
-            'userName'   => $this->faker->userName,
-            'expansionIds' => $expansionIds->toArray()
-        ])->getOriginalContent();
-        $this->game = $response['game'];
+        $user = User::factory()->create();
+        $this->game = Game::factory()->create();
+        $this->game->users()->save($user);
     }
 
     /** @test */
