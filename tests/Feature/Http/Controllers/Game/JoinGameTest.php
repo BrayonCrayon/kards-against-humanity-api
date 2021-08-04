@@ -15,6 +15,7 @@ class JoinGameTest extends TestCase
 {
     private $game;
     private $expansionIds;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -71,5 +72,53 @@ class JoinGameTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function it_returns_specified_json_structure()
+    {
+        $this->postJson(route('api.game.join', $this->game->id), [
+            'name' => 'foo'
+        ])->assertJsonStructure([
+                "game" => [
+                    "created_at",
+                    "deleted_at",
+                    "expansions" => [
+                        [
+                            "created_at",
+                            "id",
+                            "name",
+                            "pivot" => [
+                                "expansion_id",
+                                "game_id",
+                            ],
+                            "updated_at",
+                        ]
+                    ],
+                    "id",
+                    "name",
+                    "updated_at",
+                ],
+                "user" => [
+                    "black_cards",
+                    "created_at",
+                    "id",
+                    "name",
+                    "updated_at",
+                    "white_cards" => [
+                        [
+                            "created_at",
+                            "expansion_id",
+                            "id",
+                            "pivot" => [
+                                "user_id",
+                                "white_card_id"
+                            ],
+                            "text",
+                            "updated_at",
+                        ],
 
+                    ]
+                ]
+            ]
+        );
+    }
 }
