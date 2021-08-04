@@ -17,11 +17,11 @@ class JoinGameController extends Controller
     public function __invoke(JoinGameRequest $request, Game $game): JsonResponse
     {
         $user = User::create([
-            'name' => $request->get('userName')
+            'name' => $request->get('name')
         ]);
         Auth::login($user);
 
-        $this->gameService->grabWhiteCards($user, $game, $game->expansions->pluck('id')->toArray());
+    $this->gameService->grabWhiteCards($user, $game, $game->expansions->pluck('id')->toArray());
         $this->gameService->joinGame($game, $user);
 
         $user->load('whiteCards');

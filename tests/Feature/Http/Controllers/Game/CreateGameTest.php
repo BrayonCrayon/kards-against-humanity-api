@@ -15,7 +15,7 @@ class CreateGameTest extends TestCase
     {
         $expansionIds = Expansion::take(3)->get()->pluck('id');
         $this->postJson(route('api.game.store'), [
-            'userName' => "",
+            'name' => "",
             'expansionIds' => $expansionIds->toArray()
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
@@ -25,7 +25,7 @@ class CreateGameTest extends TestCase
     {
         $user = User::factory()->make();
         $this->postJson(route('api.game.store'), [
-            'userName'   => $user->name,
+            'name'   => $user->name,
             'expansionIds' => []
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
@@ -35,7 +35,7 @@ class CreateGameTest extends TestCase
     {
         $user = User::factory()->make();
         $this->postJson(route('api.game.store'), [
-            'userName'   => $user->name,
+            'name'   => $user->name,
             'expansionIds' => [-1]
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
@@ -46,7 +46,7 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $this->postJson(route('api.game.store'), [
-            'userName'   => $userName,
+            'name'   => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk();
 
@@ -61,7 +61,7 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'userName'   => $userName,
+            'name'   => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk()
         ->getOriginalContent();
@@ -78,7 +78,7 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::first()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'userName'   => $userName,
+            'name'   => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk()
             ->getOriginalContent();
@@ -96,7 +96,7 @@ class CreateGameTest extends TestCase
         $expansionId = Expansion::query()->orderByDesc('id')->first()->id;
 
         $this->postJson(route('api.game.store'), [
-            'userName' => $userName,
+            'name' => $userName,
             'expansionIds' => [$expansionId]
         ])->assertOk();
         $createdUser = User::where('name', $userName)->first();
@@ -113,7 +113,7 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'userName'   => $userName,
+            'name'   => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk()
             ->getOriginalContent();
@@ -132,7 +132,7 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'userName'   => $userName,
+            'name'   => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk()
             ->assertJsonStructure([
@@ -168,7 +168,7 @@ class CreateGameTest extends TestCase
         $expansionId = Expansion::query()->orderByDesc('id')->first()->id;
 
         $this->postJson(route('api.game.store'), [
-            'userName' => $userName,
+            'name' => $userName,
             'expansionIds' => [$expansionId]
         ])->assertOk();
         $createdUser = User::where('name', $userName)->first();

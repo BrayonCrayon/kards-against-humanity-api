@@ -14,7 +14,7 @@ class CreateGameRequest extends FormRequest
     public function rules()
     {
         return [
-            'userName' => 'required|string',
+            'name' => 'required|string',
             'expansionIds' => 'required|array',
             'expansionIds.*' => 'exists:expansions,id'
         ];

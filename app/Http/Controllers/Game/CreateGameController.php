@@ -22,7 +22,7 @@ class CreateGameController extends Controller
     public function __invoke(CreateGameRequest $request): JsonResponse
     {
         $user = User::create([
-            'name' => $request->get('userName')
+            'name' => $request->get('name')
         ]);
         Auth::login($user);
         $game = $this->gameService->createGame($user, $request->get('expansionIds'));
