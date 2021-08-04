@@ -18,8 +18,7 @@ class JoinGameTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->expansionIds = Expansion::where('id', 1)
-            ->pluck('id')->toArray();
+        $this->expansionIds = [Expansion::first()->id];
         $user = User::factory()->create();
         $this->game = Game::factory()->create();
         $this->game->users()->save($user);
@@ -61,5 +60,16 @@ class JoinGameTest extends TestCase
             $this->assertContains($id, $this->expansionIds);
         });
     }
+
+    /** @test */
+    public function it_validates_user_name_when_joining_a_game()
+    {
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+            'name' => ''
+        ])->assertJsonValidationErrors([
+            'name'
+        ]);
+    }
+
 
 }
