@@ -18,6 +18,7 @@ class UserGameWhiteCards extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignUuid('game_id')->references('id')->on('games');
             $table->foreignId('white_card_id')->references('id')->on('white_cards');
+            $table->boolean('selected')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
