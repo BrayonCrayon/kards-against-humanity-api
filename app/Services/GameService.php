@@ -7,6 +7,8 @@ namespace App\Services;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
+use App\Models\GameUser;
+use App\Models\User;
 use App\Models\UserGameBlackCards;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
@@ -59,6 +61,14 @@ class GameService
             'game_id' => $game->id,
             'user_id' => $user->id,
             'black_card_id' => $pickedCard->id
+        ]);
+    }
+
+    public function joinGame(Game $game, User $user)
+    {
+       return GameUser::create([
+            'game_id' => $game->id,
+            'user_id' => $user->id
         ]);
     }
 }

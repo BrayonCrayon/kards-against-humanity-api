@@ -5,7 +5,7 @@ services:
       context: ./
       dockerfile: environment/dockerfiles/app.dockerfile
       args:
-        xdebug: 'false'
+        xdebug: 'true'
         tinker: 'true'
     user: '1000:1000'
     volumes:

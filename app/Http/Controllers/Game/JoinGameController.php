@@ -3,29 +3,27 @@
 namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Game\CreateGameRequest;
+use App\Http\Requests\JoinGameRequest;
+use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
-class CreateGameController extends Controller
+class JoinGameController extends Controller
 {
     public function __construct(private GameService $gameService) {}
 
-    /**
-     * Handle the incoming request.
-     *
-     * @param CreateGameRequest $request
-     * @return JsonResponse
-     */
-    public function __invoke(CreateGameRequest $request): JsonResponse
+    public function __invoke(JoinGameRequest $request, Game $game): JsonResponse
     {
         $user = User::create([
             'name' => $request->get('name')
         ]);
         Auth::login($user);
-        $game = $this->gameService->createGame($user, $request->get('expansionIds'));
+
+    $this->gameService->grabWhiteCards($user, $game, $game->expansions->pluck('id')->toArray());
+        $this->gameService->joinGame($game, $user);
+
         $user->load('whiteCards');
         $user->load('blackCards');
 
