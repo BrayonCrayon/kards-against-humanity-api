@@ -40,12 +40,9 @@ class SubmitCardsTest extends TestCase
     /** @test */
     public function user_submits_a_card_for_a_game()
     {
-        $this->withoutExceptionHandling();
-        // find user that doesn't have a black card
         $user = $this->game->users->last();
         $this->actingAs($user);
 
-        // user submits a card
         $selectedCard = $user->whiteCardsInGame->first();
 
         $this->postJson(route('api.game.submit', $this->game->id), [
@@ -53,7 +50,6 @@ class SubmitCardsTest extends TestCase
         ])->assertOK();
 
         $selectedCard->refresh();
-        // assert that one card is selected
         $this->assertTrue($selectedCard->selected);
     }
 
@@ -68,5 +64,24 @@ class SubmitCardsTest extends TestCase
         $this->postJson(route('api.game.submit', $this->game->id), [
             'whiteCardIds' => [$invalid_card_id]
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function user_can_submit_2_cards()
+    {
+        $user = $this->game->users->last();
+        $this->actingAs($user);
+
+        $cards = $user->whiteCardsInGame->slice(0,2);
+        $ids = $cards->pluck('white_card_id')->toArray();
+
+        $this->postJson(route('api.game.submit', $this->game->id), [
+            'whiteCardIds' => $ids
+        ])->assertOk();
+
+        foreach ($cards as $card) {
+            $card->refresh();
+            $this->assertTrue($card->selected);
+        }
     }
 }

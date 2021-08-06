@@ -24,7 +24,7 @@ class SubmitCardRequest extends FormRequest
     public function rules()
     {
         return [
-            'whiteCardIds' => ['exists:user_game_white_cards,id'],
+            'whiteCardIds' => ['exists:white_cards,id'],
         ];
     }
 }
