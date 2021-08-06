@@ -10,6 +10,7 @@ use App\Models\UserGameWhiteCards;
 use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class SubmitCardsTest extends TestCase
@@ -54,5 +55,18 @@ class SubmitCardsTest extends TestCase
         $selectedCard->refresh();
         // assert that one card is selected
         $this->assertTrue($selectedCard->selected);
+    }
+
+    /** @test */
+    public function user_cannot_submit_a_card_that_does_not_exit()
+    {
+        $user = $this->game->users->last();
+        $this->actingAs($user);
+
+        $invalid_card_id = 99999999;
+
+        $this->postJson(route('api.game.submit', $this->game->id), [
+            'whiteCardIds' => [$invalid_card_id]
+        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

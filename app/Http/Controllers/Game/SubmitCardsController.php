@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubmitCardRequest;
 use App\Models\Game;
 use App\Models\UserGameWhiteCards;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SubmitCardsController extends Controller
 {
-    public function __invoke(Request $request, Game $game): JsonResponse
+    public function __invoke(SubmitCardRequest $request, Game $game): JsonResponse
     {
         $user = Auth::user();
 
