@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Requests\SubmitCardRequest;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -12,6 +13,7 @@ use App\Models\User;
 use App\Models\UserGameBlackCards;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
+use Illuminate\Support\Facades\Auth;
 use Nubs\RandomNameGenerator\All as NameGenerator;
 
 class GameService
@@ -70,5 +72,20 @@ class GameService
             'game_id' => $game->id,
             'user_id' => $user->id
         ]);
+    }
+
+    public function submitCards(SubmitCardRequest $request, Game $game)
+    {
+        $user = Auth::user();
+
+        $cardsToSelect = UserGameWhiteCards::where('game_id', $game->id)
+            ->where('user_id', $user->id)
+            ->whereIn('white_card_id', $request->get('whiteCardIds'))
+            ->get();
+
+        $cardsToSelect->each(function ($card) {
+            $card->selected = true;
+            $card->save();
+        });
     }
 }
