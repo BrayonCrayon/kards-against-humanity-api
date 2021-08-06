@@ -18,6 +18,7 @@ class SubmitCardsTest extends TestCase
 
     private $game;
     private $expansionIds;
+    private $user;
 
     protected function setUp(): void
     {
@@ -35,15 +36,15 @@ class SubmitCardsTest extends TestCase
         $users->each(function ($user) use ($gameService) {
             $gameService->grabWhiteCards($user, $this->game, $this->expansionIds);
         });
+
+        $this->user = $this->game->users->last();
+        $this->actingAs($this->user);
     }
 
     /** @test */
     public function user_submits_a_card_for_a_game()
     {
-        $user = $this->game->users->last();
-        $this->actingAs($user);
-
-        $selectedCard = $user->whiteCardsInGame->first();
+        $selectedCard = $this->user->whiteCardsInGame->first();
 
         $this->postJson(route('api.game.submit', $this->game->id), [
             'whiteCardIds' => [$selectedCard->white_card_id]
@@ -56,9 +57,6 @@ class SubmitCardsTest extends TestCase
     /** @test */
     public function user_cannot_submit_a_card_that_does_not_exit()
     {
-        $user = $this->game->users->last();
-        $this->actingAs($user);
-
         $invalid_card_id = 99999999;
 
         $this->postJson(route('api.game.submit', $this->game->id), [
@@ -69,10 +67,7 @@ class SubmitCardsTest extends TestCase
     /** @test */
     public function user_can_submit_2_cards()
     {
-        $user = $this->game->users->last();
-        $this->actingAs($user);
-
-        $cards = $user->whiteCardsInGame->slice(0,2);
+        $cards = $this->user->whiteCardsInGame->slice(0,2);
         $ids = $cards->pluck('white_card_id')->toArray();
 
         $this->postJson(route('api.game.submit', $this->game->id), [
@@ -83,5 +78,15 @@ class SubmitCardsTest extends TestCase
             $card->refresh();
             $this->assertTrue($card->selected);
         }
+    }
+
+    /** @test */
+    public function user_cannot_submit_more_cards_than_the_black_card_pick()
+    {
+        $ids = $this->user->whiteCardsInGame->pluck('white_card_id')->toArray();
+
+        $this->postJson(route('api.game.submit', $this->game->id), [
+            'whiteCardIds' => $ids
+        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
