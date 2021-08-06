@@ -74,13 +74,13 @@ class GameService
         ]);
     }
 
-    public function submitCards(SubmitCardRequest $request, Game $game)
+    public function submitCards($whiteCardIds, Game $game)
     {
         $user = Auth::user();
 
         $cardsToSelect = UserGameWhiteCards::where('game_id', $game->id)
             ->where('user_id', $user->id)
-            ->whereIn('white_card_id', $request->get('whiteCardIds'))
+            ->whereIn('white_card_id', $whiteCardIds)
             ->get();
 
         $cardsToSelect->each(function ($card) {

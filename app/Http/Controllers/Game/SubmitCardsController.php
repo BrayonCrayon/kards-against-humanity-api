@@ -15,8 +15,9 @@ class SubmitCardsController extends Controller
 {
     public function __invoke(SubmitCardRequest $request, Game $game): JsonResponse
     {
+        $whiteCardIds = $request->get('whiteCardIds');
         $gameService = new GameService();
-        $gameService->submitCards($request, $game);
+        $gameService->submitCards($whiteCardIds, $game);
         return response()->json();
     }
 }
