@@ -43,4 +43,12 @@ class Game extends Model
     {
         return $this->belongsToMany(Expansion::class, 'game_expansions');
     }
+
+    /**
+     * @return hasMany
+     */
+    public function userGameBlackCards()
+    {
+        return $this->hasMany(UserGameBlackCards::class);
+    }
 }
