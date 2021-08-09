@@ -9,6 +9,7 @@ use App\Models\UserGameWhiteCards;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class SubmitCardsController extends Controller
@@ -19,7 +20,7 @@ class SubmitCardsController extends Controller
         $gameService = new GameService();
 
         if(count($whiteCardIds) != $game->userGameBlackCards()->first()->blackCard->pick){
-            abort(422);
+            abort(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $gameService->submitCards($whiteCardIds, $game);
         return response()->json();
