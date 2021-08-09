@@ -45,9 +45,11 @@ class SubmitCardsTest extends TestCase
     public function user_submits_a_card_for_a_game()
     {
         $selectedCard = $this->user->whiteCardsInGame->first();
+        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
 
         $this->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => [$selectedCard->white_card_id]
+            'whiteCardIds' => [$selectedCard->white_card_id],
+            'submitAmount' => $blackCardPick
         ])->assertOK();
 
         $selectedCard->refresh();
@@ -83,10 +85,12 @@ class SubmitCardsTest extends TestCase
     /** @test */
     public function user_cannot_submit_more_cards_than_the_black_card_pick()
     {
+        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
         $ids = $this->user->whiteCardsInGame->pluck('white_card_id')->toArray();
 
         $this->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => $ids
+            'whiteCardIds' => $ids,
+            'submitAmount' => $blackCardPick
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -97,7 +101,8 @@ class SubmitCardsTest extends TestCase
         $ids = $this->user->whiteCardsInGame->pluck('white_card_id')->take($blackCardPick - 1);
 
         $this->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => $ids
+            'whiteCardIds' => $ids,
+            'submitAmount' => $blackCardPick
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

@@ -24,7 +24,8 @@ class SubmitCardRequest extends FormRequest
     public function rules()
     {
         return [
-            'whiteCardIds' => ['exists:white_cards,id'],
+            'submitAmount' => 'required|integer',
+            'whiteCardIds' => 'exists:white_cards,id|size:submitAmount',
         ];
     }
 }

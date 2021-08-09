@@ -18,10 +18,6 @@ class SubmitCardsController extends Controller
     {
         $whiteCardIds = $request->get('whiteCardIds');
         $gameService = new GameService();
-
-        if(count($whiteCardIds) != $game->userGameBlackCards()->first()->blackCard->pick){
-            abort(Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
         $gameService->submitCards($whiteCardIds, $game);
         return response()->json();
     }
