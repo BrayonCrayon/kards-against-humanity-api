@@ -47,7 +47,7 @@ class SubmitCardsTest extends TestCase
         $selectedCard = $this->user->whiteCardsInGame->first();
         $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
 
-        $this->postJson(route('api.game.submit', $this->game->id), [
+        $response = $this->postJson(route('api.game.submit', $this->game->id), [
             'whiteCardIds' => [$selectedCard->white_card_id],
             'submitAmount' => $blackCardPick
         ])->assertOK();

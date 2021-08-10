@@ -23,9 +23,24 @@ class SubmitCardRequest extends FormRequest
      */
     public function rules()
     {
+        $submitAmount = request()->get('submitAmount');
         return [
             'submitAmount' => 'required|integer',
-            'whiteCardIds' => 'exists:white_cards,id|size:submitAmount',
+            'whiteCardIds' => "exists:white_cards,id|array|size:{$submitAmount}",
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'whiteCardIds' => [
+                'exists' => 'White card Id does not exist',
+                'size' => 'Not enough cards submitted'
+            ],
+            'submitAmount' => [
+                'required' => 'Submit amount is required',
+                'integer' => 'integer required'
+            ]
         ];
     }
 }
