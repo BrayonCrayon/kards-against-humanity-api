@@ -35,8 +35,19 @@ class RoundRotationTest extends TestCase
     public function rotating_gives_a_new_user_a_black_card()
     {
         // users submit their cards
+        $cards = $this->user->whiteCardsInGame->slice(0,2);
+        $ids = $cards->pluck('white_card_id')->toArray();
+        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
 
+        // TODO: Extract out submit functionality
+        $this->postJson(route('api.game.submit', $this->game->id), [
+            'whiteCardIds' => $ids,
+            'submitAmount' => $blackCardPick
+        ])->assertOk();
+        // idea: store if user is holding a black card | store current player
         // rotation of black cards
+        $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
         // assert that the id of the user with the black card is different
+
     }
 }
