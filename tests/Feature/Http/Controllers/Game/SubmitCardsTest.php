@@ -2,10 +2,12 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
+use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
+use App\Models\UserGameBlackCards;
 use App\Models\UserGameWhiteCards;
 use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,28 +34,18 @@ class SubmitCardsTest extends TestCase
         $this->game->expansions()->saveMany(Expansion::idsIn($this->expansionIds)->get());
 
         $gameService = new GameService();
-        $gameService->grabBlackCards($users->first(), $this->game, $this->expansionIds);
         $users->each(function ($user) use ($gameService) {
             $gameService->grabWhiteCards($user, $this->game, $this->expansionIds);
         });
 
         $this->user = $this->game->users->last();
         $this->actingAs($this->user);
-    }
-
-    /** @test */
-    public function user_submits_a_card_for_a_game()
-    {
-        $selectedCard = $this->user->whiteCardsInGame->first();
-        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
-
-        $response = $this->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => [$selectedCard->white_card_id],
-            'submitAmount' => $blackCardPick
-        ])->assertOK();
-
-        $selectedCard->refresh();
-        $this->assertTrue($selectedCard->selected);
+        $blackCard = BlackCard::where('pick', 2)->first();
+        UserGameBlackCards::create([
+            'game_id' => $this->game->id,
+            'user_id' => $this->user->id,
+            'black_card_id' => $blackCard->id
+        ]);
     }
 
     /** @test */
@@ -62,18 +54,21 @@ class SubmitCardsTest extends TestCase
         $invalid_card_id = 99999999;
 
         $this->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => [$invalid_card_id]
+            'whiteCardIds' => [$invalid_card_id],
+            'submitAmount' => 1
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @test */
-    public function user_can_submit_2_cards()
+    public function user_submits_cards_for_a_game()
     {
         $cards = $this->user->whiteCardsInGame->slice(0,2);
         $ids = $cards->pluck('white_card_id')->toArray();
+        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
 
         $this->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => $ids
+            'whiteCardIds' => $ids,
+            'submitAmount' => $blackCardPick
         ])->assertOk();
 
         foreach ($cards as $card) {
