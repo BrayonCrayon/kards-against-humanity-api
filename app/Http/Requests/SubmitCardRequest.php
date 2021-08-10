@@ -29,18 +29,4 @@ class SubmitCardRequest extends FormRequest
             'whiteCardIds' => "exists:white_cards,id|array|size:{$submitAmount}",
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'whiteCardIds' => [
-                'exists' => 'White card Id does not exist',
-                'size' => 'Not enough cards submitted'
-            ],
-            'submitAmount' => [
-                'required' => 'Submit amount is required',
-                'integer' => 'integer required'
-            ]
-        ];
-    }
 }
