@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -41,6 +42,14 @@ class User extends Authenticatable
     public function whiteCards()
     {
         return $this->belongsToMany(WhiteCard::class, 'user_game_white_cards');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function whiteCardsInGame()
+    {
+        return $this->hasMany(UserGameWhiteCards::class);
     }
 
     /**

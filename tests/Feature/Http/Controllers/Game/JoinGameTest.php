@@ -56,7 +56,6 @@ class JoinGameTest extends TestCase
 
         $currentExpansionIds = User::find($joinGameResponse['user']['id'])->whiteCards->pluck('expansion_id');
 
-        // assert that the users white cards has an expansion id (pluck them out) - all of them are found in the expansion ids array
         $currentExpansionIds->each(function ($id) {
             $this->assertContains($id, $this->expansionIds);
         });
