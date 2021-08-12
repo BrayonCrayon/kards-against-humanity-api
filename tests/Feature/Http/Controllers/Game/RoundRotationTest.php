@@ -19,35 +19,34 @@ class RoundRotationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $gameService = new GameService();
         $this->expansionIds = [Expansion::first()->id];
         $users = User::factory(5)->create();
         $this->game = Game::factory()->create();
         foreach ($users as $user) {
+            $gameService->grabWhiteCards($user, $this->game, $this->expansionIds);
             $this->game->users()->save($user);
         }
         $this->game->expansions()->saveMany(Expansion::idsIn($this->expansionIds)->get());
-
-        $gameService = new GameService();
         $gameService->grabBlackCards($users->first(), $this->game, $this->expansionIds);
     }
 
     /** @test */
-    public function rotating_gives_a_new_user_a_black_card()
+    public function rotating_gives_the_next_user_a_black_card()
     {
-        $cards = $this->user->whiteCardsInGame->slice(0,2);
-        $ids = $cards->pluck('white_card_id')->toArray();
         $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
+        $users = $this->game->users;
+        $firstBlackCardUser = $this->game->getBlackCardUser();
+        $users->map(function($user) use($blackCardPick) {
+            $userCards = $user->whiteCardsInGame->take($blackCardPick);
+            $this->actingAs($user)->postJson(route('api.game.submit', $this->game->id), [
+                'whiteCardIds' => $userCards->pluck('white_card_id')->toArray(),
+                'submitAmount' => $blackCardPick
+            ])->assertOk();
+        });
 
-        // users submit their cards
-        // TODO: Extract out submit functionality
-        $this->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => $ids,
-            'submitAmount' => $blackCardPick
-        ])->assertOk();
-        // TODO: store if user is holding a black card | store current player
-        // rotation of black cards
         $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
-        // assert that the id of the user with the black card is different
-
+        $secondBlackCardUser = $this->game->getBlackCardUser();
+        $this->assertNotEquals($firstBlackCardUser->id, $secondBlackCardUser->id);
     }
 }

@@ -51,4 +51,14 @@ class Game extends Model
     {
         return $this->hasMany(UserGameBlackCards::class);
     }
+
+    public function blackCardUser()
+    {
+        return $this->belongsToMany(User::class, 'user_game_black_cards');
+    }
+
+    public function getBlackCardUser()
+    {
+        return $this->blackCardUser()->first();
+    }
 }
