@@ -39,12 +39,9 @@ class RoundRotationTest extends TestCase
         $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
         $users = $this->game->users;
         $firstBlackCardUser = $this->game->getBlackCardUser();
-        $users->map(function($user) use($blackCardPick) {
+        $users->each(function($user) use($blackCardPick) {
             $userCards = $user->whiteCardsInGame->take($blackCardPick);
-            $this->actingAs($user)->postJson(route('api.game.submit', $this->game->id), [
-                'whiteCardIds' => $userCards->pluck('white_card_id')->toArray(),
-                'submitAmount' => $blackCardPick
-            ])->assertOk();
+            $userCards->each(fn ($card) => $card->update(['selected' => true]));
         });
 
         $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
