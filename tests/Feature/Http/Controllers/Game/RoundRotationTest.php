@@ -6,6 +6,7 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
+use App\Models\UserGameBlackCards;
 use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -34,6 +35,7 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function rotating_gives_the_next_user_a_black_card()
     {
+        $this->withoutExceptionHandling();
         $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
         $users = $this->game->users;
         $firstBlackCardUser = $this->game->getBlackCardUser();
@@ -46,7 +48,10 @@ class RoundRotationTest extends TestCase
         });
 
         $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
-        $secondBlackCardUser = $this->game->getBlackCardUser();
+
+
+        $freshGame = Game::findOrFail($this->game->id);
+        $secondBlackCardUser = $freshGame->getBlackCardUser();
         $this->assertNotEquals($firstBlackCardUser->id, $secondBlackCardUser->id);
     }
 }

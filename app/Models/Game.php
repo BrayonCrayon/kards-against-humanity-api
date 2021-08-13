@@ -59,6 +59,6 @@ class Game extends Model
 
     public function getBlackCardUser()
     {
-        return $this->blackCardUser()->first();
+        return $this->blackCardUser()->whereNull('deleted_at')->first();
     }
 }
