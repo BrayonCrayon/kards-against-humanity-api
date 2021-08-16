@@ -33,14 +33,13 @@ class RoundRotationTest extends TestCase
     }
 
     /** @test */
-    public function rotating_gives_the_next_user_a_black_card()
+    public function rotating_changes_current_judge_to_new_user()
     {
+        $this->withoutExceptionHandling();
         $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
 
-        $this->assertEquals($this->game->userGameBlackCards()->first()->id, $this->game->judge_id);
-
         $users = $this->game->users;
-        $firstBlackCardUser = $this->game->getBlackCardUser();
+        $firstJudge = $this->game->judge;
         $users->each(function($user) use($blackCardPick) {
             $userCards = $user->whiteCardsInGame->take($blackCardPick);
             $userCards->each(fn ($card) => $card->update(['selected' => true]));
@@ -48,9 +47,8 @@ class RoundRotationTest extends TestCase
 
         $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
-
         $freshGame = Game::findOrFail($this->game->id);
-        $secondBlackCardUser = $freshGame->getBlackCardUser();
-        $this->assertNotEquals($firstBlackCardUser->id, $secondBlackCardUser->id);
+        $secondJudge = $freshGame->judge;
+        $this->assertNotEquals($firstJudge->id, $secondJudge->id);
     }
 }

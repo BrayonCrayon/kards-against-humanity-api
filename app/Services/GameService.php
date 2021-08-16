@@ -56,7 +56,9 @@ class GameService
 
     public function grabBlackCards($user, $game, $expansionIds)
     {
+        $drawnCards = $game->userGameBlackCards()->onlyTrashed()->get();
         $pickedCard = BlackCard::whereIn('expansion_id', $expansionIds)
+            ->whereNotIn('id', $drawnCards->pluck('id'))
             ->inRandomOrder()->first();
 
         UserGameBlackCards::create([
@@ -64,6 +66,8 @@ class GameService
             'user_id' => $user->id,
             'black_card_id' => $pickedCard->id
         ]);
+
+        return $pickedCard;
     }
 
     public function joinGame(Game $game, User $user)
