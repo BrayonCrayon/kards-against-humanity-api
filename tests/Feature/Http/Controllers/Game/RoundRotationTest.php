@@ -51,4 +51,18 @@ class RoundRotationTest extends TestCase
         $secondJudge = $freshGame->judge;
         $this->assertNotEquals($firstJudge->id, $secondJudge->id);
     }
+
+    /** @test */
+    public function it_cycles_through_the_users_when_assigning_the_judge()
+    {
+        // get at least three users
+
+        // invoke the rotate controller
+
+        // assert that we see the next user in the rotation when the game rotates
+
+        // repeat so we know we're truly rotating and not toggling
+    }
+
+
 }
