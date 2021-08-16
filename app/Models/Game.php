@@ -52,6 +52,11 @@ class Game extends Model
         return $this->hasMany(UserGameBlackCards::class);
     }
 
+    public function judge()
+    {
+        return $this->hasOne(User::class, 'id', 'judge_id');
+    }
+
     public function blackCardUser()
     {
         return $this->belongsToMany(User::class, 'user_game_black_cards');

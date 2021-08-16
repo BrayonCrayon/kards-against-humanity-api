@@ -35,8 +35,10 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function rotating_gives_the_next_user_a_black_card()
     {
-        $this->withoutExceptionHandling();
         $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
+
+        $this->assertEquals($this->game->userGameBlackCards()->first()->id, $this->game->judge_id);
+
         $users = $this->game->users;
         $firstBlackCardUser = $this->game->getBlackCardUser();
         $users->each(function($user) use($blackCardPick) {

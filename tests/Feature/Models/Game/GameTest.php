@@ -27,4 +27,16 @@ class GameTest extends TestCase
             ->create();
         $this->assertInstanceOf(Expansion::class, $game->expansions->first());
     }
+
+    /** @test */
+    public function it_has_a_judge()
+    {
+        $user = User::factory()->create();
+        $game = Game::factory()
+            ->create(['judge_id' => $user->id]);
+
+        $this->assertEquals($game->judge_id, $user->id);
+        $this->assertInstanceOf(User::class, $game->judge);
+    }
+
 }
