@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Game;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Nubs\RandomNameGenerator\All;
 
@@ -24,7 +25,8 @@ class GameFactory extends Factory
     {
         $generator = All::create();
         return [
-            'name' => $generator->getName()
+            'name' => $generator->getName(),
+            'judge_id' => User::factory()
         ];
     }
 }
