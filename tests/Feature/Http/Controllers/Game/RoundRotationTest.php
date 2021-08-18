@@ -35,7 +35,6 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function rotating_changes_current_judge_to_new_user()
     {
-        $this->withoutExceptionHandling();
         $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
 
         $users = $this->game->users;

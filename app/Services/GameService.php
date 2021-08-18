@@ -27,7 +27,8 @@ class GameService
 
     public function createGame($user, $expansionIds) {
         $game = Game::create([
-            'name' => $this->generator->getName()
+            'name' => $this->generator->getName(),
+            'judge_id' => $user->id,
         ]);
 
         $game->users()->save($user);
