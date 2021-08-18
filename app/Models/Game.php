@@ -33,7 +33,7 @@ class Game extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'game_users');
+        return $this->belongsToMany(User::class, 'game_users')->orderBy('id');
     }
 
     /**

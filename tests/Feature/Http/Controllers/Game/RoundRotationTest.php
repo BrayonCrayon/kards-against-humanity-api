@@ -23,7 +23,9 @@ class RoundRotationTest extends TestCase
         $gameService = new GameService();
         $this->expansionIds = [Expansion::first()->id];
         $users = User::factory(5)->create();
-        $this->game = Game::factory()->create();
+        $this->game = Game::factory()->create([
+            'judge_id' => $users->first()->id,
+        ]);
         foreach ($users as $user) {
             $gameService->grabWhiteCards($user, $this->game, $this->expansionIds);
             $this->game->users()->save($user);
@@ -54,13 +56,28 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function it_cycles_through_the_users_when_assigning_the_judge()
     {
-        // get at least three users
+        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
 
-        // invoke the rotate controller
+        $pickedJudgeIds = collect();
 
-        // assert that we see the next user in the rotation when the game rotates
+        $this->game->users->each(function ($user) use ($blackCardPick, $pickedJudgeIds) {
 
-        // repeat so we know we're truly rotating and not toggling
+            $this->game->users->each(function($user) use($blackCardPick) {
+                $userCards = $user->whiteCardsInGame->take($blackCardPick);
+                $userCards->each(fn ($card) => $card->update(['selected' => true]));
+            });
+
+            $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+
+            $this->game =  $this->game->fresh();
+
+            $this->assertNotEquals($user->id, $this->game->judge->id);
+
+            $pickedJudgeIds->add($this->game->judge_id);
+        });
+
+
+        $this->assertCount($this->game->users->count(), $pickedJudgeIds->unique()->all());
     }
 
 

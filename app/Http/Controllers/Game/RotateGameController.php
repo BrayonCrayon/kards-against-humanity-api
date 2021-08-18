@@ -25,16 +25,24 @@ class RotateGameController extends Controller
 
     public function __invoke(Request $request, Game $game)
     {
-        $users = $this->getAvailableUsers($game);
+        $users = $game->users;
 
-        $game->userGameBlackCards()->first()->delete();
+//        $lastUser = $users->last();
+        $firstUser = $users->first();
+        $users->push($firstUser);
+//        $users->push($lastUser);
 
-        $newUser = $users->first();
+        $users->sliding(2)->each(function($pair) use ($game) {
+            if ($pair->first()->id === $game->judge_id) {
+                $game->update([
+                    'judge_id' => $pair->last()->id
+                ]);
+                return false;
+            }
+        });
 
-        $pickedCard = $this->gameService->grabBlackCards($newUser, $game, $game->expansions->pluck('id'));
-
-        $game->update([
-            'judge_id' => $newUser->id
-        ]);
+//        $game->userGameBlackCards()->first()->delete();
+//
+//        $pickedCard = $this->gameService->grabBlackCards($newUser, $game, $game->expansions->pluck('id'));
     }
 }
