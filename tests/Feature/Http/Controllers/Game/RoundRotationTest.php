@@ -126,7 +126,7 @@ class RoundRotationTest extends TestCase
 
         $this->postJson(route('api.game.rotate', $game->id))->assertOk();
 
-        $game->fresh();
+        $game = Game::find($game->id);
         $newBlackCard = $game->currentBlackCard;
         $this->assertNotEquals($newBlackCard->id, $previousBlackCard->id);
     }

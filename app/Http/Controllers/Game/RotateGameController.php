@@ -19,10 +19,8 @@ class RotateGameController extends Controller
     {
         $users = $game->users;
 
-//        $lastUser = $users->last();
         $firstUser = $users->first();
         $users->push($firstUser);
-//        $users->push($lastUser);
 
         $users->sliding(2)->each(function($pair) use ($game) {
             if ($pair->first()->id === $game->judge_id) {
@@ -33,8 +31,14 @@ class RotateGameController extends Controller
             }
         });
 
-//        $game->userGameBlackCards()->first()->delete();
-//
-//        $pickedCard = $this->gameService->grabBlackCards($newUser, $game, $game->expansions->pluck('id'));
+        $newBlackCard = BlackCard::query()
+            ->inRandomOrder()
+            ->whereNotIn('id', $game->gameBlackCards->pluck('black_card_id'))
+            ->first();
+
+        GameBlackCards::create([
+            'game_id' => $game->id,
+            'black_card_id' => $newBlackCard->id
+        ]);
     }
 }
