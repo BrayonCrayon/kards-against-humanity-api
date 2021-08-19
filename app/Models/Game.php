@@ -56,14 +56,4 @@ class Game extends Model
     {
         return $this->hasOne(User::class, 'id', 'judge_id');
     }
-
-    public function blackCardUser()
-    {
-        return $this->belongsToMany(User::class, 'user_game_black_cards');
-    }
-
-    public function getBlackCardUser()
-    {
-        return $this->blackCardUser()->whereNull('deleted_at')->first();
-    }
 }

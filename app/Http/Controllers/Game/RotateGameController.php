@@ -15,14 +15,6 @@ class RotateGameController extends Controller
     {
     }
 
-    public function getAvailableUsers(Game $game)
-    {
-        // find a user with a black card
-        $userWithBlackCard = $game->getBlackCardUser();
-
-        return $game->users->filter(fn($user) => $user->id !== $userWithBlackCard->id);
-    }
-
     public function __invoke(Request $request, Game $game)
     {
         $users = $game->users;

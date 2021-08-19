@@ -54,12 +54,42 @@ class RoundRotationTest extends TestCase
     }
 
     /** @test */
-    public function it_cycles_through_the_users_when_assigning_the_judge()
+    public function it_cycles_through_the_users_when_assigning_the_judge_when_number_of_users_is_odd()
     {
         $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
 
         $pickedJudgeIds = collect();
 
+        $this->game->users->each(function ($user) use ($blackCardPick, $pickedJudgeIds) {
+
+            $this->game->users->each(function($user) use($blackCardPick) {
+                $userCards = $user->whiteCardsInGame->take($blackCardPick);
+                $userCards->each(fn ($card) => $card->update(['selected' => true]));
+            });
+
+            $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+
+            $this->game =  $this->game->fresh();
+
+            $this->assertNotEquals($user->id, $this->game->judge->id);
+
+            $pickedJudgeIds->add($this->game->judge_id);
+        });
+
+
+        $this->assertCount($this->game->users->count(), $pickedJudgeIds->unique()->all());
+    }
+
+    /** @test */
+    public function it_cycles_through_the_users_when_assigning_the_judge_when_number_of_users_is_even()
+    {
+        $newUser = User::factory()->create();
+        $this->game->users()->save($newUser);
+        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+
+        $pickedJudgeIds = collect();
+
+        $this->game->refresh();
         $this->game->users->each(function ($user) use ($blackCardPick, $pickedJudgeIds) {
 
             $this->game->users->each(function($user) use($blackCardPick) {
