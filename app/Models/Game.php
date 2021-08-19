@@ -28,6 +28,11 @@ class Game extends Model
      ********************************
      */
 
+    public function getCurrentBlackCardAttribute()
+    {
+        return $this->gameBlackCards->last();
+    }
+
     /**
      * @return BelongsToMany
      */

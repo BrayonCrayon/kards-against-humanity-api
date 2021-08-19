@@ -5,10 +5,12 @@ namespace Database\Factories;
 use App\Models\Game;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\WithFaker;
 use Nubs\RandomNameGenerator\All;
-
 class GameFactory extends Factory
 {
+
+    use WithFaker;
     /**
      * The name of the factory's corresponding model.
      *
@@ -25,6 +27,7 @@ class GameFactory extends Factory
     {
         $generator = All::create();
         return [
+            'id' => $this->faker->uuid(),
             'name' => $generator->getName(),
             'judge_id' => User::factory()
         ];

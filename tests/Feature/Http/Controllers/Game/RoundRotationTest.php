@@ -110,5 +110,24 @@ class RoundRotationTest extends TestCase
         $this->assertCount($this->game->users->count(), $pickedJudgeIds->unique()->all());
     }
 
+    /** @test */
+    public function it_gives_new_black_card_after_game_rotation()
+    {
 
+        /** @var Game $game */
+        $game = $this->game;
+        $blackCardPick = $game->gameBlackCards()->first()->blackCard->pick;
+        $previousBlackCard = $game->currentBlackCard;
+
+        $game->users->each(function($user) use($blackCardPick) {
+            $userCards = $user->whiteCardsInGame->take($blackCardPick);
+            $userCards->each(fn ($card) => $card->update(['selected' => true]));
+        });
+
+        $this->postJson(route('api.game.rotate', $game->id))->assertOk();
+
+        $game->fresh();
+        $newBlackCard = $game->currentBlackCard;
+        $this->assertNotEquals($newBlackCard->id, $previousBlackCard->id);
+    }
 }
