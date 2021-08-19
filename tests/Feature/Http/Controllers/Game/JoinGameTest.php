@@ -97,7 +97,6 @@ class JoinGameTest extends TestCase
                     "updated_at",
                 ],
                 "user" => [
-                    "black_cards",
                     "created_at",
                     "id",
                     "name",

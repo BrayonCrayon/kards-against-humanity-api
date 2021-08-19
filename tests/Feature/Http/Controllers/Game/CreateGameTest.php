@@ -145,13 +145,6 @@ class CreateGameTest extends TestCase
                             'text',
                             'expansion_id'
                         ],
-                    ],
-                    'black_cards' => [
-                        [
-                            'id',
-                            'text',
-                            'expansion_id'
-                        ],
                     ]
                 ],
                 'game' => [
@@ -159,23 +152,5 @@ class CreateGameTest extends TestCase
                     'name'
                 ],
             ]);
-    }
-
-    /** @test */
-    public function it_gives_user_black_card_when_game_is_created()
-    {
-        $userName = $this->faker->userName;
-        $expansionId = Expansion::query()->orderByDesc('id')->first()->id;
-
-        $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => [$expansionId]
-        ])->assertOk();
-        $createdUser = User::where('name', $userName)->first();
-
-        $this->assertCount(1, $createdUser->blackCards);
-        $createdUser->blackCards->each(function ($item) use ($expansionId) {
-            $this->assertEquals($expansionId, $item->expansion_id);
-        });
     }
 }

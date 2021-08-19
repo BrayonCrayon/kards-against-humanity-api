@@ -25,7 +25,6 @@ class JoinGameController extends Controller
         $this->gameService->joinGame($game, $user);
 
         $user->load('whiteCards');
-        $user->load('blackCards');
 
         return response()->json([
             'user' => $user,

@@ -6,7 +6,7 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
-use App\Models\UserGameBlackCards;
+use App\Models\GameBlackCards;
 use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -37,7 +37,7 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function rotating_changes_current_judge_to_new_user()
     {
-        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
+        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
 
         $users = $this->game->users;
         $firstJudge = $this->game->judge;
@@ -56,7 +56,7 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function it_cycles_through_the_users_when_assigning_the_judge()
     {
-        $blackCardPick = $this->game->userGameBlackCards()->first()->blackCard->pick;
+        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
 
         $pickedJudgeIds = collect();
 

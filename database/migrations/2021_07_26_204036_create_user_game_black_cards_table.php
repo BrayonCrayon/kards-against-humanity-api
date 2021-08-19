@@ -13,9 +13,8 @@ class CreateUserGameBlackCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_game_black_cards', function (Blueprint $table) {
+        Schema::create('game_black_cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignUuid('game_id')->references('id')->on('games');
             $table->foreignId('black_card_id')->references('id')->on('black_cards');
             $table->timestamps();
@@ -30,6 +29,6 @@ class CreateUserGameBlackCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_game_black_cards');
+        Schema::dropIfExists('game_black_cards');
     }
 }

@@ -47,9 +47,9 @@ class Game extends Model
     /**
      * @return hasMany
      */
-    public function userGameBlackCards()
+    public function gameBlackCards()
     {
-        return $this->hasMany(UserGameBlackCards::class);
+        return $this->hasMany(GameBlackCards::class);
     }
 
     public function judge()

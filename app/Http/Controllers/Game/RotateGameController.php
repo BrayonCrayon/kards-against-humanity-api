@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Game;
 use App\Http\Controllers\Controller;
 use App\Models\BlackCard;
 use App\Models\Game;
-use App\Models\UserGameBlackCards;
+use App\Models\GameBlackCards;
 use App\Services\GameService;
 use Illuminate\Http\Request;
 

@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\Models\Game;
 
+use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
+use App\Models\GameBlackCards;
 use Tests\TestCase;
 
 class GameTest extends TestCase
@@ -36,4 +38,20 @@ class GameTest extends TestCase
         $this->assertInstanceOf(User::class, $game->judge);
     }
 
+    /** @test */
+    public function it_can_get_a_black_card()
+    {
+        self::markTestSkipped();
+        $blackCard = BlackCard::first();
+        $game = Game::factory()->hasUsers(2)->create();
+
+        GameBlackCards::create([
+            'black_card_id' => $blackCard->id,
+            'game_id' => $game->id,
+        ]);
+
+        $blackCardOffGame = $game->getBlackCard();
+
+        $this->assertInstanceOf(BlackCard::class, $blackCard);
+    }
 }

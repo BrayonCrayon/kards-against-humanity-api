@@ -10,7 +10,7 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
-use App\Models\UserGameBlackCards;
+use App\Models\GameBlackCards;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
 use Illuminate\Support\Facades\Auth;
@@ -57,14 +57,13 @@ class GameService
 
     public function grabBlackCards($user, $game, $expansionIds)
     {
-        $drawnCards = $game->userGameBlackCards()->onlyTrashed()->get();
+        $drawnCards = $game->gameBlackCards()->onlyTrashed()->get();
         $pickedCard = BlackCard::whereIn('expansion_id', $expansionIds)
             ->whereNotIn('id', $drawnCards->pluck('id'))
             ->inRandomOrder()->first();
 
-        UserGameBlackCards::create([
+        GameBlackCards::create([
             'game_id' => $game->id,
-            'user_id' => $user->id,
             'black_card_id' => $pickedCard->id
         ]);
 
