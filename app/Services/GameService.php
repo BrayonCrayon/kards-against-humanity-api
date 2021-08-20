@@ -36,7 +36,7 @@ class GameService
         $game->expansions()->saveMany(Expansion::idsIn($expansionIds)->get());
 
         $this->grabWhiteCards($user, $game, $expansionIds);
-        $this->grabBlackCards($game, $expansionIds);
+        $this->drawBlackCard($game, $expansionIds);
 
         return $game;
     }
@@ -55,7 +55,7 @@ class GameService
         );
     }
 
-    public function grabBlackCards($game)
+    public function drawBlackCard($game)
     {
         $drawnCards = $game->gameBlackCards()->onlyTrashed()->get();
         $pickedCard = BlackCard::whereIn('expansion_id', $game->expansions->pluck('id'))
