@@ -39,18 +39,16 @@ class RoundRotationTest extends TestCase
     {
         $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
 
-        $users = $this->game->users;
         $firstJudge = $this->game->judge;
-        $users->each(function($user) use($blackCardPick) {
+        $this->game->users->each(function($user) use($blackCardPick) {
             $userCards = $user->whiteCardsInGame->take($blackCardPick);
             $userCards->each(fn ($card) => $card->update(['selected' => true]));
         });
 
         $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
-        $freshGame = Game::findOrFail($this->game->id);
-        $secondJudge = $freshGame->judge;
-        $this->assertNotEquals($firstJudge->id, $secondJudge->id);
+        $this->game->refresh();
+        $this->assertNotEquals($firstJudge->id, $this->game->judge_id);
     }
 
     /** @test */
@@ -69,7 +67,7 @@ class RoundRotationTest extends TestCase
 
             $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
-            $this->game =  $this->game->fresh();
+            $this->game->refresh();
 
             $this->assertNotEquals($user->id, $this->game->judge->id);
 
@@ -99,7 +97,7 @@ class RoundRotationTest extends TestCase
 
             $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
-            $this->game =  $this->game->fresh();
+            $this->game->refresh();
 
             $this->assertNotEquals($user->id, $this->game->judge->id);
 
@@ -113,7 +111,6 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function it_gives_new_black_card_after_game_rotation()
     {
-
         /** @var Game $game */
         $game = $this->game;
         $blackCardPick = $game->gameBlackCards()->first()->blackCard->pick;
@@ -126,8 +123,7 @@ class RoundRotationTest extends TestCase
 
         $this->postJson(route('api.game.rotate', $game->id))->assertOk();
 
-        $game = Game::find($game->id);
-        $newBlackCard = $game->currentBlackCard;
-        $this->assertNotEquals($newBlackCard->id, $previousBlackCard->id);
+        $game->refresh();
+        $this->assertNotEquals($game->currentBlackCard->id, $previousBlackCard->id);
     }
 }

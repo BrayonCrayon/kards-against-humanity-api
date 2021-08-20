@@ -29,7 +29,10 @@ class RotateGameController extends Controller
                 ]);
                 return false;
             }
+            return true;
         });
+
+        $game->gameBlackCards()->first()->delete();
 
         $newBlackCard = BlackCard::query()
             ->inRandomOrder()

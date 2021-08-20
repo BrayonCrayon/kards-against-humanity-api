@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Traits\UuidPrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Game extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use UuidPrimaryKey;
 
     protected $guarded = [];
 
@@ -30,7 +33,7 @@ class Game extends Model
 
     public function getCurrentBlackCardAttribute()
     {
-        return $this->gameBlackCards->last();
+        return $this->gameBlackCards->first()->blackCard;
     }
 
     /**
@@ -50,7 +53,7 @@ class Game extends Model
     }
 
     /**
-     * @return hasMany
+     * @return HasMany
      */
     public function gameBlackCards()
     {

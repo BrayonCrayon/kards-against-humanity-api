@@ -20,8 +20,6 @@ class CreateGamesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        DB::statement("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";");
-        DB::statement("ALTER TABLE games ALTER COLUMN id SET DEFAULT uuid_generate_v4();");
     }
 
     /**

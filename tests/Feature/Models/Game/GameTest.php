@@ -41,7 +41,6 @@ class GameTest extends TestCase
     /** @test */
     public function it_can_get_a_black_card()
     {
-        self::markTestSkipped();
         $blackCard = BlackCard::first();
         $game = Game::factory()->hasUsers(2)->create();
 
@@ -50,8 +49,6 @@ class GameTest extends TestCase
             'game_id' => $game->id,
         ]);
 
-        $blackCardOffGame = $game->getBlackCard();
-
-        $this->assertInstanceOf(BlackCard::class, $blackCard);
+        $this->assertInstanceOf(BlackCard::class, $game->currentBlackCard);
     }
 }
