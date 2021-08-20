@@ -32,8 +32,7 @@ class RotateGameController extends Controller
             return true;
         });
 
-        $game->gameBlackCards()->first()->delete();
-
+        $this->gameService->discardBlackCard($game);
         $this->gameService->drawBlackCard($game);
     }
 }

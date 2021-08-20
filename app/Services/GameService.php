@@ -92,4 +92,9 @@ class GameService
             $card->save();
         });
     }
+
+    public function discardBlackCard($game)
+    {
+        $game->gameBlackCards()->first()->delete();
+    }
 }
