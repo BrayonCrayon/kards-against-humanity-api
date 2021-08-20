@@ -34,14 +34,6 @@ class RotateGameController extends Controller
 
         $game->gameBlackCards()->first()->delete();
 
-        $newBlackCard = BlackCard::query()
-            ->inRandomOrder()
-            ->whereNotIn('id', $game->gameBlackCards->pluck('black_card_id'))
-            ->first();
-
-        GameBlackCards::create([
-            'game_id' => $game->id,
-            'black_card_id' => $newBlackCard->id
-        ]);
+        $this->gameService->grabBlackCards($game, $game->expansions->pluck('id'));
     }
 }

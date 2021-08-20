@@ -31,7 +31,7 @@ class RoundRotationTest extends TestCase
             $this->game->users()->save($user);
         }
         $this->game->expansions()->saveMany(Expansion::idsIn($this->expansionIds)->get());
-        $gameService->grabBlackCards($users->first(), $this->game, $this->expansionIds);
+        $gameService->grabBlackCards($this->game, $this->expansionIds);
     }
 
     /** @test */
