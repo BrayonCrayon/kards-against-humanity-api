@@ -17,20 +17,12 @@ class RotateGameController extends Controller
 
     public function __invoke(Request $request, Game $game)
     {
-        $users = $game->users;
+        $userIds = $game->users()->pluck('users.id');
 
-        $firstUser = $users->first();
-        $users->push($firstUser);
+        $currentJudgeIndex = $userIds->search($game->judge_id);
+        $nextJudgeIndex = ($currentJudgeIndex + 1) % $userIds->count();
 
-        $users->sliding(2)->each(function($pair) use ($game) {
-            if ($pair->first()->id === $game->judge_id) {
-                $game->update([
-                    'judge_id' => $pair->last()->id
-                ]);
-                return false;
-            }
-            return true;
-        });
+        $this->gameService->updateJudge($game, $userIds[$nextJudgeIndex]);
 
         $this->gameService->discardBlackCard($game);
         $this->gameService->drawBlackCard($game);

@@ -97,4 +97,11 @@ class GameService
     {
         $game->gameBlackCards()->first()->delete();
     }
+
+    public function updateJudge($game, $judgeId)
+    {
+        $game->update([
+            'judge_id' => $judgeId,
+        ]);
+    }
 }
