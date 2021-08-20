@@ -34,6 +34,6 @@ class RotateGameController extends Controller
 
         $game->gameBlackCards()->first()->delete();
 
-        $this->gameService->grabBlackCards($game, $game->expansions->pluck('id'));
+        $this->gameService->grabBlackCards($game);
     }
 }
