@@ -17,6 +17,17 @@ class RoundRotationTest extends TestCase
     private $game;
     private $expansionIds;
 
+    /**
+     * @param $blackCardPick
+     */
+    public function usersSelectCards($blackCardPick): void
+    {
+        $this->game->users->each(function ($user) use ($blackCardPick) {
+            $userCards = $user->whiteCardsInGame->take($blackCardPick);
+            $userCards->each(fn($card) => $card->update(['selected' => true]));
+        });
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -40,10 +51,7 @@ class RoundRotationTest extends TestCase
         $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
 
         $firstJudge = $this->game->judge;
-        $this->game->users->each(function($user) use($blackCardPick) {
-            $userCards = $user->whiteCardsInGame->take($blackCardPick);
-            $userCards->each(fn ($card) => $card->update(['selected' => true]));
-        });
+        $this->usersSelectCards($blackCardPick);
 
         $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
@@ -60,10 +68,7 @@ class RoundRotationTest extends TestCase
 
         $this->game->users->each(function ($user) use ($blackCardPick, $pickedJudgeIds) {
 
-            $this->game->users->each(function($user) use($blackCardPick) {
-                $userCards = $user->whiteCardsInGame->take($blackCardPick);
-                $userCards->each(fn ($card) => $card->update(['selected' => true]));
-            });
+            $this->usersSelectCards($blackCardPick);
 
             $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
@@ -90,10 +95,7 @@ class RoundRotationTest extends TestCase
         $this->game->refresh();
         $this->game->users->each(function ($user) use ($blackCardPick, $pickedJudgeIds) {
 
-            $this->game->users->each(function($user) use($blackCardPick) {
-                $userCards = $user->whiteCardsInGame->take($blackCardPick);
-                $userCards->each(fn ($card) => $card->update(['selected' => true]));
-            });
+            $this->usersSelectCards($blackCardPick);
 
             $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
