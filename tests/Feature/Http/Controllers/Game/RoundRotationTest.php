@@ -33,15 +33,13 @@ class RoundRotationTest extends TestCase
         parent::setUp();
         $gameService = new GameService();
         $this->expansionIds = [Expansion::first()->id];
-        $users = User::factory(5)->create();
-        $this->game = Game::factory()->create([
-            'judge_id' => $users->first()->id,
-        ]);
-        foreach ($users as $user) {
+
+        $this->game = Game::factory()->has(User::factory()->count(3))->create();
+        foreach ($this->game->users as $user) {
             $gameService->grabWhiteCards($user, $this->game, $this->expansionIds);
-            $this->game->users()->save($user);
         }
-        $this->game->expansions()->saveMany(Expansion::idsIn($this->expansionIds)->get());
+        $this->game->judge_id = $this->game->users->first()->id;
+
         $gameService->drawBlackCard($this->game);
     }
 
