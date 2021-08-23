@@ -35,7 +35,7 @@ class SubmitCardsTest extends TestCase
 
         $gameService = new GameService();
         $users->each(function ($user) use ($gameService) {
-            $gameService->grabWhiteCards($user, $this->game, $this->expansionIds);
+            $gameService->grabWhiteCards($user, $this->game);
         });
 
         $this->user = $this->game->users->last();

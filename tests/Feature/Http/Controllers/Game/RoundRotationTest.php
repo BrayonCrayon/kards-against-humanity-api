@@ -21,11 +21,10 @@ class RoundRotationTest extends TestCase
     {
         parent::setUp();
         $gameService = new GameService();
-        $this->expansionIds = [Expansion::first()->id];
 
         $this->game = Game::factory()->has(User::factory()->count(3))->create();
         foreach ($this->game->users as $user) {
-            $gameService->grabWhiteCards($user, $this->game, $this->expansionIds);
+            $gameService->grabWhiteCards($user, $this->game);
         }
         $this->game->judge_id = $this->game->users->first()->id;
 
