@@ -17,17 +17,6 @@ class RoundRotationTest extends TestCase
     private $game;
     private $expansionIds;
 
-    /**
-     * @param $blackCardPick
-     */
-    public function usersSelectCards($blackCardPick): void
-    {
-        $this->game->users->each(function ($user) use ($blackCardPick) {
-            $userCards = $user->whiteCardsInGame->take($blackCardPick);
-            $userCards->each(fn($card) => $card->update(['selected' => true]));
-        });
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -112,18 +101,25 @@ class RoundRotationTest extends TestCase
     public function it_gives_new_black_card_after_game_rotation()
     {
         /** @var Game $game */
-        $game = $this->game;
-        $blackCardPick = $game->gameBlackCards()->first()->blackCard->pick;
-        $previousBlackCard = $game->currentBlackCard;
+        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $previousBlackCard = $this->game->currentBlackCard;
 
-        $game->users->each(function($user) use($blackCardPick) {
+        $this->usersSelectCards($blackCardPick);
+
+        $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+
+        $this->game->refresh();
+        $this->assertNotEquals($this->game->currentBlackCard->id, $previousBlackCard->id);
+    }
+
+    /**
+     * @param $blackCardPick
+     */
+    public function usersSelectCards($blackCardPick): void
+    {
+        $this->game->users->each(function ($user) use ($blackCardPick) {
             $userCards = $user->whiteCardsInGame->take($blackCardPick);
-            $userCards->each(fn ($card) => $card->update(['selected' => true]));
+            $userCards->each(fn($card) => $card->update(['selected' => true]));
         });
-
-        $this->postJson(route('api.game.rotate', $game->id))->assertOk();
-
-        $game->refresh();
-        $this->assertNotEquals($game->currentBlackCard->id, $previousBlackCard->id);
     }
 }
