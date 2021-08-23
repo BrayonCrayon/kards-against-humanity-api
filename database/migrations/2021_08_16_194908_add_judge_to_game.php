@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGamesTable extends Migration
+class AddJudgeToGame extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,8 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
-            $table->uuid('id')->unique();
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('games', function (Blueprint $table) {
+            $table->foreignId('judge_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +25,6 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+
     }
 }

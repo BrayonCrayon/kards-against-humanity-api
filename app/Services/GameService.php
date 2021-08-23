@@ -10,7 +10,7 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
-use App\Models\UserGameBlackCards;
+use App\Models\GameBlackCards;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
 use Illuminate\Support\Facades\Auth;
@@ -27,22 +27,23 @@ class GameService
 
     public function createGame($user, $expansionIds) {
         $game = Game::create([
-            'name' => $this->generator->getName()
+            'name' => $this->generator->getName(),
+            'judge_id' => $user->id,
         ]);
 
         $game->users()->save($user);
 
         $game->expansions()->saveMany(Expansion::idsIn($expansionIds)->get());
 
-        $this->grabWhiteCards($user, $game, $expansionIds);
-        $this->grabBlackCards($user, $game, $expansionIds);
+        $this->drawWhiteCards($user, $game);
+        $this->drawBlackCard($game);
 
         return $game;
     }
 
-    public function grabWhiteCards($user, $game, $expansionIds)
+    public function drawWhiteCards($user, $game)
     {
-        $pickedCards = WhiteCard::whereIn('expansion_id', $expansionIds)
+        $pickedCards = WhiteCard::whereIn('expansion_id', $game->expansions->pluck('id')->toArray())
             ->inRandomOrder()->limit(Game::HAND_LIMIT)->get();
 
         $pickedCards->each(fn ($item) =>
@@ -54,16 +55,19 @@ class GameService
         );
     }
 
-    public function grabBlackCards($user, $game, $expansionIds)
+    public function drawBlackCard($game)
     {
-        $pickedCard = BlackCard::whereIn('expansion_id', $expansionIds)
+        $drawnCards = $game->gameBlackCards()->onlyTrashed()->get();
+        $pickedCard = BlackCard::whereIn('expansion_id', $game->expansions->pluck('id'))
+            ->whereNotIn('id', $drawnCards->pluck('id'))
             ->inRandomOrder()->first();
 
-        UserGameBlackCards::create([
+        GameBlackCards::create([
             'game_id' => $game->id,
-            'user_id' => $user->id,
             'black_card_id' => $pickedCard->id
         ]);
+
+        return $pickedCard;
     }
 
     public function joinGame(Game $game, User $user)
@@ -87,5 +91,17 @@ class GameService
             $card->selected = true;
             $card->save();
         });
+    }
+
+    public function discardBlackCard($game)
+    {
+        $game->gameBlackCards()->first()->delete();
+    }
+
+    public function updateJudge($game, $judgeId)
+    {
+        $game->update([
+            'judge_id' => $judgeId,
+        ]);
     }
 }

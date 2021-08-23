@@ -26,7 +26,7 @@ class JoinGameTest extends TestCase
         $this->game->expansions()->saveMany(Expansion::idsIn($this->expansionIds)->get());
 
         $gameService = new GameService();
-        $gameService->grabBlackCards($user, $this->game, $this->expansionIds);
+        $gameService->drawBlackCard($this->game);
     }
 
     /** @test */
@@ -97,7 +97,6 @@ class JoinGameTest extends TestCase
                     "updated_at",
                 ],
                 "user" => [
-                    "black_cards",
                     "created_at",
                     "id",
                     "name",
