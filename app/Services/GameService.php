@@ -35,13 +35,13 @@ class GameService
 
         $game->expansions()->saveMany(Expansion::idsIn($expansionIds)->get());
 
-        $this->grabWhiteCards($user, $game);
-        $this->drawBlackCard($game, $expansionIds);
+        $this->drawWhiteCards($user, $game);
+        $this->drawBlackCard($game);
 
         return $game;
     }
 
-    public function grabWhiteCards($user, $game)
+    public function drawWhiteCards($user, $game)
     {
         $pickedCards = WhiteCard::whereIn('expansion_id', $game->expansions->pluck('id')->toArray())
             ->inRandomOrder()->limit(Game::HAND_LIMIT)->get();

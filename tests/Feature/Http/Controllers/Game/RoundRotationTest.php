@@ -14,8 +14,8 @@ use Tests\TestCase;
 
 class RoundRotationTest extends TestCase
 {
+    /** @var Game  */
     private $game;
-    private $expansionIds;
 
     protected function setUp(): void
     {
@@ -24,7 +24,7 @@ class RoundRotationTest extends TestCase
 
         $this->game = Game::factory()->has(User::factory()->count(3))->create();
         foreach ($this->game->users as $user) {
-            $gameService->grabWhiteCards($user, $this->game);
+            $gameService->drawWhiteCards($user, $this->game);
         }
         $this->game->judge_id = $this->game->users->first()->id;
 
@@ -34,7 +34,7 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function rotating_changes_current_judge_to_new_user()
     {
-        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $blackCardPick = $this->game->currentBlackCard->pick;
 
         $firstJudge = $this->game->judge;
         $this->usersSelectCards($blackCardPick);
@@ -48,7 +48,7 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function it_cycles_through_the_users_when_assigning_the_judge_when_number_of_users_is_odd()
     {
-        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $blackCardPick = $this->game->currentBlackCard->pick;
 
         $pickedJudgeIds = collect();
 
@@ -74,7 +74,7 @@ class RoundRotationTest extends TestCase
     {
         $newUser = User::factory()->create();
         $this->game->users()->save($newUser);
-        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $blackCardPick = $this->game->currentBlackCard->pick;
 
         $pickedJudgeIds = collect();
 
@@ -99,8 +99,7 @@ class RoundRotationTest extends TestCase
     /** @test */
     public function it_gives_new_black_card_after_game_rotation()
     {
-        /** @var Game $game */
-        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $blackCardPick = $this->game->currentBlackCard->pick;
         $previousBlackCard = $this->game->currentBlackCard;
 
         $this->usersSelectCards($blackCardPick);

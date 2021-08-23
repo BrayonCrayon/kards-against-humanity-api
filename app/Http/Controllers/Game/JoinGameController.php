@@ -21,7 +21,7 @@ class JoinGameController extends Controller
         ]);
         Auth::login($user);
 
-    $this->gameService->grabWhiteCards($user, $game);
+    $this->gameService->drawWhiteCards($user, $game);
         $this->gameService->joinGame($game, $user);
 
         $user->load('whiteCards');
