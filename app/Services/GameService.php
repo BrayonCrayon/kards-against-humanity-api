@@ -98,6 +98,11 @@ class GameService
         $game->gameBlackCards()->first()->delete();
     }
 
+    public function discardWhiteCards($game)
+    {
+        UserGameWhiteCards::whereGameId($game->id)->where('selected', true)->delete();
+    }
+
     public function updateJudge($game, $judgeId)
     {
         $game->update([

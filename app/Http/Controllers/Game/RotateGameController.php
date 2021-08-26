@@ -23,7 +23,7 @@ class RotateGameController extends Controller
         $nextJudgeIndex = ($currentJudgeIndex + 1) % $userIds->count();
 
         $this->gameService->updateJudge($game, $userIds[$nextJudgeIndex]);
-
+        $this->gameService->discardWhiteCards($game);
         $this->gameService->discardBlackCard($game);
         $this->gameService->drawBlackCard($game);
     }
