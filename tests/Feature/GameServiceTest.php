@@ -14,8 +14,6 @@ use Tests\TestCase;
 
 class GameServiceTest extends TestCase
 {
-
-
     private GameService $gameService;
 
     private const REALLY_SMALL_EXPANSION_ID = 105;
@@ -51,7 +49,6 @@ class GameServiceTest extends TestCase
 
         $this->assertCount(1, $pickedCards);
 
-        //assert card drawn is not in white card game user table
         $this->assertEquals($lastRemainingCard->id, $pickedCards->first()->id);
     }
 }
