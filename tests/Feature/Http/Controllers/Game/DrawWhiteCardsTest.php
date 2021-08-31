@@ -32,7 +32,12 @@ class DrawWhiteCardsTest extends TestCase
         );
 
         $this->actingAs($user)->postJson(route('api.game.whiteCards.draw', $game))
-            ->assertOk();
+            ->assertOk()
+            ->assertJsonFragment([
+                'id' => $expectedCard->id,
+                'text' => $expectedCard->text,
+                'expansion_id' => $expectedCard->expansion_id,
+            ]);
     }
 
     // TODO: write a test that asserts that a user will not draw any cards if they have a full hand already.
