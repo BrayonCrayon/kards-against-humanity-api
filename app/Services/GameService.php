@@ -42,14 +42,15 @@ class GameService
         return $game;
     }
 
-    public function drawWhiteCards($user, $game, $limit = GAME::HAND_LIMIT)
+    public function drawWhiteCards($user, $game)
     {
+        $drawLimit = GAME::HAND_LIMIT - $user->whiteCards()->count();
         $pickedCards = WhiteCard::whereIn('expansion_id', $game->expansions->pluck('id')->toArray())
             ->whereNotIn('id', function ($query) use ($game) {
                 $query->select('white_card_id')->from('user_game_white_cards')->whereGameId($game->id);
             })
             ->inRandomOrder()
-            ->limit($limit)
+            ->limit($drawLimit)
             ->get();
 
         $pickedCards->each(fn($item) => UserGameWhiteCards::create([

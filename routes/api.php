@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Game\CreateGameController;
+use App\Http\Controllers\Game\DrawWhiteCardsController;
 use App\Http\Controllers\Game\JoinGameController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\SubmitCardsController;
@@ -33,4 +34,4 @@ Route::post('/game/submit/{game}', SubmitCardsController::class)->name('game.sub
 
 Route::post('/game/rotate/{game}', RotateGameController::class)->name('game.rotate');
 
-Route::post('/game/{game}/whiteCards/draw', \App\Http\Controllers\Game\DrawWhiteCardsController::class)->name('game.whiteCards.draw');
+Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');

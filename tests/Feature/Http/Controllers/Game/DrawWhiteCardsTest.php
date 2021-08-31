@@ -25,13 +25,14 @@ class DrawWhiteCardsTest extends TestCase
         $this->instance(
             GameService::class,
             Mockery::mock(GameService::class, function (MockInterface $mock) use ($game, $expectedCard, $user) {
-                $mock->shouldReceive('drawWhiteCards')->withArgs(function($u, $g) use ($game, $user) {
+                $mock->shouldReceive('drawWhiteCards')->withArgs(function ($u, $g) use ($game, $user) {
                     return $game->id === $g->id && $user->id === $u->id;
                 })->once()->andReturn([$expectedCard]);
             })
         );
 
-        $this->actingAs($user)->postJson(route('api.game.whiteCards.draw', $game))
+        $this->actingAs($user)
+            ->getJson(route('api.game.whiteCards.draw', $game))
             ->assertOk()
             ->assertJsonFragment([
                 'id' => $expectedCard->id,
@@ -40,5 +41,19 @@ class DrawWhiteCardsTest extends TestCase
             ]);
     }
 
-    // TODO: write a test that asserts that a user will not draw any cards if they have a full hand already.
+    /** @test */
+    public function guests_cannot_draw_cards()
+    {
+        $game = Game::factory()->has(User::factory())->create();
+
+        $this->instance(
+            GameService::class,
+            Mockery::mock(GameService::class, function (MockInterface $mock) use ($game) {
+                $mock->shouldReceive('drawWhiteCards')->never();
+            })
+        );
+
+        $this->getJson(route('api.game.whiteCards.draw', $game))
+            ->assertUnauthorized();
+    }
 }
