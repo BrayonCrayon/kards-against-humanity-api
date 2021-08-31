@@ -32,3 +32,5 @@ Route::post('/game/join/{game}', JoinGameController::class)->name('game.join');
 Route::post('/game/submit/{game}', SubmitCardsController::class)->name('game.submit');
 
 Route::post('/game/rotate/{game}', RotateGameController::class)->name('game.rotate');
+
+Route::post('/game/{game}/whiteCards/draw', \App\Http\Controllers\Game\DrawWhiteCardsController::class)->name('game.whiteCards.draw');

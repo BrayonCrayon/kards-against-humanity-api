@@ -9,6 +9,8 @@ use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
 use App\Services\GameService;
 use Illuminate\Http\Response;
+use Mockery;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 class DrawWhiteCardsTest extends TestCase
@@ -16,16 +18,22 @@ class DrawWhiteCardsTest extends TestCase
     /** @test */
     public function user_can_draw_more_white_cards()
     {
-        $game = Game::factory()->has(User::factory()->count(1))->create();
-        $gameService = new GameService();
-        $user = User::first();
-        $gameService->drawWhiteCards($user, $game);
+        $game = Game::factory()->has(User::factory())->create();
+        $user = $game->users()->first();
+        $expectedCard = WhiteCard::firstOrFail();
 
-        // delete some of there cards
-        //        $user->whiteCardsInGame()->where('game', $game)-first
+        $this->instance(
+            GameService::class,
+            Mockery::mock(GameService::class, function (MockInterface $mock) use ($game, $expectedCard, $user) {
+                $mock->shouldReceive('drawWhiteCards')->withArgs(function($u, $g) use ($game, $user) {
+                    return $game->id === $g->id && $user->id === $u->id;
+                })->once()->andReturn([$expectedCard]);
+            })
+        );
 
-        // hit endpoint to draw more
-
-        // assert full hand
+        $this->actingAs($user)->postJson(route('api.game.whiteCards.draw', $game))
+            ->assertOk();
     }
+
+    // TODO: write a test that asserts that a user will not draw any cards if they have a full hand already.
 }
