@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Game\CreateGameController;
 use App\Http\Controllers\Game\DrawWhiteCardsController;
+use App\Http\Controllers\Game\GetExpansionsController;
 use App\Http\Controllers\Game\JoinGameController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\SubmitCardsController;
@@ -33,5 +34,7 @@ Route::post('/game/join/{game}', JoinGameController::class)->name('game.join');
 Route::post('/game/submit/{game}', SubmitCardsController::class)->name('game.submit');
 
 Route::post('/game/rotate/{game}', RotateGameController::class)->name('game.rotate');
+
+Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');
 
 Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
