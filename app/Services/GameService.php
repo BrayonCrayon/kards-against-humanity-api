@@ -25,7 +25,8 @@ class GameService
         $this->generator = NameGenerator::create();
     }
 
-    public function createGame($user, $expansionIds) {
+    public function createGame($user, $expansionIds)
+    {
         $game = Game::create([
             'name' => $this->generator->getName(),
             'judge_id' => $user->id,
@@ -43,16 +44,22 @@ class GameService
 
     public function drawWhiteCards($user, $game)
     {
+        $drawLimit = GAME::HAND_LIMIT - $user->whiteCards()->count();
         $pickedCards = WhiteCard::whereIn('expansion_id', $game->expansions->pluck('id')->toArray())
-            ->inRandomOrder()->limit(Game::HAND_LIMIT)->get();
+            ->whereNotIn('id', function ($query) use ($game) {
+                $query->select('white_card_id')->from('user_game_white_cards')->whereGameId($game->id);
+            })
+            ->inRandomOrder()
+            ->limit($drawLimit)
+            ->get();
 
-        $pickedCards->each(fn ($item) =>
-            UserGameWhiteCards::create([
-                'game_id' => $game->id,
-                'user_id' => $user->id,
-                'white_card_id' => $item->id
-            ])
-        );
+        $pickedCards->each(fn($item) => UserGameWhiteCards::create([
+            'game_id' => $game->id,
+            'user_id' => $user->id,
+            'white_card_id' => $item->id
+        ]));
+
+        return $pickedCards;
     }
 
     public function drawBlackCard($game)
@@ -72,7 +79,7 @@ class GameService
 
     public function joinGame(Game $game, User $user)
     {
-       return GameUser::create([
+        return GameUser::create([
             'game_id' => $game->id,
             'user_id' => $user->id
         ]);
@@ -96,6 +103,11 @@ class GameService
     public function discardBlackCard($game)
     {
         $game->gameBlackCards()->first()->delete();
+    }
+
+    public function discardWhiteCards($game)
+    {
+        UserGameWhiteCards::whereGameId($game->id)->where('selected', true)->delete();
     }
 
     public function updateJudge($game, $judgeId)

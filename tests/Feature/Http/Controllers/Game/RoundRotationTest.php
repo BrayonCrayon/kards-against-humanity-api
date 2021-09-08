@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
 use App\Models\GameBlackCards;
+use App\Models\UserGameWhiteCards;
 use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -108,6 +109,22 @@ class RoundRotationTest extends TestCase
 
         $this->game->refresh();
         $this->assertNotEquals($this->game->currentBlackCard->id, $previousBlackCard->id);
+    }
+
+    /** @test */
+    public function it_soft_deletes_all_submitted_white_cards()
+    {
+        $blackCardPick = $this->game->currentBlackCard->pick;
+        $previousBlackCard = $this->game->currentBlackCard;
+
+        $this->usersSelectCards($blackCardPick);
+
+        $selectedWhiteCards = UserGameWhiteCards::whereGameId($this->game->id)->where('selected', true)->get();
+        $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+
+        $selectedWhiteCards->each(fn ($selectedCard) => $this->assertSoftDeleted(UserGameWhiteCards::class, [
+            'id' => $selectedCard->id,
+        ]));
     }
 
     /**
