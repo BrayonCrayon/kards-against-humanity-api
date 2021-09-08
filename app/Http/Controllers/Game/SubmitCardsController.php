@@ -5,20 +5,21 @@ namespace App\Http\Controllers\Game;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitCardRequest;
 use App\Models\Game;
-use App\Models\UserGameWhiteCards;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class SubmitCardsController extends Controller
 {
+    public function __construct(private GameService $gameService)
+    {
+        $this->middleware('auth');
+    }
+
     public function __invoke(SubmitCardRequest $request, Game $game): JsonResponse
     {
-        $whiteCardIds = $request->get('whiteCardIds');
-        $gameService = new GameService();
-        $gameService->submitCards($whiteCardIds, $game);
-        return response()->json();
+        $this->gameService->submitCards($request->get('whiteCardIds'), $game);
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

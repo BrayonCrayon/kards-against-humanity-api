@@ -40,7 +40,7 @@ class RoundRotationTest extends TestCase
         $firstJudge = $this->game->judge;
         $this->usersSelectCards($blackCardPick);
 
-        $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+        $this->actingAs($firstJudge)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
         $this->game->refresh();
         $this->assertNotEquals($firstJudge->id, $this->game->judge_id);
@@ -57,7 +57,7 @@ class RoundRotationTest extends TestCase
 
             $this->usersSelectCards($blackCardPick);
 
-            $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+            $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
             $this->game->refresh();
 
@@ -84,7 +84,7 @@ class RoundRotationTest extends TestCase
 
             $this->usersSelectCards($blackCardPick);
 
-            $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+            $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
             $this->game->refresh();
 
@@ -105,7 +105,8 @@ class RoundRotationTest extends TestCase
 
         $this->usersSelectCards($blackCardPick);
 
-        $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+        $user = User::factory()->create();
+        $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
         $this->game->refresh();
         $this->assertNotEquals($this->game->currentBlackCard->id, $previousBlackCard->id);
@@ -120,7 +121,10 @@ class RoundRotationTest extends TestCase
         $this->usersSelectCards($blackCardPick);
 
         $selectedWhiteCards = UserGameWhiteCards::whereGameId($this->game->id)->where('selected', true)->get();
-        $this->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
         $selectedWhiteCards->each(fn ($selectedCard) => $this->assertSoftDeleted(UserGameWhiteCards::class, [
             'id' => $selectedCard->id,

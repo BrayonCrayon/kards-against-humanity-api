@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\WhiteCardsCollection;
 use App\Http\Resources\WhiteCardsResource;
 use App\Models\Game;
 use App\Services\GameService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DrawWhiteCardsController extends Controller
 {
@@ -23,8 +23,9 @@ class DrawWhiteCardsController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Game $game
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request, Game $game)
     {

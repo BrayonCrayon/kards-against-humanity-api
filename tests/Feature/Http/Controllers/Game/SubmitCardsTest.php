@@ -68,7 +68,7 @@ class SubmitCardsTest extends TestCase
         $this->postJson(route('api.game.submit', $this->game->id), [
             'whiteCardIds' => $ids,
             'submitAmount' => $blackCardPick
-        ])->assertOk();
+        ])->assertNoContent();
 
         foreach ($cards as $card) {
             $card->refresh();
