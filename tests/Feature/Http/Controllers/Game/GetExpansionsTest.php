@@ -1,0 +1,28 @@
+<?php
+
+namespace Tests\Feature\Http\Controllers\Game;
+
+use App\Models\Expansion;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class GetExpansionsTest extends TestCase
+{
+    /** @test */
+    public function it_can_fetch_expansions()
+    {
+        $expansionCount = Expansion::count();
+        $expectedExpansion = Expansion::firstOrFail();
+
+        $this->getJson(route('api.expansions.index'))
+            ->assertOk()
+            ->assertJsonCount($expansionCount, 'data')
+            ->assertJsonFragment([
+                'name' => $expectedExpansion->name,
+                'created_at' => $expectedExpansion->created_at,
+                'updated_at' => $expectedExpansion->updated_at,
+            ]);
+    }
+}
