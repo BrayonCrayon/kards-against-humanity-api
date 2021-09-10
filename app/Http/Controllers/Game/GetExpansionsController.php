@@ -23,7 +23,7 @@ class GetExpansionsController extends Controller
         return ExpansionResource::collection(
             Cache::remember('expansions-all',
                 Carbon::SECONDS_PER_MINUTE * Carbon::MINUTES_PER_HOUR * Carbon::HOURS_PER_DAY,
-                fn () => Expansion::all()
+                fn() => Expansion::all()
             )
         );
     }

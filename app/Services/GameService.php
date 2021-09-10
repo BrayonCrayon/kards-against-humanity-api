@@ -4,16 +4,14 @@
 namespace App\Services;
 
 
-use App\Http\Requests\SubmitCardRequest;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
+use App\Models\GameBlackCards;
 use App\Models\GameUser;
 use App\Models\User;
-use App\Models\GameBlackCards;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
-use Illuminate\Support\Facades\Auth;
 use Nubs\RandomNameGenerator\All as NameGenerator;
 
 class GameService
@@ -44,7 +42,7 @@ class GameService
 
     public function drawWhiteCards($user, $game)
     {
-        $drawLimit = GAME::HAND_LIMIT - $user->whiteCards()->count();
+        $drawLimit = Game::HAND_LIMIT - $user->whiteCards()->count();
         $pickedCards = WhiteCard::whereIn('expansion_id', $game->expansions->pluck('id')->toArray())
             ->whereNotIn('id', function ($query) use ($game) {
                 $query->select('white_card_id')->from('user_game_white_cards')->whereGameId($game->id);
@@ -67,7 +65,8 @@ class GameService
         $drawnCards = $game->gameBlackCards()->onlyTrashed()->get();
         $pickedCard = BlackCard::whereIn('expansion_id', $game->expansions->pluck('id'))
             ->whereNotIn('id', $drawnCards->pluck('id'))
-            ->inRandomOrder()->first();
+            ->inRandomOrder()
+            ->firstOrFail();
 
         GameBlackCards::create([
             'game_id' => $game->id,
@@ -87,22 +86,17 @@ class GameService
 
     public function submitCards($whiteCardIds, Game $game)
     {
-        $user = Auth::user();
-
-        $cardsToSelect = UserGameWhiteCards::where('game_id', $game->id)
-            ->where('user_id', $user->id)
+        UserGameWhiteCards::where('game_id', $game->id)
+            ->where('user_id', auth()->id())
             ->whereIn('white_card_id', $whiteCardIds)
-            ->get();
-
-        $cardsToSelect->each(function ($card) {
-            $card->selected = true;
-            $card->save();
-        });
+            ->update([
+                'selected' => true
+            ]);
     }
 
     public function discardBlackCard($game)
     {
-        $game->gameBlackCards()->first()->delete();
+        $game->gameBlackCards()->firstOrFail()->delete();
     }
 
     public function discardWhiteCards($game)

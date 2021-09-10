@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 class JoinGameController extends Controller
 {
-    public function __construct(private GameService $gameService) {}
+    public function __construct(private GameService $gameService)
+    {
+    }
 
     public function __invoke(JoinGameRequest $request, Game $game): JsonResponse
     {
@@ -21,7 +23,7 @@ class JoinGameController extends Controller
         ]);
         Auth::login($user);
 
-    $this->gameService->drawWhiteCards($user, $game);
+        $this->gameService->drawWhiteCards($user, $game);
         $this->gameService->joinGame($game, $user);
 
         $user->load('whiteCards');

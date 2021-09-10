@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateGameController extends Controller
 {
-    public function __construct(private GameService $gameService) {}
+    public function __construct(private GameService $gameService)
+    {
+    }
 
     /**
      * Handle the incoming request.
