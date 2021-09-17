@@ -49,38 +49,26 @@ class SubmitCardsTest extends TestCase
     public function user_submits_cards_for_a_game()
     {
         $this->gameService->discardBlackCard($this->game);
-
-        $drawnCards = $this->game->gameBlackCards()->onlyTrashed()->get();
-        $pickedCard = BlackCard::whereIn('expansion_id', $this->game->expansions->pluck('id'))
-            ->whereNotIn('id', $drawnCards->pluck('id'))
-            ->where('pick', 2)
-            ->inRandomOrder()
-            ->firstOrFail();
-        GameBlackCards::create([
-            'game_id' => $this->game->id,
-            'black_card_id' => $pickedCard->id
-        ]);
+        $this->drawBlackCardWithPickOf(2, $this->game);
         $this->game->refresh();
 
-        $cards = $this->user->whiteCardsInGame()->take(2);
-        $ids = $cards->pluck('white_card_id')->toArray();
-        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $cards = $this->user->whiteCardsInGame->take(2);
 
         $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
-            'whiteCardIds' => $ids,
-            'submitAmount' => $blackCardPick
+            'whiteCardIds' => $cards->pluck('white_card_id')->toArray(),
+            'submitAmount' => $this->game->currentBlackCard->pick
         ])->assertNoContent();
 
-        foreach ($cards as $card) {
+        $cards->each(function ($card) {
             $card->refresh();
             $this->assertTrue($card->selected);
-        }
+        });
     }
 
     /** @test */
     public function user_cannot_submit_more_cards_than_the_black_card_pick()
     {
-        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $blackCardPick = $this->game->currentBlackCard->pick;
         $ids = $this->user->whiteCardsInGame->pluck('white_card_id')->toArray();
 
         $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
@@ -92,7 +80,11 @@ class SubmitCardsTest extends TestCase
     /** @test */
     public function user_cannot_submit_less_cards_than_the_black_card_pick()
     {
-        $blackCardPick = $this->game->gameBlackCards()->first()->blackCard->pick;
+        $this->gameService->discardBlackCard($this->game);
+        $this->drawBlackCardWithPickOf(2, $this->game);
+        $this->game->refresh();
+
+        $blackCardPick = $this->game->currentBlackCard->pick;
         $ids = $this->user->whiteCardsInGame->pluck('white_card_id')->take($blackCardPick - 1);
 
         $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
