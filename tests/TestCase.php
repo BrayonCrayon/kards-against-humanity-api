@@ -16,15 +16,15 @@ abstract class TestCase extends BaseTestCase
 
     public function drawBlackCardWithPickOf($pick, $game)
     {
-        $drawnCards = $game->gameBlackCards()->onlyTrashed()->get();
+        $drawnCards = $game->deletedBlackCards()->get();
         $pickedCard = BlackCard::whereIn('expansion_id', $game->expansions->pluck('id'))
-            ->whereNotIn('id', $drawnCards->pluck('black_card_id'))
+            ->whereNotIn('id', $drawnCards->pluck('id'))
             ->where('pick', $pick)
             ->inRandomOrder()
             ->firstOrFail();
-        return GameBlackCards::create([
-            'game_id' => $game->id,
-            'black_card_id' => $pickedCard->id
-        ]);
+
+        $game->blackCards()->attach($pickedCard);
+
+        return $pickedCard;
     }
 }

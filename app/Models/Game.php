@@ -33,7 +33,7 @@ class Game extends Model
 
     public function getCurrentBlackCardAttribute()
     {
-        return $this->gameBlackCards()->firstOrFail()->blackCard;
+        return $this->blackCards()->firstOrFail();
     }
 
     /**
@@ -62,7 +62,18 @@ class Game extends Model
 
     public function blackCards()
     {
-        return $this->belongsToMany(BlackCard::class, 'game_black_cards');
+        return $this->belongsToMany(BlackCard::class, 'game_black_cards')
+            ->whereNull('deleted_at')
+            ->withTimestamps()
+            ->withPivot(['deleted_at']);
+    }
+
+    public function deletedBlackCards()
+    {
+        return $this->belongsToMany(BlackCard::class, 'game_black_cards')
+            ->whereNotNull('deleted_at')
+            ->withTimestamps()
+            ->withPivot(['deleted_at']);
     }
 
     public function judge()
