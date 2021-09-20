@@ -28,13 +28,12 @@ Broadcast::routes(['middleware' => ['auth:sanctum']]);
  *****************************
  */
 Route::post('/game/store', CreateGameController::class)->name('game.store');
-
 Route::post('/game/join/{game}', JoinGameController::class)->name('game.join');
 
-Route::post('/game/submit/{game}', SubmitCardsController::class)->name('game.submit');
-
-Route::post('/game/rotate/{game}', RotateGameController::class)->name('game.rotate');
-
-Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/game/submit/{game}', SubmitCardsController::class)->name('game.submit');
+    Route::post('/game/rotate/{game}', RotateGameController::class)->name('game.rotate');
+    Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
+});
 
 Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');
