@@ -51,4 +51,15 @@ class GameTest extends TestCase
 
         $this->assertInstanceOf(BlackCard::class, $game->currentBlackCard);
     }
+
+    /** @test */
+    public function it_can_get_black_cards()
+    {
+        $game = Game::factory()->create();
+
+        $blackCard = BlackCard::first();
+        $game->blackCards()->attach($blackCard);
+
+        $this->assertEquals($blackCard->id, $game->blackCards->first()->id);
+    }
 }

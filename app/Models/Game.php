@@ -60,6 +60,11 @@ class Game extends Model
         return $this->hasMany(GameBlackCards::class);
     }
 
+    public function blackCards()
+    {
+        return $this->belongsToMany(BlackCard::class, 'game_black_cards');
+    }
+
     public function judge()
     {
         return $this->hasOne(User::class, 'id', 'judge_id');

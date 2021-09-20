@@ -68,10 +68,7 @@ class GameService
             ->inRandomOrder()
             ->firstOrFail();
 
-        GameBlackCards::create([
-            'game_id' => $game->id,
-            'black_card_id' => $pickedCard->id
-        ]);
+        $game->blackCards()->attach($pickedCard);
 
         return $pickedCard;
     }

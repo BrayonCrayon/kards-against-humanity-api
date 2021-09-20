@@ -78,22 +78,18 @@ class GameServiceTest extends TestCase
     {
         $this->gameSetup(self::REALLY_SMALL_EXPANSION_ID);
 
-        // get all black cards for a given expansion
         $blackCards = BlackCard::query()->where("expansion_id", self::REALLY_SMALL_EXPANSION_ID)->get();
 
         $remainingCard = $blackCards->pop();
 
-        // insert the first 4 into the database
         $blackCards->each(fn($card) => GameBlackCards::create([
             'game_id' => $this->game->id,
             'black_card_id' => $card->id,
             'deleted_at' => now(),
         ]));
 
-        // draw another black card (last one)
         $drawnCard = $this->gameService->drawBlackCard($this->game);
 
-        // assert that the last black card is from the drawnCard variable
         $this->assertEquals($remainingCard->id, $drawnCard->id);
     }
 }
