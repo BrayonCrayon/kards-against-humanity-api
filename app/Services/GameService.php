@@ -64,7 +64,7 @@ class GameService
     {
         $drawnCards = $game->gameBlackCards()->onlyTrashed()->get();
         $pickedCard = BlackCard::whereIn('expansion_id', $game->expansions->pluck('id'))
-            ->whereNotIn('id', $drawnCards->pluck('id'))
+            ->whereNotIn('id', $drawnCards->pluck('black_card_id'))
             ->inRandomOrder()
             ->firstOrFail();
 
