@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
+use App\Models\GameBlackCards;
 use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
 use App\Services\GameService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class GameServiceTest extends TestCase
@@ -71,5 +71,25 @@ class GameServiceTest extends TestCase
         $drawnCards = $this->gameService->drawWhiteCards($this->user, $this->game);
 
         $this->assertCount(3, $drawnCards);
+    }
+
+    /** @test */
+    public function it_only_draws_available_black_cards()
+    {
+        $this->gameSetup(self::REALLY_SMALL_EXPANSION_ID);
+
+        $blackCards = BlackCard::query()->where("expansion_id", self::REALLY_SMALL_EXPANSION_ID)->get();
+
+        $remainingCard = $blackCards->pop();
+
+        $blackCards->each(fn($card) => GameBlackCards::create([
+            'game_id' => $this->game->id,
+            'black_card_id' => $card->id,
+            'deleted_at' => now(),
+        ]));
+
+        $drawnCard = $this->gameService->drawBlackCard($this->game);
+
+        $this->assertEquals($remainingCard->id, $drawnCard->id);
     }
 }

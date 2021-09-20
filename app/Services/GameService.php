@@ -62,16 +62,13 @@ class GameService
 
     public function drawBlackCard($game)
     {
-        $drawnCards = $game->gameBlackCards()->onlyTrashed()->get();
+        $drawnCards = $game->deletedBlackCards()->get();
         $pickedCard = BlackCard::whereIn('expansion_id', $game->expansions->pluck('id'))
             ->whereNotIn('id', $drawnCards->pluck('id'))
             ->inRandomOrder()
             ->firstOrFail();
 
-        GameBlackCards::create([
-            'game_id' => $game->id,
-            'black_card_id' => $pickedCard->id
-        ]);
+        $game->blackCards()->attach($pickedCard);
 
         return $pickedCard;
     }
