@@ -34,5 +34,9 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=kards-against-humanity
+  redis:
+    image: 'redis'
+    ports:
+      - '6379:6379'
 volumes:
   dbdata: null
