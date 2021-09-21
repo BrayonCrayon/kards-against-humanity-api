@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Game;
 
+use App\Events\GameRotation;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Services\GameService;
@@ -25,5 +26,10 @@ class RotateGameController extends Controller
         $this->gameService->discardWhiteCards($game);
         $this->gameService->discardBlackCard($game);
         $this->gameService->drawBlackCard($game);
+        // TODO: Do this and emit event for every user
+        $this->gameService->drawWhiteCards($game->users->first(), $game);
+
+        // for each user, draw white cards, and then emit event
+        event(new GameRotation($game->users->first()->whiteCards->toArray()));
     }
 }

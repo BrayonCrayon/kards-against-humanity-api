@@ -130,15 +130,4 @@ class RoundRotationTest extends TestCase
             'id' => $selectedCard->id,
         ]));
     }
-
-    /**
-     * @param $blackCardPick
-     */
-    public function usersSelectCards($blackCardPick): void
-    {
-        $this->game->users->each(function ($user) use ($blackCardPick) {
-            $userCards = $user->whiteCardsInGame->take($blackCardPick);
-            $userCards->each(fn($card) => $card->update(['selected' => true]));
-        });
-    }
 }

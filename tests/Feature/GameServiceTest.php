@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Events\GameRotation;
 use App\Models\BlackCard;
 use App\Events\GameJoined;
 use App\Models\Expansion;
@@ -95,6 +96,7 @@ class GameServiceTest extends TestCase
         $this->assertEquals($remainingCard->id, $drawnCard->id);
     }
 
+    /** @test */
     public function it_emits_an_event_when_a_user_joins_a_game()
     {
         $this->gameSetup(self::REALLY_CHUNKY_EXPANSION_ID);
@@ -107,6 +109,34 @@ class GameServiceTest extends TestCase
 
         Event::assertDispatched(GameJoined::class, function (GameJoined $event) use ($user) {
             return $event->game->id === $this->game->id && $user->id === $event->user->id;
+        });
+    }
+
+    // create an event that will give users their new cards
+    /** @test */
+    public function it_emits_event_with_new_white_cards_after_game_rotation()
+    {
+        $this->withoutExceptionHandling();
+        Event::fake();
+
+        $this->game = Game::factory()->has(User::factory()->count(3))->create();
+        foreach ($this->game->users as $user) {
+            $this->gameService->drawWhiteCards($user, $this->game);
+        }
+        $this->game->judge_id = $this->game->users->first()->id;
+
+        $this->gameService->drawBlackCard($this->game);
+
+        $blackCardPick = $this->game->currentBlackCard->pick;
+
+        $this->usersSelectCards($blackCardPick, $this->game);
+
+        $this->actingAs($this->game->users->first())
+            ->postJson(route('api.game.rotate', $this->game->id))
+            ->assertOk();
+
+        Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick) {
+            return ($event->cards != null) && Game::HAND_LIMIT === count($event->cards);
         });
     }
 }
