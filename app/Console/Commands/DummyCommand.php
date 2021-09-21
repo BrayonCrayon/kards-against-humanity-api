@@ -38,8 +38,8 @@ class DummyCommand extends Command
      */
     public function handle()
     {
-//        event(DummyEvent::class);
-        DummyEvent::dispatch();
+//        event(new DummyEvent());
+        DummyEvent::dispatch('something');
         return 0;
     }
 }
