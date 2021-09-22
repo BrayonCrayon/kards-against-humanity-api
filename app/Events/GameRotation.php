@@ -20,7 +20,7 @@ class GameRotation implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(public $game, public array $cards)
+    public function __construct(public $game, public $user)
     {
     }
 
@@ -31,7 +31,6 @@ class GameRotation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // TODO: broadcast to user in specific game
-        return new PrivateChannel('game.'.$this->game->id);
+        return new PrivateChannel('game.'.$this->game->id . '.' . $this->user->id);
     }
 }

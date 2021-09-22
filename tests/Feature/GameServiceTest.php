@@ -135,11 +135,22 @@ class GameServiceTest extends TestCase
             ->postJson(route('api.game.rotate', $this->game->id))
             ->assertOk();
 
-        Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick) {
-            return ($event->cards != null)
-                && Game::HAND_LIMIT === count($event->cards)
-                && $event->game->id === $this->game->id
-                && $event->broadcastOn()->name === 'private-game.' . $this->game->id;
+        $this->game->users->each(function($user) use ($blackCardPick) {
+            Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick, $user) {
+                return
+                ($event->user->whiteCards->toArray() != null)
+                    && Game::HAND_LIMIT === count($event->user->whiteCards->toArray())
+                    && $event->game->id === $this->game->id
+                    && $event->broadcastOn()->name === 'private-game.' . $this->game->id . '.' . $user->id;
+            });
         });
+
+//        Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick) {
+//            return ($event->user->whiteCards->toArray() != null)
+//                && Game::HAND_LIMIT === count($event->user->whiteCards->toArray())
+//                && $event->game->id === $this->game->id
+//                && $event->broadcastOn()->name === 'private-game.' . $this->game->id . '.' . $event->user->id;
+//        });
     }
+
 }

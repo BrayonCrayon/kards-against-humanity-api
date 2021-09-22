@@ -26,10 +26,10 @@ class RotateGameController extends Controller
         $this->gameService->discardWhiteCards($game);
         $this->gameService->discardBlackCard($game);
         $this->gameService->drawBlackCard($game);
-        // TODO: Do this and emit event for every user
-        $this->gameService->drawWhiteCards($game->users->first(), $game);
 
-        // for each user, draw white cards, and then emit event
-        event(new GameRotation($game, $game->users->first()->whiteCards->toArray()));
+        $game->users->each(function($user) use ($game) {
+            $this->gameService->drawWhiteCards($user, $game);
+            event(new GameRotation($game, $user));
+        });
     }
 }
