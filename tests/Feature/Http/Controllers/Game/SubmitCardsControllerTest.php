@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
+use App\Events\CardsSubmitted;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -13,9 +14,10 @@ use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class SubmitCardsTest extends TestCase
+class SubmitCardsControllerTest extends TestCase
 {
 
     private $game;
@@ -91,5 +93,29 @@ class SubmitCardsTest extends TestCase
             'whiteCardIds' => $ids,
             'submitAmount' => $blackCardPick
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function event_fired_when_user_submits_cards_for_a_game()
+    {
+        Event::fake();
+        $this->gameService->discardBlackCard($this->game);
+        $this->drawBlackCardWithPickOf(2, $this->game);
+        $this->game->refresh();
+
+        $cards = $this->user->whiteCardsInGame->take(2);
+
+        $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
+            'whiteCardIds' => $cards->pluck('white_card_id')->toArray(),
+            'submitAmount' => $this->game->currentBlackCard->pick
+        ])->assertNoContent();
+
+        // TODO: assert that the white card id is in the event cards property
+       Event::assertDispatched(CardsSubmitted::class, function (CardsSubmitted $event) use ($cards) {
+           return  $event->game->id === $this->game->id
+               && $event->broadcastOn()->name === 'private-game.' . $this->game->id
+               && count($event->cards) === $cards->count()
+               && $this->user->id === $event->user->id;
+       });
     }
 }
