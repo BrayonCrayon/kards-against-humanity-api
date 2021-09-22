@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Events\GameJoined;
 use App\Events\GameRotation;
 use App\Models\BlackCard;
-use App\Events\GameJoined;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameBlackCards;
@@ -113,10 +113,10 @@ class GameServiceTest extends TestCase
     }
 
     // create an event that will give users their new cards
+
     /** @test */
     public function it_emits_event_with_new_white_cards_after_game_rotation()
     {
-        $this->withoutExceptionHandling();
         Event::fake();
 
         $this->game = Game::factory()->has(User::factory()->count(3))->create();
@@ -136,7 +136,10 @@ class GameServiceTest extends TestCase
             ->assertOk();
 
         Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick) {
-            return ($event->cards != null) && Game::HAND_LIMIT === count($event->cards);
+            return ($event->cards != null)
+                && Game::HAND_LIMIT === count($event->cards)
+                && $event->game->id === $this->game->id
+                && $event->broadcastOn()->name === 'private-game.' . $this->game->id;
         });
     }
 }
