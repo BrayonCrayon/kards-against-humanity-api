@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
+use App\Events\GameRotation;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
@@ -11,25 +12,27 @@ use App\Models\UserGameWhiteCards;
 use App\Services\GameService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class RoundRotationTest extends TestCase
+class RotateGameControllerTest extends TestCase
 {
     /** @var Game  */
     private $game;
+    private GameService $gameService;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $gameService = new GameService();
+        $this->gameService = new GameService();
 
         $this->game = Game::factory()->has(User::factory()->count(3))->create();
         foreach ($this->game->users as $user) {
-            $gameService->drawWhiteCards($user, $this->game);
+            $this->gameService->drawWhiteCards($user, $this->game);
         }
         $this->game->judge_id = $this->game->users->first()->id;
 
-        $gameService->drawBlackCard($this->game);
+        $this->gameService->drawBlackCard($this->game);
     }
 
     /** @test */
@@ -129,5 +132,38 @@ class RoundRotationTest extends TestCase
         $selectedWhiteCards->each(fn ($selectedCard) => $this->assertSoftDeleted(UserGameWhiteCards::class, [
             'id' => $selectedCard->id,
         ]));
+    }
+
+
+    /** @test */
+    public function it_emits_event_with_new_white_cards_after_game_rotation()
+    {
+        Event::fake();
+
+        $this->game = Game::factory()->has(User::factory()->count(3))->create();
+        foreach ($this->game->users as $user) {
+            $this->gameService->drawWhiteCards($user, $this->game);
+        }
+        $this->game->judge_id = $this->game->users->first()->id;
+
+        $this->gameService->drawBlackCard($this->game);
+
+        $blackCardPick = $this->game->currentBlackCard->pick;
+
+        $this->usersSelectCards($blackCardPick, $this->game);
+
+        $this->actingAs($this->game->users->first())
+            ->postJson(route('api.game.rotate', $this->game->id))
+            ->assertOk();
+
+        $this->game->users->each(function($user) use ($blackCardPick) {
+            Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick, $user) {
+                return
+                    ($event->user->whiteCards->toArray() != null)
+                    && Game::HAND_LIMIT === count($event->user->whiteCards->toArray())
+                    && $event->game->id === $this->game->id
+                    && $event->broadcastOn()->name === 'private-game.' . $this->game->id . '.' . $user->id;
+            });
+        });
     }
 }

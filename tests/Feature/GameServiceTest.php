@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Events\GameJoined;
-use App\Events\GameRotation;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -111,46 +110,4 @@ class GameServiceTest extends TestCase
             return $event->game->id === $this->game->id && $user->id === $event->user->id;
         });
     }
-
-    // create an event that will give users their new cards
-
-    /** @test */
-    public function it_emits_event_with_new_white_cards_after_game_rotation()
-    {
-        Event::fake();
-
-        $this->game = Game::factory()->has(User::factory()->count(3))->create();
-        foreach ($this->game->users as $user) {
-            $this->gameService->drawWhiteCards($user, $this->game);
-        }
-        $this->game->judge_id = $this->game->users->first()->id;
-
-        $this->gameService->drawBlackCard($this->game);
-
-        $blackCardPick = $this->game->currentBlackCard->pick;
-
-        $this->usersSelectCards($blackCardPick, $this->game);
-
-        $this->actingAs($this->game->users->first())
-            ->postJson(route('api.game.rotate', $this->game->id))
-            ->assertOk();
-
-        $this->game->users->each(function($user) use ($blackCardPick) {
-            Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick, $user) {
-                return
-                ($event->user->whiteCards->toArray() != null)
-                    && Game::HAND_LIMIT === count($event->user->whiteCards->toArray())
-                    && $event->game->id === $this->game->id
-                    && $event->broadcastOn()->name === 'private-game.' . $this->game->id . '.' . $user->id;
-            });
-        });
-
-//        Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick) {
-//            return ($event->user->whiteCards->toArray() != null)
-//                && Game::HAND_LIMIT === count($event->user->whiteCards->toArray())
-//                && $event->game->id === $this->game->id
-//                && $event->broadcastOn()->name === 'private-game.' . $this->game->id . '.' . $event->user->id;
-//        });
-    }
-
 }
