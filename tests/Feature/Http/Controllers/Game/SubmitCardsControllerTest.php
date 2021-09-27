@@ -110,12 +110,14 @@ class SubmitCardsControllerTest extends TestCase
             'submitAmount' => $this->game->currentBlackCard->pick
         ])->assertNoContent();
 
-        // TODO: assert that the white card id is in the event cards property
        Event::assertDispatched(CardsSubmitted::class, function (CardsSubmitted $event) use ($cards) {
-           return  $event->game->id === $this->game->id
+           $cardIds = collect($event->cards)->pluck('id');
+           return $event->game->id === $this->game->id
                && $event->broadcastOn()->name === 'private-game.' . $this->game->id
                && count($event->cards) === $cards->count()
-               && $this->user->id === $event->user->id;
+               && $this->user->id === $event->user->id
+               && $cardIds->contains($cards->first()->white_card_id)
+               && $cardIds->contains($cards->last()->white_card_id);
        });
     }
 }
