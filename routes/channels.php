@@ -22,3 +22,7 @@ Broadcast::channel('example-channel', function () {
     Log::error("I am here");
     return true;
 });
+
+Broadcast::channel('game.{game}', function($user, $game) {
+    return false;
+});
