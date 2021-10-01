@@ -43,6 +43,7 @@ class SubmitCardsControllerTest extends TestCase
     /** @test */
     public function user_submits_cards_for_a_game()
     {
+        Event::fake();
         $this->gameService->discardBlackCard($this->game);
         $this->drawBlackCardWithPickOf(2, $this->game);
         $this->game->refresh();

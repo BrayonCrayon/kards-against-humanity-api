@@ -20,6 +20,7 @@ class RotateGameControllerTest extends TestCase
     {
         parent::setUp();
         $this->gameService = new GameService();
+        Event::fake();
 
         $this->game = Game::factory()->has(User::factory()->count(3))->create();
         foreach ($this->game->users as $user) {
@@ -133,8 +134,6 @@ class RotateGameControllerTest extends TestCase
     /** @test */
     public function it_emits_event_with_new_white_cards_after_game_rotation()
     {
-        Event::fake();
-
         $this->game = Game::factory()->has(User::factory()->count(3))->create();
         foreach ($this->game->users as $user) {
             $this->gameService->drawWhiteCards($user, $this->game);
