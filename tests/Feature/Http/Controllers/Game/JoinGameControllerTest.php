@@ -7,11 +7,10 @@ use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
 use App\Services\GameService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class JoinGameTest extends TestCase
+class JoinGameControllerTest extends TestCase
 {
     private $game;
     private $expansionIds;
@@ -19,6 +18,7 @@ class JoinGameTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        Event::fake();
         $this->expansionIds = [Expansion::first()->id];
         $user = User::factory()->create();
         $this->game = Game::factory()->create();

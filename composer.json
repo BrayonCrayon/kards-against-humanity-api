@@ -12,7 +12,9 @@
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "nubs/random-name-generator": "^2.2"
+        "nubs/random-name-generator": "^2.2",
+        "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

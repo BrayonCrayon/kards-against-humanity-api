@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Events\GameJoined;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -10,6 +11,7 @@ use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
 use App\Services\GameService;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class GameServiceTest extends TestCase
@@ -91,5 +93,21 @@ class GameServiceTest extends TestCase
         $drawnCard = $this->gameService->drawBlackCard($this->game);
 
         $this->assertEquals($remainingCard->id, $drawnCard->id);
+    }
+
+    /** @test */
+    public function it_emits_an_event_when_a_user_joins_a_game()
+    {
+        $this->gameSetup(self::REALLY_CHUNKY_EXPANSION_ID);
+        Event::fake();
+
+        /** @var User $user */
+        $user = User::factory()->create();
+
+        $this->gameService->joinGame($this->game, $user);
+
+        Event::assertDispatched(GameJoined::class, function (GameJoined $event) use ($user) {
+            return $event->game->id === $this->game->id && $user->id === $event->user->id;
+        });
     }
 }

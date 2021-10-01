@@ -2,20 +2,15 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
-use App\Models\BlackCard;
+use App\Events\CardsSubmitted;
 use App\Models\Expansion;
-use App\Models\Game;
-use App\Models\GameUser;
 use App\Models\User;
-use App\Models\GameBlackCards;
-use App\Models\UserGameWhiteCards;
 use App\Services\GameService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class SubmitCardsTest extends TestCase
+class SubmitCardsControllerTest extends TestCase
 {
 
     private $game;
@@ -48,6 +43,7 @@ class SubmitCardsTest extends TestCase
     /** @test */
     public function user_submits_cards_for_a_game()
     {
+        Event::fake();
         $this->gameService->discardBlackCard($this->game);
         $this->drawBlackCardWithPickOf(2, $this->game);
         $this->game->refresh();
@@ -91,5 +87,31 @@ class SubmitCardsTest extends TestCase
             'whiteCardIds' => $ids,
             'submitAmount' => $blackCardPick
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function event_fired_when_user_submits_cards_for_a_game()
+    {
+        Event::fake();
+        $this->gameService->discardBlackCard($this->game);
+        $this->drawBlackCardWithPickOf(2, $this->game);
+        $this->game->refresh();
+
+        $cards = $this->user->whiteCardsInGame->take(2);
+
+        $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
+            'whiteCardIds' => $cards->pluck('white_card_id')->toArray(),
+            'submitAmount' => $this->game->currentBlackCard->pick
+        ])->assertNoContent();
+
+       Event::assertDispatched(CardsSubmitted::class, function (CardsSubmitted $event) use ($cards) {
+           $cardIds = collect($event->cards)->pluck('id');
+           return $event->game->id === $this->game->id
+               && $event->broadcastOn()->name === 'private-game.' . $this->game->id
+               && count($event->cards) === $cards->count()
+               && $this->user->id === $event->user->id
+               && $cardIds->contains($cards->first()->white_card_id)
+               && $cardIds->contains($cards->last()->white_card_id);
+       });
     }
 }

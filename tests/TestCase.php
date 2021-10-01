@@ -27,4 +27,16 @@ abstract class TestCase extends BaseTestCase
 
         return $pickedCard;
     }
+
+    /**
+     * @param $blackCardPick
+     * @param $game
+     */
+    public function usersSelectCards($blackCardPick, $game): void
+    {
+        $game->users->each(function ($user) use ($blackCardPick) {
+            $userCards = $user->whiteCardsInGame->take($blackCardPick);
+            $userCards->each(fn($card) => $card->update(['selected' => true]));
+        });
+    }
 }

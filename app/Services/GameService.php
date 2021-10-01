@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Events\GameJoined;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -75,10 +76,14 @@ class GameService
 
     public function joinGame(Game $game, User $user)
     {
-        return GameUser::create([
+        $joinedUser = GameUser::create([
             'game_id' => $game->id,
             'user_id' => $user->id
         ]);
+
+        event(new GameJoined($game, $user));
+
+        return $joinedUser;
     }
 
     public function submitCards($whiteCardIds, Game $game)
