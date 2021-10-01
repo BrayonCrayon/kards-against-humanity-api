@@ -7,8 +7,6 @@ use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
 use App\Services\GameService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class JoinGameTest extends TestCase

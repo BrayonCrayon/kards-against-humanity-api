@@ -18,11 +18,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('example-channel', function () {
-    Log::error("I am here");
-    return true;
-});
-
 Broadcast::channel('game.{game}', function($user, $game) {
     return false;
 });

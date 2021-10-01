@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Game;
+namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Models\Expansion;
 use App\Models\Game;
