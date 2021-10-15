@@ -3,6 +3,7 @@
 use App\Http\Controllers\Game\CreateGameController;
 use App\Http\Controllers\Game\DrawWhiteCardsController;
 use App\Http\Controllers\Game\GetExpansionsController;
+use App\Http\Controllers\Game\GetGameStateController;
 use App\Http\Controllers\Game\JoinGameController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\SubmitCardsController;
@@ -34,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/game/submit/{game}', SubmitCardsController::class)->name('game.submit');
     Route::post('/game/rotate/{game}', RotateGameController::class)->name('game.rotate');
     Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
+    Route::get('/game/{game}/state', GetGameStateController::class)->name('game.state');
 });
 
 Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');
