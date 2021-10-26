@@ -33,7 +33,7 @@ class Game extends Model
 
     public function getCurrentBlackCardAttribute()
     {
-        return $this->blackCards()->firstOrFail();
+        return $this->blackCards->firstOrFail();
     }
 
     /**
