@@ -53,23 +53,18 @@ class GetGameStateControllerTest extends TestCase
         $response->assertJsonFragment([
                 'id' => $game->id,
                 'name' => $game->name,
-                'judge_id' => $game->judge_id,
+                'judge' => [
+                    'id' => $game->judge_id,
+                    'name' => $game->judge->name,
+                    'created_at' => $game->judge->created_at,
+                    'updated_at' => $game->judge->updated_at,
+                ],
         ]);
 
         $response->assertJsonFragment([
             'id' => $game->currentBlackCard->id,
             'pick' => $game->currentBlackCard->pick,
             'text' => $game->currentBlackCard->text,
-        ]);
-
-        $response->assertJsonFragment([
-            'judge' => [
-                'id' => $players->first()->id,
-                'name' => $players->first()->name,
-                'remember_token' => $players->first()->remember_token,
-                'updated_at' => $players->first()->updated_at,
-                'created_at' => $players->first()->created_at,
-            ],
         ]);
 
         $players->each(function ($player) use ($response) {
