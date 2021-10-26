@@ -22,7 +22,7 @@ class GetGameStateControllerTest extends TestCase
     public function it_does_not_allow_non_auth_users()
     {
         $game = Game::factory()->create();
-        $this->getJson(route('api.game.state', $game->id))
+        $this->getJson(route('api.game.show', $game->id))
             ->assertUnauthorized();
     }
 
@@ -31,7 +31,7 @@ class GetGameStateControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user)
-            ->getJson(route('api.game.state', $this->faker->uuid))
+            ->getJson(route('api.game.show', $this->faker->uuid))
             ->assertNotFound();
     }
 
@@ -47,7 +47,7 @@ class GetGameStateControllerTest extends TestCase
 
 
         $response = $this->actingAs($players->first())
-            ->getJson(route('api.game.state', $game->id))
+            ->getJson(route('api.game.show', $game->id))
             ->assertOk();
 
         $response->assertJsonFragment([
