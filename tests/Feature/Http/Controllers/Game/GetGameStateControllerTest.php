@@ -2,10 +2,12 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
+use App\Events\GameJoined;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class GetGameStateControllerTest extends TestCase
@@ -15,6 +17,7 @@ class GetGameStateControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->gameService = new GameService();
     }
 
@@ -38,6 +41,7 @@ class GetGameStateControllerTest extends TestCase
     /** @test */
     public function it_returns_current_game_state()
     {
+        Event::fake([GameJoined::class]);
         $players = User::factory()->count(4)->create();
         /** @var Game */
         $game = $this->gameService->createGame($players->first(), [Expansion::first()->id]);
