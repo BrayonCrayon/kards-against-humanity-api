@@ -18,6 +18,8 @@ jobs:
           php-version: '8.0.3'
       - name: Copy .env.example to .env
         run: cp .env.example .env
+      - name: Copy .docker.env.example to .docker.env
+        run: cp environment/.docker.env.example environment/docker.env
       - run: docker-compose pull
       - uses: satackey/action-docker-layer-caching@v0.0.11
         continue-on-error: true
