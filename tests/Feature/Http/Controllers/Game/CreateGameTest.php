@@ -25,7 +25,7 @@ class CreateGameTest extends TestCase
     {
         $user = User::factory()->make();
         $this->postJson(route('api.game.store'), [
-            'name'   => $user->name,
+            'name' => $user->name,
             'expansionIds' => []
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
@@ -35,7 +35,7 @@ class CreateGameTest extends TestCase
     {
         $user = User::factory()->make();
         $this->postJson(route('api.game.store'), [
-            'name'   => $user->name,
+            'name' => $user->name,
             'expansionIds' => [-1]
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
@@ -46,7 +46,7 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $this->postJson(route('api.game.store'), [
-            'name'   => $userName,
+            'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk();
 
@@ -61,14 +61,13 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'name'   => $userName,
+            'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
-        ])->assertOk()
-        ->getOriginalContent();
+        ])->assertOk();
 
         $this->assertDatabaseHas('games', [
-            'id' => $response['game']->id,
-            'name' => $response['game']->name
+            'id' => $response->json('data.id'),
+            'name' => $response->json('data.name')
         ]);
     }
 
@@ -78,14 +77,13 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::first()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'name'   => $userName,
+            'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
-        ])->assertOk()
-            ->getOriginalContent();
+        ])->assertOk();
 
         $this->assertDatabaseHas('game_users', [
-            'game_id' => $response['game']->id,
-            'user_id' => $response['user']->id
+            'game_id' => $response->json('data.id'),
+            'user_id' => $response->json('data.current_user.id')
         ]);
     }
 
@@ -113,16 +111,14 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'name'   => $userName,
+            'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
-        ])->assertOk()
-            ->getOriginalContent();
+        ])->assertOk();
 
-        $expansionIds->each(fn ($id) =>
-            $this->assertDatabaseHas('game_expansions', [
-                'game_id' => $response['game']->id,
-                'expansion_id' => $id
-            ])
+        $expansionIds->each(fn($id) => $this->assertDatabaseHas('game_expansions', [
+            'game_id' => $response->json('data.id'),
+            'expansion_id' => $id
+        ])
         );
     }
 
@@ -132,25 +128,41 @@ class CreateGameTest extends TestCase
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
-            'name'   => $userName,
+            'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk()
             ->assertJsonStructure([
-                'user' => [
-                    'id',
-                    'name',
-                    'white_cards' => [
+                'data' => [
+                    'users' => [
+                        [
+                            'id',
+                            'name',
+                        ]
+                    ],
+                    'current_user' => [
+                        'id',
+                        'name',
+                    ],
+                    'judge' => [
+                        'id',
+                        'name',
+                    ],
+                    'hand' => [
                         [
                             'id',
                             'text',
                             'expansion_id'
                         ],
-                    ]
-                ],
-                'game' => [
+                    ],
                     'id',
-                    'name'
-                ],
+                    'name',
+                    'current_black_card' => [
+                        'id',
+                        'text',
+                        'pick'
+                    ]
+                ]
+
             ]);
     }
 }

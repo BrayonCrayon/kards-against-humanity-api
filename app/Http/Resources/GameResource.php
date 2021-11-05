@@ -19,6 +19,7 @@ class GameResource extends JsonResource
             'name' => $this->resource->name,
             'judge' => UserResource::make($this->resource->judge),
             'users' => UserResource::collection($this->resource->users),
+            'current_user' => UserResource::make(auth()->user()),
             'current_black_card' => BlackCardResource::make($this->resource->current_black_card),
             'hand' => WhiteCardsResource::collection(auth()->user()->whiteCards),
         ];
