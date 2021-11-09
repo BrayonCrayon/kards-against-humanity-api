@@ -24,7 +24,7 @@ class JoinGameController extends Controller
         ]);
         Auth::login($user);
 
-        $game = Game::where('code', $gameCode)->first();
+        $game = Game::byCode($gameCode)->first();
 
         $this->gameService->drawWhiteCards($user, $game);
         $this->gameService->joinGame($game, $user);

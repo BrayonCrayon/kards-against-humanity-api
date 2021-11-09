@@ -80,4 +80,9 @@ class Game extends Model
     {
         return $this->hasOne(User::class, 'id', 'judge_id');
     }
+
+    public function scopeByCode($query, $gameCode)
+    {
+        return $query->where('code', $gameCode);
+    }
 }
