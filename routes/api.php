@@ -29,7 +29,7 @@ Broadcast::routes(['middleware' => ['auth:sanctum']]);
  *****************************
  */
 Route::post('/game', CreateGameController::class)->name('game.store');
-Route::post('/game/{game}/join', JoinGameController::class)->name('game.join');
+Route::post('/game/{gameCode}/join', JoinGameController::class)->name('game.join');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/game/{game}/submit', SubmitCardsController::class)->name('game.submit');

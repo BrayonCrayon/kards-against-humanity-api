@@ -16,12 +16,14 @@ class JoinGameController extends Controller
     {
     }
 
-    public function __invoke(JoinGameRequest $request, Game $game): JsonResponse
+    public function __invoke(JoinGameRequest $request, string $gameCode): JsonResponse
     {
         $user = User::create([
             'name' => $request->get('name')
         ]);
         Auth::login($user);
+
+        $game = Game::where('code', $gameCode)->first();
 
         $this->gameService->drawWhiteCards($user, $game);
         $this->gameService->joinGame($game, $user);

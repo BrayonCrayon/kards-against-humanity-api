@@ -32,7 +32,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_adds_a_user_to_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
         $this->assertCount(1, GameUser::where('game_id', $this->game->id)->where('user_id', $joinGameResponse['user']['id'])->get());
@@ -41,7 +41,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_gives_a_user_white_cards_when_joining_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
         $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse['user']['id'])->whiteCards);
@@ -50,7 +50,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_brings_back_white_cards_that_are_in_specific_expansions()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
 
@@ -64,7 +64,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_validates_user_name_when_joining_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => ''
         ])->assertJsonValidationErrors([
             'name'
@@ -74,7 +74,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_returns_specified_json_structure()
     {
-        $this->postJson(route('api.game.join', $this->game->id), [
+        $this->postJson(route('api.game.join', $this->game->code), [
             'name' => 'foo'
         ])->assertJsonStructure([
                 "game" => [
