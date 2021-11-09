@@ -67,7 +67,8 @@ class CreateGameTest extends TestCase
 
         $this->assertDatabaseHas('games', [
             'id' => $response->json('data.id'),
-            'name' => $response->json('data.name')
+            'name' => $response->json('data.name'),
+            'code' => $response->json('data.code'),
         ]);
     }
 
