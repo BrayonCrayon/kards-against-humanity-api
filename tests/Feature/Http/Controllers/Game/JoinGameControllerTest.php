@@ -35,7 +35,7 @@ class JoinGameControllerTest extends TestCase
         $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
-        $this->assertCount(1, GameUser::where('game_id', $this->game->id)->where('user_id', $joinGameResponse['user']['id'])->get());
+        $this->assertCount(1, GameUser::where('game_id', $this->game->id)->where('user_id', $joinGameResponse['data']['current_user']['id'])->get());
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class JoinGameControllerTest extends TestCase
         $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
-        $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse['user']['id'])->whiteCards);
+        $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse->json('data.current_user.id'))->whiteCards);
     }
 
     /** @test */
@@ -54,7 +54,7 @@ class JoinGameControllerTest extends TestCase
             'name' => $this->faker->userName
         ])->assertOK();
 
-        $currentExpansionIds = User::find($joinGameResponse['user']['id'])->whiteCards->pluck('expansion_id');
+        $currentExpansionIds = User::find($joinGameResponse->json('data.current_user.id'))->whiteCards->pluck('expansion_id');
 
         $currentExpansionIds->each(function ($id) {
             $this->assertContains($id, $this->expansionIds);
@@ -77,43 +77,35 @@ class JoinGameControllerTest extends TestCase
         $this->postJson(route('api.game.join', $this->game->code), [
             'name' => 'foo'
         ])->assertJsonStructure([
-                "game" => [
-                    "created_at",
-                    "deleted_at",
-                    "expansions" => [
+                'data' => [
+                    'users' => [
                         [
-                            "created_at",
-                            "id",
-                            "name",
-                            "pivot" => [
-                                "expansion_id",
-                                "game_id",
-                            ],
-                            "updated_at",
+                            'id',
+                            'name',
                         ]
                     ],
-                    "id",
-                    "name",
-                    "updated_at",
-                ],
-                "user" => [
-                    "created_at",
-                    "id",
-                    "name",
-                    "updated_at",
-                    "white_cards" => [
+                    'current_user' => [
+                        'id',
+                        'name',
+                    ],
+                    'judge' => [
+                        'id',
+                        'name',
+                    ],
+                    'hand' => [
                         [
-                            "created_at",
-                            "expansion_id",
-                            "id",
-                            "pivot" => [
-                                "user_id",
-                                "white_card_id"
-                            ],
-                            "text",
-                            "updated_at",
+                            'id',
+                            'text',
+                            'expansion_id'
                         ],
-
+                    ],
+                    'id',
+                    'name',
+                    'code',
+                    'current_black_card' => [
+                        'id',
+                        'text',
+                        'pick'
                     ]
                 ]
             ]

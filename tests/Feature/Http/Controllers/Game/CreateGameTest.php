@@ -159,6 +159,7 @@ class CreateGameTest extends TestCase
                     ],
                     'id',
                     'name',
+                    'code',
                     'current_black_card' => [
                         'id',
                         'text',

@@ -38,6 +38,7 @@ class GameServiceTest extends TestCase
         $this->game = Game::create([
             'name' => 'Krombopulos Michael',
             'judge_id' => $this->user->id,
+            'code' => strval(random_int(0000, 9999))
         ]);
         $this->game->users()->save($this->user);
         $this->game->expansions()->saveMany(Expansion::idsIn([$expansionId])->get());
