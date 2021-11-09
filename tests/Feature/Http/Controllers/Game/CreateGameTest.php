@@ -70,6 +70,8 @@ class CreateGameTest extends TestCase
             'name' => $response->json('data.name'),
             'code' => $response->json('data.code'),
         ]);
+
+        $this->assertEquals(4, strlen($response->json('data.code')));
     }
 
     /** @test */
