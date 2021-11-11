@@ -26,11 +26,10 @@ class GameService
 
     public function createGame($user, $expansionIds)
     {
-        $test = strval(random_int(0000, 9999));
         $game = Game::create([
             'name' => $this->generator->getName(),
             'judge_id' => $user->id,
-            'code' => $test
+            'code' => strval(random_int(1000, 9999))
         ]);
 
         $game->users()->save($user);
