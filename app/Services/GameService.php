@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
 use Nubs\RandomNameGenerator\All as NameGenerator;
+use Ramsey\Uuid\Type\Integer;
 
 class GameService
 {
