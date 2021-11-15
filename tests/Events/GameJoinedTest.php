@@ -19,7 +19,7 @@ class GameJoinedTest extends TestCase
 //    }
 
     /** @test */
-    public function taco()
+    public function it_returns_game_and_user_information_from_broadcastWith()
     {
         $this->user = User::factory()->create();
         $this->game = Game::create([
@@ -32,6 +32,11 @@ class GameJoinedTest extends TestCase
 
         $gameJoined = new GameJoined($this->game, $this->user);
 
-        $this->assertEquals(['gameId' => $this->game->id], $gameJoined->broadcastWith());
+        $payload = [
+            'gameId' => $this->game->id,
+            'userId' => $this->user->id,
+        ];
+
+        $this->assertEquals($payload, $gameJoined->broadcastWith());
     }
 }

@@ -30,6 +30,7 @@ class GameJoined implements ShouldBroadcastNow
     {
         return [
             'gameId' => $this->game->id,
+            'userId' => $this->user->id
         ];
     }
 
