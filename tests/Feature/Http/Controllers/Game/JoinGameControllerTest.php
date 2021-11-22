@@ -72,6 +72,14 @@ class JoinGameControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_prevents_user_from_joining_game_that_doesnt_exist()
+    {
+        $joinGameResponse = $this->postJson(route('api.game.join', 1234), [
+            'name' => 'Rick Sanchez'
+        ])->assertNotFound();
+    }
+
+    /** @test */
     public function it_returns_specified_json_structure()
     {
         $this->postJson(route('api.game.join', $this->game->code), [

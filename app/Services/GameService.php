@@ -30,7 +30,7 @@ class GameService
         $game = Game::create([
             'name' => $this->generator->getName(),
             'judge_id' => $user->id,
-            'code' => strval(random_int(1000, 9999))
+            'code' => bin2hex(random_bytes(2))
         ]);
 
         $game->users()->save($user);
