@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers\Game;
 use App\Models\Expansion;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CreateGameTest extends TestCase
@@ -123,6 +124,22 @@ class CreateGameTest extends TestCase
             'expansion_id' => $id
         ])
         );
+    }
+    /** @test */
+    public function it_creates_gamecode_with_uppercase_letters()
+    {
+        $userName = $this->faker->userName;
+        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $response = $this->postJson(route('api.game.store'), [
+            'name' => $userName,
+            'expansionIds' => $expansionIds->toArray()
+        ]);
+
+        $gameCode = $response->json('data.code');
+        $this->assertEquals(Str::upper($gameCode), $gameCode);
+
+        $invalidCode = Str::lower($gameCode);
+        $this->assertNotEquals($invalidCode, $gameCode);
     }
 
     /** @test */

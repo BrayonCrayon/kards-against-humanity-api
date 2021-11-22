@@ -12,12 +12,6 @@ class GameJoinedTest extends TestCase
     private $game;
     private $user;
 
-//    protected function setUp(): void
-//    {
-//        parent::setUp();
-//
-//    }
-
     /** @test */
     public function it_returns_game_and_user_information_from_broadcastWith()
     {
