@@ -17,6 +17,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->uuid('id')->unique();
             $table->string('name');
+            $table->string('code', 4)->unique();
             $table->timestamps();
             $table->softDeletes();
         });

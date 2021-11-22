@@ -17,6 +17,7 @@ class GameResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
+            'code' => $this->resource->code,
             'judge' => UserResource::make($this->resource->judge),
             'users' => UserResource::collection($this->resource->users),
             'current_user' => UserResource::make(auth()->user()),

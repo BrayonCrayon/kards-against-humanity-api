@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JoinGameRequest;
+use App\Http\Resources\GameResource;
 use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
@@ -26,11 +27,8 @@ class JoinGameController extends Controller
         $this->gameService->drawWhiteCards($user, $game);
         $this->gameService->joinGame($game, $user);
 
-        $user->load('whiteCards');
-
         return response()->json([
-            'user' => $user,
-            'game' => $game
+            'data' => GameResource::make($game)
         ]);
     }
 }

@@ -13,7 +13,9 @@ use App\Models\GameUser;
 use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
+use Illuminate\Support\Str;
 use Nubs\RandomNameGenerator\All as NameGenerator;
+use Ramsey\Uuid\Type\Integer;
 
 class GameService
 {
@@ -29,6 +31,7 @@ class GameService
         $game = Game::create([
             'name' => $this->generator->getName(),
             'judge_id' => $user->id,
+            'code' => Str::upper(bin2hex(random_bytes(2)))
         ]);
 
         $game->users()->save($user);

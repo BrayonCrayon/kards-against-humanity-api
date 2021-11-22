@@ -30,6 +30,7 @@ class GameFactory extends Factory
         return [
             'id' => $this->faker->uuid(),
             'name' => $generator->getName(),
+            'code' => $this->faker->bothify('##??'),
             'judge_id' => User::factory()
         ];
     }

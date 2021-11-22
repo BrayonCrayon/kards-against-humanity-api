@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers\Game;
 use App\Models\Expansion;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CreateGameTest extends TestCase
@@ -67,8 +68,11 @@ class CreateGameTest extends TestCase
 
         $this->assertDatabaseHas('games', [
             'id' => $response->json('data.id'),
-            'name' => $response->json('data.name')
+            'name' => $response->json('data.name'),
+            'code' => $response->json('data.code'),
         ]);
+
+        $this->assertEquals(4, strlen($response->json('data.code')));
     }
 
     /** @test */
@@ -121,6 +125,22 @@ class CreateGameTest extends TestCase
         ])
         );
     }
+    /** @test */
+    public function it_creates_gamecode_with_uppercase_letters()
+    {
+        $userName = $this->faker->userName;
+        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $response = $this->postJson(route('api.game.store'), [
+            'name' => $userName,
+            'expansionIds' => $expansionIds->toArray()
+        ]);
+
+        $gameCode = $response->json('data.code');
+        $this->assertEquals(Str::upper($gameCode), $gameCode);
+
+        $invalidCode = Str::lower($gameCode);
+        $this->assertNotEquals($invalidCode, $gameCode);
+    }
 
     /** @test */
     public function it_expects_certain_shape()
@@ -156,6 +176,7 @@ class CreateGameTest extends TestCase
                     ],
                     'id',
                     'name',
+                    'code',
                     'current_black_card' => [
                         'id',
                         'text',

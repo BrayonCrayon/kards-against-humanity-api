@@ -26,6 +26,14 @@ class GameJoined implements ShouldBroadcastNow
         //
     }
 
+    public function broadcastWith()
+    {
+        return [
+            'gameId' => $this->game->id,
+            'userId' => $this->user->id
+        ];
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *

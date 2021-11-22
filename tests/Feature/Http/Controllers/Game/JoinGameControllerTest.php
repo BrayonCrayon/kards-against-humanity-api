@@ -32,29 +32,29 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_adds_a_user_to_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
-        $this->assertCount(1, GameUser::where('game_id', $this->game->id)->where('user_id', $joinGameResponse['user']['id'])->get());
+        $this->assertCount(1, GameUser::where('game_id', $this->game->id)->where('user_id', $joinGameResponse['data']['current_user']['id'])->get());
     }
 
     /** @test */
     public function it_gives_a_user_white_cards_when_joining_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
-        $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse['user']['id'])->whiteCards);
+        $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse->json('data.current_user.id'))->whiteCards);
     }
 
     /** @test */
     public function it_brings_back_white_cards_that_are_in_specific_expansions()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
 
-        $currentExpansionIds = User::find($joinGameResponse['user']['id'])->whiteCards->pluck('expansion_id');
+        $currentExpansionIds = User::find($joinGameResponse->json('data.current_user.id'))->whiteCards->pluck('expansion_id');
 
         $currentExpansionIds->each(function ($id) {
             $this->assertContains($id, $this->expansionIds);
@@ -64,7 +64,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_validates_user_name_when_joining_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->id), [
+        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
             'name' => ''
         ])->assertJsonValidationErrors([
             'name'
@@ -72,48 +72,48 @@ class JoinGameControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_prevents_user_from_joining_game_that_doesnt_exist()
+    {
+        $joinGameResponse = $this->postJson(route('api.game.join', 1234), [
+            'name' => 'Rick Sanchez'
+        ])->assertNotFound();
+    }
+
+    /** @test */
     public function it_returns_specified_json_structure()
     {
-        $this->postJson(route('api.game.join', $this->game->id), [
+        $this->postJson(route('api.game.join', $this->game->code), [
             'name' => 'foo'
         ])->assertJsonStructure([
-                "game" => [
-                    "created_at",
-                    "deleted_at",
-                    "expansions" => [
+                'data' => [
+                    'users' => [
                         [
-                            "created_at",
-                            "id",
-                            "name",
-                            "pivot" => [
-                                "expansion_id",
-                                "game_id",
-                            ],
-                            "updated_at",
+                            'id',
+                            'name',
                         ]
                     ],
-                    "id",
-                    "name",
-                    "updated_at",
-                ],
-                "user" => [
-                    "created_at",
-                    "id",
-                    "name",
-                    "updated_at",
-                    "white_cards" => [
+                    'current_user' => [
+                        'id',
+                        'name',
+                    ],
+                    'judge' => [
+                        'id',
+                        'name',
+                    ],
+                    'hand' => [
                         [
-                            "created_at",
-                            "expansion_id",
-                            "id",
-                            "pivot" => [
-                                "user_id",
-                                "white_card_id"
-                            ],
-                            "text",
-                            "updated_at",
+                            'id',
+                            'text',
+                            'expansion_id'
                         ],
-
+                    ],
+                    'id',
+                    'name',
+                    'code',
+                    'current_black_card' => [
+                        'id',
+                        'text',
+                        'pick'
                     ]
                 ]
             ]
