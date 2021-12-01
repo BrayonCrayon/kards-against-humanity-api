@@ -16,6 +16,7 @@ class GameJoined implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+
     /**
      * Create a new event instance.
      *
@@ -34,6 +35,10 @@ class GameJoined implements ShouldBroadcastNow
         ];
     }
 
+    public function broadcastAs(){
+        return 'game.joined';
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -41,6 +46,6 @@ class GameJoined implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('game.' . $this->game->id);
+        return new Channel('game-' . $this->game->id);
     }
 }
