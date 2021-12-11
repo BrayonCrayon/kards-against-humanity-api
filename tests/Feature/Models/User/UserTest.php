@@ -49,4 +49,32 @@ class UserTest extends TestCase
         $this->gameService->drawWhiteCards($user, $game);
         $this->assertFalse($user->hasSubmittedWhiteCards);
     }
+
+    /** @test */
+    public function it_returns_submitted_white_card_ids_when_user_has_submitted_cards()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $game = $this->gameService->createGame($user, Expansion::all()->pluck('id'));
+
+        $this->gameService->drawWhiteCards($user, $game);
+
+        $submittedWhiteCardIds = $user->whiteCards->take(2)->pluck('id');
+        $this->gameService->submitCards($submittedWhiteCardIds,$game);
+        $submittedWhiteCardIds->each(fn ($cardId) => $this->assertContains($cardId, $user->submittedWhiteCardIds));
+    }
+
+    /** @test */
+    public function submitted_white_cards_returns_empty_array_when_there_are_no_submitted_cards()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $game = $this->gameService->createGame($user, Expansion::all()->pluck('id'));
+
+        $this->gameService->drawWhiteCards($user, $game);
+
+        $this->assertEmpty($user->submittedWhiteCardIds);
+    }
 }
