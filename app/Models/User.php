@@ -24,6 +24,17 @@ class User extends Authenticatable
 
     /*
      ********************************
+     *          Attributes          *
+     ********************************
+     */
+
+    public function getHasSubmittedWhiteCardsAttribute()
+    {
+        return $this->whiteCardsInGame()->where('selected', true)->count() > 0;
+    }
+
+    /*
+     ********************************
      *        Relationships         *
      ********************************
      */
