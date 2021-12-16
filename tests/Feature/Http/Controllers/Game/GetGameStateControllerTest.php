@@ -66,6 +66,14 @@ class GetGameStateControllerTest extends TestCase
         ]);
 
         $response->assertJsonFragment([
+            'hasSubmittedWhiteCards' => false
+        ]);
+
+        $response->assertJsonFragment([
+            'submittedWhiteCardIds' => []
+        ]);
+
+        $response->assertJsonFragment([
             'id' => $game->currentBlackCard->id,
             'pick' => $game->currentBlackCard->pick,
             'text' => $game->currentBlackCard->text,

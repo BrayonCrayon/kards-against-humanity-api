@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -21,6 +22,28 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
     ];
+
+    /*
+     ********************************
+     *          Attributes          *
+     ********************************
+     */
+
+    /**
+     * @return bool
+     */
+    public function getHasSubmittedWhiteCardsAttribute(): bool
+    {
+        return $this->whiteCardsInGame->where('selected', true)->count() > 0;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSubmittedWhiteCardIdsAttribute(): Collection
+    {
+        return $this->whiteCardsInGame->where('selected', true)->pluck('white_card_id');
+    }
 
     /*
      ********************************
