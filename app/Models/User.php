@@ -34,7 +34,7 @@ class User extends Authenticatable
      */
     public function getHasSubmittedWhiteCardsAttribute(): bool
     {
-        return $this->whiteCardsInGame()->where('selected', true)->count() > 0;
+        return $this->whiteCardsInGame->where('selected', true)->count() > 0;
     }
 
     /**
@@ -42,7 +42,7 @@ class User extends Authenticatable
      */
     public function getSubmittedWhiteCardIdsAttribute(): Collection
     {
-        return $this->whiteCardsInGame()->where('selected', true)->get()->pluck('white_card_id');
+        return $this->whiteCardsInGame->where('selected', true)->pluck('white_card_id');
     }
 
     /*
