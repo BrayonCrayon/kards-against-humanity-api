@@ -68,7 +68,7 @@ class HelperServiceTest extends TestCase
     }
 
     /** @test */
-    public function it_will_bring_back_code_in_character_format()
+    public function it_will_bring_back_code_in_alpha_character_format()
     {
         $codeFormat = "????";
         $code = $this->service->generateCode($codeFormat);
@@ -77,5 +77,28 @@ class HelperServiceTest extends TestCase
         foreach (str_split($code) as $codeChar) {
             $this->assertTrue($this->service->isUpperAlphaCharacter($codeChar));
         }
+    }
+
+    /** @test */
+    public function it_will_bring_back_code_in_both_alpha_digit_character_format()
+    {
+        $codeFormat = "#?#?";
+        $code = $this->service->generateCode($codeFormat);
+
+        $this->assertEquals(strlen($codeFormat), strlen($code));
+        $this->assertIsNumeric($code[0]);
+        $this->assertTrue($this->service->isUpperAlphaCharacter($code[1]));
+        $this->assertIsNumeric($code[2]);
+        $this->assertTrue($this->service->isUpperAlphaCharacter($code[3]));
+    }
+
+    /** @test */
+    public function it_will_generate_two_different_codes()
+    {
+        $codeFormat = "#?#?";
+        $firstCode = $this->service->generateCode($codeFormat);
+        $secondCode = $this->service->generateCode($codeFormat);
+
+        $this->assertNotEquals($firstCode, $secondCode);
     }
 }

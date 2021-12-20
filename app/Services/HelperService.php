@@ -10,6 +10,7 @@ class HelperService
     const LOWER_CASE_ALPHA_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
     const LOWER_CASE_ALPHA_ASCII_START = 97;
     const LOWER_CASE_ALPHA_ASCII_END = 122;
+    const DIGIT_CHARACTERS = "0123456789";
 
     public function isUpperAlphaCharacter(string $char): bool
     {
@@ -27,9 +28,9 @@ class HelperService
 
         foreach (str_split($codeFormat) as $item) {
             if ($item === "#")
-                $code .= '1';
+                $code .= self::DIGIT_CHARACTERS[rand(0, strlen(self::DIGIT_CHARACTERS) - 1)];
             else if ($item === "?")
-                $code .= 'A';
+                $code .= self::UPPER_CASE_ALPHA_CHARACTERS[rand(0, strlen(self::UPPER_CASE_ALPHA_CHARACTERS) - 1)];
         }
 
         return $code;
