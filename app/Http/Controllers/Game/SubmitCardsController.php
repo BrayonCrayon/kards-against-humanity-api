@@ -24,7 +24,7 @@ class SubmitCardsController extends Controller
 
 
         $cardsInHand = WhiteCard::whereIn('id', $request->get('whiteCardIds'))->get()->toArray();
-        event(new CardsSubmitted($game, $cardsInHand, request()->user()));
+        event(new CardsSubmitted($game, request()->user()));
 
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
