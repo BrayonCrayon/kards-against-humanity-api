@@ -31,6 +31,11 @@ class CardsSubmitted implements ShouldBroadcastNow
             'userId' => $this->user->id
         ];
     }
+
+    public function broadcastAs(){
+        return 'cards.submitted';
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *
