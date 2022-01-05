@@ -106,7 +106,7 @@ class SubmitCardsControllerTest extends TestCase
 
        Event::assertDispatched(CardsSubmitted::class, function (CardsSubmitted $event) {
            return $event->game->id === $this->game->id
-               && $event->broadcastOn()->name === 'private-game.' . $this->game->id
+               && $event->broadcastOn()->name === 'game.' . $this->game->id
                && $this->user->id === $event->user->id;
        });
     }
