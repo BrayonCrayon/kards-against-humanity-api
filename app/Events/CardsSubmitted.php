@@ -43,6 +43,6 @@ class CardsSubmitted implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('game.'.$this->game->id );
+        return new Channel('game-'.$this->game->id );
     }
 }
