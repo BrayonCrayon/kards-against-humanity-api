@@ -9,25 +9,27 @@ use Tests\TestCase;
 
 class CardsSubmittedTest extends TestCase
 {
-    private $game;
-    private $user;
-
     /** @test */
     public function it_sends_game_id_and_user_id() {
 
-        $this->user = User::factory()->create();
-        $this->game = Game::factory()->create([
-            'judge_id' => $this->user->id,
-        ]);
-        $this->game->users()->save($this->user);
+        $game = Game::factory()->create();
 
-        $cardsSubmitted = new CardsSubmitted($this->game, $this->user);
+        $cardsSubmitted = new CardsSubmitted($game, $game->judge);
 
         $payload = [
-            'gameId' => $this->game->id,
-            'userId' => $this->user->id,
+            'gameId' => $game->id,
+            'userId' => $game->judge->id,
         ];
 
         $this->assertEquals($payload, $cardsSubmitted->broadcastWith());
+    }
+
+    /** @test */
+    public function it_broadcasts_on_correct_channel_name() {
+        $game = Game::factory()->create();
+
+        $cardsSubmitted = new CardsSubmitted($game, $game->judge);
+
+        $this->assertEquals("cards.submitted", $cardsSubmitted->broadcastAs());
     }
 }
