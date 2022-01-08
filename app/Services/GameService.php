@@ -88,11 +88,13 @@ class GameService
 
     public function submitCards($whiteCardIds, Game $game)
     {
+        $cardOrder = 1;
         UserGameWhiteCards::where('game_id', $game->id)
             ->where('user_id', auth()->id())
             ->whereIn('white_card_id', $whiteCardIds)
             ->update([
-                'selected' => true
+                'selected' => true,
+                'order' => $cardOrder++
             ]);
     }
 
