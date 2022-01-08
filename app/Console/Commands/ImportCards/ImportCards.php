@@ -40,8 +40,10 @@ class ImportCards extends Command
      */
     public function handle(): int
     {
+        $startLoading = now();
         collect($this->loadDeck())->each(fn ($expansionData) => $this->createExpansion($expansionData));
-
+        $endLoading = now();
+        $this->info("Loading Deck: {$endLoading->diffInSeconds($startLoading)}}");
         return 0;
     }
 

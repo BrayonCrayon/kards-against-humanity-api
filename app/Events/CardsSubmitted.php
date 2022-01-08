@@ -6,8 +6,6 @@ use App\Models\Game;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -21,9 +19,21 @@ class CardsSubmitted implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct(public Game $game, public array $cards, public User $user)
+    public function __construct(public Game $game, public User $user)
     {
         //
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'gameId' => $this->game->id,
+            'userId' => $this->user->id
+        ];
+    }
+
+    public function broadcastAs(){
+        return 'cards.submitted';
     }
 
     /**
@@ -33,6 +43,6 @@ class CardsSubmitted implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('game.'.$this->game->id );
+        return new Channel('game-'.$this->game->id );
     }
 }

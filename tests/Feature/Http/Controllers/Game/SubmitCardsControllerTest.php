@@ -104,14 +104,35 @@ class SubmitCardsControllerTest extends TestCase
             'submitAmount' => $this->game->currentBlackCard->pick
         ])->assertNoContent();
 
-       Event::assertDispatched(CardsSubmitted::class, function (CardsSubmitted $event) use ($cards) {
-           $cardIds = collect($event->cards)->pluck('id');
+       Event::assertDispatched(CardsSubmitted::class, function (CardsSubmitted $event) {
            return $event->game->id === $this->game->id
-               && $event->broadcastOn()->name === 'private-game.' . $this->game->id
-               && count($event->cards) === $cards->count()
-               && $this->user->id === $event->user->id
-               && $cardIds->contains($cards->first()->white_card_id)
-               && $cardIds->contains($cards->last()->white_card_id);
+               && $event->broadcastOn()->name === 'game-' . $this->game->id
+               && $this->user->id === $event->user->id;
        });
+    }
+
+    /** @test */
+    public function user_submitting_cards_will_keep_the_order_they_were_submitted_in() {
+        Event::fake();
+        $this->gameService->discardBlackCard($this->game);
+        $this->drawBlackCardWithPickOf(2, $this->game);
+        $this->game->refresh();
+
+        $cardsToSubmit = $this->user->whiteCardsInGame->take(2);
+
+        $this->actingAs($this->user)
+            ->postJson(route('api.game.submit', $this->game->id), [
+                'whiteCardIds' => $cardsToSubmit->pluck('white_card_id')->toArray(),
+                'submitAmount' => $this->game->currentBlackCard->pick
+            ])->assertNoContent();
+
+        $orderNum = 1;
+        $cardsToSubmit->each(function($submittedCard) use ($orderNum) {
+            $this->assertDatabaseHas('user_game_white_cards', [
+                'id' => $submittedCard->id,
+                'order' => $orderNum
+            ]);
+            ++$orderNum;
+        });
     }
 }
