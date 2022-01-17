@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
+use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Services\GameService;
 use Tests\TestCase;
 
 class SubmittedCardsControllerTest extends TestCase
@@ -27,5 +27,37 @@ class SubmittedCardsControllerTest extends TestCase
         $this->actingAs($user)
             ->getJson(route('api.game.submitted.cards', $this->faker->uuid()))
             ->assertNotFound();
+    }
+
+    /** @test */
+    public function it_will_return_user_submitted_cards()
+    {
+        $gameService = new GameService();
+        $user = User::factory()->create();
+        $game = $gameService->createGame($user, Expansion::all()->pluck('id'));
+        $submittedUser = User::factory()->create();
+        $game->users()->attach($submittedUser);
+        $game->users->each(fn($user) => $gameService->drawWhiteCards($user, $game));
+
+        $gameService->submitCards($submittedUser->whiteCards->take(2)->pluck('id'), $game);
+
+        $this->actingAs($submittedUser)
+            ->getJson(route('api.game.submitted.cards', $game->id))
+            ->assertOK()
+            ->assertJsonStructure([
+                'data' => [
+                    [
+                        'user_id',
+                        'submitted_cards' => [
+                             [
+                                'id',
+                                'text',
+                                'expansion_id',
+                                'order'
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
     }
 }

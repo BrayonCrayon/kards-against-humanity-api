@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Game;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Services\GameService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -19,11 +20,21 @@ class SubmittedCardsController extends Controller
      * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request, Game $game)
+    public function __invoke(Request $request, Game $game) : JsonResponse
     {
 
-        return response()->json();
+
+        $data = $game->users()->whereNotIn('id', [$game->judge()->id])->get()->map(function($user) {
+            return [
+                'user_id' => $user->id,
+                'submitted_cards' => $user->whiteCardsInGame()->whereSelected(true)->get(),
+            ];
+        });
+
+        return response()->json([
+            'data' => $data
+        ]);
     }
 }
