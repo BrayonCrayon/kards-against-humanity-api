@@ -7,6 +7,7 @@ use App\Http\Controllers\Game\GetGameStateController;
 use App\Http\Controllers\Game\JoinGameController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\SubmitCardsController;
+use App\Http\Controllers\Game\SubmittedCardsController;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::post('/game', CreateGameController::class)->name('game.store');
 Route::post('/game/{game:code}/join', JoinGameController::class)->name('game.join');
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/game/{game}/submitted-cards', SubmittedCardsController::class)->name('game.submitted.cards');
     Route::post('/game/{game}/submit', SubmitCardsController::class)->name('game.submit');
     Route::post('/game/{game}/rotate', RotateGameController::class)->name('game.rotate');
     Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
