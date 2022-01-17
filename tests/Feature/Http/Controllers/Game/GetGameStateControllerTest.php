@@ -92,6 +92,7 @@ class GetGameStateControllerTest extends TestCase
             $response->assertJsonFragment([
                'id' => $whiteCard->id,
                'text' => $whiteCard->text,
+               'order' => $whiteCard->order,
                'expansion_id' => $whiteCard->expansion_id
             ]);
         });
