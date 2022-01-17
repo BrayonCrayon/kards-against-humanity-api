@@ -26,7 +26,7 @@ class SubmittedCardsController extends Controller
     {
 
 
-        $data = $game->users()->whereNotIn('id', [$game->judge()->id])->get()->map(function($user) {
+        $data = $game->users()->whereNotIn('user_id', [$game->judge->id])->get()->map(function($user) {
             return [
                 'user_id' => $user->id,
                 'submitted_cards' => $user->whiteCardsInGame()->whereSelected(true)->get(),

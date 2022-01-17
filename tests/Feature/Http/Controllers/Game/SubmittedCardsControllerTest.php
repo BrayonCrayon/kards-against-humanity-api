@@ -41,6 +41,7 @@ class SubmittedCardsControllerTest extends TestCase
 
         $gameService->submitCards($submittedUser->whiteCards->take(2)->pluck('id'), $game);
 
+        //$this->withoutExceptionHandling();
         $this->actingAs($submittedUser)
             ->getJson(route('api.game.submitted.cards', $game->id))
             ->assertOK()
