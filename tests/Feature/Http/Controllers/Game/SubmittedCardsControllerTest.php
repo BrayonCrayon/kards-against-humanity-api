@@ -39,26 +39,29 @@ class SubmittedCardsControllerTest extends TestCase
         $game->users()->attach($submittedUser);
         $game->users->each(fn($user) => $gameService->drawWhiteCards($user, $game));
 
+        $this->actingAs($submittedUser);
         $gameService->submitCards($submittedUser->whiteCards->take(2)->pluck('id'), $game);
 
-        //$this->withoutExceptionHandling();
-        $this->actingAs($submittedUser)
-            ->getJson(route('api.game.submitted.cards', $game->id))
+        $response = $this->getJson(route('api.game.submitted.cards', $game->id))
             ->assertOK()
             ->assertJsonStructure([
-                'data' => [
-                    [
-                        'user_id',
-                        'submitted_cards' => [
-                             [
+            'data' => [
+                [
+                    'user_id',
+                    'submitted_cards' => [
+                        [
+                            'id',
+                            'white_card_id',
+                            'order',
+                            'white_card' => [
                                 'id',
                                 'text',
-                                'expansion_id',
-                                'order'
+                                'expansion_id'
                             ]
                         ]
                     ]
                 ]
-            ]);
+            ]
+        ]);
     }
 }

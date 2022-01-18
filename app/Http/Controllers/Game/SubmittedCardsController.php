@@ -24,12 +24,10 @@ class SubmittedCardsController extends Controller
      */
     public function __invoke(Request $request, Game $game) : JsonResponse
     {
-
-
         $data = $game->users()->whereNotIn('user_id', [$game->judge->id])->get()->map(function($user) {
             return [
                 'user_id' => $user->id,
-                'submitted_cards' => $user->whiteCardsInGame()->whereSelected(true)->get(),
+                'submitted_cards' => $user->whiteCardsInGame()->with('whiteCard')->whereSelected(true)->get(),
             ];
         });
 
