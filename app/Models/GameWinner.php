@@ -16,4 +16,19 @@ class GameWinner extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class);
+    }
+
+    public function whiteCard()
+    {
+        return $this->belongsTo(WhiteCard::class);
+    }
+
+    public function blackCard()
+    {
+        return $this->belongsTo(BlackCard::class);
+    }
 }

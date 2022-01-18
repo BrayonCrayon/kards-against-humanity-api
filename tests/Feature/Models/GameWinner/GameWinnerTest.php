@@ -12,15 +12,18 @@ use Tests\TestCase;
 class GameWinnerTest extends TestCase
 {
     /** @test */
-    public function it_brings_back_user_instance_using_user_relationship()
+    public function it_has_relationships()
     {
-        $user = User::factory()->create();
         $gameWinner = GameWinner::create([
-            'user_id' => $user->id,
+            'user_id' => User::factory()->create()->id,
             'game_id' => Game::factory()->create()->id,
             'white_card_id' => WhiteCard::first()->id,
             'black_card_id' => BlackCard::first()->id,
         ]);
+
         $this->assertInstanceOf(User::class, $gameWinner->user);
+        $this->assertInstanceOf(Game::class, $gameWinner->game);
+        $this->assertInstanceOf(WhiteCard::class, $gameWinner->whiteCard);
+        $this->assertInstanceOf(BlackCard::class, $gameWinner->blackCard);
     }
 }
