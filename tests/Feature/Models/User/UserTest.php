@@ -10,19 +10,14 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    private $gameService;
     private $user;
     private $game;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->gameService = new GameService();
-        $this->user = User::factory()->create();
-        $this->actingAs($this->user);
-        $this->game = $this->gameService->createGame($this->user, Expansion::all()->pluck('id'));
-
-        $this->gameService->drawWhiteCards($this->user, $this->game);
+        $this->game = Game::factory()->hasUsers(1)->create();
+        $this->user = $this->game->users->whereNotIn('id', [$this->game->judge->id])->first();
     }
 
     /** @test */
@@ -37,7 +32,7 @@ class UserTest extends TestCase
     /** @test */
     public function has_submitted_white_cards_attribute_brings_back_true_if_user_has_submitted_cards()
     {
-        $this->gameService->submitCards($this->user->whiteCards->take(2)->pluck('id'), $this->game);
+        $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
         $this->assertTrue($this->user->hasSubmittedWhiteCards);
     }
 
@@ -50,8 +45,8 @@ class UserTest extends TestCase
     /** @test */
     public function it_returns_submitted_white_card_ids_when_user_has_submitted_cards()
     {
-        $submittedWhiteCardIds = $this->user->whiteCards->take(2)->pluck('id');
-        $this->gameService->submitCards($submittedWhiteCardIds, $this->game);
+        $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
+        $submittedWhiteCardIds = $this->user->whiteCardsInGame()->selected()->pluck('white_card_id');
         $submittedWhiteCardIds->each(fn ($cardId) => $this->assertContains($cardId, $this->user->submittedWhiteCardIds));
     }
 

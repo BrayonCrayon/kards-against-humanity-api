@@ -10,6 +10,7 @@ use App\Models\WhiteCard;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class SubmitCardsController extends Controller
 {
@@ -20,7 +21,7 @@ class SubmitCardsController extends Controller
 
     public function __invoke(SubmitCardRequest $request, Game $game): JsonResponse
     {
-        $this->gameService->submitCards($request->get('whiteCardIds'), $game);
+        $this->gameService->submitCards($request->get('whiteCardIds'), $game, auth()->user());
 
         event(new CardsSubmitted($game, request()->user()));
 

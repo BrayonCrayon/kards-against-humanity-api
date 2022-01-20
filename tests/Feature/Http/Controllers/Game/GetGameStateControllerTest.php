@@ -12,13 +12,9 @@ use Tests\TestCase;
 
 class GetGameStateControllerTest extends TestCase
 {
-    private GameService $gameService;
-
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->gameService = new GameService();
     }
 
     /** @test */

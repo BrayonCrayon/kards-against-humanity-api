@@ -14,12 +14,10 @@ class RotateGameControllerTest extends TestCase
 {
     /** @var Game  */
     private $game;
-    private GameService $gameService;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->gameService = new GameService();
         Event::fake();
 
         $this->game = Game::factory()->has(User::factory()->count(3))->create();
@@ -37,7 +35,7 @@ class RotateGameControllerTest extends TestCase
         $blackCardPick = $this->game->currentBlackCard->pick;
 
         $firstJudge = $this->game->judge;
-        $this->usersSelectCards($blackCardPick, $this->game);
+        $this->playersSubmitCards($blackCardPick, $this->game);
 
         $this->actingAs($firstJudge)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
@@ -54,7 +52,7 @@ class RotateGameControllerTest extends TestCase
 
         $this->game->users->each(function ($user) use ($blackCardPick, $pickedJudgeIds) {
 
-            $this->usersSelectCards($blackCardPick, $this->game);
+            $this->playersSubmitCards($blackCardPick, $this->game);
 
             $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
@@ -81,7 +79,7 @@ class RotateGameControllerTest extends TestCase
         $this->game->refresh();
         $this->game->users->each(function ($user) use ($blackCardPick, $pickedJudgeIds) {
 
-            $this->usersSelectCards($blackCardPick, $this->game);
+            $this->playersSubmitCards($blackCardPick, $this->game);
 
             $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
 
@@ -102,7 +100,7 @@ class RotateGameControllerTest extends TestCase
         $blackCardPick = $this->game->currentBlackCard->pick;
         $previousBlackCard = $this->game->currentBlackCard;
 
-        $this->usersSelectCards($blackCardPick, $this->game);
+        $this->playersSubmitCards($blackCardPick, $this->game);
 
         $user = User::factory()->create();
         $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
@@ -117,7 +115,7 @@ class RotateGameControllerTest extends TestCase
         $blackCardPick = $this->game->currentBlackCard->pick;
         $previousBlackCard = $this->game->currentBlackCard;
 
-        $this->usersSelectCards($blackCardPick, $this->game);
+        $this->playersSubmitCards($blackCardPick, $this->game);
 
         $selectedWhiteCards = UserGameWhiteCards::whereGameId($this->game->id)->where('selected', true)->get();
 
@@ -144,7 +142,7 @@ class RotateGameControllerTest extends TestCase
 
         $blackCardPick = $this->game->currentBlackCard->pick;
 
-        $this->usersSelectCards($blackCardPick, $this->game);
+        $this->playersSubmitCards($blackCardPick, $this->game);
 
         $this->actingAs($this->game->users->first())
             ->postJson(route('api.game.rotate', $this->game->id))

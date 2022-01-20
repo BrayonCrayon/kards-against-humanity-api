@@ -15,12 +15,10 @@ class SubmitCardsControllerTest extends TestCase
 
     private $game;
     private User $user;
-    private GameService $gameService;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->gameService = new GameService();
 
         $this->user = User::factory()->create();
         $this->game = $this->gameService->createGame($this->user, [Expansion::first()->id]);

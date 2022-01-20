@@ -86,11 +86,11 @@ class GameService
         return $joinedUser;
     }
 
-    public function submitCards($whiteCardIds, Game $game)
+    public function submitCards($whiteCardIds, Game $game, User $user)
     {
         $cardOrder = 1;
         UserGameWhiteCards::where('game_id', $game->id)
-            ->where('user_id', auth()->id())
+            ->where('user_id', $user->id)
             ->whereIn('white_card_id', $whiteCardIds)
             ->update([
                 'selected' => true,

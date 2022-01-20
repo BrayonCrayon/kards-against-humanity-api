@@ -32,17 +32,13 @@ class SubmittedCardsControllerTest extends TestCase
     /** @test */
     public function it_will_return_user_submitted_cards()
     {
-        $gameService = new GameService();
-        $user = User::factory()->create();
-        $game = $gameService->createGame($user, Expansion::all()->pluck('id'));
-        $submittedUser = User::factory()->create();
-        $game->users()->attach($submittedUser);
-        $game->users->each(fn($user) => $gameService->drawWhiteCards($user, $game));
+        $game = Game::factory()->hasUsers(1)->create();
+        $submittedUser = $game->users->whereNotIn('id', [$game->judge->id])->first();
 
-        $this->actingAs($submittedUser);
-        $gameService->submitCards($submittedUser->whiteCards->take(2)->pluck('id'), $game);
+        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
 
-        $response = $this->getJson(route('api.game.submitted.cards', $game->id))
+        $this->actingAs($submittedUser)
+            ->getJson(route('api.game.submitted.cards', $game->id))
             ->assertOK()
             ->assertJsonStructure([
             'data' => [
