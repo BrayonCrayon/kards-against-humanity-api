@@ -37,18 +37,6 @@ class RotateGameControllerTest extends TestCase
         $this->assertNotEquals($firstJudge->id, $this->game->judge_id);
     }
 
-    public function getNextJudge($user, $game): int
-    {
-        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
-
-        $this->actingAs($user)->postJson(route('api.game.rotate', $game->id))->assertOk();
-
-        $game->refresh();
-
-        $this->assertNotEquals($user->id, $game->judge->id);
-        return $game->judge->id;
-    }
-
     /** @test */
     public function it_cycles_through_the_users_when_assigning_the_judge_when_number_of_users_is_odd()
     {
@@ -68,18 +56,7 @@ class RotateGameControllerTest extends TestCase
         $pickedJudgeIds = collect();
 
         $this->game->refresh();
-        $this->game->users->each(function ($user) use ($pickedJudgeIds) {
-
-            $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
-
-            $this->actingAs($user)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
-
-            $this->game->refresh();
-
-            $this->assertNotEquals($user->id, $this->game->judge->id);
-
-            $pickedJudgeIds->add($this->game->judge_id);
-        });
+        $this->game->users->each(fn($user) => $pickedJudgeIds->add($this->getNextJudge($user, $this->game)));
 
 
         $this->assertCount($this->game->users->count(), $pickedJudgeIds->unique()->all());
