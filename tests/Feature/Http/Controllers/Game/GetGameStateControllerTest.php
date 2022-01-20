@@ -7,15 +7,12 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
+use Database\Factories\GameFactory;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class GetGameStateControllerTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
 
     /** @test */
     public function it_does_not_allow_non_auth_users()
@@ -38,15 +35,9 @@ class GetGameStateControllerTest extends TestCase
     public function it_returns_current_game_state()
     {
         Event::fake([GameJoined::class]);
-        $players = User::factory()->count(4)->create();
-        /** @var Game */
-        $game = $this->gameService->createGame($players->first(), [Expansion::first()->id]);
+        $game = Game::factory()->hasUsers(4)->create();
 
-        $players->filter(fn($player) => $player->id !== $players->first()->id)
-            ->each(fn($player) => $this->gameService->joinGame($game, $player));
-
-
-        $response = $this->actingAs($players->first())
+        $response = $this->actingAs($game->judge)
             ->getJson(route('api.game.show', $game->id))
             ->assertOk();
 
@@ -76,7 +67,7 @@ class GetGameStateControllerTest extends TestCase
             'text' => $game->currentBlackCard->text,
         ]);
 
-        $players->each(function ($player) use ($response) {
+        $game->users->each(function ($player) use ($response) {
             $response->assertJsonFragment([
                'id' => $player->id,
                'name' => $player->name,
@@ -84,7 +75,7 @@ class GetGameStateControllerTest extends TestCase
             ]);
         });
 
-        $players->first()->whiteCards->each(function ($whiteCard) use ($response) {
+        $game->judge->whiteCards->each(function ($whiteCard) use ($response) {
             $response->assertJsonFragment([
                'id' => $whiteCard->id,
                'text' => $whiteCard->text,
