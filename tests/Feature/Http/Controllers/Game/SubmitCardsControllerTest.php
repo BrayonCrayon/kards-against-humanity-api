@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Events\CardsSubmitted;
 use App\Models\Expansion;
+use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Http\Response;
@@ -20,11 +21,8 @@ class SubmitCardsControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
-        $this->game = $this->gameService->createGame($this->user, [Expansion::first()->id]);
-        $this->game->users()->attach(User::factory(4)->create());
-        $this->game->users->each(fn ($user) => $this->gameService->drawWhiteCards($user, $this->game));
-        $this->gameService->drawWhiteCards($this->user, $this->game);
+        $this->game = Game::factory()->hasUsers(4)->create();
+        $this->user = $this->game->judge;
     }
 
     /** @test */
