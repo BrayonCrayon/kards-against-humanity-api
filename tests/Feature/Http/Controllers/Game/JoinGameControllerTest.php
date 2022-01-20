@@ -13,20 +13,12 @@ use Tests\TestCase;
 class JoinGameControllerTest extends TestCase
 {
     private $game;
-    private $expansionIds;
 
     protected function setUp(): void
     {
         parent::setUp();
         Event::fake();
-        $this->expansionIds = [Expansion::first()->id];
-        $user = User::factory()->create();
         $this->game = Game::factory()->create();
-        $this->game->users()->save($user);
-        $this->game->expansions()->saveMany(Expansion::idsIn($this->expansionIds)->get());
-
-        $gameService = new GameService();
-        $gameService->drawBlackCard($this->game);
     }
 
     /** @test */
@@ -57,14 +49,14 @@ class JoinGameControllerTest extends TestCase
         $currentExpansionIds = User::find($joinGameResponse->json('data.current_user.id'))->whiteCards->pluck('expansion_id');
 
         $currentExpansionIds->each(function ($id) {
-            $this->assertContains($id, $this->expansionIds);
+            $this->assertContains($id, $this->game->expansions->pluck('id'));
         });
     }
 
     /** @test */
     public function it_validates_user_name_when_joining_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
+        $this->postJson(route('api.game.join', $this->game->code), [
             'name' => ''
         ])->assertJsonValidationErrors([
             'name'
@@ -74,7 +66,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_prevents_user_from_joining_game_that_doesnt_exist()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', 1234), [
+        $this->postJson(route('api.game.join', 1234), [
             'name' => 'Rick Sanchez'
         ])->assertNotFound();
     }
