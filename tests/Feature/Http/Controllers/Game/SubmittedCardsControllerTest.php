@@ -35,7 +35,7 @@ class SubmittedCardsControllerTest extends TestCase
 
         $this->playersSubmitCards($game->currentBlackCard->pick, $game);
 
-        $response = $this->actingAs($submittedUser)
+        $this->actingAs($submittedUser)
             ->getJson(route('api.game.submitted.cards', $game->id))
             ->assertOK()
             ->assertJsonStructure([
@@ -54,6 +54,19 @@ class SubmittedCardsControllerTest extends TestCase
                     ]
                 ]
             ]);
+    }
+
+    /** @test */
+    public function it_will_bring_back_correct_submitted_user_cards()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+        $submittedUser = $game->users->whereNotIn('id', [$game->judge->id])->first();
+
+        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+
+        $response = $this->actingAs($submittedUser)
+            ->getJson(route('api.game.submitted.cards', $game->id))
+            ->assertOK();
 
         $this->assertCount(1, $response->json("data"));
         $this->assertCount($submittedUser->whiteCardsInGame()->selected()->count(), $response->json("data")[0]["submitted_cards"]);
