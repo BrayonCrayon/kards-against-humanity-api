@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserGameWhiteCardResource;
 use App\Models\Game;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +28,7 @@ class SubmittedCardsController extends Controller
         $data = $game->users()->whereNotIn('user_id', [$game->judge->id])->get()->map(function($user) {
             return [
                 'user_id' => $user->id,
-                'submitted_cards' => $user->whiteCardsInGame()->with('whiteCard')->whereSelected(true)->get(),
+                'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
             ];
         });
 

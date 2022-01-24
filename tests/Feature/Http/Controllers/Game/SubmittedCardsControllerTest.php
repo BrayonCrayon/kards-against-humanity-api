@@ -47,13 +47,10 @@ class SubmittedCardsControllerTest extends TestCase
                     'submitted_cards' => [
                         [
                             'id',
-                            'white_card_id',
+                            'text',
+                            'expansion_id',
                             'order',
-                            'white_card' => [
-                                'id',
-                                'text',
-                                'expansion_id'
-                            ]
+                            'selected',
                         ]
                     ]
                 ]
