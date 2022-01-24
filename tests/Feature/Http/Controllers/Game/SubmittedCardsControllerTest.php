@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
-use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
-use App\Services\GameService;
 use Tests\TestCase;
 
 class SubmittedCardsControllerTest extends TestCase
@@ -37,24 +35,36 @@ class SubmittedCardsControllerTest extends TestCase
 
         $this->playersSubmitCards($game->currentBlackCard->pick, $game);
 
-        $this->actingAs($submittedUser)
+        $response = $this->actingAs($submittedUser)
             ->getJson(route('api.game.submitted.cards', $game->id))
             ->assertOK()
             ->assertJsonStructure([
-            'data' => [
-                [
-                    'user_id',
-                    'submitted_cards' => [
-                        [
-                            'id',
-                            'text',
-                            'expansion_id',
-                            'order',
-                            'selected',
+                'data' => [
+                    [
+                        'user_id',
+                        'submitted_cards' => [
+                            [
+                                'id',
+                                'text',
+                                'expansion_id',
+                                'order',
+                                'selected',
+                            ]
                         ]
                     ]
                 ]
-            ]
-        ]);
+            ]);
+
+        $this->assertCount(1, $response->json("data"));
+        $this->assertCount($submittedUser->whiteCardsInGame()->selected()->count(), $response->json("data")[0]["submitted_cards"]);
+        $submittedUser->whiteCardsInGame()->selected()->get()->each(function ($whiteCardInGame) use ($response) {
+            $response->assertJsonFragment([
+                'id' => $whiteCardInGame->white_card_id,
+                'text' => $whiteCardInGame->whiteCard->text,
+                'expansion_id' => $whiteCardInGame->whiteCard->expansion_id,
+                'order' => $whiteCardInGame->order,
+                'selected' => $whiteCardInGame->selected,
+            ]);
+        });
     }
 }
