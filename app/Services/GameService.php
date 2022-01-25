@@ -89,13 +89,15 @@ class GameService
     public function submitCards($whiteCardIds, Game $game, User $user)
     {
         $cardOrder = 1;
-        UserGameWhiteCards::where('game_id', $game->id)
-            ->where('user_id', $user->id)
-            ->whereIn('white_card_id', $whiteCardIds)
-            ->update([
-                'selected' => true,
-                'order' => $cardOrder++
-            ]);
+        collect($whiteCardIds)->each(function ($id) use(&$cardOrder, $user, $game) {
+            UserGameWhiteCards::where('game_id', $game->id)
+                ->where('user_id', $user->id)
+                ->where('white_card_id', $id)
+                ->update([
+                    'selected' => true,
+                    'order' => $cardOrder++
+                ]);
+        });
     }
 
     public function discardBlackCard($game)

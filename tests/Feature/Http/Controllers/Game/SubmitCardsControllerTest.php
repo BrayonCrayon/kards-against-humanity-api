@@ -123,7 +123,7 @@ class SubmitCardsControllerTest extends TestCase
             ])->assertNoContent();
 
         $orderNum = 1;
-        $cardsToSubmit->each(function($submittedCard) use ($orderNum) {
+        $cardsToSubmit->each(function($submittedCard) use (&$orderNum) {
             $this->assertDatabaseHas('user_game_white_cards', [
                 'id' => $submittedCard->id,
                 'order' => $orderNum
