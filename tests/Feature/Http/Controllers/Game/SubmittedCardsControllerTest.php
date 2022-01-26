@@ -47,8 +47,7 @@ class SubmittedCardsControllerTest extends TestCase
                                 'id',
                                 'text',
                                 'expansion_id',
-                                'order',
-                                'selected',
+                                'order'
                             ]
                         ]
                     ]
@@ -75,8 +74,7 @@ class SubmittedCardsControllerTest extends TestCase
                 'id' => $whiteCardInGame->white_card_id,
                 'text' => $whiteCardInGame->whiteCard->text,
                 'expansion_id' => $whiteCardInGame->whiteCard->expansion_id,
-                'order' => $whiteCardInGame->order,
-                'selected' => $whiteCardInGame->selected,
+                'order' => $whiteCardInGame->order
             ]);
         });
     }
