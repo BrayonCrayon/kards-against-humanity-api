@@ -16,8 +16,6 @@ use Tests\TestCase;
 
 class GameServiceTest extends TestCase
 {
-    private GameService $gameService;
-
     private const REALLY_SMALL_EXPANSION_ID = 105;
     private const REALLY_CHUNKY_EXPANSION_ID = 150;
 
@@ -28,8 +26,6 @@ class GameServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->gameService = new GameService();
     }
 
     public function gameSetup($expansionId)

@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Models\BlackCard;
 use App\Models\GameBlackCards;
+use App\Services\GameService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,6 +14,13 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use DatabaseTransactions;
     use WithFaker;
+    public $gameService;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->gameService = new GameService();
+    }
 
     public function drawBlackCardWithPickOf($pick, $game)
     {
@@ -32,11 +40,21 @@ abstract class TestCase extends BaseTestCase
      * @param $blackCardPick
      * @param $game
      */
-    public function usersSelectCards($blackCardPick, $game): void
+    public function playersSubmitCards($blackCardPick, $game): void
     {
-        $game->users->each(function ($user) use ($blackCardPick) {
-            $userCards = $user->whiteCardsInGame->take($blackCardPick);
-            $userCards->each(fn($card) => $card->update(['selected' => true]));
-        });
+        $game->users->where('id', '<>', $game->judge->id)
+            ->each(fn($user) => $this->gameService->submitCards($user->whiteCards->take($blackCardPick)->pluck('id'), $game, $user));
+    }
+
+    public function getNextJudge($user, $game): int
+    {
+        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+
+        $this->actingAs($user)->postJson(route('api.game.rotate', $game->id))->assertOk();
+
+        $game->refresh();
+
+        $this->assertNotEquals($user->id, $game->judge->id);
+        return $game->judge->id;
     }
 }

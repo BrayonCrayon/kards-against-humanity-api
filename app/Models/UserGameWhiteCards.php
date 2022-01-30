@@ -29,4 +29,10 @@ class UserGameWhiteCards extends Model
     {
         return $this->belongsTo(WhiteCard::class);
     }
+
+
+    public function scopeSelected($query)
+    {
+        return $query->where('selected', true);
+    }
 }

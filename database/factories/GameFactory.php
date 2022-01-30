@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
+use App\Services\GameService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Nubs\RandomNameGenerator\All;
@@ -38,7 +40,11 @@ class GameFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Game $game) {
+            $gameService = new GameService();
             $game->expansions()->saveMany([Expansion::first()]);
+            $game->blackCards()->attach(BlackCard::first());
+            $game->users()->attach($game->judge);
+            $game->users->each(fn($user) => $gameService->drawWhiteCards($user, $game));
         });
     }
 }

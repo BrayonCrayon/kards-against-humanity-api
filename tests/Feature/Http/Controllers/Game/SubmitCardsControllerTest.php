@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Events\CardsSubmitted;
 use App\Models\Expansion;
+use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Http\Response;
@@ -15,18 +16,13 @@ class SubmitCardsControllerTest extends TestCase
 
     private $game;
     private User $user;
-    private GameService $gameService;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->gameService = new GameService();
 
-        $this->user = User::factory()->create();
-        $this->game = $this->gameService->createGame($this->user, [Expansion::first()->id]);
-        $this->game->users()->attach(User::factory(4)->create());
-        $this->game->users->each(fn ($user) => $this->gameService->drawWhiteCards($user, $this->game));
-        $this->gameService->drawWhiteCards($this->user, $this->game);
+        $this->game = Game::factory()->hasUsers(4)->create();
+        $this->user = $this->game->judge;
     }
 
     /** @test */
@@ -127,7 +123,7 @@ class SubmitCardsControllerTest extends TestCase
             ])->assertNoContent();
 
         $orderNum = 1;
-        $cardsToSubmit->each(function($submittedCard) use ($orderNum) {
+        $cardsToSubmit->each(function($submittedCard) use (&$orderNum) {
             $this->assertDatabaseHas('user_game_white_cards', [
                 'id' => $submittedCard->id,
                 'order' => $orderNum

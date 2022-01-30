@@ -3,23 +3,13 @@
 namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Events\GameJoined;
-use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
-use App\Services\GameService;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class GetGameStateControllerTest extends TestCase
 {
-    private GameService $gameService;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->gameService = new GameService();
-    }
 
     /** @test */
     public function it_does_not_allow_non_auth_users()
@@ -42,28 +32,22 @@ class GetGameStateControllerTest extends TestCase
     public function it_returns_current_game_state()
     {
         Event::fake([GameJoined::class]);
-        $players = User::factory()->count(4)->create();
-        /** @var Game */
-        $game = $this->gameService->createGame($players->first(), [Expansion::first()->id]);
+        $game = Game::factory()->hasUsers(4)->create();
 
-        $players->filter(fn($player) => $player->id !== $players->first()->id)
-            ->each(fn($player) => $this->gameService->joinGame($game, $player));
-
-
-        $response = $this->actingAs($players->first())
+        $response = $this->actingAs($game->judge)
             ->getJson(route('api.game.show', $game->id))
             ->assertOk();
 
         $response->assertJsonFragment([
-                'id' => $game->id,
-                'name' => $game->name,
-                'judge' => [
-                    'id' => $game->judge_id,
-                    'name' => $game->judge->name,
-                    'has_submitted_white_cards' => $game->judge->hasSubmittedWhiteCards,
-                    'created_at' => $game->judge->created_at,
-                    'updated_at' => $game->judge->updated_at,
-                ],
+            'id' => $game->id,
+            'name' => $game->name,
+            'judge' => [
+                'id' => $game->judge_id,
+                'name' => $game->judge->name,
+                'has_submitted_white_cards' => $game->judge->hasSubmittedWhiteCards,
+                'created_at' => $game->judge->created_at,
+                'updated_at' => $game->judge->updated_at,
+            ],
         ]);
 
         $response->assertJsonFragment([
@@ -80,19 +64,21 @@ class GetGameStateControllerTest extends TestCase
             'text' => $game->currentBlackCard->text,
         ]);
 
-        $players->each(function ($player) use ($response) {
+        $game->users->each(function ($player) use ($response) {
             $response->assertJsonFragment([
-               'id' => $player->id,
-               'name' => $player->name,
+                'id' => $player->id,
+                'name' => $player->name,
                 'has_submitted_white_cards' => $player->hasSubmittedWhiteCards
             ]);
         });
 
-        $players->first()->whiteCards->each(function ($whiteCard) use ($response) {
+        $game->judge->whiteCardsInGame->each(function ($userCard) use ($response) {
             $response->assertJsonFragment([
-               'id' => $whiteCard->id,
-               'text' => $whiteCard->text,
-               'expansion_id' => $whiteCard->expansion_id
+                'id' => $userCard->whiteCard->id,
+                'text' => $userCard->whiteCard->text,
+                'expansion_id' => $userCard->whiteCard->expansion_id,
+                'order' => $userCard->order,
+                'selected' => $userCard->selected
             ]);
         });
     }
