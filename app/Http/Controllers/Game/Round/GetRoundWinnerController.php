@@ -14,7 +14,7 @@ class GetRoundWinnerController extends Controller
     {
         $winner = GameWinner::whereGameId($game->id)
             ->whereBlackCardId($game->currentBlackCard->id)
-            ->with('whiteCard')->get();
+            ->get();
 
         $whiteCardIds = $winner->pluck('white_card_id');
 
