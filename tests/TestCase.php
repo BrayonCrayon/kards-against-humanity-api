@@ -3,7 +3,10 @@
 namespace Tests;
 
 use App\Models\BlackCard;
+use App\Models\Game;
 use App\Models\GameBlackCards;
+use App\Models\RoundWinner;
+use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -56,5 +59,17 @@ abstract class TestCase extends BaseTestCase
 
         $this->assertNotEquals($user->id, $game->judge->id);
         return $game->judge->id;
+    }
+
+    public function selectGameWinner(User $user, Game $game): void
+    {
+        $user->whiteCardsInGame()->whereSelected(true)->get()->each(function ($whiteGameCard) use ($user, $game) {
+            RoundWinner::create([
+                'user_id' => $user->id,
+                'game_id' => $game->id,
+                'black_card_id' => $game->currentBlackCard->id,
+                'white_card_id' => $whiteGameCard->white_card_id
+            ]);
+        });
     }
 }
