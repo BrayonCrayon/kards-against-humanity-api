@@ -28,7 +28,7 @@ class GetRoundWinnerControllerTest extends TestCase
             ]);
         });
 
-        $this->actingAs($user)->get(route('api.game.round.winner', $game->id))
+        $this->actingAs($user)->getJson(route('api.game.round.winner', $game->id))
             ->assertOK()
             ->assertJsonStructure([
                 'user_id',
@@ -64,7 +64,31 @@ class GetRoundWinnerControllerTest extends TestCase
             ]);
         });
 
-        $this->actingAs($secondGame->judge)->get(route('api.game.round.winner', $game->id))
+        $this->actingAs($secondGame->judge)->getJson(route('api.game.round.winner', $game->id))
             ->assertForbidden();
     }
+
+    /** @test */
+    public function it_returns_401_if_unauthorized()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+        $user = $game->users->whereNotIn('id', [$game->judge->id])->first();
+
+        $this->drawBlackCardWithPickOf(2, $game);
+        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+
+        $user->whiteCardsInGame()->whereSelected(true)->get()->each(function ($whiteGameCard) use ($user, $game) {
+            RoundWinner::create([
+                'user_id' => $user->id,
+                'game_id' => $game->id,
+                'black_card_id' => $game->currentBlackCard->id,
+                'white_card_id' => $whiteGameCard->white_card_id
+            ]);
+        });
+
+        $this->getJson(route('api.game.round.winner', $game->id))
+            ->assertUnauthorized();
+    }
+
+
 }
