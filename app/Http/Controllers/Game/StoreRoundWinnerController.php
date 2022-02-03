@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
-use App\Models\GameWinner;
+use App\Models\RoundWinner;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class StoreGameWinnerController extends Controller
+class StoreRoundWinnerController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -21,7 +21,7 @@ class StoreGameWinnerController extends Controller
         $user = User::findOrFail($request->get('user_id'));
 
         $user->whiteCardsInGame()->where('selected', true)->get()->each(function ($item) use ($game, $user) {
-            GameWinner::create([
+            RoundWinner::create([
                 'game_id' => $game->id,
                 'user_id' => $user->id,
                 'white_card_id' => $item->white_card_id,

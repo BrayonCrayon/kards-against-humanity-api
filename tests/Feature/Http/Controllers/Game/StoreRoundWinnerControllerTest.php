@@ -2,14 +2,12 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
-use App\Models\Expansion;
 use App\Models\Game;
-use App\Models\GameWinner;
+use App\Models\RoundWinner;
 use App\Models\User;
-use App\Services\GameService;
 use Tests\TestCase;
 
-class StoreGameWinnerControllerTest extends TestCase
+class StoreRoundWinnerControllerTest extends TestCase
 {
 
     /** @test */
@@ -42,7 +40,7 @@ class StoreGameWinnerControllerTest extends TestCase
            'user_id' => $player->id,
         ])->assertOk();
 
-        $gameWinners = GameWinner::where('user_id', $player->id)->get();
-        $this->assertCount($game->currentBlackCard->pick, $gameWinners);
+        $roundWinners = RoundWinner::where('user_id', $player->id)->get();
+        $this->assertCount($game->currentBlackCard->pick, $roundWinners);
     }
 }

@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Game\Round;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserGameWhiteCardResource;
 use App\Models\Game;
-use App\Models\GameWinner;
+use App\Models\RoundWinner;
 use Illuminate\Http\Request;
 
 class GetRoundWinnerController extends Controller
 {
     public function __invoke(Request $request, Game $game)
     {
-        $winner = GameWinner::whereGameId($game->id)
+        $winner = RoundWinner::whereGameId($game->id)
             ->whereBlackCardId($game->currentBlackCard->id)
             ->get();
 

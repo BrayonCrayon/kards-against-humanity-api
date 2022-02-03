@@ -3,7 +3,7 @@
 namespace Tests\Feature\Http\Controllers\Game\Round;
 
 use App\Models\Game;
-use App\Models\GameWinner;
+use App\Models\RoundWinner;
 use Tests\TestCase;
 
 class GetRoundWinnerControllerTest extends TestCase
@@ -20,7 +20,7 @@ class GetRoundWinnerControllerTest extends TestCase
         $this->playersSubmitCards($game->currentBlackCard->pick, $game);
 
         $user->whiteCardsInGame()->whereSelected(true)->get()->each(function ($whiteGameCard) use ($user, $game) {
-            GameWinner::create([
+            RoundWinner::create([
                 'user_id' => $user->id,
                 'game_id' => $game->id,
                 'black_card_id' => $game->currentBlackCard->id,
