@@ -12,6 +12,8 @@ class GetRoundWinnerController extends Controller
 {
     public function __invoke(Request $request, Game $game)
     {
+        $this->authorize('get', $game);
+
         $winner = RoundWinner::whereGameId($game->id)
             ->whereBlackCardId($game->currentBlackCard->id)
             ->get();
