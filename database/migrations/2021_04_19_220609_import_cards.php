@@ -14,6 +14,6 @@ class ImportCards extends Migration
      */
     public function up()
     {
-        Artisan::call("import:cards");
+//        Artisan::call("import:cards");
     }
 }
