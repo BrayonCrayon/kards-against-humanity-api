@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Game;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,6 +11,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use JetBrains\PhpStorm\ArrayShape;
 
 class WinnerSelected
 {
@@ -20,26 +22,35 @@ class WinnerSelected
      *
      * @return void
      */
-    public function __construct(public Game $game, public $userId)
-    {
+    public function __construct(public Game $game, public User $user) {}
 
-    }
-
-    public function broadcastWith()
+    /**
+     * @return array
+     */
+    #[ArrayShape(['game_id' => "mixed", 'user_id' => "mixed"])]
+    public function broadcastWith(): array
     {
         return [
             'game_id' => $this->game->id,
-            'user_id' => $this->userId
+            'user_id' => $this->user->id
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function broadcastAs(): string
+    {
+        return 'winner.selected';
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): Channel|array
     {
-        return new PrivateChannel('channel-name');
+        return new Channel("game-{$this->game->id}");
     }
 }
