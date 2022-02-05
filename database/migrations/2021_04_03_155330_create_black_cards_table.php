@@ -18,7 +18,8 @@ class CreateBlackCardsTable extends Migration
             $table->text('text');
             $table->unsignedInteger('pick');
             $table->unsignedBigInteger('expansion_id');
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->default(now());
+            $table->timestamp('updated_at')->nullable()->default(now());
         });
     }
 

@@ -16,7 +16,8 @@ class CreateExpansionsTable extends Migration
         Schema::create('expansions', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->default(now());
+            $table->timestamp('updated_at')->nullable()->default(now());
         });
     }
 
