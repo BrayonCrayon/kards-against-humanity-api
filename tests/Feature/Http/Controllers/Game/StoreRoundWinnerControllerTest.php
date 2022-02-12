@@ -5,6 +5,8 @@ namespace Tests\Feature\Http\Controllers\Game;
 use App\Models\Game;
 use App\Models\RoundWinner;
 use App\Models\User;
+use App\Services\GameService;
+use Mockery;
 use Tests\TestCase;
 
 class StoreRoundWinnerControllerTest extends TestCase
@@ -44,14 +46,25 @@ class StoreRoundWinnerControllerTest extends TestCase
         $this->assertCount($game->currentBlackCard->pick, $roundWinners);
     }
 
-//    /** @test */
-//    public function it_calls_select_winner_from_game_service()
-//    {
-//        $game = Game::factory()->hasUsers(1)->create();
-//        $player = $game->nonJudgeUsers()->first();
-//
-//        $this->playersSubmitCards($game->blackCardPick, $game);
-//    }
+    /** @test */
+    public function it_calls_select_winner_from_game_service()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+        $player = $game->nonJudgeUsers()->first();
+        $this->playersSubmitCards($game->blackCardPick, $game);
+        $gameServiceSpy = $this->spy(GameService::class);
+
+        $this->actingAs($game->judge)
+            ->postJson(route('api.game.winner', $game), [
+                'user_id' => $player->id
+            ])->assertOk();
+
+        $gameServiceSpy->shouldHaveReceived('selectWinner')
+            ->withArgs(function($gameArg, $userArg) use ($game, $player) {
+                return $gameArg->id === $game->id && $userArg->id === $player->id;
+            })
+            ->once();
+    }
 
 
 }

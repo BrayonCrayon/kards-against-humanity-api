@@ -118,7 +118,7 @@ class GameService
         ]);
     }
 
-    public function selectWinner($game, $user)
+    public function selectWinner(Game $game, $user)
     {
         event(new WinnerSelected($game, $user));
     }
