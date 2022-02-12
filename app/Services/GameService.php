@@ -10,6 +10,7 @@ use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
+use App\Models\RoundWinner;
 use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
@@ -120,6 +121,14 @@ class GameService
 
     public function selectWinner(Game $game, $user)
     {
+        $user->whiteCardsInGame()->where('selected', true)->get()->each(function ($item) use ($game, $user) {
+            RoundWinner::create([
+                'game_id' => $game->id,
+                'user_id' => $user->id,
+                'white_card_id' => $item->white_card_id,
+                'black_card_id' => $game->currentBlackCard->id,
+            ]);
+        });
         event(new WinnerSelected($game, $user));
     }
 }

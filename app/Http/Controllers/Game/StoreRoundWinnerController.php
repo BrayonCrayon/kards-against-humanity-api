@@ -27,15 +27,6 @@ class StoreRoundWinnerController extends Controller
 
         $this->service->selectWinner($game, $user);
 
-        $user->whiteCardsInGame()->where('selected', true)->get()->each(function ($item) use ($game, $user) {
-            RoundWinner::create([
-                'game_id' => $game->id,
-                'user_id' => $user->id,
-                'white_card_id' => $item->white_card_id,
-                'black_card_id' => $game->currentBlackCard->id,
-            ]);
-        });
-
         return response()->json();
     }
 }
