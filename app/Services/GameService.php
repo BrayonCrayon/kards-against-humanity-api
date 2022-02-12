@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Events\GameJoined;
+use App\Events\WinnerSelected;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -115,5 +116,10 @@ class GameService
         $game->update([
             'judge_id' => $judgeId,
         ]);
+    }
+
+    public function selectWinner($game, $user)
+    {
+        event(new WinnerSelected($game, $user));
     }
 }
