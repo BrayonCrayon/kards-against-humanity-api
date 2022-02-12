@@ -28,7 +28,6 @@ class JoinGameControllerTest extends TestCase
         $player = $this->game->nonJudgeUsers()->first();
         Sanctum::actingAs($player, []);
 
-        $this->withoutExceptionHandling();
         $this->postJson(route('api.game.join', $this->game->code), [
             'name' => $player->name,
         ])
