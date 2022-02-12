@@ -32,9 +32,9 @@ class StoreRoundWinnerControllerTest extends TestCase
     public function it_stores_game_winner_will_data()
     {
         $game = Game::factory()->hasUsers(1)->create();
-        $player = $game->users->where('id', '<>',$game->judge->id)->first();
+        $player = $game->nonJudgeUsers()->first();
 
-        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+        $this->playersSubmitCards($game->blackCardPick, $game);
 
         $this->actingAs($game->judge)->postJson(route('api.game.winner', $game->id), [
            'user_id' => $player->id,
@@ -43,4 +43,15 @@ class StoreRoundWinnerControllerTest extends TestCase
         $roundWinners = RoundWinner::where('user_id', $player->id)->get();
         $this->assertCount($game->currentBlackCard->pick, $roundWinners);
     }
+
+//    /** @test */
+//    public function it_calls_select_winner_from_game_service()
+//    {
+//        $game = Game::factory()->hasUsers(1)->create();
+//        $player = $game->nonJudgeUsers()->first();
+//
+//        $this->playersSubmitCards($game->blackCardPick, $game);
+//    }
+
+
 }

@@ -62,4 +62,26 @@ class GameTest extends TestCase
 
         $this->assertEquals($blackCard->id, $game->blackCards->first()->id);
     }
+
+    /** @test */
+    public function it_brings_back_users_that_are_not_a_judge_user()
+    {
+        $usersToCreate = 3;
+        $game = Game::factory()->hasUsers($usersToCreate)->create();
+
+        $users = $game->nonJudgeUsers()->get()->pluck('id');
+
+        $this->assertCount($usersToCreate, $users);
+        $this->assertFalse(in_array($game->judge_id, $users->toArray()));
+    }
+
+    /** @test */
+    public function it_returns_correct_black_pick_amount_from_game_attribute()
+    {
+        $game = Game::factory()->create();
+
+        $this->assertEquals($game->currentBlackCard->pick, $game->blackCardPick);
+    }
+
+
 }
