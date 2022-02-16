@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\RoundWinner;
 use App\Models\User;
+use App\Services\GameService;
 use Illuminate\Http\Request;
 
 class StoreRoundWinnerController extends Controller
 {
+    public function __construct(public GameService $service)
+    {
+    }
+
     /**
      * Handle the incoming request.
      *
@@ -20,14 +25,7 @@ class StoreRoundWinnerController extends Controller
     {
         $user = User::findOrFail($request->get('user_id'));
 
-        $user->whiteCardsInGame()->where('selected', true)->get()->each(function ($item) use ($game, $user) {
-            RoundWinner::create([
-                'game_id' => $game->id,
-                'user_id' => $user->id,
-                'white_card_id' => $item->white_card_id,
-                'black_card_id' => $game->currentBlackCard->id,
-            ]);
-        });
+        $this->service->selectWinner($game, $user);
 
         return response()->json();
     }

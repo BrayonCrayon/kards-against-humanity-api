@@ -8,6 +8,7 @@ use App\Models\GameUser;
 use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Support\Facades\Event;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class JoinGameControllerTest extends TestCase
@@ -18,8 +19,23 @@ class JoinGameControllerTest extends TestCase
     {
         parent::setUp();
         Event::fake();
-        $this->game = Game::factory()->create();
+        $this->game = Game::factory()->hasUsers(1)->create();
     }
+
+    /** @test */
+    public function it_allows_an_existing_player_to_rejoin_game()
+    {
+        $player = $this->game->nonJudgeUsers()->first();
+        Sanctum::actingAs($player, []);
+
+        $this->postJson(route('api.game.join', $this->game->code), [
+            'name' => $player->name,
+        ])
+        ->assertOK();
+
+        $this->assertCount(1, User::whereName($player->name)->get());
+    }
+
 
     /** @test */
     public function it_adds_a_user_to_a_game()

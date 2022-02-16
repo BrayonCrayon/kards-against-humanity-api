@@ -36,6 +36,11 @@ class Game extends Model
         return $this->blackCards->firstOrFail();
     }
 
+    public function getBlackCardPickAttribute()
+    {
+        return $this->currentBlackCard->pick;
+    }
+
     /**
      * @return BelongsToMany
      */
@@ -79,6 +84,11 @@ class Game extends Model
     public function judge()
     {
         return $this->hasOne(User::class, 'id', 'judge_id');
+    }
+
+    public function nonJudgeUsers()
+    {
+        return $this->users()->where('users.id', '<>', $this->judge_id);
     }
 
     public function scopeByCode($query, $gameCode)

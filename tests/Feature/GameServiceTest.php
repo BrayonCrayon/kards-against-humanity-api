@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Events\GameJoined;
+use App\Events\WinnerSelected;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -109,4 +110,22 @@ class GameServiceTest extends TestCase
             return $event->game->id === $this->game->id && $user->id === $event->user->id;
         });
     }
+
+    /** @test */
+    public function it_emits_an_event_when_judge_user_selects_a_round_winner()
+    {
+        $this->gameSetup(self::REALLY_CHUNKY_EXPANSION_ID);
+        Event::fake();
+
+        $user = User::factory()->hasGames($this->game)->create();
+
+        $this->gameService->selectWinner($this->game, $user);
+
+        Event::assertDispatched(WinnerSelected::class, function (WinnerSelected $event) use ($user) {
+            return $event->user->id === $user->id && $event->game->id === $this->game->id;
+        });
+    }
+
+
+
 }
