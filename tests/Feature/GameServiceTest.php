@@ -10,7 +10,7 @@ use App\Models\GameBlackCards;
 use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
-use App\Services\GameService;
+use App\Services\HelperService;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -22,10 +22,12 @@ class GameServiceTest extends TestCase
     private $user;
     private $game;
     private $playedCards;
+    private $helperService;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->helperService = new HelperService();
     }
 
     public function gameSetup($expansionId)
@@ -34,7 +36,7 @@ class GameServiceTest extends TestCase
         $this->game = Game::create([
             'name' => 'Krombopulos Michael',
             'judge_id' => $this->user->id,
-            'code' => strval(random_int(0000, 9999))
+            'code' => $this->helperService->generateCode("?#?#")
         ]);
         $this->game->users()->save($this->user);
         $this->game->expansions()->saveMany(Expansion::idsIn([$expansionId])->get());
