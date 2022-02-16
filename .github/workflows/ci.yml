@@ -21,8 +21,6 @@ jobs:
       - name: Copy .docker.env.example to .docker.env
         run: cp environment/.docker.env.example environment/docker.env
       - run: docker-compose pull
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
       - name: make vendor folder placeholder
         run: mkdir vendor
       - name: Spin up container
