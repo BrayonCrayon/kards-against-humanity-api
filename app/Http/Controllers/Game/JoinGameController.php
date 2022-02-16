@@ -8,12 +8,15 @@ use App\Http\Requests\JoinGameRequest;
 use App\Http\Resources\GameResource;
 use App\Models\Game;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class JoinGameController extends Controller
 {
     public function __invoke(JoinGameRequest $request, Game $game, UserJoinsGame $userJoinsGame): JsonResponse
     {
-        $userJoinsGame($game, $request->input('name'));
+        if (!Auth::check()) {
+            $userJoinsGame($game, $request->input('name'));
+        }
 
         return response()->json([
             'data' => GameResource::make($game)

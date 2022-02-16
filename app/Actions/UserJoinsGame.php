@@ -15,10 +15,6 @@ class UserJoinsGame
 
     public function __invoke(Game $game, $name)
     {
-        if (Auth::check()) {
-            return;
-        }
-
         $user = User::create([
             'name' => $name
         ]);
