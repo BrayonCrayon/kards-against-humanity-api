@@ -4,6 +4,8 @@ namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Models\Game;
 use App\Models\User;
+use App\Services\GameService;
+use Hamcrest\Core\IsEqual;
 use Tests\TestCase;
 
 class SubmittedCardsControllerTest extends TestCase
@@ -77,5 +79,25 @@ class SubmittedCardsControllerTest extends TestCase
                 'order' => $whiteCardInGame->order
             ]);
         });
+    }
+
+    /** @test */
+    public function call_get_submitted_cards_from_game_service_when_getting_submitted_cards()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+        $submittedUser = $game->users->whereNotIn('id', [$game->judge->id])->first();
+        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+
+        $spy = $this->spy(GameService::class);
+
+        $this->actingAs($submittedUser)
+            ->getJson(route('api.game.submitted.cards', $game->id))
+            ->assertOK();
+
+        $spy->shouldHaveReceived("getSubmittedCards")
+            ->withArgs(function($argument) use ($game) {
+                return $argument->id === $game->id;
+            })
+            ->once();
     }
 }

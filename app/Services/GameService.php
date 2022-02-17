@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Events\GameJoined;
 use App\Events\WinnerSelected;
+use App\Http\Resources\UserGameWhiteCardResource;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -130,5 +131,16 @@ class GameService
             ]);
         });
         event(new WinnerSelected($game, $user));
+    }
+
+    public function getSubmittedCards(Game $game)
+    {
+        return
+        $game->users()->whereNotIn('user_id', [$game->judge->id])->get()->map(function($user) {
+            return [
+                'user_id' => $user->id,
+                'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
+            ];
+        });
     }
 }
