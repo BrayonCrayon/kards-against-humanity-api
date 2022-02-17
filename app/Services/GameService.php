@@ -122,7 +122,7 @@ class GameService
 
     public function selectWinner(Game $game, $user)
     {
-        $user->whiteCardsInGame()->where('selected', true)->get()->each(function ($item) use ($game, $user) {
+        $user->whiteCardsInGame()->whereSelected(true)->get()->each(function ($item) use ($game, $user) {
             RoundWinner::create([
                 'game_id' => $game->id,
                 'user_id' => $user->id,
@@ -135,8 +135,7 @@ class GameService
 
     public function getSubmittedCards(Game $game)
     {
-        return
-        $game->users()->whereNotIn('user_id', [$game->judge->id])->get()->map(function($user) {
+        return $game->nonJudgeUsers()->get()->map(function($user) {
             return [
                 'user_id' => $user->id,
                 'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
