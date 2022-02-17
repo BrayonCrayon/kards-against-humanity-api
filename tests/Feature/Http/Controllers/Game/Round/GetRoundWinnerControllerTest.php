@@ -3,8 +3,6 @@
 namespace Tests\Feature\Http\Controllers\Game\Round;
 
 use App\Models\Game;
-use App\Models\RoundWinner;
-use App\Models\User;
 use Tests\TestCase;
 
 class GetRoundWinnerControllerTest extends TestCase
@@ -27,13 +25,15 @@ class GetRoundWinnerControllerTest extends TestCase
         $this->actingAs($this->user)->getJson(route('api.game.round.winner', $this->game->id))
             ->assertOK()
             ->assertJsonStructure([
-                'user_id',
-                'submitted_cards' => [
-                    [
-                        'id',
-                        'text',
-                        'expansion_id',
-                       'order',
+                'data' => [
+                    'user_id',
+                    'submitted_cards' => [
+                        [
+                            'id',
+                            'text',
+                            'expansion_id',
+                            'order',
+                        ]
                     ]
                 ]
             ]);

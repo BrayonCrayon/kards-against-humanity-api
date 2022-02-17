@@ -23,8 +23,10 @@ class GetRoundWinnerController extends Controller
         $whiteCards = $winner->first()->user->whiteCardsInGame()->whereIn('white_card_id', $whiteCardIds->toArray())->get();
 
         return response()->json([
-            'user_id' => $winner->first()->user->id,
-            'submitted_cards' => UserGameWhiteCardResource::collection($whiteCards)
+            'data' => [
+                'user_id' => $winner->first()->user->id,
+                'submitted_cards' => UserGameWhiteCardResource::collection($whiteCards)
+            ]
         ]);
     }
 }
