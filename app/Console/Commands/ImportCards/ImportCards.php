@@ -41,37 +41,24 @@ class ImportCards extends Command
     public function handle(): int
     {
         $startLoading = now();
-        collect($this->loadDeck())->each(fn ($expansionData) => $this->createExpansion($expansionData));
+        $this->loadCards();
         $endLoading = now();
-        $this->info("Loading Deck: {$endLoading->diffInSeconds($startLoading)}}");
+        $this->info("Loading Deck: {$endLoading->diffInMilliseconds($startLoading)}}");
         return 0;
     }
 
-    private function createExpansion($expansionData)
+    private function loadCards()
     {
-        $this->info("Importing: {$expansionData['name']}");
+        $cardData = $this->loadDecks();
 
-        $expansion = Expansion::create([
-            'name' => $expansionData['name']
-        ]);
-
-        $whiteCards = collect($expansionData['white'])->map(fn($whiteCard) => WhiteCard::make([
-            'text' => $whiteCard['text'],
-            'expansion_id' => $expansion->id
-        ]));
-        $blackCards = collect($expansionData['black'])->map(fn($blackCard) => BlackCard::make([
-            'text' => $blackCard['text'],
-            'pick' => $blackCard['pick'],
-            'expansion_id' => $expansion->id
-        ]));
-
-        WhiteCard::insert($whiteCards->toArray());
-        BlackCard::insert($blackCards->toArray());
+        Expansion::insert($cardData['expansions']);
+        WhiteCard::insert($cardData['white_cards']);
+        BlackCard::insert($cardData['black_cards']);
     }
 
-    private function loadDeck()
+    private function loadDecks()
     {
-        $jsonString = file_get_contents(app_path('Console/Commands/ImportCards/cah-cards-full.json'));
+        $jsonString = file_get_contents(app_path('Console/Commands/ImportCards/card-data.json'));
 
         return json_decode($jsonString, true);
     }

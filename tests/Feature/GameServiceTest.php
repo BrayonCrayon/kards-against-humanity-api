@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Events\GameJoined;
+use App\Events\WinnerSelected;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
@@ -10,7 +11,7 @@ use App\Models\GameBlackCards;
 use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
-use App\Services\GameService;
+use App\Services\HelperService;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -22,10 +23,12 @@ class GameServiceTest extends TestCase
     private $user;
     private $game;
     private $playedCards;
+    private $helperService;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->helperService = new HelperService();
     }
 
     public function gameSetup($expansionId)
@@ -34,10 +37,12 @@ class GameServiceTest extends TestCase
         $this->game = Game::create([
             'name' => 'Krombopulos Michael',
             'judge_id' => $this->user->id,
-            'code' => strval(random_int(0000, 9999))
+            'code' => $this->helperService->generateCode("?#?#")
         ]);
+        $this->game->users()->saveMany(User::factory()->count(3)->create());
         $this->game->users()->save($this->user);
         $this->game->expansions()->saveMany(Expansion::idsIn([$expansionId])->get());
+
 
         $this->playedCards = WhiteCard::whereExpansionId($expansionId)->limit(4)->get();
         $this->playedCards->each(function ($whiteCard) {
@@ -107,4 +112,45 @@ class GameServiceTest extends TestCase
             return $event->game->id === $this->game->id && $user->id === $event->user->id;
         });
     }
+
+    /** @test */
+    public function it_emits_an_event_when_judge_user_selects_a_round_winner()
+    {
+        $this->gameSetup(self::REALLY_CHUNKY_EXPANSION_ID);
+        Event::fake();
+
+        $user = User::factory()->hasGames($this->game)->create();
+
+        $this->gameService->selectWinner($this->game, $user);
+
+        Event::assertDispatched(WinnerSelected::class, function (WinnerSelected $event) use ($user) {
+            return $event->user->id === $user->id && $event->game->id === $this->game->id;
+        });
+    }
+
+    /** @test */
+    public function calling_get_submitted_card_brings_back_all_submitted_cards()
+    {
+        $this->gameSetup(self::REALLY_CHUNKY_EXPANSION_ID);
+        $this->drawBlackCardWithPickOf(2, $this->game);
+        $this->playersSubmitCards($this->game->blackCardPick, $this->game);
+
+        $data = $this->gameService->getSubmittedCards($this->game);
+
+        $this->assertEquals($this->game->nonJudgeUsers->count(), $data->count());
+
+        $data->each(function ($item, $key) {
+            $this->assertTrue($this->game->nonJudgeUsers->pluck("id")->contains($item["user_id"]));
+        });
+
+        $data->each(function ($item, $key) use ($data) {
+            $selectedCards = UserGameWhiteCards::where("user_id", $item["user_id"])->where("selected", true)->get()->pluck("white_card_id");
+
+            $item["submitted_cards"]->each(function ($item, $key) use ($selectedCards) {
+                $this->assertTrue($selectedCards->contains($item->id));
+            });
+        });
+    }
+
+
 }

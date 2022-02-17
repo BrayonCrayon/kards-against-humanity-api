@@ -1,6 +1,6 @@
-FROM php:8.0.3-fpm-buster
+FROM php:8.1.2-fpm-buster
 
-ARG xdebug=false
+ARG xdebug=true
 ARG tinker=false
 
 WORKDIR /var/www

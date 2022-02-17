@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\GameService;
 use App\Services\HelperService;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->singleton(HelperService::class, fn () => new HelperService());
+        $this->app->bind(GameService::class, fn () => new GameService());
     }
 }

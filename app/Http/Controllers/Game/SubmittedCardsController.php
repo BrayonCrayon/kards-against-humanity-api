@@ -25,12 +25,7 @@ class SubmittedCardsController extends Controller
      */
     public function __invoke(Request $request, Game $game) : JsonResponse
     {
-        $data = $game->users()->whereNotIn('user_id', [$game->judge->id])->get()->map(function($user) {
-            return [
-                'user_id' => $user->id,
-                'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
-            ];
-        });
+        $data = $this->gameService->getSubmittedCards($game);
 
         return response()->json([
             'data' => $data

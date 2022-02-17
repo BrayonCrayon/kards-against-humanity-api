@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameWinnersTable extends Migration
+class CreateRoundWinnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGameWinnersTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_winners', function (Blueprint $table) {
+        Schema::create('round_winners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignUuid('game_id')->references('id')->on('games');
@@ -30,6 +30,6 @@ class CreateGameWinnersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_winners');
+        Schema::dropIfExists('round_winners');
     }
 }

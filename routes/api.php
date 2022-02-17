@@ -6,7 +6,8 @@ use App\Http\Controllers\Game\GetExpansionsController;
 use App\Http\Controllers\Game\GetGameStateController;
 use App\Http\Controllers\Game\JoinGameController;
 use App\Http\Controllers\Game\RotateGameController;
-use App\Http\Controllers\Game\StoreGameWinnerController;
+use App\Http\Controllers\Game\Round\GetRoundWinnerController;
+use App\Http\Controllers\Game\StoreRoundWinnerController;
 use App\Http\Controllers\Game\SubmitCardsController;
 use App\Http\Controllers\Game\SubmittedCardsController;
 use Illuminate\Support\Facades\Broadcast;
@@ -39,7 +40,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/game/{game}/rotate', RotateGameController::class)->name('game.rotate');
     Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
     Route::get('/game/{game}', GetGameStateController::class)->name('game.show');
-    Route::post('/game/{game}/winner', StoreGameWinnerController::class)->name('game.winner');
+    Route::post('/game/{game}/winner', StoreRoundWinnerController::class)->name('game.winner');
+    Route::get('/game/{game}/round/winner', GetRoundWinnerController::class)->name('game.round.winner');
 });
 
 Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');
