@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Models\Game;
-use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,10 +14,8 @@ class UserJoinsGame
 
     public function __invoke(Game $game, $name)
     {
-        $user = User::create([
-            'name' => $name
-        ]);
-        Auth::login($user);
+        $creatingUser = new CreatingUser();
+        $user = Auth::check() ? Auth::user() : $creatingUser($name);
 
         $this->service->drawWhiteCards($user, $game);
         $this->service->joinGame($game, $user);

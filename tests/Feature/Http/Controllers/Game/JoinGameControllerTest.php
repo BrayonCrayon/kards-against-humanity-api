@@ -23,6 +23,26 @@ class JoinGameControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_allows_an_existing_player_to_join_a_different_game()
+    {
+        $player = $this->game->nonJudgeUsers()->first();
+        Sanctum::actingAs($player, []);
+
+        $differentGame = Game::factory()->create();
+
+        $responseData = $this->postJson(route('api.game.join', $differentGame->code), [
+            'name' => $player->name
+        ])
+            ->assertOK()
+            ->json('data');
+
+        $this->assertCount(2, $responseData['users']);
+        $this->assertCount(Game::HAND_LIMIT, $responseData['hand']);
+        $this->assertNotNull(collect($responseData['users'])->where('id', $player->id)->first());
+    }
+
+
+    /** @test */
     public function it_allows_an_existing_player_to_rejoin_game()
     {
         $player = $this->game->nonJudgeUsers()->first();

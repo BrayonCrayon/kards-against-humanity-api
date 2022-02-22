@@ -6,10 +6,17 @@ use App\Models\Game;
 use App\Models\RoundWinner;
 use App\Models\User;
 use App\Services\GameService;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class StoreRoundWinnerControllerTest extends TestCase
 {
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Event::fake();
+    }
 
     /** @test */
     public function it_does_not_allow_game_that_does_not_exist()
