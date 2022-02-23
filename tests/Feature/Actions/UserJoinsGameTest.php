@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Actions;
 
+use App\Actions\CreatingUser;
 use App\Actions\UserJoinsGame;
 use App\Models\Game;
 use App\Models\User;
@@ -21,7 +22,7 @@ class UserJoinsGameTest extends TestCase
 
         $this->actingAs($player);
 
-        $userJoinsGame = new UserJoinsGame(new GameService());
+        $userJoinsGame = new UserJoinsGame(new GameService(), new CreatingUser());
         $userJoinsGame($otherGame, $player->name);
 
         $this->assertNotEquals(auth()->user()->id, $player->id);

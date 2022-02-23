@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
 use Nubs\RandomNameGenerator\All as NameGenerator;
+use Facades\App\Services\HelperService;
 
 class GameService
 {
@@ -31,7 +32,7 @@ class GameService
         $game = Game::create([
             'name' => $this->generator->getName(),
             'judge_id' => $user->id,
-            'code' => app(HelperService::class)->generateCode("#?#?")
+            'code' => HelperService::generateCode("#?#?")
         ]);
 
         $game->users()->save($user);

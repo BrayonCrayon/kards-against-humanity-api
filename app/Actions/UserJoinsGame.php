@@ -8,19 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class UserJoinsGame
 {
-    public function __construct(private GameService $service)
+    public function __construct(private GameService $service, private CreatingUser $creatingUser)
     {
     }
 
     public function __invoke(Game $game, string $name)
     {
-        $creatingUser = new CreatingUser();
-
         if (Auth::check()) {
             Auth::logout();
         }
 
-        $user = $creatingUser($name);
+        $user = ($this->creatingUser)($name);
 
         $this->service->drawWhiteCards($user, $game);
         $this->service->joinGame($game, $user);
