@@ -12,7 +12,7 @@ class CreatingUser
         $user = User::create([
             'name' => $name
         ]);
-        Auth::login($user);
+        Auth::loginUsingId($user->id);
         return $user;
     }
 }

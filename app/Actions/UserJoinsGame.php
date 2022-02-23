@@ -12,10 +12,16 @@ class UserJoinsGame
     {
     }
 
-    public function __invoke(Game $game, $name)
+    public function __invoke(Game $game, string $name)
     {
         $creatingUser = new CreatingUser();
-        $user = Auth::check() ? Auth::user() : $creatingUser($name);
+        $user = null;
+        if (auth()->check() && auth()->user()->games->first()->id !== $game->id) {
+            $user = $creatingUser($name);
+        } else {
+            $user = Auth::check() ? Auth::user() : $creatingUser($name);
+        }
+
 
         $this->service->drawWhiteCards($user, $game);
         $this->service->joinGame($game, $user);
