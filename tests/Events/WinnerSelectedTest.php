@@ -27,8 +27,9 @@ class WinnerSelectedTest extends TestCase
     public function it_sends_user_id_and_game_id_in_event_payload()
     {
         $payload = [
-            'game_id' => $this->game->id,
-            'user_id' => $this->user->id
+            'gameId' => $this->game->id,
+            'userId' => $this->user->id,
+            'blackCardId' => $this->game->currentBlackCard->id
         ];
 
         $this->assertEquals($payload, $this->event->broadcastWith());
