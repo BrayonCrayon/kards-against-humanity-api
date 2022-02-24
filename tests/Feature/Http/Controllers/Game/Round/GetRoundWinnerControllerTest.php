@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\Game\Round;
 
 use App\Models\Game;
+use App\Services\GameService;
 use Tests\TestCase;
 
 class GetRoundWinnerControllerTest extends TestCase
@@ -16,6 +17,30 @@ class GetRoundWinnerControllerTest extends TestCase
         $this->drawBlackCardWithPickOf(2, $this->game);
         $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
         $this->selectGameWinner($this->user, $this->game);
+    }
+
+    /** @test */
+    public function it_will_call_game_service_to_retrieve_round_winner()
+    {
+        $serviceSpy = $this->spy(GameService::class);
+        $serviceSpy->shouldReceive('latestRoundWinner')
+            ->andReturn([
+               'user' => $this->user,
+               'whiteCards' => $this->user->whiteCardsInGame()->whereSelected(true)->get()
+            ]);
+
+        $this->actingAs($this->user)
+            ->getJson(route('api.game.round.winner', [
+                $this->game,
+                $this->game->currentBlackCard
+            ]))
+            ->assertOk();
+
+        $serviceSpy->shouldHaveReceived('latestRoundWinner')
+            ->withArgs(function($game, $blackCard) {
+                return $game->id === $this->game->id && $blackCard->id === $this->game->currentBlackCard->id;
+            })
+            ->once();
     }
 
 
