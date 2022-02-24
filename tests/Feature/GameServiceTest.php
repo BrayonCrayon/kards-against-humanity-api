@@ -164,11 +164,12 @@ class GameServiceTest extends TestCase
 
         $winnerData = $this->gameService->latestRoundWinner($game, $game->currentBlackCard);
 
-        $selectedWhiteCardIds = $playerWinner->whiteCardsInGame()->whereSelected(true)->get()->pluck('white_card_id');
+        $selectedWhiteCardIds = $playerWinner->whiteCardsInGame()->whereSelected(true)->get()->pluck('id');
         $this->assertEquals($playerWinner->id, $winnerData['user']['id']);
-        $this->assertCount($selectedWhiteCardIds->count(), $winnerData['whiteCards']);
+        $this->assertCount($selectedWhiteCardIds->count(), $winnerData['userGameWhiteCards']);
 
-        collect($winnerData['whiteCards'])->each(function ($whiteCard) use ($selectedWhiteCardIds) {
+        collect($winnerData['userGameWhiteCards'])->each(function ($whiteCard) use ($selectedWhiteCardIds) {
+            $this->assertInstanceOf(UserGameWhiteCards::class, $whiteCard);
             $this->assertTrue($selectedWhiteCardIds->contains($whiteCard['id']));
         });
     }

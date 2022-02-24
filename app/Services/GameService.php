@@ -15,8 +15,8 @@ use App\Models\RoundWinner;
 use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
-use Nubs\RandomNameGenerator\All as NameGenerator;
 use Facades\App\Services\HelperService;
+use Nubs\RandomNameGenerator\All as NameGenerator;
 
 class GameService
 {
@@ -152,7 +152,10 @@ class GameService
 
         return [
             "user" => $winner->first()->user,
-            "whiteCards" => $winner->pluck('whiteCard')
+            "userGameWhiteCards" => UserGameWhiteCards::whereUserId($winner->first()->user->id)
+                ->whereGameId($game->id)
+                ->whereIn('white_card_id', $winner->pluck('white_card_id'))
+                ->get()
         ];
     }
 }
