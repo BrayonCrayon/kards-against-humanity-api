@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Game\Round;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserGameWhiteCardResource;
+use App\Models\BlackCard;
 use App\Models\Game;
 use App\Models\RoundWinner;
 use Illuminate\Http\Request;
 
 class GetRoundWinnerController extends Controller
 {
-    public function __invoke(Request $request, Game $game)
+    public function __invoke(Request $request, Game $game, BlackCard $blackCard)
     {
         $this->authorize('get', $game);
 
         $winner = RoundWinner::whereGameId($game->id)
-            ->whereBlackCardId($game->currentBlackCard->id)
+            ->whereBlackCardId($blackCard->id)
             ->get();
 
         $whiteCardIds = $winner->pluck('white_card_id');

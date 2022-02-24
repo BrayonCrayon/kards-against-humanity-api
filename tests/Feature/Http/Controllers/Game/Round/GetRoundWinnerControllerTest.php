@@ -22,7 +22,7 @@ class GetRoundWinnerControllerTest extends TestCase
     /** @test */
     public function it_returns_the_round_winner()
     {
-        $this->actingAs($this->user)->getJson(route('api.game.round.winner', $this->game->id))
+        $this->actingAs($this->user)->getJson(route('api.game.round.winner', [$this->game->id, $this->game->currentBlackCard->id]))
             ->assertOK()
             ->assertJsonStructure([
                 'data' => [
@@ -44,14 +44,14 @@ class GetRoundWinnerControllerTest extends TestCase
     public function it_returns_a_403_when_the_user_is_not_in_the_game()
     {
         $secondGame = Game::factory()->create();
-        $this->actingAs($secondGame->judge)->getJson(route('api.game.round.winner', $this->game->id))
+        $this->actingAs($secondGame->judge)->getJson(route('api.game.round.winner', [$this->game->id, $this->game->currentBlackCard->id]))
             ->assertForbidden();
     }
 
     /** @test */
     public function it_returns_401_if_unauthorized()
     {
-        $this->getJson(route('api.game.round.winner', $this->game->id))
+        $this->getJson(route('api.game.round.winner', [$this->game->id, $this->game->currentBlackCard->id]))
             ->assertUnauthorized();
     }
 
