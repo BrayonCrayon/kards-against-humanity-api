@@ -143,4 +143,16 @@ class GameService
             ];
         });
     }
+
+    public function latestRoundWinner(Game $game, BlackCard $blackCard)
+    {
+        $winner = RoundWinner::whereGameId($game->id)
+            ->whereBlackCardId($blackCard->id)
+            ->get();
+
+        return [
+            "user" => $winner->first()->user,
+            "whiteCards" => $winner->pluck('whiteCard')
+        ];
+    }
 }

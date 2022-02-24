@@ -152,5 +152,26 @@ class GameServiceTest extends TestCase
         });
     }
 
+    /** @test */
+    public function it_will_bring_back_latest_round_winner_data()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+        $this->drawBlackCardWithPickOf(2, $game);
+        $this->playersSubmitCards($game->blackCardPick, $game);
+
+        $playerWinner = $game->nonJudgeUsers()->first();
+        $this->selectGameWinner($playerWinner, $game);
+
+        $winnerData = $this->gameService->latestRoundWinner($game, $game->currentBlackCard);
+
+        $selectedWhiteCardIds = $playerWinner->whiteCardsInGame()->whereSelected(true)->get()->pluck('white_card_id');
+        $this->assertEquals($playerWinner->id, $winnerData['user']['id']);
+        $this->assertCount($selectedWhiteCardIds->count(), $winnerData['whiteCards']);
+
+        collect($winnerData['whiteCards'])->each(function ($whiteCard) use ($selectedWhiteCardIds) {
+            $this->assertTrue($selectedWhiteCardIds->contains($whiteCard['id']));
+        });
+    }
+
 
 }
