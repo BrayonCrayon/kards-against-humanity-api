@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserGameWhiteCardResource;
 use App\Models\BlackCard;
 use App\Models\Game;
-use App\Models\RoundWinner;
 use App\Services\GameService;
 use Illuminate\Http\Request;
 
