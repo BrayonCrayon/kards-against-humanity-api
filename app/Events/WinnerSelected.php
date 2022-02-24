@@ -28,12 +28,13 @@ class WinnerSelected implements ShouldBroadcastNow
     /**
      * @return array
      */
-    #[ArrayShape(['game_id' => "mixed", 'user_id' => "mixed"])]
+    #[ArrayShape(['gameId' => "string", 'userId' => "int", 'blackCardId' => "int"])]
     public function broadcastWith(): array
     {
         return [
-            'game_id' => $this->game->id,
-            'user_id' => $this->user->id
+            'gameId' => $this->game->id,
+            'userId' => $this->user->id,
+            'blackCardId' => $this->game->currentBlackCard->id
         ];
     }
 
