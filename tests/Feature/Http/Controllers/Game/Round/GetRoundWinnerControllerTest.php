@@ -26,7 +26,7 @@ class GetRoundWinnerControllerTest extends TestCase
         $serviceSpy->shouldReceive('latestRoundWinner')
             ->andReturn([
                'user' => $this->user,
-               'whiteCards' => $this->user->whiteCardsInGame()->whereSelected(true)->get()
+               'userGameWhiteCards' => $this->user->whiteCardsInGame()->whereSelected(true)->get()
             ]);
 
         $this->actingAs($this->user)
