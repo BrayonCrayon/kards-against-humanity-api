@@ -19,7 +19,7 @@ class GetRoundWinnerController extends Controller
     {
         $this->authorize('get', $game);
 
-        $winnerData = $this->gameService->latestRoundWinner($game, $blackCard);
+        $winnerData = $this->gameService->roundWinner($game, $blackCard);
 
         return response()->json([
             'data' => [

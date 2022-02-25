@@ -162,7 +162,7 @@ class GameServiceTest extends TestCase
         $playerWinner = $game->nonJudgeUsers()->first();
         $this->selectGameWinner($playerWinner, $game);
 
-        $winnerData = $this->gameService->latestRoundWinner($game, $game->currentBlackCard);
+        $winnerData = $this->gameService->roundWinner($game, $game->currentBlackCard);
 
         $selectedWhiteCardIds = $playerWinner->whiteCardsInGame()->whereSelected(true)->get()->pluck('id');
         $this->assertEquals($playerWinner->id, $winnerData['user']['id']);
@@ -172,6 +172,42 @@ class GameServiceTest extends TestCase
             $this->assertInstanceOf(UserGameWhiteCards::class, $whiteCard);
             $this->assertTrue($selectedWhiteCardIds->contains($whiteCard['id']));
         });
+    }
+
+    /** @test */
+    public function it_will_bring_back_round_winner_data_from_a_previous_round()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+        $this->drawBlackCardWithPickOf(2, $game);
+        $this->playersSubmitCards($game->blackCardPick, $game);
+
+        $playerWinner = $game->nonJudgeUsers()->first();
+        $this->selectGameWinner($playerWinner, $game);
+        $previousBlackCard = $game->currentBlackCard;
+        $selectedWhiteCardCount = $playerWinner->whiteCardsInGame()->whereSelected(true)->count();
+
+        $this->gameService->rotateGame($game);
+
+        $winnerData = $this->gameService->roundWinner($game, $previousBlackCard);
+
+        $this->assertEquals($playerWinner->id, $winnerData['user']['id']);
+        $this->assertCount($selectedWhiteCardCount, $winnerData['userGameWhiteCards']);
+    }
+
+    /** @test */
+    public function it_will_bring_back_correct_card_amount_for_each_user_after_game_rotate()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+        $this->drawBlackCardWithPickOf(2, $game);
+        $this->playersSubmitCards($game->blackCardPick, $game);
+
+        $playerWinner = $game->nonJudgeUsers()->first();
+        $this->selectGameWinner($playerWinner, $game);
+
+        $this->gameService->rotateGame($game);
+
+        $playerWinner = $playerWinner->refresh();
+        $this->assertCount(Game::HAND_LIMIT, $playerWinner->whiteCardsInGame);
     }
 
 

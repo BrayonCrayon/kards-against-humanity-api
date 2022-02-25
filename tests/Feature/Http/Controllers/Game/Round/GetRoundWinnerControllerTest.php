@@ -23,7 +23,7 @@ class GetRoundWinnerControllerTest extends TestCase
     public function it_will_call_game_service_to_retrieve_round_winner()
     {
         $serviceSpy = $this->spy(GameService::class);
-        $serviceSpy->shouldReceive('latestRoundWinner')
+        $serviceSpy->shouldReceive('roundWinner')
             ->andReturn([
                'user' => $this->user,
                'userGameWhiteCards' => $this->user->whiteCardsInGame()->whereSelected(true)->get()
@@ -36,7 +36,7 @@ class GetRoundWinnerControllerTest extends TestCase
             ]))
             ->assertOk();
 
-        $serviceSpy->shouldHaveReceived('latestRoundWinner')
+        $serviceSpy->shouldHaveReceived('roundWinner')
             ->withArgs(function($game, $blackCard) {
                 return $game->id === $this->game->id && $blackCard->id === $this->game->currentBlackCard->id;
             })
