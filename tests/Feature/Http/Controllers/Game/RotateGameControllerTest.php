@@ -104,11 +104,31 @@ class RotateGameControllerTest extends TestCase
         $this->game->users->each(function($user) use ($blackCardPick) {
             Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick, $user) {
                 return
-                    ($event->user->whiteCards->toArray() != null)
-                    && Game::HAND_LIMIT === count($event->user->whiteCards->toArray())
+                    ($event->user->whiteCardsInGame->toArray() != null)
+                    && Game::HAND_LIMIT === count($event->user->whiteCardsInGame->toArray())
                     && $event->game->id === $this->game->id
-                    && $event->broadcastOn()->name === 'private-game.' . $this->game->id . '.' . $user->id;
+                    && $event->broadcastOn()->name === 'game-' . $this->game->id;;
             });
         });
     }
+
+    /** @test */
+    public function it_calls_game_service_to_rotate_game()
+    {
+        $serviceSpy = $this->spy(GameService::class);
+
+        $this->playersSubmitCards($this->game->blackCardPick, $this->game);
+
+        $this->actingAs($this->game->users->first())
+            ->postJson(route('api.game.rotate', $this->game->id))
+            ->assertOk();
+
+        $serviceSpy->shouldHaveReceived('rotateGame')
+            ->withArgs(function ($game) {
+                return $game->id === $this->game->id;
+            })
+            ->once();
+    }
+
+
 }

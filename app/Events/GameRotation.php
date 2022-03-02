@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -21,6 +21,17 @@ class GameRotation implements ShouldBroadcastNow
     {
     }
 
+    public function broadcastWith()
+    {
+        return [
+            'gameId' => $this->game->id,
+        ];
+    }
+
+    public function broadcastAs(){
+        return 'game.rotate';
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -28,6 +39,6 @@ class GameRotation implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('game.'.$this->game->id . '.' . $this->user->id);
+        return new Channel('game-'.$this->game->id);
     }
 }

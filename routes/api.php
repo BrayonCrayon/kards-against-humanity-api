@@ -41,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
     Route::get('/game/{game}', GetGameStateController::class)->name('game.show');
     Route::post('/game/{game}/winner', StoreRoundWinnerController::class)->name('game.winner');
-    Route::get('/game/{game}/round/winner', GetRoundWinnerController::class)->name('game.round.winner');
+    Route::get('/game/{game}/round/winner/{blackCard}', GetRoundWinnerController::class)->name('game.round.winner');
 });
 
 Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');

@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Events\GameJoined;
+use App\Events\GameRotation;
 use App\Events\WinnerSelected;
 use App\Http\Resources\UserGameWhiteCardResource;
 use App\Models\BlackCard;
@@ -15,8 +16,8 @@ use App\Models\RoundWinner;
 use App\Models\User;
 use App\Models\UserGameWhiteCards;
 use App\Models\WhiteCard;
-use Nubs\RandomNameGenerator\All as NameGenerator;
 use Facades\App\Services\HelperService;
+use Nubs\RandomNameGenerator\All as NameGenerator;
 
 class GameService
 {
@@ -47,7 +48,7 @@ class GameService
 
     public function drawWhiteCards($user, $game)
     {
-        $drawLimit = Game::HAND_LIMIT - $user->whiteCards()->count();
+        $drawLimit = Game::HAND_LIMIT - $user->whiteCardsInGame()->count();
         $pickedCards = WhiteCard::whereIn('expansion_id', $game->expansions->pluck('id')->toArray())
             ->whereNotIn('id', function ($query) use ($game) {
                 $query->select('white_card_id')->from('user_game_white_cards')->whereGameId($game->id);
@@ -141,6 +142,40 @@ class GameService
                 'user_id' => $user->id,
                 'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
             ];
+        });
+    }
+
+    public function roundWinner(Game $game, BlackCard $blackCard)
+    {
+        $winner = RoundWinner::whereGameId($game->id)
+            ->whereBlackCardId($blackCard->id)
+            ->get();
+
+        return [
+            "user" => $winner->first()->user,
+            "userGameWhiteCards" => UserGameWhiteCards::withTrashed()
+                ->whereUserId($winner->first()->user->id)
+                ->whereGameId($game->id)
+                ->whereIn('white_card_id', $winner->pluck('white_card_id'))
+                ->get()
+        ];
+    }
+
+    public function rotateGame(Game $game)
+    {
+        $userIds = $game->users()->pluck('users.id');
+
+        $currentJudgeIndex = $userIds->search($game->judge_id);
+        $nextJudgeIndex = ($currentJudgeIndex + 1) % $userIds->count();
+
+        $this->updateJudge($game, $userIds[$nextJudgeIndex]);
+        $this->discardWhiteCards($game);
+        $this->discardBlackCard($game);
+        $this->drawBlackCard($game);
+
+        $game->users->each(function($user) use ($game) {
+            $this->drawWhiteCards($user, $game);
+            event(new GameRotation($game, $user));
         });
     }
 }
