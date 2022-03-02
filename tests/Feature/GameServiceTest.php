@@ -28,7 +28,6 @@ class GameServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Event::fake();
         $this->helperService = new HelperService();
     }
 
@@ -178,6 +177,7 @@ class GameServiceTest extends TestCase
     /** @test */
     public function it_will_bring_back_round_winner_data_from_a_previous_round()
     {
+        Event::fake();
         $game = Game::factory()->hasUsers(1)->create();
         $this->drawBlackCardWithPickOf(2, $game);
         $this->playersSubmitCards($game->blackCardPick, $game);
@@ -198,6 +198,7 @@ class GameServiceTest extends TestCase
     /** @test */
     public function it_will_bring_back_correct_card_amount_for_each_user_after_game_rotate()
     {
+        Event::fake();
         $game = Game::factory()->hasUsers(1)->create();
         $this->drawBlackCardWithPickOf(2, $game);
         $this->playersSubmitCards($game->blackCardPick, $game);
