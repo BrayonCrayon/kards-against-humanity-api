@@ -28,6 +28,7 @@ class GameServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        Event::fake();
         $this->helperService = new HelperService();
     }
 
