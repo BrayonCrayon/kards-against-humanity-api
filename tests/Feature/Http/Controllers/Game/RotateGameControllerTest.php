@@ -107,7 +107,7 @@ class RotateGameControllerTest extends TestCase
                     ($event->user->whiteCardsInGame->toArray() != null)
                     && Game::HAND_LIMIT === count($event->user->whiteCardsInGame->toArray())
                     && $event->game->id === $this->game->id
-                    && $event->broadcastOn()->name === 'private-game.' . $this->game->id . '.' . $user->id;
+                    && $event->broadcastOn()->name === 'game-' . $this->game->id;;
             });
         });
     }
