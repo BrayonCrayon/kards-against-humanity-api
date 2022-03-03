@@ -59,6 +59,11 @@ class GetRoundWinnerControllerTest extends TestCase
                             'expansion_id',
                             'order',
                         ]
+                    ],
+                    'black_card' => [
+                        'id',
+                        'pick',
+                        'text'
                     ]
                 ]
             ]);
