@@ -24,7 +24,8 @@ class GetRoundWinnerController extends Controller
         return response()->json([
             'data' => [
                 'user_id' => $winnerData['user']->id,
-                'submitted_cards' => UserGameWhiteCardResource::collection($winnerData['userGameWhiteCards'])
+                'submitted_cards' => UserGameWhiteCardResource::collection($winnerData['userGameWhiteCards']),
+                'black_card' => $blackCard
             ]
         ]);
     }
