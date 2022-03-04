@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KickPlayerController extends Controller
@@ -14,7 +15,7 @@ class KickPlayerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request, Game $game)
+    public function __invoke(Request $request, Game $game, User $user)
     {
         //
     }
