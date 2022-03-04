@@ -4,8 +4,6 @@ namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Models\Game;
 use App\Models\UserGameWhiteCards;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class KickPlayerControllerTest extends TestCase
