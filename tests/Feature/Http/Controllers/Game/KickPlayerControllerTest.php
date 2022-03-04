@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Models\Game;
+use App\Models\UserGameWhiteCards;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -58,6 +59,21 @@ class KickPlayerControllerTest extends TestCase
         $this->actingAs($differentGame->judge)
             ->postJson(route('api.game.player.kick', [$this->game, $playerToKick]))
             ->assertForbidden();
+    }
+
+    /** @test */
+    public function it_will_kick_player_from_game()
+    {
+        $playerToKick = $this->game->nonJudgeUsers()->first();
+        $playerCount = $this->game->users()->count();
+        $this->actingAs($this->game->judge)
+            ->postJson(route('api.game.player.kick', [$this->game, $playerToKick]))
+            ->assertOK();
+
+        $this->game->refresh();
+
+        $this->assertCount($playerCount - 1, $this->game->users);
+        $this->assertCount($this->game->users->count() * Game::HAND_LIMIT, UserGameWhiteCards::whereGameId($this->game->id)->get());
     }
 
 
