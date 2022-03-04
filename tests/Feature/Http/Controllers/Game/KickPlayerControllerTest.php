@@ -50,5 +50,15 @@ class KickPlayerControllerTest extends TestCase
             ->assertForbidden();
     }
 
+    /** @test */
+    public function it_will_reject_judge_players_to_kick_other_players_of_another_game()
+    {
+        $differentGame = Game::factory()->create();
+        $playerToKick = $this->game->nonJudgeUsers()->first();
+        $this->actingAs($differentGame->judge)
+            ->postJson(route('api.game.player.kick', [$this->game, $playerToKick]))
+            ->assertForbidden();
+    }
+
 
 }
