@@ -17,6 +17,6 @@ class KickPlayerController extends Controller
      */
     public function __invoke(Request $request, Game $game, User $user)
     {
-        //
+        $this->authorize('kick', $game);
     }
 }

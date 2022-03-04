@@ -41,4 +41,14 @@ class KickPlayerControllerTest extends TestCase
             ->assertNotFound();
     }
 
+    /** @test */
+    public function it_will_reject_non_judge_players_from_kicking_users()
+    {
+        $player = $this->game->nonJudgeUsers()->first();
+        $this->actingAs($player)
+            ->postJson(route('api.game.player.kick', [$this->game, $player]))
+            ->assertForbidden();
+    }
+
+
 }
