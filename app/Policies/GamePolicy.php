@@ -24,4 +24,9 @@ class GamePolicy
     {
         return $user->games()->firstOrFail()->id === $game->id;
     }
+
+    public function kick(User $user, Game $game)
+    {
+        return $user->id === $game->judge_id;
+    }
 }
