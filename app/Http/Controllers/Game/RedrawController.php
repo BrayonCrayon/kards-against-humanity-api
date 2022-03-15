@@ -19,9 +19,7 @@ class RedrawController extends Controller
      */
     public function __invoke(Request $request, Game $game, GameService $gameService)
     {
-        $user = $game->users()->where('users.id', '=', auth()->user()->id)->first();
-        $user->whiteCardsInGame()->delete();
-
-        $gameService->drawWhiteCards($user, $game);
+        auth()->user()->whiteCardsInGame()->delete();
+        $gameService->drawWhiteCards(auth()->user(), $game);
     }
 }
