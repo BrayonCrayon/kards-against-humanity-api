@@ -175,7 +175,7 @@ class GameService
 
         $game->users->each(function($user) use ($game) {
             $this->drawWhiteCards($user, $game);
-            event(new GameRotation($game, $user));
         });
+        event(new GameRotation($game));
     }
 }

@@ -17,7 +17,7 @@ class GameRotation implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct(public $game, public $user)
+    public function __construct(public $game)
     {
     }
 
