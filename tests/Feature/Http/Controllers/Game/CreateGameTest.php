@@ -147,7 +147,7 @@ class CreateGameTest extends TestCase
     {
         $userName = $this->faker->userName;
         $expansionIds = Expansion::take(1)->get()->pluck('id');
-        $response = $this->postJson(route('api.game.store'), [
+        $this->postJson(route('api.game.store'), [
             'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk()
@@ -157,11 +157,13 @@ class CreateGameTest extends TestCase
                         [
                             'id',
                             'name',
+                            'score'
                         ]
                     ],
                     'current_user' => [
                         'id',
                         'name',
+                        'score'
                     ],
                     'judge' => [
                         'id',

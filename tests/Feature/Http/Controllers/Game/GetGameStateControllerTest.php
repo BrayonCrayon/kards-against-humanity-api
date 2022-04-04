@@ -44,6 +44,7 @@ class GetGameStateControllerTest extends TestCase
             'judge' => [
                 'id' => $game->judge_id,
                 'name' => $game->judge->name,
+                'score' => $game->judge->score,
                 'has_submitted_white_cards' => $game->judge->hasSubmittedWhiteCards,
                 'created_at' => $game->judge->created_at,
                 'updated_at' => $game->judge->updated_at,
@@ -68,6 +69,7 @@ class GetGameStateControllerTest extends TestCase
             $response->assertJsonFragment([
                 'id' => $player->id,
                 'name' => $player->name,
+                'score' => $player->score,
                 'has_submitted_white_cards' => $player->hasSubmittedWhiteCards
             ]);
         });

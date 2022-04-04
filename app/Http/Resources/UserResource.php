@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'has_submitted_white_cards' => $this->resource->hasSubmittedWhiteCards,
+            'score' => $this->resource->score,
             'created_at' => $this->resource->created_at,
             'updated_at' => $this->resource->updated_at,
         ];
