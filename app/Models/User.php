@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->whiteCardsInGame->where('selected', true)->pluck('white_card_id');
     }
 
+    public function getScoreAttribute(): int
+    {
+        return $this->roundsWon->count();
+    }
+
     /*
      ********************************
      *        Relationships         *
@@ -75,4 +80,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserGameWhiteCards::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function roundsWon ()
+    {
+        return $this->hasMany(RoundWinner::class)->distinct('black_card_id');
+    }
+
+
 }

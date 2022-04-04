@@ -55,4 +55,19 @@ class UserTest extends TestCase
     {
         $this->assertEmpty($this->user->submittedWhiteCardIds);
     }
+
+    /** @test */
+    public function it_returns_number_of_rounds_user_has_won()
+    {
+        $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
+        $this->selectGameWinner($this->user, $this->game);
+
+        $this->assertEquals( 1 ,$this->user->score);
+    }
+
+    /** @test */
+    public function it_return_score_of_zero_if_player_has_not_won()
+    {
+        $this->assertEquals( 0 ,$this->user->score);
+    }
 }
