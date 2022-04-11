@@ -12,6 +12,7 @@ use App\Http\Controllers\Game\Round\GetRoundWinnerController;
 use App\Http\Controllers\Game\StoreRoundWinnerController;
 use App\Http\Controllers\Game\SubmitCardsController;
 use App\Http\Controllers\Game\SubmittedCardsController;
+use App\Http\Controllers\PlayersController;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/game/{game}/round/winner/{blackCard}', GetRoundWinnerController::class)->name('game.round.winner');
     Route::post('/game/{game}/player/{user}/kick', KickPlayerController::class)->name('game.player.kick');
     Route::post('/game/{game}/redraw', RedrawController::class)->name('game.redraw');
+    Route::get('/game/{game}/players', PlayersController::class)->name('game.players.index');
 });
 
 Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');
