@@ -142,7 +142,7 @@ class GameService
                 'user_id' => $user->id,
                 'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
             ];
-        });
+        })->shuffle();
     }
 
     public function roundWinner(Game $game, BlackCard $blackCard)
