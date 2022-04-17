@@ -212,5 +212,24 @@ class GameServiceTest extends TestCase
         $this->assertCount(Game::HAND_LIMIT, $playerWinner->whiteCardsInGame);
     }
 
+    /** @test */
+    public function it_will_return_randomize_submitted_cards()
+    {
+        $game = Game::factory()->hasUsers(4)->create();
+        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
 
+        $responseUserIds = $this->gameService->getSubmittedCards($game)->pluck('user_id');
+
+        $orderCount = 0;
+        $previousId = 0;
+        $responseUserIds->each(function ($item) use (&$orderCount, &$previousId) {
+
+            if ($previousId and $previousId < $item) {
+                $orderCount += 1;
+            }
+            $previousId = $item;
+        });
+
+         $this->assertNotEquals($responseUserIds, $orderCount);
+    }
 }
