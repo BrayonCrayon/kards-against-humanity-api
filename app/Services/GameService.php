@@ -33,7 +33,8 @@ class GameService
         $game = Game::create([
             'name' => $this->generator->getName(),
             'judge_id' => $user->id,
-            'code' => HelperService::generateCode("#?#?")
+            'code' => HelperService::generateCode("#?#?"),
+            'redraw_limit' => 2,
         ]);
 
         $game->users()->save($user);
@@ -175,6 +176,8 @@ class GameService
 
         $game->users->each(function($user) use ($game) {
             $this->drawWhiteCards($user, $game);
+            $user->pivot->redraw_count = 0;
+            $user->pivot->save();
         });
         event(new GameRotation($game));
     }

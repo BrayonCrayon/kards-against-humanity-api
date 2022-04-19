@@ -95,4 +95,9 @@ class Game extends Model
     {
         return $query->where('code', $gameCode);
     }
+
+    public function getUser(string $id) {
+        return $this->users()->withPivot('redraw_count')
+            ->where('users.id', $id)->first();
+    }
 }

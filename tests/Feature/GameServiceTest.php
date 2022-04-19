@@ -232,4 +232,22 @@ class GameServiceTest extends TestCase
 
          $this->assertNotEquals($responseUserIds, $orderCount);
     }
+
+    /** @test */
+    public function it_will_reset_users_redraw_count_when_game_rotates()
+    {
+        $game = Game::factory()->hasUsers(1)->create();
+
+        $game->nonJudgeUsers->each(function ($user) {
+           $user->pivot->redraw_count = 2;
+           $user->pivot->save();
+        });
+
+        $this->gameService->rotateGame($game);
+
+        $game->nonJudgeUsers->each(function ($user) {
+            $user->pivot->refresh();
+            $this->assertEquals(0, $user->pivot->redraw_count);
+        });
+    }
 }
