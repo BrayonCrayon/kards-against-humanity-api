@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Game extends Model
@@ -41,31 +42,25 @@ class Game extends Model
         return $this->currentBlackCard->pick;
     }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function users()
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'game_users')->orderBy('id');
+        return $this->belongsToMany(User::class, 'game_users')
+            ->as('gameState')
+            ->withPivot('redraw_count')
+            ->orderBy('id');
     }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function expansions()
+    public function expansions(): BelongsToMany
     {
         return $this->belongsToMany(Expansion::class, 'game_expansions');
     }
 
-    /**
-     * @return HasMany
-     */
-    public function gameBlackCards()
+    public function gameBlackCards(): HasMany
     {
         return $this->hasMany(GameBlackCards::class);
     }
 
-    public function blackCards()
+    public function blackCards(): BelongsToMany
     {
         return $this->belongsToMany(BlackCard::class, 'game_black_cards')
             ->whereNull('deleted_at')
@@ -73,7 +68,7 @@ class Game extends Model
             ->withPivot(['deleted_at']);
     }
 
-    public function deletedBlackCards()
+    public function deletedBlackCards(): BelongsToMany
     {
         return $this->belongsToMany(BlackCard::class, 'game_black_cards')
             ->whereNotNull('deleted_at')
@@ -81,12 +76,12 @@ class Game extends Model
             ->withPivot(['deleted_at']);
     }
 
-    public function judge()
+    public function judge(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'judge_id');
     }
 
-    public function nonJudgeUsers()
+    public function nonJudgeUsers() : BelongsToMany
     {
         return $this->users()->where('users.id', '<>', $this->judge_id);
     }
@@ -96,8 +91,7 @@ class Game extends Model
         return $query->where('code', $gameCode);
     }
 
-    public function getUser(string $id) {
-        return $this->users()->withPivot('redraw_count')
-            ->where('users.id', $id)->first();
+    public function getUser(string $id) : User {
+        return $this->users()->whereUserId($id)->first();
     }
 }

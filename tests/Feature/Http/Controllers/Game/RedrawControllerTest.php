@@ -27,7 +27,8 @@ class RedrawControllerTest extends TestCase
 
         $this->actingAs($game->judge)
             ->postJson(route('api.game.redraw', $game))
-        ->assertOK();
+            ->assertOK()
+            ->assertJsonCount(7, 'data');
 
         $newHand = $game->judge->whiteCardsInGame()->get()->pluck('id');
         $this->assertNotEquals($newHand, $hand);
@@ -43,8 +44,8 @@ class RedrawControllerTest extends TestCase
         $game = Game::factory()->create();
         $hand = $game->judge->whiteCardsInGame->pluck('id');
         $user = $game->getUser($game->judge_id);
-        $user->pivot->redraw_count = 2;
-        $user->pivot->save();
+        $user->gameState->redraw_count = 2;
+        $user->gameState->save();
 
         $this->actingAs($user)
             ->postJson(route('api.game.redraw', $game))

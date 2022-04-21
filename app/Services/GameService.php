@@ -162,6 +162,19 @@ class GameService
         ];
     }
 
+    public function resetDrawCount(Game $game) {
+        GameUser::whereGameId($game->id)
+            ->update([
+                'redraw_count' => 0
+            ]);
+    }
+
+    public function incrementDrawCount(Game $game, User $user) {
+        GameUser::whereGameId($game->id)
+            ->whereUserId($user->id)
+            ->increment('redraw_count');
+    }
+
     public function rotateGame(Game $game)
     {
         $userIds = $game->users()->pluck('users.id');
@@ -169,16 +182,17 @@ class GameService
         $currentJudgeIndex = $userIds->search($game->judge_id);
         $nextJudgeIndex = ($currentJudgeIndex + 1) % $userIds->count();
 
-        $this->updateJudge($game, $userIds[$nextJudgeIndex]);
         $this->discardWhiteCards($game);
         $this->discardBlackCard($game);
         $this->drawBlackCard($game);
+        $this->resetDrawCount($game);
 
-        $game->users->each(function($user) use ($game) {
+        $game->nonJudgeUsers->each(function($user) use ($game) {
             $this->drawWhiteCards($user, $game);
-            $user->pivot->redraw_count = 0;
-            $user->pivot->save();
         });
+
+        $this->updateJudge($game, $userIds[$nextJudgeIndex]);
+
         event(new GameRotation($game));
     }
 }

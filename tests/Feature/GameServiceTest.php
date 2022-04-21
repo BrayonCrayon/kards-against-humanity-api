@@ -234,20 +234,20 @@ class GameServiceTest extends TestCase
     }
 
     /** @test */
-    public function it_will_reset_users_redraw_count_when_game_rotates()
+    public function it_will_reset_draw_count_for_all_players()
     {
-        $game = Game::factory()->hasUsers(1)->create();
+        $game = Game::factory()->hasUsers(4)->create();
 
         $game->nonJudgeUsers->each(function ($user) {
-           $user->pivot->redraw_count = 2;
-           $user->pivot->save();
+            $user->gameState->redraw_count = 2;
+            $user->gameState->save();
         });
 
-        $this->gameService->rotateGame($game);
+        $this->gameService->resetDrawCount($game);
 
         $game->nonJudgeUsers->each(function ($user) {
-            $user->pivot->refresh();
-            $this->assertEquals(0, $user->pivot->redraw_count);
+            $user->gameState->refresh();
+            $this->assertEquals(0, $user->gameState->redraw_count);
         });
     }
 }

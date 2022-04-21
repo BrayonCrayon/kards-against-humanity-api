@@ -9,19 +9,13 @@ use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Http\Request;
 
-class StoreRoundWinnerController extends Controller
+class StoreRoundWinnerController
 {
     public function __construct(public GameService $service)
     {
     }
 
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function __invoke(Request $request, Game $game)
+    public function __invoke(Request $request, Game $game): \Illuminate\Http\JsonResponse
     {
         $user = User::findOrFail($request->get('user_id'));
 
