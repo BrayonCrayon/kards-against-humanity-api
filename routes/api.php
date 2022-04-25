@@ -9,6 +9,8 @@ use App\Http\Controllers\Game\KickPlayerController;
 use App\Http\Controllers\Game\RedrawController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\Round\GetRoundWinnerController;
+use App\Http\Controllers\Game\SpectateGameController;
+use App\Http\Controllers\Game\Spectator\GetSpectateDataController;
 use App\Http\Controllers\Game\StoreRoundWinnerController;
 use App\Http\Controllers\Game\SelectCardsController;
 use App\Http\Controllers\Game\SubmittedCardsController;
@@ -36,6 +38,7 @@ Broadcast::routes(['middleware' => ['auth:sanctum']]);
  */
 Route::post('/game', CreateGameController::class)->name('game.store');
 Route::post('/game/{game:code}/join', JoinGameController::class)->name('game.join');
+Route::post('/game/{game:code}/spectate', SpectateGameController::class)->name('game.spectate');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/game/{game}/submitted-cards', SubmittedCardsController::class)->name('game.submitted.cards');
@@ -43,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/game/{game}/rotate', RotateGameController::class)->name('game.rotate');
     Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
     Route::get('/game/{game}', GetGameStateController::class)->name('game.show');
+    Route::get('/game/{game}/spectate', GetSpectateDataController::class)->name('game.spectate.show');
     Route::post('/game/{game}/winner', StoreRoundWinnerController::class)->name('game.winner');
     Route::get('/game/{game}/round/winner/{blackCard}', GetRoundWinnerController::class)->name('game.round.winner');
     Route::post('/game/{game}/player/{user}/kick', KickPlayerController::class)->name('game.player.kick');

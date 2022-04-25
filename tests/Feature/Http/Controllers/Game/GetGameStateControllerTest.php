@@ -38,8 +38,9 @@ class GetGameStateControllerTest extends TestCase
         Event::fake([GameJoined::class]);
 
         $game = $this->createGame(4);
+        $user = $game->nonJudgeUsers()->first();
 
-        $response = $this->actingAs($game->judge)
+        $response = $this->actingAs($user)
             ->getJson(route('api.game.show', $game->id))
             ->assertOk();
 
@@ -48,14 +49,7 @@ class GetGameStateControllerTest extends TestCase
             'name' => $game->name,
             'code' => $game->code,
             'redrawLimit' => $game->redraw_limit,
-            'judge' => [
-                'id' => $game->judge_id,
-                'name' => $game->judge->name,
-                'score' => $game->judge->score,
-                'has_submitted_white_cards' => $game->judge->hasSubmittedWhiteCards,
-                'created_at' => $game->judge->created_at,
-                'updated_at' => $game->judge->updated_at,
-            ],
+            'judgeId' => $game->judge_id
         ]);
 
         $response->assertJsonFragment([
@@ -77,13 +71,13 @@ class GetGameStateControllerTest extends TestCase
                 'id' => $player->id,
                 'name' => $player->name,
                 'score' => $player->score,
-                'has_submitted_white_cards' => $player->hasSubmittedWhiteCards
+                'hasSubmittedWhiteCards' => $player->hasSubmittedWhiteCards
             ]);
         });
-        // TODO: come back!!
+
         $game->refresh();
-        $this->assertCount(Game::HAND_LIMIT, $game->judge->hand);
-        $game->judge->hand->each(function ($userCard) use ($response) {
+        $this->assertCount(Game::HAND_LIMIT, $user->hand);
+        $user->hand->each(function ($userCard) use ($response) {
             $response->assertJsonFragment([
                 'id' => $userCard->whiteCard->id,
                 'text' => $userCard->whiteCard->text,
@@ -93,13 +87,16 @@ class GetGameStateControllerTest extends TestCase
             ]);
         });
 
-        $loggedInUser = $game->getPlayer($game->judge_id);
+        $loggedInUser = $game->getPlayer($user->id);
         $response->assertJsonFragment([
-            'id' => $loggedInUser->id,
-            'name' => $loggedInUser->name,
-            'score' => $loggedInUser->score,
-            'has_submitted_white_cards' => $loggedInUser->hasSubmittedWhiteCards,
-            'redrawCount' => $loggedInUser->gameState->redraw_count
+            'currentUser' => [
+                'id' => $loggedInUser->id,
+                'name' => $loggedInUser->name,
+                'score' => $loggedInUser->score,
+                'hasSubmittedWhiteCards' => $loggedInUser->hasSubmittedWhiteCards,
+                'isSpectator' => $loggedInUser->gameState->is_spectator,
+                'redrawCount' => $loggedInUser->gameState->redraw_count
+            ]
         ]);
     }
 }
