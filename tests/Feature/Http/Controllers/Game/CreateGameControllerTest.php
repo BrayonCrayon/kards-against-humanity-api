@@ -20,7 +20,7 @@ class CreateGameControllerTest extends TestCase
         $this->postJson(route('api.game.store'), [
             'name' => "",
             'expansionIds' => $expansionIds->toArray()
-        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        ])->assertUnprocessable();
     }
 
     /** @test */
@@ -30,7 +30,7 @@ class CreateGameControllerTest extends TestCase
         $this->postJson(route('api.game.store'), [
             'name' => $user->name,
             'expansionIds' => []
-        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        ])->assertUnprocessable();
     }
 
     /** @test */
@@ -40,7 +40,7 @@ class CreateGameControllerTest extends TestCase
         $this->postJson(route('api.game.store'), [
             'name' => $user->name,
             'expansionIds' => [-1]
-        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        ])->assertUnprocessable();
     }
 
     /** @test */
@@ -70,13 +70,13 @@ class CreateGameControllerTest extends TestCase
         ])->assertOk();
 
         $this->assertDatabaseHas('games', [
-            'id' => $response->json('data.id'),
-            'name' => $response->json('data.name'),
-            'code' => $response->json('data.code'),
+            'id' => $response->json('data.game.id'),
+            'name' => $response->json('data.game.name'),
+            'code' => $response->json('data.game.code'),
             'redraw_limit' => 2
         ]);
 
-        $this->assertEquals(4, strlen($response->json('data.code')));
+        $this->assertEquals(4, strlen($response->json('data.game.code')));
     }
 
     /** @test */
@@ -90,7 +90,7 @@ class CreateGameControllerTest extends TestCase
         ])->assertOk();
 
         $this->assertDatabaseHas('game_users', [
-            'game_id' => $response->json('data.id'),
+            'game_id' => $response->json('data.game.id'),
             'user_id' => $response->json('data.currentUser.id')
         ]);
     }
@@ -108,6 +108,7 @@ class CreateGameControllerTest extends TestCase
             'name' => $userName,
             'expansionIds' => [$expansion->id]
         ])->assertOk();
+
         $createdUser = User::where('name', $userName)->first();
 
         $this->assertCount(7, $createdUser->whiteCards);
@@ -127,7 +128,7 @@ class CreateGameControllerTest extends TestCase
         ])->assertOk();
 
         $this->assertDatabaseHas('game_expansions', [
-            'game_id' => $response->json('data.id'),
+            'game_id' => $response->json('data.game.id'),
             'expansion_id' => $id
         ]);
     }
@@ -140,7 +141,7 @@ class CreateGameControllerTest extends TestCase
             'expansionIds' => [Expansion::factory()->has(BlackCard::factory())->create()->id]
         ]);
 
-        $gameCode = $response->json('data.code');
+        $gameCode = $response->json('data.game.code');
         $this->assertEquals(Str::upper($gameCode), $gameCode);
 
         $invalidCode = Str::lower($gameCode);
@@ -170,10 +171,6 @@ class CreateGameControllerTest extends TestCase
                         'name',
                         'score'
                     ],
-                    'judge' => [
-                        'id',
-                        'name',
-                    ],
                     'hand' => [
                         [
                             'id',
@@ -181,17 +178,19 @@ class CreateGameControllerTest extends TestCase
                             'expansionId'
                         ],
                     ],
-                    'id',
-                    'name',
-                    'code',
-                    'redrawLimit',
+                    'game' => [
+                        'id',
+                        'name',
+                        'code',
+                        'redrawLimit',
+                        'judgeId'
+                    ],
                     'blackCard' => [
                         'id',
                         'text',
                         'pick'
                     ]
                 ]
-
             ]);
     }
 }

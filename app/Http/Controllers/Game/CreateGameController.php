@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Game;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameRequest;
 use App\Http\Resources\GameResource;
+use App\Http\Resources\GameStateResource;
 use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
@@ -26,6 +27,6 @@ class CreateGameController
         $game = $this->gameService->createGame($user, $request->get('expansionIds'));
         $user->load('whiteCards');
 
-        return response()->json( ['data' => GameResource::make($game)]);
+        return response()->json( ['data' => GameStateResource::make($game)]);
     }
 }

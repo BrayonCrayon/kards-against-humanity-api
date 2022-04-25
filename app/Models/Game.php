@@ -46,7 +46,11 @@ class Game extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'game_users');
+        return $this->belongsToMany(User::class, 'game_users')
+            ->as('gameState')
+            ->withPivot(['redraw_count', 'is_spectator'])
+            ->where('game_users.is_spectator', false)
+            ->orderBy('id');
     }
 
     public function players(): BelongsToMany
@@ -56,7 +60,19 @@ class Game extends Model
             ->orderBy('id');
     }
 
-    public function expansions(): BelongsToMany
+    public function spectators() : BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'game_users')
+            ->as('gameState')
+            ->withPivot(['is_spectator', 'redraw_count'])
+            ->where('game_users.is_spectator', true)
+            ->orderBy('id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function expansions()
     {
         return $this->belongsToMany(Expansion::class, 'game_expansions');
     }

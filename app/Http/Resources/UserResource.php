@@ -17,13 +17,14 @@ class UserResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'has_submitted_white_cards' => $this->resource->hasSubmittedWhiteCards,
+            'hasSubmittedWhiteCards' => $this->resource->hasSubmittedWhiteCards,
             'score' => $this->resource->score,
+            'isSpectator' => $this->whenPivotLoadedAs('gameState', 'game_users', function () {
+                return $this->resource->gameState->is_spectator;
+            }),
             'redrawCount' => $this->whenPivotLoadedAs('gameState', 'game_users', function () {
                 return $this->resource->gameState->redraw_count;
             }),
-            'created_at' => $this->resource->created_at,
-            'updated_at' => $this->resource->updated_at,
         ];
     }
 }
