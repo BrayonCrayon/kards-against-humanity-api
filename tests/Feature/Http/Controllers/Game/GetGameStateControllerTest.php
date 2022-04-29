@@ -41,6 +41,8 @@ class GetGameStateControllerTest extends TestCase
         $response->assertJsonFragment([
             'id' => $game->id,
             'name' => $game->name,
+            'code' => $game->code,
+            'redrawLimit' => $game->redraw_limit,
             'judge' => [
                 'id' => $game->judge_id,
                 'name' => $game->judge->name,
@@ -83,5 +85,14 @@ class GetGameStateControllerTest extends TestCase
                 'selected' => $userCard->selected
             ]);
         });
+
+        $loggedInUser = $game->getUser($game->judge_id);
+        $response->assertJsonFragment([
+            'id' => $loggedInUser->id,
+            'name' => $loggedInUser->name,
+            'score' => $loggedInUser->score,
+            'has_submitted_white_cards' => $loggedInUser->hasSubmittedWhiteCards,
+            'redrawCount' => $loggedInUser->gameState->redraw_count
+        ]);
     }
 }

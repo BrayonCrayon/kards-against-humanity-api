@@ -13,10 +13,7 @@ use Illuminate\Http\Request;
 class KickPlayerController extends Controller
 {
     /**
-     * Handle the incoming request.
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function __invoke(Request $request, Game $game, User $user): JsonResponse
     {

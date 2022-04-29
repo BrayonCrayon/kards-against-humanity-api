@@ -10,7 +10,7 @@ use App\Models\Game;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
-class JoinGameController extends Controller
+class JoinGameController
 {
     public function __invoke(JoinGameRequest $request, Game $game, UserJoinsGame $userJoinsGame): JsonResponse
     {

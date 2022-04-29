@@ -70,6 +70,7 @@ class CreateGameTest extends TestCase
             'id' => $response->json('data.id'),
             'name' => $response->json('data.name'),
             'code' => $response->json('data.code'),
+            'redraw_limit' => 2
         ]);
 
         $this->assertEquals(4, strlen($response->json('data.code')));
@@ -179,6 +180,7 @@ class CreateGameTest extends TestCase
                     'id',
                     'name',
                     'code',
+                    'redrawLimit',
                     'current_black_card' => [
                         'id',
                         'text',

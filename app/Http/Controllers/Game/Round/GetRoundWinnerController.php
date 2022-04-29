@@ -7,6 +7,8 @@ use App\Http\Resources\UserGameWhiteCardResource;
 use App\Models\BlackCard;
 use App\Models\Game;
 use App\Services\GameService;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class GetRoundWinnerController extends Controller
@@ -15,7 +17,10 @@ class GetRoundWinnerController extends Controller
     {
     }
 
-    public function __invoke(Request $request, Game $game, BlackCard $blackCard)
+    /**
+     * @throws AuthorizationException
+     */
+    public function __invoke(Request $request, Game $game, BlackCard $blackCard): JsonResponse
     {
         $this->authorize('get', $game);
 

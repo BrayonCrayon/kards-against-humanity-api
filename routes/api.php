@@ -6,6 +6,7 @@ use App\Http\Controllers\Game\GetExpansionsController;
 use App\Http\Controllers\Game\GetGameStateController;
 use App\Http\Controllers\Game\JoinGameController;
 use App\Http\Controllers\Game\KickPlayerController;
+use App\Http\Controllers\Game\RedrawController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\Round\GetRoundWinnerController;
 use App\Http\Controllers\Game\StoreRoundWinnerController;
@@ -44,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/game/{game}/winner', StoreRoundWinnerController::class)->name('game.winner');
     Route::get('/game/{game}/round/winner/{blackCard}', GetRoundWinnerController::class)->name('game.round.winner');
     Route::post('/game/{game}/player/{user}/kick', KickPlayerController::class)->name('game.player.kick');
+    Route::post('/game/{game}/redraw', RedrawController::class)->name('game.redraw');
 });
 
 Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');

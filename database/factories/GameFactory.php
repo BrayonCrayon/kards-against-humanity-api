@@ -33,7 +33,8 @@ class GameFactory extends Factory
             'id' => $this->faker->uuid(),
             'name' => $generator->getName(),
             'code' => $this->faker->bothify('##??'),
-            'judge_id' => User::factory()
+            'judge_id' => User::factory(),
+            'redraw_limit' => 2
         ];
     }
 
