@@ -180,6 +180,7 @@ class CreateGameTest extends TestCase
                     'id',
                     'name',
                     'code',
+                    'redrawLimit',
                     'current_black_card' => [
                         'id',
                         'text',

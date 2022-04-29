@@ -41,6 +41,8 @@ class GetGameStateControllerTest extends TestCase
         $response->assertJsonFragment([
             'id' => $game->id,
             'name' => $game->name,
+            'code' => $game->code,
+            'redrawLimit' => $game->redraw_limit,
             'judge' => [
                 'id' => $game->judge_id,
                 'name' => $game->judge->name,
