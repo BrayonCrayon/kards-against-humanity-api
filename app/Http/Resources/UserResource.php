@@ -19,6 +19,9 @@ class UserResource extends JsonResource
             'name' => $this->resource->name,
             'has_submitted_white_cards' => $this->resource->hasSubmittedWhiteCards,
             'score' => $this->resource->score,
+            'redrawCount' => $this->whenPivotLoadedAs('gameState', 'game_users', function () {
+                return $this->resource->gameState->redraw_count;
+            }),
             'created_at' => $this->resource->created_at,
             'updated_at' => $this->resource->updated_at,
         ];

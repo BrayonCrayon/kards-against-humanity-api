@@ -15,11 +15,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
     protected $fillable = [
         'name',
     ];
@@ -30,17 +26,11 @@ class User extends Authenticatable
      ********************************
      */
 
-    /**
-     * @return bool
-     */
     public function getHasSubmittedWhiteCardsAttribute(): bool
     {
         return $this->whiteCardsInGame->where('selected', true)->count() > 0;
     }
 
-    /**
-     * @return Collection
-     */
     public function getSubmittedWhiteCardIdsAttribute(): Collection
     {
         return $this->whiteCardsInGame->where('selected', true)->pluck('white_card_id');
@@ -57,34 +47,23 @@ class User extends Authenticatable
      ********************************
      */
 
-    /**
-     * @return BelongsToMany
-     */
-    public function games()
+    public function games() : BelongsToMany
     {
-        return $this->belongsToMany(Game::class, 'game_users');
+        return $this->belongsToMany(Game::class, 'game_users')
+            ->as('gameState');
     }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function whiteCards()
+    public function whiteCards() : BelongsToMany
     {
         return $this->belongsToMany(WhiteCard::class, 'user_game_white_cards');
     }
 
-    /**
-     * @return HasMany
-     */
-    public function whiteCardsInGame()
+    public function whiteCardsInGame() : HasMany
     {
         return $this->hasMany(UserGameWhiteCards::class);
     }
 
-    /**
-     * @return HasMany
-     */
-    public function roundsWon ()
+    public function roundsWon() : HasMany
     {
         return $this->hasMany(RoundWinner::class)->distinct('black_card_id');
     }

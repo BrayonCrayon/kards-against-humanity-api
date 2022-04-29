@@ -10,15 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Cache;
 
-class GetExpansionsController extends Controller
+class GetExpansionsController
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param Request $request
-     * @return AnonymousResourceCollection
-     */
-    public function __invoke(Request $request)
+
+    public function __invoke(Request $request): AnonymousResourceCollection
     {
         return ExpansionResource::collection(
             Cache::remember('expansions-all',
