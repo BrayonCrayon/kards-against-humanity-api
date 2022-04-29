@@ -33,7 +33,8 @@ class GameService
         $game = Game::create([
             'name' => $this->generator->getName(),
             'judge_id' => $user->id,
-            'code' => HelperService::generateCode("#?#?")
+            'code' => HelperService::generateCode("#?#?"),
+            'redraw_limit' => 2,
         ]);
 
         $game->users()->save($user);
@@ -142,7 +143,7 @@ class GameService
                 'user_id' => $user->id,
                 'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
             ];
-        });
+        })->shuffle();
     }
 
     public function roundWinner(Game $game, BlackCard $blackCard)
@@ -161,6 +162,19 @@ class GameService
         ];
     }
 
+    public function resetDrawCount(Game $game) {
+        GameUser::whereGameId($game->id)
+            ->update([
+                'redraw_count' => 0
+            ]);
+    }
+
+    public function incrementDrawCount(Game $game, User $user) {
+        GameUser::whereGameId($game->id)
+            ->whereUserId($user->id)
+            ->increment('redraw_count');
+    }
+
     public function rotateGame(Game $game)
     {
         $userIds = $game->users()->pluck('users.id');
@@ -168,14 +182,17 @@ class GameService
         $currentJudgeIndex = $userIds->search($game->judge_id);
         $nextJudgeIndex = ($currentJudgeIndex + 1) % $userIds->count();
 
-        $this->updateJudge($game, $userIds[$nextJudgeIndex]);
         $this->discardWhiteCards($game);
         $this->discardBlackCard($game);
         $this->drawBlackCard($game);
+        $this->resetDrawCount($game);
 
-        $game->users->each(function($user) use ($game) {
+        $game->nonJudgeUsers->each(function($user) use ($game) {
             $this->drawWhiteCards($user, $game);
         });
+
+        $this->updateJudge($game, $userIds[$nextJudgeIndex]);
+
         event(new GameRotation($game));
     }
 }

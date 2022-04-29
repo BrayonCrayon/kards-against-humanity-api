@@ -9,15 +9,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetGameStateController extends Controller
+class GetGameStateController
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param Request $request
-     * @param Game $game
-     * @return JsonResource
-     */
     public function __invoke(Request $request, Game $game): JsonResource
     {
         $game->load('judge', 'users');
