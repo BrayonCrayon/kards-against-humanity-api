@@ -15,14 +15,19 @@ class PlayersControllerTest extends TestCase
     /** @test */
     public function it_requires_a_user_to_be_authenticated()
     {
-        self::markTestSkipped('');
+        $game = Game::factory()->create();
+        $this->getJson(route('api.game.players.index', $game))
+            ->assertUnauthorized();
     }
 
     /** @test */
     public function it_requires_the_user_to_be_a_player_in_the_game()
     {
-        self::markTestSkipped('');
-
+        $game = Game::factory()->create();
+        $user = User::factory()->create();
+        $this->actingAs($user)
+            ->getJson(route('api.game.players.index', $game))
+            ->assertNotFound();
     }
 
     /** @test */
@@ -30,7 +35,7 @@ class PlayersControllerTest extends TestCase
     {
         $game = Game::factory()->hasUsers(3)->create();
 
-        $response = $this->actingAs($game->judge)
+        $this->actingAs($game->judge)
             ->getJson(route('api.game.players.index', $game))
             ->assertOk()
             ->assertJsonCount($game->users()->count(), 'data')
