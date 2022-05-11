@@ -5,18 +5,18 @@ namespace Tests\Feature\Http\Controllers\Game\Round;
 use App\Models\Game;
 use App\Services\GameService;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class GetRoundWinnerControllerTest extends TestCase
 {
+    use GameUtilities;
     protected function setUp(): void
     {
         parent::setUp();
-        $this->game = Game::factory()->hasUsers(1)->create();
-        $this->user = $this->game->users->whereNotIn('id', [$this->game->judge->id])->first();
-
-        $this->drawBlackCardWithPickOf(2, $this->game);
-        $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
-        $this->selectGameWinner($this->user, $this->game);
+        $this->game = $this->createGame(blackCardCount: 10);
+        $this->user = $this->game->nonJudgeUsers()->first();
+        $this->selectAllPlayersCards($this->game);
+        $this->submitPlayerForRoundWinner($this->user, $this->game);
     }
 
     /** @test */
@@ -26,19 +26,19 @@ class GetRoundWinnerControllerTest extends TestCase
         $serviceSpy->shouldReceive('roundWinner')
             ->andReturn([
                'user' => $this->user,
-               'userGameWhiteCards' => $this->user->whiteCardsInGame()->whereSelected(true)->get()
+               'userGameWhiteCards' => $this->user->hand()->whereSelected(true)->get()
             ]);
 
         $this->actingAs($this->user)
             ->getJson(route('api.game.round.winner', [
                 $this->game,
-                $this->game->currentBlackCard
+                $this->game->blackCard
             ]))
             ->assertOk();
 
         $serviceSpy->shouldHaveReceived('roundWinner')
             ->withArgs(function($game, $blackCard) {
-                return $game->id === $this->game->id && $blackCard->id === $this->game->currentBlackCard->id;
+                return $game->id === $this->game->id && $blackCard->id === $this->game->blackCard->id;
             })
             ->once();
     }
@@ -47,7 +47,7 @@ class GetRoundWinnerControllerTest extends TestCase
     /** @test */
     public function it_returns_the_round_winner()
     {
-        $this->actingAs($this->user)->getJson(route('api.game.round.winner', [$this->game->id, $this->game->currentBlackCard->id]))
+        $this->actingAs($this->user)->getJson(route('api.game.round.winner', [$this->game->id, $this->game->blackCard->id]))
             ->assertOK()
             ->assertJsonStructure([
                 'data' => [
@@ -56,7 +56,7 @@ class GetRoundWinnerControllerTest extends TestCase
                         [
                             'id',
                             'text',
-                            'expansion_id',
+                            'expansionId',
                             'order',
                         ]
                     ],
@@ -64,7 +64,7 @@ class GetRoundWinnerControllerTest extends TestCase
                         'id',
                         'pick',
                         'text',
-                        'expansion_id'
+                        'expansionId'
                     ]
                 ]
             ]);
@@ -75,14 +75,14 @@ class GetRoundWinnerControllerTest extends TestCase
     public function it_returns_a_403_when_the_user_is_not_in_the_game()
     {
         $secondGame = Game::factory()->create();
-        $this->actingAs($secondGame->judge)->getJson(route('api.game.round.winner', [$this->game->id, $this->game->currentBlackCard->id]))
+        $this->actingAs($secondGame->judge)->getJson(route('api.game.round.winner', [$this->game->id, $this->game->blackCard->id]))
             ->assertForbidden();
     }
 
     /** @test */
     public function it_returns_401_if_unauthorized()
     {
-        $this->getJson(route('api.game.round.winner', [$this->game->id, $this->game->currentBlackCard->id]))
+        $this->getJson(route('api.game.round.winner', [$this->game->id, $this->game->blackCard->id]))
             ->assertUnauthorized();
     }
 

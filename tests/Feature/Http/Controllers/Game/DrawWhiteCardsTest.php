@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers\Game;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
-use App\Models\UserGameWhiteCards;
+use App\Models\UserGameWhiteCard;
 use App\Models\WhiteCard;
 use App\Services\GameService;
 use Illuminate\Http\Response;
@@ -19,17 +19,16 @@ class DrawWhiteCardsTest extends TestCase
     public function user_can_draw_more_white_cards()
     {
         $game = Game::factory()->has(User::factory())->create();
-        $user = $game->users()->first();
-        $expectedCard = WhiteCard::firstOrFail();
+        $user = $game->players()->first();
+        $expectedCard = WhiteCard::factory()->create();
 
-        $this->instance(
-            GameService::class,
-            Mockery::mock(GameService::class, function (MockInterface $mock) use ($game, $expectedCard, $user) {
-                $mock->shouldReceive('drawWhiteCards')->withArgs(function ($u, $g) use ($game, $user) {
-                    return $game->id === $g->id && $user->id === $u->id;
-                })->once()->andReturn([$expectedCard]);
+        $this->mock(GameService::class)
+            ->shouldReceive('drawWhiteCards')
+            ->withArgs(function ($u, $g) use ($game, $user) {
+                return $game->id === $g->id && $user->id === $u->id;
             })
-        );
+            ->once()
+            ->andReturn([$expectedCard]);
 
         $this->actingAs($user)
             ->getJson(route('api.game.whiteCards.draw', $game))
@@ -37,7 +36,7 @@ class DrawWhiteCardsTest extends TestCase
             ->assertJsonFragment([
                 'id' => $expectedCard->id,
                 'text' => $expectedCard->text,
-                'expansion_id' => $expectedCard->expansion_id,
+                'expansionId' => $expectedCard->expansion_id,
             ]);
     }
 

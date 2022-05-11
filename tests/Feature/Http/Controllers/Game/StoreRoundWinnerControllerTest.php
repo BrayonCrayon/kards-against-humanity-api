@@ -8,9 +8,11 @@ use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class StoreRoundWinnerControllerTest extends TestCase
 {
+    use GameUtilities;
 
     protected function setUp(): void
     {
@@ -39,25 +41,29 @@ class StoreRoundWinnerControllerTest extends TestCase
     /** @test */
     public function it_stores_game_winner_will_data()
     {
-        $game = Game::factory()->hasUsers(1)->create();
+        $game = $this->createGame();
+        $this->drawBlackCard($game);
         $player = $game->nonJudgeUsers()->first();
 
-        $this->playersSubmitCards($game->blackCardPick, $game);
+        $this->selectAllPlayersCards($game);
 
         $this->actingAs($game->judge)->postJson(route('api.game.winner', $game->id), [
            'user_id' => $player->id,
         ])->assertOk();
 
         $roundWinners = RoundWinner::where('user_id', $player->id)->get();
-        $this->assertCount($game->currentBlackCard->pick, $roundWinners);
+        $this->assertCount($game->blackCard->pick, $roundWinners);
     }
 
     /** @test */
     public function it_calls_select_winner_from_game_service()
     {
-        $game = Game::factory()->hasUsers(1)->create();
+        $game = $this->createGame();
+        $this->drawBlackCard($game);
+
         $player = $game->nonJudgeUsers()->first();
-        $this->playersSubmitCards($game->blackCardPick, $game);
+        // TODO: rename playerSelectsCardsForSubmission instead of playerSubmitCards
+        $this->selectAllPlayersCards($game);
         $gameServiceSpy = $this->spy(GameService::class);
 
         $this->actingAs($game->judge)

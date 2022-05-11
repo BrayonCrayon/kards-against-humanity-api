@@ -17,7 +17,7 @@ class WhiteCardsResource extends JsonResource
         return [
           'id' => $this->resource->id,
           'text' => $this->resource->text,
-          'expansion_id' => $this->resource->expansion_id,
+          'expansionId' => $this->resource->expansion_id,
         ];
     }
 }

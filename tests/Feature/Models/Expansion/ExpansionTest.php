@@ -12,7 +12,7 @@ class ExpansionTest extends TestCase
     /** @test */
     public function scope_query_ids_in_brings_back_correct_expansion()
     {
-        $expansion = Expansion::first();
+        $expansion = Expansion::factory()->create();
         $this->assertEquals(1, Expansion::idsIn([$expansion->id])->count());
         $this->assertEquals($expansion->id, Expansion::idsIn([$expansion->id])->first()->id);
     }
@@ -21,7 +21,7 @@ class ExpansionTest extends TestCase
     /** @test */
     public function white_cards_relationship_brings_back_white_card_type()
     {
-        $expansion = Expansion::first();
+        $expansion = Expansion::factory()->hasWhiteCards()->create();
         $this->assertInstanceOf(WhiteCard::class, $expansion->whiteCards->first());
     }
 
@@ -29,7 +29,7 @@ class ExpansionTest extends TestCase
     /** @test */
     public function black_cards_relationship_brings_back_black_card_types()
     {
-        $expansion = Expansion::first();
+        $expansion = Expansion::factory()->hasBlackCards()->create();
         $this->assertInstanceOf(BlackCard::class, $expansion->blackCards->first());
     }
 }

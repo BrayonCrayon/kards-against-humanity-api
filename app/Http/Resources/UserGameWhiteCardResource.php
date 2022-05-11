@@ -17,7 +17,7 @@ class UserGameWhiteCardResource extends JsonResource
         return [
             'id' => $this->resource->white_card_id,
             'text' => $this->resource->whiteCard->text,
-            'expansion_id' => $this->resource->whiteCard->expansion_id,
+            'expansionId' => $this->resource->whiteCard->expansion_id,
             'order' => $this->resource->order,
             'selected' => $this->resource->selected
         ];

@@ -14,12 +14,7 @@ class RoundWinnerTest extends TestCase
     /** @test */
     public function it_has_relationships()
     {
-        $roundWinner = RoundWinner::create([
-            'user_id' => User::factory()->create()->id,
-            'game_id' => Game::factory()->create()->id,
-            'white_card_id' => WhiteCard::first()->id,
-            'black_card_id' => BlackCard::first()->id,
-        ]);
+        $roundWinner = RoundWinner::factory()->create();
 
         $this->assertInstanceOf(User::class, $roundWinner->user);
         $this->assertInstanceOf(Game::class, $roundWinner->game);

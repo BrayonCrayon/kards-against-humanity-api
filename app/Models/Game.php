@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 class Game extends Model
 {
@@ -32,20 +34,24 @@ class Game extends Model
      ********************************
      */
 
-    public function getCurrentBlackCardAttribute()
+    public function getBlackCardAttribute()
     {
         return $this->blackCards->firstOrFail();
     }
 
     public function getBlackCardPickAttribute()
     {
-        return $this->currentBlackCard->pick;
+        return $this->blackCard->pick;
     }
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'game_users')
-            ->as('gameState')
+        return $this->belongsToMany(User::class, 'game_users');
+    }
+
+    public function players(): BelongsToMany
+    {
+        return $this->users()->as('gameState')
             ->withPivot('redraw_count')
             ->orderBy('id');
     }
@@ -68,6 +74,17 @@ class Game extends Model
             ->withPivot(['deleted_at']);
     }
 
+    public function getAvailableWhiteCardsAttribute(): Collection
+    {
+        return $this->expansions()
+            ->with(['whiteCards' => function ($query) {
+                return $query->whereNotIn('id', UserGameWhiteCard::whereGameId($this->id)->get()->pluck('white_card_id'));
+            }])
+            ->get()
+            ->pluck('whiteCards')
+            ->flatten();
+    }
+
     public function deletedBlackCards(): BelongsToMany
     {
         return $this->belongsToMany(BlackCard::class, 'game_black_cards')
@@ -83,7 +100,7 @@ class Game extends Model
 
     public function nonJudgeUsers() : BelongsToMany
     {
-        return $this->users()->where('users.id', '<>', $this->judge_id);
+        return $this->players()->where('users.id', '<>', $this->judge_id);
     }
 
     public function scopeByCode($query, $gameCode)
@@ -91,7 +108,7 @@ class Game extends Model
         return $query->where('code', $gameCode);
     }
 
-    public function getUser(string $id) : User {
-        return $this->users()->whereUserId($id)->first();
+    public function getPlayer(string $id) : User {
+        return $this->players()->whereUserId($id)->first();
     }
 }

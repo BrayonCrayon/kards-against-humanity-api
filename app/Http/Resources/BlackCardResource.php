@@ -18,6 +18,7 @@ class BlackCardResource extends JsonResource
             'id' => $this->resource->id,
             'pick' => $this->resource->pick,
             'text' => $this->resource->text,
+            'expansionId' => $this->resource->expansion_id
         ];
     }
 }

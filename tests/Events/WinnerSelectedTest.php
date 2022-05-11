@@ -29,7 +29,7 @@ class WinnerSelectedTest extends TestCase
         $payload = [
             'gameId' => $this->game->id,
             'userId' => $this->user->id,
-            'blackCardId' => $this->game->currentBlackCard->id
+            'blackCardId' => $this->game->blackCard->id
         ];
 
         $this->assertEquals($payload, $this->event->broadcastWith());

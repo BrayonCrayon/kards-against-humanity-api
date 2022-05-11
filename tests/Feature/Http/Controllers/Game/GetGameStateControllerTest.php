@@ -3,13 +3,17 @@
 namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Events\GameJoined;
+use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
+use App\Services\GameService;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class GetGameStateControllerTest extends TestCase
 {
+    use GameUtilities;
 
     /** @test */
     public function it_does_not_allow_non_auth_users()
@@ -32,7 +36,8 @@ class GetGameStateControllerTest extends TestCase
     public function it_returns_current_game_state()
     {
         Event::fake([GameJoined::class]);
-        $game = Game::factory()->hasUsers(4)->create();
+
+        $game = $this->createGame(4);
 
         $response = $this->actingAs($game->judge)
             ->getJson(route('api.game.show', $game->id))
@@ -62,9 +67,9 @@ class GetGameStateControllerTest extends TestCase
         ]);
 
         $response->assertJsonFragment([
-            'id' => $game->currentBlackCard->id,
-            'pick' => $game->currentBlackCard->pick,
-            'text' => $game->currentBlackCard->text,
+            'id' => $game->blackCard->id,
+            'pick' => $game->blackCard->pick,
+            'text' => $game->blackCard->text,
         ]);
 
         $game->users->each(function ($player) use ($response) {
@@ -75,18 +80,20 @@ class GetGameStateControllerTest extends TestCase
                 'has_submitted_white_cards' => $player->hasSubmittedWhiteCards
             ]);
         });
-
-        $game->judge->whiteCardsInGame->each(function ($userCard) use ($response) {
+        // TODO: come back!!
+        $game->refresh();
+        $this->assertCount(Game::HAND_LIMIT, $game->judge->hand);
+        $game->judge->hand->each(function ($userCard) use ($response) {
             $response->assertJsonFragment([
                 'id' => $userCard->whiteCard->id,
                 'text' => $userCard->whiteCard->text,
-                'expansion_id' => $userCard->whiteCard->expansion_id,
+                'expansionId' => $userCard->whiteCard->expansion_id,
                 'order' => $userCard->order,
                 'selected' => $userCard->selected
             ]);
         });
 
-        $loggedInUser = $game->getUser($game->judge_id);
+        $loggedInUser = $game->getPlayer($game->judge_id);
         $response->assertJsonFragment([
             'id' => $loggedInUser->id,
             'name' => $loggedInUser->name,
