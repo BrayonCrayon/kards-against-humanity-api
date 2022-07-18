@@ -14,7 +14,7 @@ use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\RoundWinner;
 use App\Models\User;
-use App\Models\UserGameWhiteCards;
+use App\Models\UserGameWhiteCard;
 use App\Models\WhiteCard;
 use Facades\App\Services\HelperService;
 use Nubs\RandomNameGenerator\All as NameGenerator;
@@ -49,7 +49,7 @@ class GameService
 
     public function drawWhiteCards($user, $game)
     {
-        $drawLimit = Game::HAND_LIMIT - $user->whiteCardsInGame()->count();
+        $drawLimit = Game::HAND_LIMIT - $user->hand()->count();
         $pickedCards = WhiteCard::whereIn('expansion_id', $game->expansions->pluck('id')->toArray())
             ->whereNotIn('id', function ($query) use ($game) {
                 $query->select('white_card_id')->from('user_game_white_cards')->whereGameId($game->id);
@@ -58,7 +58,7 @@ class GameService
             ->limit($drawLimit)
             ->get();
 
-        $pickedCards->each(fn($item) => UserGameWhiteCards::create([
+        $pickedCards->each(fn($item) => UserGameWhiteCard::create([
             'game_id' => $game->id,
             'user_id' => $user->id,
             'white_card_id' => $item->id
@@ -92,11 +92,11 @@ class GameService
         return $joinedUser;
     }
 
-    public function submitCards($whiteCardIds, Game $game, User $user)
+    public function selectCards($whiteCardIds, Game $game, User $user) : void
     {
         $cardOrder = 1;
         collect($whiteCardIds)->each(function ($id) use(&$cardOrder, $user, $game) {
-            UserGameWhiteCards::where('game_id', $game->id)
+            UserGameWhiteCard::where('game_id', $game->id)
                 ->where('user_id', $user->id)
                 ->where('white_card_id', $id)
                 ->update([
@@ -113,7 +113,7 @@ class GameService
 
     public function discardWhiteCards($game)
     {
-        UserGameWhiteCards::whereGameId($game->id)->where('selected', true)->delete();
+        UserGameWhiteCard::whereGameId($game->id)->where('selected', true)->delete();
     }
 
     public function updateJudge($game, $judgeId)
@@ -125,12 +125,12 @@ class GameService
 
     public function selectWinner(Game $game, $user)
     {
-        $user->whiteCardsInGame()->whereSelected(true)->get()->each(function ($item) use ($game, $user) {
+        $user->hand()->whereSelected(true)->get()->each(function ($item) use ($game, $user) {
             RoundWinner::create([
                 'game_id' => $game->id,
                 'user_id' => $user->id,
                 'white_card_id' => $item->white_card_id,
-                'black_card_id' => $game->currentBlackCard->id,
+                'black_card_id' => $game->blackCard->id,
             ]);
         });
         event(new WinnerSelected($game, $user));
@@ -141,7 +141,7 @@ class GameService
         return $game->nonJudgeUsers()->get()->map(function($user) {
             return [
                 'user_id' => $user->id,
-                'submitted_cards' => UserGameWhiteCardResource::collection($user->whiteCardsInGame()->whereSelected(true)->get()),
+                'submitted_cards' => UserGameWhiteCardResource::collection($user->hand()->whereSelected(true)->get()),
             ];
         })->shuffle();
     }
@@ -154,7 +154,7 @@ class GameService
 
         return [
             "user" => $winner->first()->user,
-            "userGameWhiteCards" => UserGameWhiteCards::withTrashed()
+            "userGameWhiteCards" => UserGameWhiteCard::withTrashed()
                 ->whereUserId($winner->first()->user->id)
                 ->whereGameId($game->id)
                 ->whereIn('white_card_id', $winner->pluck('white_card_id'))
@@ -177,7 +177,7 @@ class GameService
 
     public function rotateGame(Game $game)
     {
-        $userIds = $game->users()->pluck('users.id');
+        $userIds = $game->players()->pluck('users.id');
 
         $currentJudgeIndex = $userIds->search($game->judge_id);
         $nextJudgeIndex = ($currentJudgeIndex + 1) % $userIds->count();

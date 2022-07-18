@@ -10,29 +10,32 @@ use App\Services\GameService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class SubmitCardsControllerTest extends TestCase
 {
+    use GameUtilities;
 
     private $game;
     private User $user;
+
+    private $route = 'api.game.select';
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->game = Game::factory()->hasUsers(4)->create();
+        $this->game = $this->createGame(blackCardPick: 2);
         $this->user = $this->game->judge;
     }
 
     /** @test */
-    public function user_cannot_submit_a_card_that_does_not_exit()
+    public function user_cannot_select_a_card_that_does_not_exit()
     {
         $invalid_card_id = 99999999;
 
-        $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
+        $this->actingAs($this->user)->postJson(route($this->route, $this->game->id), [
             'whiteCardIds' => [$invalid_card_id],
-            'submitAmount' => 1
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -40,15 +43,10 @@ class SubmitCardsControllerTest extends TestCase
     public function user_submits_cards_for_a_game()
     {
         Event::fake();
-        $this->gameService->discardBlackCard($this->game);
-        $this->drawBlackCardWithPickOf(2, $this->game);
-        $this->game->refresh();
+        $cards = $this->user->hand->take(2);
 
-        $cards = $this->user->whiteCardsInGame->take(2);
-
-        $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
+        $this->actingAs($this->user)->postJson(route($this->route, $this->game->id), [
             'whiteCardIds' => $cards->pluck('white_card_id')->toArray(),
-            'submitAmount' => $this->game->currentBlackCard->pick
         ])->assertNoContent();
 
         $cards->each(function ($card) {
@@ -60,10 +58,10 @@ class SubmitCardsControllerTest extends TestCase
     /** @test */
     public function user_cannot_submit_more_cards_than_the_black_card_pick()
     {
-        $blackCardPick = $this->game->currentBlackCard->pick;
-        $ids = $this->user->whiteCardsInGame->pluck('white_card_id')->toArray();
+        $blackCardPick = $this->game->blackCard->pick;
+        $ids = $this->user->hand->pluck('white_card_id')->toArray();
 
-        $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
+        $this->actingAs($this->user)->postJson(route($this->route, $this->game->id), [
             'whiteCardIds' => $ids,
             'submitAmount' => $blackCardPick
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -72,14 +70,10 @@ class SubmitCardsControllerTest extends TestCase
     /** @test */
     public function user_cannot_submit_less_cards_than_the_black_card_pick()
     {
-        $this->gameService->discardBlackCard($this->game);
-        $this->drawBlackCardWithPickOf(2, $this->game);
-        $this->game->refresh();
+        $blackCardPick = $this->game->blackCard->pick;
+        $ids = $this->user->hand->pluck('white_card_id')->take($blackCardPick - 1);
 
-        $blackCardPick = $this->game->currentBlackCard->pick;
-        $ids = $this->user->whiteCardsInGame->pluck('white_card_id')->take($blackCardPick - 1);
-
-        $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
+        $this->actingAs($this->user)->postJson(route($this->route, $this->game->id), [
             'whiteCardIds' => $ids,
             'submitAmount' => $blackCardPick
         ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -89,15 +83,11 @@ class SubmitCardsControllerTest extends TestCase
     public function event_fired_when_user_submits_cards_for_a_game()
     {
         Event::fake();
-        $this->gameService->discardBlackCard($this->game);
-        $this->drawBlackCardWithPickOf(2, $this->game);
-        $this->game->refresh();
+        $cards = $this->user->hand->take(2);
 
-        $cards = $this->user->whiteCardsInGame->take(2);
-
-        $this->actingAs($this->user)->postJson(route('api.game.submit', $this->game->id), [
+        $this->actingAs($this->user)->postJson(route($this->route, $this->game->id), [
             'whiteCardIds' => $cards->pluck('white_card_id')->toArray(),
-            'submitAmount' => $this->game->currentBlackCard->pick
+            'submitAmount' => $this->game->blackCard->pick
         ])->assertNoContent();
 
        Event::assertDispatched(CardsSubmitted::class, function (CardsSubmitted $event) {
@@ -110,16 +100,12 @@ class SubmitCardsControllerTest extends TestCase
     /** @test */
     public function user_submitting_cards_will_keep_the_order_they_were_submitted_in() {
         Event::fake();
-        $this->gameService->discardBlackCard($this->game);
-        $this->drawBlackCardWithPickOf(2, $this->game);
-        $this->game->refresh();
-
-        $cardsToSubmit = $this->user->whiteCardsInGame->take(2);
+        $cardsToSubmit = $this->user->hand->take(2);
 
         $this->actingAs($this->user)
-            ->postJson(route('api.game.submit', $this->game->id), [
+            ->postJson(route($this->route, $this->game->id), [
                 'whiteCardIds' => $cardsToSubmit->pluck('white_card_id')->toArray(),
-                'submitAmount' => $this->game->currentBlackCard->pick
+                'submitAmount' => $this->game->blackCard->pick
             ])->assertNoContent();
 
         $orderNum = 1;

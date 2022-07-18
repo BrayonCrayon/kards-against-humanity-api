@@ -7,6 +7,8 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
 use App\Models\GameBlackCards;
+use App\Models\UserGameWhiteCard;
+use App\Models\WhiteCard;
 use Tests\TestCase;
 
 class GameTest extends TestCase
@@ -25,7 +27,7 @@ class GameTest extends TestCase
     public function expansion_relationship_brings_back_expansion_type()
     {
         $game = Game::factory()
-            ->hasAttached(Expansion::first())
+            ->hasAttached(Expansion::factory())
             ->create();
         $this->assertInstanceOf(Expansion::class, $game->expansions->first());
     }
@@ -41,7 +43,7 @@ class GameTest extends TestCase
     /** @test */
     public function it_can_get_a_black_card()
     {
-        $blackCard = BlackCard::first();
+        $blackCard = BlackCard::factory()->create();
         $game = Game::factory()->hasUsers(2)->create();
 
         GameBlackCards::create([
@@ -49,7 +51,7 @@ class GameTest extends TestCase
             'game_id' => $game->id,
         ]);
 
-        $this->assertInstanceOf(BlackCard::class, $game->currentBlackCard);
+        $this->assertInstanceOf(BlackCard::class, $game->blackCard);
     }
 
     /** @test */
@@ -57,7 +59,7 @@ class GameTest extends TestCase
     {
         $game = Game::factory()->create();
 
-        $blackCard = BlackCard::first();
+        $blackCard = BlackCard::factory()->create();
         $game->blackCards()->attach($blackCard);
 
         $this->assertEquals($blackCard->id, $game->blackCards->first()->id);
@@ -78,10 +80,35 @@ class GameTest extends TestCase
     /** @test */
     public function it_returns_correct_black_pick_amount_from_game_attribute()
     {
-        $game = Game::factory()->create();
+        $game = Game::factory()->hasBlackCards()->create();
 
-        $this->assertEquals($game->currentBlackCard->pick, $game->blackCardPick);
+        $this->assertEquals($game->blackCard->pick, $game->blackCardPick);
     }
 
+    /** @test */
+    public function it_can_get_white_cards()
+    {
+        $game = Game::factory()->has(Expansion::factory()->hasWhiteCards())->create();
 
+        $whiteCard = WhiteCard::firstOrFail();
+
+        $this->assertEquals($whiteCard->id, $game->available_white_cards->first()->id);
+    }
+
+    /** @test */
+    public function it_excludes_white_cards_that_have_been_drawn()
+    {
+        $game = Game::factory()->has(Expansion::factory()->hasWhiteCards(2))->create();
+
+        [$whiteCard, $drawnWhiteCard] = WhiteCard::all();
+
+        UserGameWhiteCard::create([
+            'white_card_id' => $drawnWhiteCard->id,
+            'user_id' => $game->judge->id,
+            'game_id' => $game->id,
+        ]);
+
+        $this->assertCount(1, $game->available_white_cards);
+//        $this->assertEquals($whiteCard->id, $game->available_white_cards->first()->id);
+    }
 }

@@ -7,17 +7,19 @@ use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class UserTest extends TestCase
 {
+    use GameUtilities;
     private $user;
     private $game;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->game = Game::factory()->hasUsers(1)->create();
-        $this->user = $this->game->users->whereNotIn('id', [$this->game->judge->id])->first();
+        $this->game = $this->createGame();
+        $this->user = $this->game->nonJudgeUsers()->first();
     }
 
     /** @test */
@@ -32,7 +34,7 @@ class UserTest extends TestCase
     /** @test */
     public function has_submitted_white_cards_attribute_brings_back_true_if_user_has_submitted_cards()
     {
-        $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
+        $this->selectAllPlayersCards($this->game);
         $this->assertTrue($this->user->hasSubmittedWhiteCards);
     }
 
@@ -45,8 +47,8 @@ class UserTest extends TestCase
     /** @test */
     public function it_returns_submitted_white_card_ids_when_user_has_submitted_cards()
     {
-        $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
-        $submittedWhiteCardIds = $this->user->whiteCardsInGame()->selected()->pluck('white_card_id');
+        $this->selectAllPlayersCards($this->game);
+        $submittedWhiteCardIds = $this->user->hand()->selected()->pluck('white_card_id');
         $submittedWhiteCardIds->each(fn ($cardId) => $this->assertContains($cardId, $this->user->submittedWhiteCardIds));
     }
 
@@ -59,8 +61,8 @@ class UserTest extends TestCase
     /** @test */
     public function it_returns_number_of_rounds_user_has_won()
     {
-        $this->playersSubmitCards($this->game->currentBlackCard->pick, $this->game);
-        $this->selectGameWinner($this->user, $this->game);
+        $this->selectAllPlayersCards($this->game);
+        $this->submitPlayerForRoundWinner($this->user, $this->game);
 
         $this->assertEquals( 1 ,$this->user->score);
     }

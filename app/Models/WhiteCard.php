@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WhiteCard extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     /*
@@ -15,16 +18,9 @@ class WhiteCard extends Model
      ********************************
      */
 
-    /**
-     * @return BelongsTo
-     */
-    public function expansion()
+    public function expansion() : BelongsTo
     {
         return $this->belongsTo(Expansion::class);
     }
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'user_game_white_cards');
-    }
 }
