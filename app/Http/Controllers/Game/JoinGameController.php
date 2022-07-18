@@ -14,7 +14,7 @@ class JoinGameController
 {
     public function __invoke(JoinGameRequest $request, Game $game, UserJoinsGame $userJoinsGame): JsonResponse
     {
-        if ($game->users()->where('users.id', Auth::id())->count() === 0) {
+        if ($game->players()->where('users.id', Auth::id())->count() === 0) {
             $userJoinsGame($game, $request->input('name'));
         }
 

@@ -21,11 +21,11 @@ class GameResource extends JsonResource
             'redrawLimit' => $this->resource->redraw_limit,
             'judge' => UserResource::make($this->resource->judge),
             'users' => UserResource::collection($this->resource->users),
-            'current_user' => UserResource::make($this->resource->getUser(auth()->user()->id)),
-            'current_black_card' => BlackCardResource::make($this->resource->current_black_card),
+            'currentUser' => UserResource::make($this->resource->getPlayer(auth()->user()->id)),
+            'blackCard' => BlackCardResource::make($this->resource->blackCard),
             'hasSubmittedWhiteCards' => auth()->user()->hasSubmittedWhiteCards,
             'submittedWhiteCardIds' => auth()->user()->submittedWhiteCardIds,
-            'hand' => UserGameWhiteCardResource::collection(auth()->user()->whiteCardsInGame),
+            'hand' => UserGameWhiteCardResource::collection(auth()->user()->hand),
         ];
     }
 }

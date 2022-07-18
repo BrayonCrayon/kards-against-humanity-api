@@ -7,9 +7,11 @@ use App\Models\User;
 use App\Services\GameService;
 use Hamcrest\Core\IsEqual;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class SubmittedCardsControllerTest extends TestCase
 {
+    use GameUtilities;
 
     /** @test */
     public function it_will_not_allow_non_auth_user_to_get_submitted_cards()
@@ -32,10 +34,11 @@ class SubmittedCardsControllerTest extends TestCase
     /** @test */
     public function it_will_return_user_submitted_cards()
     {
-        $game = Game::factory()->hasUsers(1)->create();
-        $submittedUser = $game->users->whereNotIn('id', [$game->judge->id])->first();
+        $game = $this->createGame();
 
-        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+        $submittedUser = $game->nonJudgeUsers->first();
+
+        $this->selectAllPlayersCards($game);
 
         $this->actingAs($submittedUser)
             ->getJson(route('api.game.submitted.cards', $game->id))
@@ -48,7 +51,7 @@ class SubmittedCardsControllerTest extends TestCase
                             [
                                 'id',
                                 'text',
-                                'expansion_id',
+                                'expansionId',
                                 'order'
                             ]
                         ]
@@ -60,22 +63,22 @@ class SubmittedCardsControllerTest extends TestCase
     /** @test */
     public function it_will_bring_back_correct_submitted_user_cards()
     {
-        $game = Game::factory()->hasUsers(1)->create();
-        $submittedUser = $game->users->whereNotIn('id', [$game->judge->id])->first();
+        $game = $this->createGame();
+        $submittedUser = $game->nonJudgeUsers->first();
 
-        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+        $this->selectAllPlayersCards($game);
 
         $response = $this->actingAs($submittedUser)
             ->getJson(route('api.game.submitted.cards', $game->id))
             ->assertOK();
 
         $this->assertCount(1, $response->json("data"));
-        $this->assertCount($submittedUser->whiteCardsInGame()->selected()->count(), $response->json("data")[0]["submitted_cards"]);
-        $submittedUser->whiteCardsInGame()->selected()->get()->each(function ($whiteCardInGame) use ($response) {
+        $this->assertCount($submittedUser->hand()->selected()->count(), $response->json("data")[0]["submitted_cards"]);
+        $submittedUser->hand()->selected()->get()->each(function ($whiteCardInGame) use ($response) {
             $response->assertJsonFragment([
                 'id' => $whiteCardInGame->white_card_id,
                 'text' => $whiteCardInGame->whiteCard->text,
-                'expansion_id' => $whiteCardInGame->whiteCard->expansion_id,
+                'expansionId' => $whiteCardInGame->whiteCard->expansion_id,
                 'order' => $whiteCardInGame->order
             ]);
         });
@@ -84,9 +87,10 @@ class SubmittedCardsControllerTest extends TestCase
     /** @test */
     public function call_get_submitted_cards_from_game_service_when_getting_submitted_cards()
     {
-        $game = Game::factory()->hasUsers(1)->create();
-        $submittedUser = $game->users->whereNotIn('id', [$game->judge->id])->first();
-        $this->playersSubmitCards($game->currentBlackCard->pick, $game);
+        $game = $this->createGame();
+        $submittedUser = $game->nonJudgeUsers->first();
+
+        $this->selectAllPlayersCards($game);
 
         $spy = $this->spy(GameService::class);
 

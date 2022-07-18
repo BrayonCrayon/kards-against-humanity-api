@@ -10,7 +10,7 @@ use App\Http\Controllers\Game\RedrawController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\Round\GetRoundWinnerController;
 use App\Http\Controllers\Game\StoreRoundWinnerController;
-use App\Http\Controllers\Game\SubmitCardsController;
+use App\Http\Controllers\Game\SelectCardsController;
 use App\Http\Controllers\Game\SubmittedCardsController;
 use App\Http\Controllers\PlayersController;
 use Illuminate\Support\Facades\Broadcast;
@@ -39,7 +39,7 @@ Route::post('/game/{game:code}/join', JoinGameController::class)->name('game.joi
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/game/{game}/submitted-cards', SubmittedCardsController::class)->name('game.submitted.cards');
-    Route::post('/game/{game}/submit', SubmitCardsController::class)->name('game.submit');
+    Route::post('/game/{game}/select', SelectCardsController::class)->name('game.select');
     Route::post('/game/{game}/rotate', RotateGameController::class)->name('game.rotate');
     Route::get('/game/{game}/whiteCards/draw', DrawWhiteCardsController::class)->name('game.whiteCards.draw');
     Route::get('/game/{game}', GetGameStateController::class)->name('game.show');

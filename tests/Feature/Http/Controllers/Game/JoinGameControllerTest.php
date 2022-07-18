@@ -6,32 +6,30 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
-use App\Services\GameService;
 use Illuminate\Support\Facades\Event;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class JoinGameControllerTest extends TestCase
 {
-    private $game;
+    use GameUtilities;
 
     protected function setUp(): void
     {
         parent::setUp();
         Event::fake();
-        $this->game = Game::factory()->hasUsers(1)->create();
     }
 
     /** @test */
     public function it_allows_an_existing_player_to_rejoin_game()
     {
-        $player = $this->game->nonJudgeUsers()->first();
-        Sanctum::actingAs($player, []);
+        $game = Game::factory()->hasBlackCards()->hasUsers()->create();
+        $player = $game->judge;
 
-        $this->postJson(route('api.game.join', $this->game->code), [
+        $this->actingAs($player)->postJson(route('api.game.join', $game->code), [
             'name' => $player->name,
         ])
-        ->assertOK();
+            ->assertOK();
 
         $this->assertCount(1, User::whereName($player->name)->get());
     }
@@ -40,39 +38,49 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_adds_a_user_to_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
+        $game = Game::factory()->hasBlackCards()->hasUsers()->create();
+        $joinGameResponse = $this->postJson(route('api.game.join', $game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
-        $this->assertCount(1, GameUser::where('game_id', $this->game->id)->where('user_id', $joinGameResponse['data']['current_user']['id'])->get());
+        $this->assertCount(1, GameUser::where('game_id', $game->id)->where('user_id', $joinGameResponse['data']['currentUser']['id'])->get());
     }
 
     /** @test */
     public function it_gives_a_user_white_cards_when_joining_a_game()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
+        $game = Game::factory()
+            ->has(Expansion::factory()->hasWhiteCards(Game::HAND_LIMIT)->hasBlackCards(1))
+            ->create();
+        $this->drawBlackCard($game);
+
+        $joinGameResponse = $this->postJson(route('api.game.join', $game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
-        $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse->json('data.current_user.id'))->whiteCards);
+
+        $this->assertCount(Game::HAND_LIMIT, User::find($joinGameResponse->json('data.currentUser.id'))->whiteCards);
     }
 
     /** @test */
     public function it_brings_back_white_cards_that_are_in_specific_expansions()
     {
-        $joinGameResponse = $this->postJson(route('api.game.join', $this->game->code), [
+        $game = $this->createGame();
+        $this->drawBlackCard($game);
+        $joinGameResponse = $this->postJson(route('api.game.join', $game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
 
-        $currentExpansionIds = User::find($joinGameResponse->json('data.current_user.id'))->whiteCards->pluck('expansion_id');
+        $currentExpansionIds = User::find($joinGameResponse->json('data.currentUser.id'))->whiteCards->pluck('expansion_id');
 
-        $currentExpansionIds->each(function ($id) {
-            $this->assertContains($id, $this->game->expansions->pluck('id'));
+        $currentExpansionIds->each(function ($id) use ($game) {
+            $this->assertContains($id, $game->expansions->pluck('id'));
         });
     }
 
     /** @test */
     public function it_validates_user_name_when_joining_a_game()
     {
-        $this->postJson(route('api.game.join', $this->game->code), [
+        $game = Game::factory()->create();
+        $this->postJson(route('api.game.join', $game->code), [
             'name' => ''
         ])->assertJsonValidationErrors([
             'name'
@@ -90,42 +98,48 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_returns_specified_json_structure()
     {
-        $this->postJson(route('api.game.join', $this->game->code), [
+        $game = Game::factory()
+            ->has(Expansion::factory()->hasWhiteCards(Game::HAND_LIMIT)->hasBlackCards(1))
+            ->create();
+        $this->drawBlackCard($game);
+
+        $this->postJson(route('api.game.join', $game->code), [
             'name' => 'foo'
-        ])->assertJsonStructure([
-                'data' => [
-                    'users' => [
-                        [
+        ])->assertOk()
+            ->assertJsonStructure([
+                    'data' => [
+                        'users' => [
+                            [
+                                'id',
+                                'name',
+                            ]
+                        ],
+                        'currentUser' => [
                             'id',
                             'name',
-                        ]
-                    ],
-                    'current_user' => [
+                        ],
+                        'judge' => [
+                            'id',
+                            'name',
+                        ],
+                        'hand' => [
+                            [
+                                'id',
+                                'text',
+                                'expansionId'
+                            ],
+                        ],
                         'id',
                         'name',
-                    ],
-                    'judge' => [
-                        'id',
-                        'name',
-                    ],
-                    'hand' => [
-                        [
+                        'code',
+                        'redrawLimit',
+                        'blackCard' => [
                             'id',
                             'text',
-                            'expansion_id'
-                        ],
-                    ],
-                    'id',
-                    'name',
-                    'code',
-                    'redrawLimit',
-                    'current_black_card' => [
-                        'id',
-                        'text',
-                        'pick'
+                            'pick'
+                        ]
                     ]
                 ]
-            ]
-        );
+            );
     }
 }

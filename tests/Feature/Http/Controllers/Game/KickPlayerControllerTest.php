@@ -2,16 +2,23 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
+use App\Models\Expansion;
 use App\Models\Game;
-use App\Models\UserGameWhiteCards;
+use App\Models\UserGameWhiteCard;
+use App\Services\GameService;
 use Tests\TestCase;
+use Tests\Traits\GameUtilities;
 
 class KickPlayerControllerTest extends TestCase
 {
+    use GameUtilities;
+
     private $game;
+    public $gameService;
     protected function setUp(): void
     {
         parent::setUp();
+        $this->gameService = new GameService();
         $this->game = Game::factory()->hasUsers(2)->create();
     }
 
@@ -62,16 +69,22 @@ class KickPlayerControllerTest extends TestCase
     /** @test */
     public function it_will_kick_player_from_game()
     {
-        $playerToKick = $this->game->nonJudgeUsers()->first();
-        $playerCount = $this->game->users()->count();
-        $this->actingAs($this->game->judge)
-            ->postJson(route('api.game.player.kick', [$this->game, $playerToKick]))
+        $game = Game::factory()
+            ->has(Expansion::factory()->hasWhiteCards(21)->hasBlackCards(1))
+            ->hasUsers(2)
+            ->create();
+        $this->drawBlackCard($game);
+        $game->players()->each(fn ($user) => $this->gameService->drawWhiteCards($user, $game));
+        $playerToKick = $game->nonJudgeUsers()->first();
+        $playerCount = $game->users()->count();
+
+        $this->actingAs($game->judge)
+            ->postJson(route('api.game.player.kick', [$game, $playerToKick]))
             ->assertOK();
+        $game->refresh();
 
-        $this->game->refresh();
-
-        $this->assertCount($playerCount - 1, $this->game->users);
-        $this->assertCount($this->game->users->count() * Game::HAND_LIMIT, UserGameWhiteCards::whereGameId($this->game->id)->get());
+        $this->assertCount($playerCount - 1, $game->users);
+        $this->assertCount($game->players->count() * Game::HAND_LIMIT, UserGameWhiteCard::whereGameId($game->id)->get());
     }
 
 

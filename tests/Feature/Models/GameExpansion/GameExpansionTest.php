@@ -13,7 +13,7 @@ class GameExpansionTest extends TestCase
     public function game_relationship_brings_back_game_type()
     {
         $gameExpansion = GameExpansion::factory()
-            ->for(Expansion::first())
+            ->for(Expansion::factory())
             ->create();
         $this->assertInstanceOf(Game::class, $gameExpansion->game);
     }
@@ -22,7 +22,7 @@ class GameExpansionTest extends TestCase
     public function expansion_relationship_brings_back_expansion_type()
     {
         $gameExpansion = GameExpansion::factory()
-            ->for(Expansion::first())
+            ->for(Expansion::factory())
             ->create();
         $this->assertInstanceOf(Expansion::class, $gameExpansion->expansion);
     }

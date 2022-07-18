@@ -12,7 +12,7 @@ class WhiteCardTest extends TestCase
     /** @test */
     public function expansion_relationship_brings_back_expansion_type()
     {
-        $whiteCard = WhiteCard::first();
+        $whiteCard = WhiteCard::factory()->create();
         $this->assertInstanceOf(Expansion::class, $whiteCard->expansion);
     }
 }
