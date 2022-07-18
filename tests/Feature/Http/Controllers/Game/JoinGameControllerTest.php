@@ -118,10 +118,6 @@ class JoinGameControllerTest extends TestCase
                             'id',
                             'name',
                         ],
-                        'judge' => [
-                            'id',
-                            'name',
-                        ],
                         'hand' => [
                             [
                                 'id',
@@ -129,10 +125,13 @@ class JoinGameControllerTest extends TestCase
                                 'expansionId'
                             ],
                         ],
-                        'id',
-                        'name',
-                        'code',
-                        'redrawLimit',
+                        'game' => [
+                            'id',
+                            'name',
+                            'code',
+                            'judgeId',
+                            'redrawLimit'
+                        ],
                         'blackCard' => [
                             'id',
                             'text',

@@ -7,6 +7,8 @@ use App\Events\WinnerSelected;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
+use App\Models\GameBlackCards;
+use App\Models\GameUser;
 use App\Models\User;
 use App\Models\UserGameWhiteCard;
 use App\Services\GameService;
