@@ -44,10 +44,8 @@ class PlayersControllerTest extends TestCase
                     [
                         'id',
                         'name',
-                        'has_submitted_white_cards',
-                        'score',
-                        'created_at',
-                        'updated_at',
+                        'hasSubmittedWhiteCards',
+                        'score'
                     ]
                 ]
             ]);
