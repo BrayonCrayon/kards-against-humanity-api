@@ -34,7 +34,7 @@ class WinnerSelected implements ShouldBroadcastNow
         return [
             'gameId' => $this->game->id,
             'userId' => $this->user->id,
-            'blackCardId' => $this->game->currentBlackCard->id
+            'blackCardId' => $this->game->blackCard->id
         ];
     }
 

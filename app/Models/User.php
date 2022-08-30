@@ -28,12 +28,12 @@ class User extends Authenticatable
 
     public function getHasSubmittedWhiteCardsAttribute(): bool
     {
-        return $this->whiteCardsInGame->where('selected', true)->count() > 0;
+        return $this->hand->where('selected', true)->count() > 0;
     }
 
     public function getSubmittedWhiteCardIdsAttribute(): Collection
     {
-        return $this->whiteCardsInGame->where('selected', true)->pluck('white_card_id');
+        return $this->hand->where('selected', true)->pluck('white_card_id');
     }
 
     public function getScoreAttribute(): int
@@ -55,12 +55,13 @@ class User extends Authenticatable
 
     public function whiteCards() : BelongsToMany
     {
-        return $this->belongsToMany(WhiteCard::class, 'user_game_white_cards');
+        return $this->belongsToMany(WhiteCard::class, 'user_game_white_cards')
+            ->wherePivotNull('deleted_at');
     }
 
-    public function whiteCardsInGame() : HasMany
+    public function hand() : HasMany
     {
-        return $this->hasMany(UserGameWhiteCards::class);
+        return $this->hasMany(UserGameWhiteCard::class);
     }
 
     public function roundsWon() : HasMany

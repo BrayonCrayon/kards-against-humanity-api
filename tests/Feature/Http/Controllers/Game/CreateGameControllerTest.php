@@ -2,13 +2,15 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
+use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\User;
+use App\Models\WhiteCard;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-class CreateGameTest extends TestCase
+class CreateGameControllerTest extends TestCase
 {
 
     /** @test */
@@ -18,7 +20,7 @@ class CreateGameTest extends TestCase
         $this->postJson(route('api.game.store'), [
             'name' => "",
             'expansionIds' => $expansionIds->toArray()
-        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        ])->assertUnprocessable();
     }
 
     /** @test */
@@ -28,7 +30,7 @@ class CreateGameTest extends TestCase
         $this->postJson(route('api.game.store'), [
             'name' => $user->name,
             'expansionIds' => []
-        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        ])->assertUnprocessable();
     }
 
     /** @test */
@@ -38,14 +40,15 @@ class CreateGameTest extends TestCase
         $this->postJson(route('api.game.store'), [
             'name' => $user->name,
             'expansionIds' => [-1]
-        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        ])->assertUnprocessable();
     }
 
     /** @test */
     public function it_creates_user()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
+
         $this->postJson(route('api.game.store'), [
             'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
@@ -60,35 +63,35 @@ class CreateGameTest extends TestCase
     public function it_creates_game()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
             'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk();
 
         $this->assertDatabaseHas('games', [
-            'id' => $response->json('data.id'),
-            'name' => $response->json('data.name'),
-            'code' => $response->json('data.code'),
+            'id' => $response->json('data.game.id'),
+            'name' => $response->json('data.game.name'),
+            'code' => $response->json('data.game.code'),
             'redraw_limit' => 2
         ]);
 
-        $this->assertEquals(4, strlen($response->json('data.code')));
+        $this->assertEquals(4, strlen($response->json('data.game.code')));
     }
 
     /** @test */
     public function it_assigns_users_when_game_is_created()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::first()->pluck('id');
+        $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
             'name' => $userName,
             'expansionIds' => $expansionIds->toArray()
         ])->assertOk();
 
         $this->assertDatabaseHas('game_users', [
-            'game_id' => $response->json('data.id'),
-            'user_id' => $response->json('data.current_user.id')
+            'game_id' => $response->json('data.game.id'),
+            'user_id' => $response->json('data.currentUser.id')
         ]);
     }
 
@@ -96,17 +99,21 @@ class CreateGameTest extends TestCase
     public function it_gives_users_cards_when_a_game_is_created()
     {
         $userName = $this->faker->userName;
-        $expansionId = Expansion::query()->orderByDesc('id')->first()->id;
+        $expansion = Expansion::factory()
+            ->has(BlackCard::factory())
+            ->has(WhiteCard::factory(7))
+            ->create();
 
         $this->postJson(route('api.game.store'), [
             'name' => $userName,
-            'expansionIds' => [$expansionId]
+            'expansionIds' => [$expansion->id]
         ])->assertOk();
+
         $createdUser = User::where('name', $userName)->first();
 
         $this->assertCount(7, $createdUser->whiteCards);
-        $createdUser->whiteCards->each(function ($item) use ($expansionId) {
-            $this->assertEquals($expansionId, $item->expansion_id);
+        $createdUser->whiteCards->each(function ($item) use ($expansion) {
+            $this->assertEquals($expansion->id, $item->expansion_id);
         });
     }
 
@@ -114,29 +121,27 @@ class CreateGameTest extends TestCase
     public function it_assigns_selected_expansions_when_game_is_created()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $id = Expansion::factory()->has(BlackCard::factory())->create()->id;
         $response = $this->postJson(route('api.game.store'), [
             'name' => $userName,
-            'expansionIds' => $expansionIds->toArray()
+            'expansionIds' => [$id]
         ])->assertOk();
 
-        $expansionIds->each(fn($id) => $this->assertDatabaseHas('game_expansions', [
-            'game_id' => $response->json('data.id'),
+        $this->assertDatabaseHas('game_expansions', [
+            'game_id' => $response->json('data.game.id'),
             'expansion_id' => $id
-        ])
-        );
+        ]);
     }
     /** @test */
-    public function it_creates_gamecode_with_uppercase_letters()
+    public function it_creates_game_code_with_uppercase_letters()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::take(1)->get()->pluck('id');
         $response = $this->postJson(route('api.game.store'), [
             'name' => $userName,
-            'expansionIds' => $expansionIds->toArray()
+            'expansionIds' => [Expansion::factory()->has(BlackCard::factory())->create()->id]
         ]);
 
-        $gameCode = $response->json('data.code');
+        $gameCode = $response->json('data.game.code');
         $this->assertEquals(Str::upper($gameCode), $gameCode);
 
         $invalidCode = Str::lower($gameCode);
@@ -147,10 +152,10 @@ class CreateGameTest extends TestCase
     public function it_expects_certain_shape()
     {
         $userName = $this->faker->userName;
-        $expansionIds = Expansion::take(1)->get()->pluck('id');
+        $id = Expansion::factory()->hasBlackCards()->hasWhiteCards(7)->create()->id;
         $this->postJson(route('api.game.store'), [
             'name' => $userName,
-            'expansionIds' => $expansionIds->toArray()
+            'expansionIds' => [$id]
         ])->assertOk()
             ->assertJsonStructure([
                 'data' => [
@@ -161,33 +166,31 @@ class CreateGameTest extends TestCase
                             'score'
                         ]
                     ],
-                    'current_user' => [
+                    'currentUser' => [
                         'id',
                         'name',
                         'score'
-                    ],
-                    'judge' => [
-                        'id',
-                        'name',
                     ],
                     'hand' => [
                         [
                             'id',
                             'text',
-                            'expansion_id'
+                            'expansionId'
                         ],
                     ],
-                    'id',
-                    'name',
-                    'code',
-                    'redrawLimit',
-                    'current_black_card' => [
+                    'game' => [
+                        'id',
+                        'name',
+                        'code',
+                        'redrawLimit',
+                        'judgeId'
+                    ],
+                    'blackCard' => [
                         'id',
                         'text',
                         'pick'
                     ]
                 ]
-
             ]);
     }
 }

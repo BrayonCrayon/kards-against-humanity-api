@@ -34,5 +34,16 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=kards-against-humanity
+  testdatabase:
+    image: 'postgres:latest'
+    volumes:
+      - '/dbDatatest:/var/lib/postgresql/data'
+    ports:
+      - '33071:5432'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=kards-against-humanity
 volumes:
-  dbdata: null
+  dbData: null
+  dbDatatest: null

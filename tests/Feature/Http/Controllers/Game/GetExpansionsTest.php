@@ -13,12 +13,11 @@ class GetExpansionsTest extends TestCase
     /** @test */
     public function it_can_fetch_expansions()
     {
-        $expansionCount = Expansion::count();
-        $expectedExpansion = Expansion::firstOrFail();
+        $expectedExpansion = Expansion::factory()->create();
 
         $this->getJson(route('api.expansions.index'))
             ->assertOk()
-            ->assertJsonCount($expansionCount, 'data')
+            ->assertJsonCount(1, 'data')
             ->assertJsonFragment([
                 'name' => $expectedExpansion->name,
                 'created_at' => $expectedExpansion->created_at,

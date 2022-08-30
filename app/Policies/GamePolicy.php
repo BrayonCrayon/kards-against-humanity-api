@@ -32,7 +32,7 @@ class GamePolicy
 
     public function redraw(User $user, Game $game)
     {
-        $match = $game->getUser($user->id);
+        $match = $game->getPlayer($user->id);
         return $match->gameState->redraw_count < $game->redraw_limit;
     }
 }

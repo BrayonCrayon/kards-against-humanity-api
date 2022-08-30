@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Game\Round;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BlackCardResource;
 use App\Http\Resources\UserGameWhiteCardResource;
 use App\Models\BlackCard;
 use App\Models\Game;
@@ -30,7 +31,7 @@ class GetRoundWinnerController extends Controller
             'data' => [
                 'user_id' => $winnerData['user']->id,
                 'submitted_cards' => UserGameWhiteCardResource::collection($winnerData['userGameWhiteCards']),
-                'black_card' => $blackCard
+                'black_card' => BlackCardResource::make($blackCard)
             ]
         ]);
     }

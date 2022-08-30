@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\User;
-use App\Models\UserGameWhiteCards;
+use App\Models\UserGameWhiteCard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class KickPlayerController extends Controller
         $this->authorize('kick', $game);
 
         GameUser::whereUserId($user->id)->delete();
-        UserGameWhiteCards::whereUserId($user->id)->delete();
+        UserGameWhiteCard::whereUserId($user->id)->delete();
         $user->delete();
 
         return response()->json();

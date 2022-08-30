@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubmitCardRequest extends FormRequest
+class SelectCardRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,9 @@ class SubmitCardRequest extends FormRequest
      */
     public function rules()
     {
-        $submitAmount = request()->get('submitAmount');
         return [
-            'submitAmount' => 'required|integer',
-            'whiteCardIds' => "exists:white_cards,id|array|size:{$submitAmount}",
+            'whiteCardIds' => "exists:white_cards,id|array|size:" . $this->game->blackCardPick,
         ];
     }
+
 }
