@@ -20,6 +20,7 @@ class GetExpansionsTest extends TestCase
             ->assertJsonCount(1, 'data')
             ->assertJsonFragment([
                 'name' => $expectedExpansion->name,
+                'whiteCardCount' => $expectedExpansion->white_card_count,
                 'created_at' => $expectedExpansion->created_at,
                 'updated_at' => $expectedExpansion->updated_at,
             ]);
