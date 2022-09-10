@@ -9,7 +9,7 @@ class ExpansionResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -17,6 +17,7 @@ class ExpansionResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
+            'whiteCardCount' => $this->resource->white_card_count,
             'created_at' => $this->resource->created_at,
             'updated_at' => $this->resource->updated_at,
         ];
