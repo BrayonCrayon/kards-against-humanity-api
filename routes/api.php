@@ -6,6 +6,7 @@ use App\Http\Controllers\Game\GetExpansionsController;
 use App\Http\Controllers\Game\GetGameStateController;
 use App\Http\Controllers\Game\JoinGameController;
 use App\Http\Controllers\Game\KickPlayerController;
+use App\Http\Controllers\Game\LeaveGameController;
 use App\Http\Controllers\Game\RedrawController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\Round\GetRoundWinnerController;
@@ -41,6 +42,7 @@ Route::post('/game/{game:code}/join', JoinGameController::class)->name('game.joi
 Route::post('/game/{game:code}/spectate', SpectateGameController::class)->name('game.spectate');
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/game/{game}/leave', LeaveGameController::class)->name('game.leave');
     Route::get('/game/{game}/submitted-cards', SubmittedCardsController::class)->name('game.submitted.cards');
     Route::post('/game/{game}/select', SelectCardsController::class)->name('game.select');
     Route::post('/game/{game}/rotate', RotateGameController::class)->name('game.rotate');
