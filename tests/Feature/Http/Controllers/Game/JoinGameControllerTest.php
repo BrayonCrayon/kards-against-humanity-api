@@ -96,6 +96,25 @@ class JoinGameControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_will_allow_existing_player_to_join_an_existing_game()
+    {
+        $game = $this->createGame();
+        $user = User::factory()->create();
+        $playerCount = $game->players()->count();
+
+        $this->actingAs($user)
+            ->postJson(route('api.game.join', $game), [
+                'name' => $user->name
+            ])
+            ->assertOk();
+
+        $game->refresh();
+
+        $this->assertNotNull($game->players()->where('users.id', $user->id)->first());
+        $this->assertEquals($playerCount + 1, $game->players()->count());
+    }
+
+    /** @test */
     public function it_returns_specified_json_structure()
     {
         $game = Game::factory()

@@ -3,6 +3,8 @@
 namespace Tests\Feature\Http\Controllers\Game;
 
 use App\Models\Game;
+use App\Models\User;
+use App\Models\UserGameWhiteCard;
 use Tests\TestCase;
 use Tests\Traits\GameUtilities;
 
@@ -17,6 +19,20 @@ class RedrawControllerTest extends TestCase
 
         $this->postJson(route('api.game.redraw', $game))
             ->assertUnauthorized();
+    }
+
+    /** @test */
+    public function it_will_put_players_hand_back_into_the_deck()
+    {
+        $game = $this->createGame();
+        $user = $game->nonJudgeUsers()->first();
+
+        $this->actingAs($user)
+            ->postJson(route('api.game.redraw', $game))
+            ->assertOK();
+
+        $previousCards = UserGameWhiteCard::query()->onlyTrashed()->get();
+        $this->assertCount(0, $previousCards);
     }
 
     /** @test */

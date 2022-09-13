@@ -175,13 +175,16 @@ class GameService
             ->increment('redraw_count');
     }
 
+    public function nextJudge(Game $game)
+    {
+        $users = $game->players->sortBy('id');
+        $currentJudgeIndex = $users->search(fn (User $item) => $item->id === $game->judge_id);
+        return $users[($currentJudgeIndex + 1) % $users->count()];
+    }
+
     public function rotateGame(Game $game)
     {
-        $userIds = $game->players()->pluck('users.id');
-
-        $currentJudgeIndex = $userIds->search($game->judge_id);
-        $nextJudgeIndex = ($currentJudgeIndex + 1) % $userIds->count();
-
+        $nextJudge = $this->nextJudge($game);
         $this->discardWhiteCards($game);
         $this->discardBlackCard($game);
         $this->drawBlackCard($game);
@@ -191,7 +194,7 @@ class GameService
             $this->drawWhiteCards($user, $game);
         });
 
-        $this->updateJudge($game, $userIds[$nextJudgeIndex]);
+        $this->updateJudge($game, $nextJudge->id);
 
         event(new GameRotation($game));
     }
