@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class GetExpansionsTest extends TestCase
+class GetExpansionsControllerTest extends TestCase
 {
     /** @test */
     public function it_can_fetch_expansions()
@@ -20,7 +20,7 @@ class GetExpansionsTest extends TestCase
             ->assertJsonCount(1, 'data')
             ->assertJsonFragment([
                 'name' => $expectedExpansion->name,
-                'whiteCardCount' => $expectedExpansion->white_card_count,
+                'cardCount' => $expectedExpansion->card_count,
                 'created_at' => $expectedExpansion->created_at,
                 'updated_at' => $expectedExpansion->updated_at,
             ]);

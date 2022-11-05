@@ -17,7 +17,7 @@ class ExpansionResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'whiteCardCount' => $this->resource->white_card_count,
+            'cardCount' => $this->resource->card_count,
             'created_at' => $this->resource->created_at,
             'updated_at' => $this->resource->updated_at,
         ];
