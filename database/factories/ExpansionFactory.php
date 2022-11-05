@@ -15,7 +15,7 @@ class ExpansionFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'white_card_count' => 0
+            'card_count' => 0
         ];
     }
 }
