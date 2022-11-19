@@ -17,7 +17,7 @@ class ConvertJson extends Command
      *
      * @var string
      */
-    protected $signature = 'convert:json';
+    protected $signature = 'kah:convert-json';
 
     /**
      * The console command description.

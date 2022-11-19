@@ -21,13 +21,6 @@ class GameServiceTest extends TestCase
 {
     use GameUtilities;
 
-    private const REALLY_SMALL_EXPANSION_ID = 105;
-    private const REALLY_CHUNKY_EXPANSION_ID = 150;
-
-    private $user;
-    private $game;
-    private $playedCards;
-    private $helperService;
     public $gameService;
 
     protected function setUp(): void
@@ -236,5 +229,18 @@ class GameServiceTest extends TestCase
             $user->gameState->refresh();
             $this->assertEquals(0, $user->gameState->redraw_count);
         });
+    }
+
+    /** @test */
+    public function it_will_find_next_judge()
+    {
+        $game = $this->createGame(2);
+        $currentJudgeIndex = $game->players->pluck('user.id')->search($game->judge_id);
+        $nextJudge = $game->players[($currentJudgeIndex + 1) % $game->players->count()];
+
+        $user = $this->gameService->nextJudge($game);
+
+        $this->assertNotEquals($user->id, $game->judge_id);
+        $this->assertEquals($nextJudge->id, $user->id);
     }
 }

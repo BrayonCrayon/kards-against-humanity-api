@@ -19,7 +19,7 @@ class RedrawController extends Controller
     {
 
         $this->authorize('redraw', $game);
-        auth()->user()->hand()->delete();
+        auth()->user()->hand()->forceDelete();
         $gameService->drawWhiteCards(auth()->user(), $game);
         $gameService->incrementDrawCount($game, auth()->user());
 

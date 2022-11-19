@@ -14,7 +14,7 @@ class ImportCards extends Command
      *
      * @var string
      */
-    protected $signature = 'import:cards';
+    protected $signature = 'kah:import-cards';
 
     /**
      * The console command description.

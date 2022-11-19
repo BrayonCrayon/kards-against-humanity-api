@@ -95,17 +95,15 @@ class RotateGameControllerTest extends TestCase
     /** @test */
     public function it_emits_event_with_new_white_cards_after_game_rotation()
     {
-        $blackCardPick = $this->game->blackCard->pick;
-
         $this->selectAllPlayersCards($this->game);
 
         $this->actingAs($this->game->users->first())
             ->postJson(route('api.game.rotate', $this->game->id))
             ->assertOk();
 
-        Event::assertDispatched(GameRotation::class, function (GameRotation $event) use ($blackCardPick) {
+        Event::assertDispatched(GameRotation::class, function (GameRotation $event) {
             return $event->game->id === $this->game->id
-                && $event->broadcastOn()->name === 'game-' . $this->game->id;;
+                && $event->broadcastOn()->name === 'game-' . $this->game->id;
         });
     }
 

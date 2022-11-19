@@ -10,7 +10,10 @@ class Expansion extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'card_count'
+    ];
 
     /*
      ********************************
