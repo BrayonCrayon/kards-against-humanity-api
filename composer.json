@@ -20,7 +20,7 @@
     "require-dev": {
         "facade/ignition": "^2.17",
         "fakerphp/faker": "^1.19.0",
-        "laravel/sail": "^1.13.1",
+        "laravel/sail": "^1.18",
         "mockery/mockery": "^1.5.0",
         "nunomaduro/collision": "^5.11",
         "phpunit/phpunit": "^9.5.13"
