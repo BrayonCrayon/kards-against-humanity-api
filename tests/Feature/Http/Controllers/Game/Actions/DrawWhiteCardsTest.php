@@ -1,14 +1,11 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Game;
+namespace Tests\Feature\Http\Controllers\Game\Actions;
 
-use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
-use App\Models\UserGameWhiteCard;
 use App\Models\WhiteCard;
 use App\Services\GameService;
-use Illuminate\Http\Response;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;

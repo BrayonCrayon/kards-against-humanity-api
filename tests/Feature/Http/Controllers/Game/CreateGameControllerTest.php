@@ -6,7 +6,6 @@ use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\User;
 use App\Models\WhiteCard;
-use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -132,6 +131,7 @@ class CreateGameControllerTest extends TestCase
             'expansion_id' => $id
         ]);
     }
+
     /** @test */
     public function it_creates_game_code_with_uppercase_letters()
     {
@@ -183,7 +183,9 @@ class CreateGameControllerTest extends TestCase
                         'name',
                         'code',
                         'redrawLimit',
-                        'judgeId'
+                        'judgeId',
+                        'selectionEndsAt',
+                        'selectionTimer'
                     ],
                     'blackCard' => [
                         'id',
@@ -192,5 +194,83 @@ class CreateGameControllerTest extends TestCase
                     ]
                 ]
             ]);
+    }
+
+    /** @test */
+    public function it_will_create_settings_when_supplied()
+    {
+        $userName = $this->faker->userName;
+        $expansionId = Expansion::factory()->hasBlackCards()->hasWhiteCards(7)->create()->id;
+        $timer = 60;
+
+        $response = $this->postJson(
+            route('api.game.store'), [
+            'name' => $userName,
+            'expansionIds' => [$expansionId],
+            'timer' => $timer,
+        ])->assertOk()
+            ->assertJson([
+                'data' => [
+                    'game' => [
+                        'selectionTimer' => $timer,
+                    ]
+                ]
+            ]);
+
+        $this->assertDatabaseHas('settings', [
+            'selection_timer' => $timer,
+            'game_id' => $response->json('data.game.id')
+        ]);
+    }
+
+    /**
+     * @test
+     * @dataProvider provideTimerValidation
+     */
+    public function it_will_not_allow_less_than_one_minute_round_timers($timer, $expectedStatusCode)
+    {
+        $userName = $this->faker->userName;
+        $expansionId = Expansion::factory()->hasBlackCards()->hasWhiteCards(7)->create()->id;
+
+        $response = $this->postJson(route('api.game.store'), [
+            'name' => $userName,
+            'expansionIds' => [$expansionId],
+            'timer' => $timer
+        ])
+            ->assertStatus($expectedStatusCode);
+
+        if ($expectedStatusCode === 200) {
+            $this->assertDatabaseHas('settings', [
+                'game_id' => $response->json('data.game.id'),
+                'selection_timer' => $timer
+            ]);
+        } else {
+            $this->assertDatabaseMissing('settings', [
+                'selection_timer' => $timer
+            ]);
+        }
+
+    }
+
+    public function provideTimerValidation(): array
+    {
+        return [
+            [
+                'timer' => 59,
+                'expectedStatusCode' => 422
+            ], [
+                'timer' => 60,
+                'expectedStatusCode' => 200
+            ], [
+                'timer' => 60 * 5,
+                'expectedStatusCode' => 200
+            ], [
+                'timer' => 60 * 5 + 1,
+                'expectedStatusCode' => 422
+            ], [
+                'timer' => null,
+                'expectedStatusCode' => 200
+            ],
+        ];
     }
 }

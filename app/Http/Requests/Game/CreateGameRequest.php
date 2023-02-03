@@ -16,7 +16,8 @@ class CreateGameRequest extends FormRequest
         return [
             'name' => 'required|string',
             'expansionIds' => 'required|array',
-            'expansionIds.*' => 'exists:expansions,id'
+            'expansionIds.*' => 'exists:expansions,id',
+            'timer' => 'nullable|int|gte:60|lte:300'
         ];
     }
 }

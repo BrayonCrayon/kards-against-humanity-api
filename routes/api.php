@@ -1,20 +1,22 @@
 <?php
 
+use App\Http\Controllers\Game\Actions\DrawWhiteCardsController;
+use App\Http\Controllers\Game\Actions\JoinGameController;
+use App\Http\Controllers\Game\Actions\KickPlayerController;
+use App\Http\Controllers\Game\Actions\LeaveGameController;
+use App\Http\Controllers\Game\Actions\RedrawController;
+use App\Http\Controllers\Game\Actions\SelectCardsController;
+use App\Http\Controllers\Game\Actions\StartGameController;
 use App\Http\Controllers\Game\CreateGameController;
-use App\Http\Controllers\Game\DrawWhiteCardsController;
 use App\Http\Controllers\Game\GetExpansionsController;
 use App\Http\Controllers\Game\GetGameStateController;
-use App\Http\Controllers\Game\JoinGameController;
-use App\Http\Controllers\Game\KickPlayerController;
-use App\Http\Controllers\Game\LeaveGameController;
-use App\Http\Controllers\Game\RedrawController;
 use App\Http\Controllers\Game\RotateGameController;
 use App\Http\Controllers\Game\Round\GetRoundWinnerController;
-use App\Http\Controllers\Game\SpectateGameController;
 use App\Http\Controllers\Game\Spectator\GetSpectateDataController;
+use App\Http\Controllers\Game\Spectator\SpectateGameController;
 use App\Http\Controllers\Game\StoreRoundWinnerController;
-use App\Http\Controllers\Game\SelectCardsController;
 use App\Http\Controllers\Game\SubmittedCardsController;
+use App\Http\Controllers\Game\UpdateGameSettingsController;
 use App\Http\Controllers\PlayersController;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +44,7 @@ Route::post('/game/{game:code}/join', JoinGameController::class)->name('game.joi
 Route::post('/game/{game:code}/spectate', SpectateGameController::class)->name('game.spectate');
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/game/{game}/start', StartGameController::class)->name('game.start');
     Route::post('/game/{game}/leave', LeaveGameController::class)->name('game.leave');
     Route::get('/game/{game}/submitted-cards', SubmittedCardsController::class)->name('game.submitted.cards');
     Route::post('/game/{game}/select', SelectCardsController::class)->name('game.select');
@@ -54,6 +57,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/game/{game}/player/{user}/kick', KickPlayerController::class)->name('game.player.kick');
     Route::post('/game/{game}/redraw', RedrawController::class)->name('game.redraw');
     Route::get('/game/{game}/players', PlayersController::class)->name('game.players.index');
+    Route::post('/game/{game}/settings', UpdateGameSettingsController::class)->name('game.settings.update');
+
 });
 
 Route::get('/expansions', GetExpansionsController::class)->name('expansions.index');
+

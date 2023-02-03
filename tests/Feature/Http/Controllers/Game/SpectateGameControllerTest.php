@@ -2,12 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Game;
 
-use App\Models\BlackCard;
-use App\Models\Game;
 use App\Models\GameUser;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tests\Traits\GameUtilities;
 
@@ -44,7 +39,9 @@ class SpectateGameControllerTest extends TestCase
                         'id' => $this->game->id,
                         'judgeId' => $this->game->judge_id,
                         'name' => $this->game->name,
-                        'redrawLimit' => $this->game->redraw_limit
+                        'redrawLimit' => $this->game->redraw_limit,
+                        'selectionEndsAt' => $this->game->selection_ends_at,
+                        'selectionTimer' => $this->game->setting->selection_timer
                     ],
             ]);
 
