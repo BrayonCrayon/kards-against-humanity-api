@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Game;
+namespace Tests\Feature\Http\Controllers\Game\Actions;
 
 use App\Models\Expansion;
 use App\Models\Game;
@@ -23,7 +23,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_allows_an_existing_player_to_rejoin_game()
     {
-        $game = Game::factory()->hasBlackCards()->hasUsers()->create();
+        $game = Game::factory()->hasBlackCards()->hasSetting()->hasUsers()->create();
         $player = $game->judge;
 
         $this->actingAs($player)->postJson(route('api.game.join', $game->code), [
@@ -38,7 +38,7 @@ class JoinGameControllerTest extends TestCase
     /** @test */
     public function it_adds_a_user_to_a_game()
     {
-        $game = Game::factory()->hasBlackCards()->hasUsers()->create();
+        $game = Game::factory()->hasBlackCards()->hasSetting()->hasUsers()->create();
         $joinGameResponse = $this->postJson(route('api.game.join', $game->code), [
             'name' => $this->faker->userName
         ])->assertOK();
@@ -50,6 +50,7 @@ class JoinGameControllerTest extends TestCase
     {
         $game = Game::factory()
             ->has(Expansion::factory()->hasWhiteCards(Game::HAND_LIMIT)->hasBlackCards(1))
+            ->hasSetting()
             ->create();
         $this->drawBlackCard($game);
 
@@ -119,6 +120,7 @@ class JoinGameControllerTest extends TestCase
     {
         $game = Game::factory()
             ->has(Expansion::factory()->hasWhiteCards(Game::HAND_LIMIT)->hasBlackCards(1))
+            ->hasSetting()
             ->create();
         $this->drawBlackCard($game);
 
@@ -149,7 +151,8 @@ class JoinGameControllerTest extends TestCase
                             'name',
                             'code',
                             'judgeId',
-                            'redrawLimit'
+                            'redrawLimit',
+                            'selectionTimer'
                         ],
                         'blackCard' => [
                             'id',

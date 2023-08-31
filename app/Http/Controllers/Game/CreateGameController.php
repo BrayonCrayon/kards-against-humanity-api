@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\CreateGameRequest;
-use App\Http\Resources\GameResource;
 use App\Http\Resources\GameStateResource;
-use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
@@ -24,9 +21,10 @@ class CreateGameController
             'name' => $request->get('name')
         ]);
         Auth::login($user);
-        $game = $this->gameService->createGame($user, $request->get('expansionIds'));
+        $game = $this->gameService->createGame($user, $request->get('expansionIds'), $request->input('timer'));
+
         $user->load('whiteCards');
 
-        return response()->json( ['data' => GameStateResource::make($game)]);
+        return response()->json(['data' => GameStateResource::make($game)]);
     }
 }

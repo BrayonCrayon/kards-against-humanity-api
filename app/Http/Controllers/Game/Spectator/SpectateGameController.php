@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Game;
+namespace App\Http\Controllers\Game\Spectator;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SpectateGameResource;

@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\BlackCard;
-use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
-use App\Services\GameService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Nubs\RandomNameGenerator\All;
+
 class GameFactory extends Factory
 {
 
@@ -34,7 +32,7 @@ class GameFactory extends Factory
             'name' => $generator->getName(),
             'code' => $this->faker->bothify('##??'),
             'judge_id' => User::factory(),
-            'redraw_limit' => 2
+            'redraw_limit' => 2,
         ];
     }
 

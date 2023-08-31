@@ -3,8 +3,6 @@
 namespace Tests\Feature\Http\Controllers\Game\Spectate;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tests\Traits\GameUtilities;
 
@@ -38,7 +36,9 @@ class GetSpectateDataControllerTest extends TestCase
                     'name' => $game->name,
                     'judgeId' => $game->judge_id,
                     'code' => $game->code,
-                    'redrawLimit' => $game->redraw_limit
+                    'redrawLimit' => $game->redraw_limit,
+                    'selectionEndsAt' => $game->selection_ends_at,
+                    'selectionTimer' => $game->setting->selection_timer
                 ]
             ])->assertJsonFragment([
                 'user' => [
