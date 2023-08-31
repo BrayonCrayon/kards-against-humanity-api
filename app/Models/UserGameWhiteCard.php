@@ -36,9 +36,13 @@ class UserGameWhiteCard extends Model
         return $this->belongsTo(Game::class);
     }
 
-
     public function scopeSelected($query)
     {
         return $query->where('selected', true);
+    }
+
+    public function scopeGame($query, string $gameId)
+    {
+        return $query->where('game_id', $gameId);
     }
 }

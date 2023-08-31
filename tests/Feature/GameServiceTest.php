@@ -3,16 +3,16 @@
 namespace Tests\Feature;
 
 use App\Events\GameJoined;
+use App\Events\RoundStart;
 use App\Events\WinnerSelected;
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
-use App\Models\GameBlackCards;
-use App\Models\GameUser;
 use App\Models\User;
 use App\Models\UserGameWhiteCard;
 use App\Services\GameService;
 use App\Services\HelperService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 use Tests\Traits\GameUtilities;
@@ -159,7 +159,11 @@ class GameServiceTest extends TestCase
     public function it_will_bring_back_round_winner_data_from_a_previous_round()
     {
         Event::fake();
-        $game = Game::factory()->has(Expansion::factory()->hasWhiteCards(7)->hasBlackCards(2))->hasUsers()->create();
+        $game = Game::factory()
+            ->has(Expansion::factory()->hasWhiteCards(7)->hasBlackCards(2))
+            ->hasUsers()
+            ->hasSetting()
+            ->create();
         $this->drawBlackCard($game);
         $user = $game->nonJudgeUsers()->first();
         $this->drawCardsForUser($user, $game,7);
@@ -178,7 +182,11 @@ class GameServiceTest extends TestCase
     public function it_will_bring_back_correct_card_amount_for_each_user_after_game_rotate()
     {
         Event::fake();
-        $game = Game::factory()->has(Expansion::factory()->hasBlackCards(2)->hasWhiteCards(14))->hasUsers(1)->create();
+        $game = Game::factory()
+            ->has(Expansion::factory()->hasBlackCards(2)->hasWhiteCards(14))
+            ->hasUsers(1)
+            ->hasSetting()
+            ->create();
         $playerWinner = $game->nonJudgeUsers()->first();
         $this->drawBlackCard($game);
         $this->selectAndSubmitPlayerForRoundWinner($playerWinner, $game);
@@ -242,5 +250,31 @@ class GameServiceTest extends TestCase
 
         $this->assertNotEquals($user->id, $game->judge_id);
         $this->assertEquals($nextJudge->id, $user->id);
+    }
+
+    /** @test */
+    public function it_will_set_selection_ends_at_time_when_game_rotates()
+    {
+        Carbon::setTestNow(now());
+        $this->expectsEvents(RoundStart::class);
+        $game = $this->createGame(3, 2);
+        $game->setting()->update(['selection_timer' => 60]);
+        $currentTimestamp = Carbon::now()->addSeconds($game->setting->selection_timer)->unix();
+        $this->gameService->rotateGame($game);
+
+        $this->assertEquals($currentTimestamp, $game->selection_ends_at);
+    }
+
+    /** @test */
+    public function it_will_not_calculate_selection_ends_at_when_no_selection_timer()
+    {
+        $this->doesntExpectEvents(RoundStart::class);
+        $game = $this->createGame(2, 3);
+
+        $this->assertNull($game->setting->selection_timer);
+
+        $this->gameService->rotateGame($game);
+
+        $this->assertEquals($game->selection_ends_at, null);
     }
 }

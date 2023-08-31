@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Game;
+namespace App\Http\Controllers\Game\Actions;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WhiteCardsResource;
@@ -8,7 +8,6 @@ use App\Models\Game;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class DrawWhiteCardsController extends Controller
 {
