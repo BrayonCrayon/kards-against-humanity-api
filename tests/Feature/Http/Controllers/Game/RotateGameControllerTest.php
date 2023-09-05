@@ -29,6 +29,7 @@ class RotateGameControllerTest extends TestCase
         $this->game = Game::factory()
             ->has(Expansion::factory()->hasWhiteCards(4 * Game::HAND_LIMIT)->hasBlackCards(10))
             ->hasUsers(2)
+            ->hasSetting()
             ->create();
 
         $this->drawBlackCard($this->game);

@@ -6,10 +6,10 @@ use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\RoundWinner;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserGameWhiteCard;
 use App\Services\GameService;
-use Illuminate\Support\Collection;
 
 trait GameUtilities
 {
@@ -26,6 +26,7 @@ trait GameUtilities
             ->hasUsers($usersCount)
             ->create();
 
+        Setting::factory()->for($game)->create();
         $this->drawBlackCard($game);
 
         $game->players->each(fn ($user) => $gameService->drawWhiteCards($user,$game));

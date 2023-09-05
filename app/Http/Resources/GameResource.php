@@ -19,7 +19,9 @@ class GameResource extends JsonResource
             'name' => $this->resource->name,
             'code' => $this->resource->code,
             'redrawLimit' => $this->resource->redraw_limit,
-            'judgeId' => $this->resource->judge_id
+            'judgeId' => $this->resource->judge_id,
+            'selectionEndsAt' => $this->resource->selection_ends_at,
+            'selectionTimer' => $this->resource->setting->selection_timer
         ];
     }
 }

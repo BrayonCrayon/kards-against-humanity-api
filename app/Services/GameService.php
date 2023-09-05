@@ -13,9 +13,11 @@ use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\RoundWinner;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserGameWhiteCard;
 use App\Models\WhiteCard;
+use Carbon\Carbon;
 use Facades\App\Services\HelperService;
 use Nubs\RandomNameGenerator\All as NameGenerator;
 
@@ -28,7 +30,7 @@ class GameService
         $this->generator = NameGenerator::create();
     }
 
-    public function createGame($user, $expansionIds)
+    public function createGame($user, $expansionIds, $timer = null)
     {
         $game = Game::create([
             'name' => $this->generator->getName(),
@@ -44,6 +46,10 @@ class GameService
         $this->drawWhiteCards($user, $game);
         $this->drawBlackCard($game);
 
+        Setting::create([
+            'game_id' => $game->id,
+            'selection_timer' => $timer
+        ]);
         return $game;
     }
 
@@ -196,6 +202,15 @@ class GameService
 
         $this->updateJudge($game, $nextJudge->id);
 
+        $game->update([
+            'selection_ends_at' => $game->setting->selection_timer ? Carbon::now()->addSeconds($game->setting->selection_timer)->unix() : null
+        ]);
+
         event(new GameRotation($game));
+    }
+
+    public function gameHasTimer($game) : bool
+    {
+        return !is_null($game->setting->selection_timer);
     }
 }

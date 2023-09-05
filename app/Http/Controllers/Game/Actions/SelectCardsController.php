@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Game;
+namespace App\Http\Controllers\Game\Actions;
 
 use App\Events\CardsSubmitted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SelectCardRequest;
 use App\Models\Game;
-use App\Models\WhiteCard;
 use App\Services\GameService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class SelectCardsController extends Controller
 {

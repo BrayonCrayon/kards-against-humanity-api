@@ -118,6 +118,10 @@ class Game extends Model
         return $this->players()->where('users.id', '<>', $this->judge_id);
     }
 
+    public function setting() : HasOne {
+        return $this->hasOne(Setting::class);
+    }
+
     public function scopeByCode($query, $gameCode)
     {
         return $query->where('code', $gameCode);

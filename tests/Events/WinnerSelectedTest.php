@@ -46,4 +46,6 @@ class WinnerSelectedTest extends TestCase
     {
         $this->assertEquals("winner.selected", $this->event->broadcastAs());
     }
+
+
 }
