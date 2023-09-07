@@ -35,6 +35,7 @@ test('rotating changes current judge to new user', function () {
 });
 
 it('cycles through the users when assigning the judge when number of users is even', function () {
+
     $newUser = User::factory()->create();
     $this->gameService->joinGame($this->game, $newUser);
 
@@ -42,7 +43,7 @@ it('cycles through the users when assigning the judge when number of users is ev
 
     $this->game->refresh();
 
-    $this->game->users->each(fn($user) => $pickedJudgeIds->add(getNextJudge($user, $this->game)));
+    $this->game->users->each(fn($user) => $pickedJudgeIds->add(getNextJudge($user, $this->game, $this)));
 
     expect($pickedJudgeIds->unique()->all())->toHaveCount($this->game->users->count());
 });
@@ -99,15 +100,15 @@ it('calls game service to rotate game', function () {
         ->once();
 });
 
-function getNextJudge($user, $game) : int
+function getNextJudge($user, $game, $context) : int
 {
     $game->users->where('id', '<>', $game->judge->id)
-        ->each(fn($user) => $this->gameService->selectCards($user->whiteCards->take($game->blackCard->pick)->pluck('id'), $game, $user));
+        ->each(fn($user) => $context->gameService->selectCards($user->whiteCards->take($game->blackCard->pick)->pluck('id'), $game, $user));
 
-    $this->actingAs($user)->postJson(route('api.game.rotate', $game->id))->assertOk();
+    $context->actingAs($user)->postJson(route('api.game.rotate', $game->id))->assertOk();
 
     $game->refresh();
 
-    $this->assertNotEquals($user->id, $game->judge->id);
+    $context->assertNotEquals($user->id, $game->judge->id);
     return $game->judge->id;
 }

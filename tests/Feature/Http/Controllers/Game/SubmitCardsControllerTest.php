@@ -9,6 +9,7 @@ uses(\Tests\Traits\GameUtilities::class);
 beforeEach(function () {
     $this->game = $this->createGame(blackCardPick: 2);
     $this->user = $this->game->judge;
+    $this->route = "api.game.select";
 });
 
 test('user cannot select a card that does not exit', function () {
