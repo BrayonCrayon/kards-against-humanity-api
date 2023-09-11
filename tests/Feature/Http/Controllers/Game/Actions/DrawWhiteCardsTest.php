@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\WhiteCard;
 use App\Services\GameService;
 use Mockery\MockInterface;
+use function Pest\Laravel\{actingAs, getJson};
 
 test('user can draw more white cards', function () {
     $game = Game::factory()->has(User::factory())->create();
@@ -19,10 +20,9 @@ test('user can draw more white cards', function () {
         ->once()
         ->andReturn([$expectedCard]);
 
-    $this->actingAs($user)
-        ->getJson(route('api.game.whiteCards.draw', $game))
-        ->assertOk()
-        ->assertJsonFragment([
+    expect(actingAs($user)->getJson(route('api.game.whiteCards.draw', $game)))
+        ->toBeOk()
+        ->toHaveJsonFragment([
             'id' => $expectedCard->id,
             'text' => $expectedCard->text,
             'expansionId' => $expectedCard->expansion_id,
@@ -39,6 +39,5 @@ test('guests cannot draw cards', function () {
         })
     );
 
-    $this->getJson(route('api.game.whiteCards.draw', $game))
-        ->assertUnauthorized();
+    expect(getJson(route('api.game.whiteCards.draw', $game)))->toBeUnauthorized();
 });

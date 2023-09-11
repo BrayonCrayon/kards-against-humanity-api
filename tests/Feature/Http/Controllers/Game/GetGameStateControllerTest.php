@@ -4,20 +4,21 @@ use App\Events\GameJoined;
 use App\Models\Game;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
+use function Pest\Laravel\{actingAs, getJson};
 
 uses(\Tests\Traits\GameUtilities::class);
 
 it('does not allow non auth users', function () {
     $game = Game::factory()->create();
-    $this->getJson(route('api.game.show', $game->id))
+    expect(getJson(route('api.game.show', $game->id)))
         ->assertUnauthorized();
 });
 
 it('does not accept non existing id', function () {
     $user = User::factory()->create();
-    $this->actingAs($user)
-        ->getJson(route('api.game.show', $this->faker->uuid))
-        ->assertNotFound();
+    expect(actingAs($user)
+        ->getJson(route('api.game.show', $this->faker->uuid)))
+        ->toBeNotFound();
 });
 
 it('returns current game state', function () {

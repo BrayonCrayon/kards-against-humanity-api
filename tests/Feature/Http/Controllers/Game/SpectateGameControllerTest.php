@@ -25,7 +25,9 @@ it('will return game data to spectator', function () {
                     'id' => $this->game->id,
                     'judgeId' => $this->game->judge_id,
                     'name' => $this->game->name,
-                    'redrawLimit' => $this->game->redraw_limit
+                    'redrawLimit' => $this->game->redraw_limit,
+                    'selectionEndsAt' => $this->game->selection_ends_at,
+                    'selectionTimer' => $this->game->setting->selection_timer
                 ],
         ]);
 

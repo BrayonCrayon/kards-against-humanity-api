@@ -1,12 +1,11 @@
 <?php
 
 use App\Events\GameRotation;
-use App\Models\Expansion;
-use App\Models\Game;
 use App\Models\User;
 use App\Models\UserGameWhiteCard;
 use App\Services\GameService;
 use Illuminate\Support\Facades\Event;
+use function Pest\Laravel\{actingAs};
 
 uses(\Tests\Traits\GameUtilities::class);
 
@@ -14,12 +13,7 @@ beforeEach(function () {
     Event::fake();
     $this->gameService = new GameService();
 
-    $this->game = Game::factory()
-        ->has(Expansion::factory()->hasWhiteCards(4 * Game::HAND_LIMIT)->hasBlackCards(10))
-        ->hasUsers(2)
-        ->create();
-
-    $this->drawBlackCard($this->game);
+    $this->game = $this->createGame(2, 6);
 });
 
 test('rotating changes current judge to new user', function () {
@@ -28,10 +22,10 @@ test('rotating changes current judge to new user', function () {
     $firstJudge = $this->game->judge;
     $this->selectAllPlayersCards($this->game);
 
-    $this->actingAs($firstJudge)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+    expect(actingAs($firstJudge)->postJson(route('api.game.rotate', $this->game->id)))->toBeOk();
 
     $this->game->refresh();
-    $this->assertNotEquals($firstJudge->id, $this->game->judge_id);
+    expect($firstJudge->id)->not->toEqual($this->game->judge_id);
 });
 
 it('cycles through the users when assigning the judge when number of users is even', function () {
@@ -43,7 +37,7 @@ it('cycles through the users when assigning the judge when number of users is ev
 
     $this->game->refresh();
 
-    $this->game->users->each(fn($user) => $pickedJudgeIds->add(getNextJudge($user, $this->game, $this)));
+    $this->game->users->each(fn($user) => $pickedJudgeIds->add(getNextJudge($user, $this->game, $this->gameService)));
 
     expect($pickedJudgeIds->unique()->all())->toHaveCount($this->game->users->count());
 });
@@ -53,10 +47,11 @@ it('gives new black card after game rotation', function () {
 
     $this->selectAllPlayersCards($this->game);
 
-    $this->actingAs($this->game->judge)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+    expect(actingAs($this->game->judge)->postJson(route('api.game.rotate', $this->game->id)))
+        ->assertOk();
 
     $this->game->refresh();
-    $this->assertNotEquals($this->game->blackCard->id, $previousBlackCard->id);
+    expect($this->game->blackCard->id)->not()->toEqual($previousBlackCard->id);
 });
 
 it('soft deletes all submitted white cards', function () {
@@ -64,11 +59,11 @@ it('soft deletes all submitted white cards', function () {
 
     $selectedWhiteCards = UserGameWhiteCard::whereGameId($this->game->id)->where('selected', true)->get();
 
-    $this->actingAs($this->game->judge)->postJson(route('api.game.rotate', $this->game->id))->assertOk();
+    expect(actingAs($this->game->judge)->postJson(route('api.game.rotate', $this->game->id)))
+        ->assertOk();
 
-    $selectedWhiteCards->each(fn ($selectedCard) => $this->assertSoftDeleted(UserGameWhiteCard::class, [
-        'id' => $selectedCard->id,
-    ]));
+    $selectedWhiteCards->each(fn ($selectedCard) => expect($selectedCard)->toBeSoftDeleted());
+    expect($selectedWhiteCards->count())->toBeGreaterThan(0);
 });
 
 it('emits event with new white cards after game rotation', function () {
@@ -100,15 +95,15 @@ it('calls game service to rotate game', function () {
         ->once();
 });
 
-function getNextJudge($user, $game, $context) : int
+function getNextJudge($user, $game, $gameService) : int
 {
     $game->users->where('id', '<>', $game->judge->id)
-        ->each(fn($user) => $context->gameService->selectCards($user->whiteCards->take($game->blackCard->pick)->pluck('id'), $game, $user));
+        ->each(fn($user) => $gameService->selectCards($user->whiteCards->take($game->blackCard->pick)->pluck('id'), $game, $user));
 
-    $context->actingAs($user)->postJson(route('api.game.rotate', $game->id))->assertOk();
+    expect(actingAs($user)->postJson(route('api.game.rotate', $game->id)))->toBeOk();
 
     $game->refresh();
 
-    $context->assertNotEquals($user->id, $game->judge->id);
+    expect($user->id)->not->toEqual($game->judge->id);
     return $game->judge->id;
 }

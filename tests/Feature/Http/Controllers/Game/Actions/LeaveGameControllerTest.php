@@ -1,68 +1,44 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Game\Actions;
-
 use App\Models\Game;
 use App\Models\User;
 use App\Services\GameService;
-use Tests\TestCase;
-use Tests\Traits\GameUtilities;
+use function Pest\Laravel\{actingAs, postJson};
 
-class LeaveGameControllerTest extends TestCase
-{
-    use GameUtilities;
+uses(\Tests\Traits\GameUtilities::class);
 
-    /** @test */
-    public function it_will_allow_user_to_leave_a_game()
-    {
-        $game = Game::factory()->hasBlackCards()->hasUsers()->create();
-        $player = User::first();
+it('will allow user to leave a game', function () {
+    $game = Game::factory()->hasBlackCards()->hasUsers()->create();
+    $player = User::first();
 
-        $this->actingAs($player)
-            ->postJson(route('api.game.leave', $game->id))->assertOK();
+    expect(actingAs($player)->postJson(route('api.game.leave', $game->id)))
+        ->toBeOk()
+        ->and(['user_id' => $player->id])->not->toBeInDatabase('game_users');
+});
 
-        $this->assertDatabaseMissing('game_users', ['user_id'  => $player->id]);
-    }
+it('will not allow non auth to leave a game', function () {
+    $game = Game::factory()->create();
+    expect(postJson(route('api.game.leave', $game->id)))->toBeUnauthorized();
+});
 
-    /** @test */
-    public function it_will_not_allow_non_auth_to_leave_a_game()
-    {
-        $game = Game::factory()->create();
-        $this->postJson(route('api.game.leave', $game->id))
-            ->assertUnauthorized();
-    }
+it('will switch judge when judge leaves', function () {
+    $service = new GameService();
+    $game = $this->createGame();
+    $judge = $game->judge;
+    $player = $service->nextJudge($game);
 
-    /** @test */
-    public function it_will_switch_judge_when_judge_leaves()
-    {
-        $service = new GameService();
-        $game = $this->createGame();
-        $judge = $game->judge;
-        $player = $service->nextJudge($game);
+    expect(actingAs($judge)->postJson(route('api.game.leave', $game->id)))->toBeOk();
 
-        $this->actingAs($judge)
-            ->postJson(route('api.game.leave', $game->id))
-            ->assertOK();
+    $game->refresh();
+    expect($judge->id)->not->toEqual($game->judge->id)
+        ->and($game->judge->id)->toEqual($player->id);
+});
 
-        $game->refresh();
-        $this->assertNotEquals($judge->id, $game->judge->id);
-        $this->assertEquals($player->id, $game->judge->id);
-    }
+it('will remove left users white cards', function () {
+    $game = $this->createGame();
+    $user = $game->nonJudgeUsers()->first();
+    $this->selectCardsForUser($user, $game);
 
-    /** @test */
-    public function it_will_remove_left_users_white_cards()
-    {
-        $game = $this->createGame();
-        $user = $game->nonJudgeUsers()->first();
-        $this->selectCardsForUser($user, $game);
-
-        $this->actingAs($user)
-            ->postJson(route('api.game.leave', $game->id))
-            ->assertOk();
-
-        $this->assertDatabaseMissing('user_game_white_cards', [
-            'user_id' => $user->id,
-            'game_id' => $game->id
-        ]);
-    }
-}
+    expect(actingAs($user)->postJson(route('api.game.leave', $game->id)))->toBeOk()
+        ->and(['user_id' => $user->id, 'game_id' => $game->id])->not()->toBeInDatabase('user_game_white_cards');
+});

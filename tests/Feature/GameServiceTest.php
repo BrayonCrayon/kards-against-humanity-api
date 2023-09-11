@@ -131,7 +131,11 @@ it('will bring back latest round winner data', function () {
 
 it('will bring back round winner data from a previous round', function () {
     Event::fake();
-    $game = Game::factory()->has(Expansion::factory()->hasWhiteCards(7)->hasBlackCards(2))->hasUsers()->create();
+    $game = Game::factory()
+        ->hasSetting()
+        ->has(Expansion::factory()->hasWhiteCards(7)->hasBlackCards(2))
+        ->hasUsers()
+        ->create();
     $this->drawBlackCard($game);
     $user = $game->nonJudgeUsers()->first();
     $this->drawCardsForUser($user, $game,7);
@@ -148,7 +152,11 @@ it('will bring back round winner data from a previous round', function () {
 
 it('will bring back correct card amount for each user after game rotate', function () {
     Event::fake();
-    $game = Game::factory()->has(Expansion::factory()->hasBlackCards(2)->hasWhiteCards(14))->hasUsers(1)->create();
+    $game = Game::factory()
+        ->hasSetting()
+        ->has(Expansion::factory()->hasBlackCards(2)->hasWhiteCards(14))
+        ->hasUsers(1)
+        ->create();
     $playerWinner = $game->nonJudgeUsers()->first();
     $this->drawBlackCard($game);
     $this->selectAndSubmitPlayerForRoundWinner($playerWinner, $game);

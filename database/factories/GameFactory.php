@@ -39,11 +39,7 @@ class GameFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Game $game) {
-//            $gameService = new GameService();
-//            $game->expansions()->saveMany([Expansion::first()]);
-//            $game->blackCards()->attach(BlackCard::first());
             $game->players()->attach($game->judge);
-//            $game->players->each(fn($user) => $gameService->drawWhiteCards($user, $game));
         });
     }
 }
