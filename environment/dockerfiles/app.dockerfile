@@ -1,4 +1,4 @@
-FROM php:8.1.15-fpm
+FROM php:8.2.7-fpm-buster
 
 ARG xdebug=true
 ARG tinker=false
@@ -38,4 +38,6 @@ COPY environment/config/fpm/*.conf /usr/local/etc/php-fpm.d/
 
 RUN chmod -R 777 /var/www/storage
 RUN chmod -R 777 /var/www/bootstrap
+
+RUN if [ "$tinker" = "true" ] ; then mkdir -p /.config && chmod -R 777 /.config ; else echo Running app without Tinker support ; fi
 

@@ -1,75 +1,48 @@
 <?php
 
-namespace Tests\Feature\Models\User;
-
-use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\User;
-use App\Services\GameService;
-use Tests\TestCase;
-use Tests\Traits\GameUtilities;
 
-class UserTest extends TestCase
-{
-    use GameUtilities;
-    private $user;
-    private $game;
+uses(\Tests\Traits\GameUtilities::class);
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->game = $this->createGame();
-        $this->user = $this->game->nonJudgeUsers()->first();
-    }
+beforeEach(function () {
+    $this->game = $this->createGame();
+    $this->user = $this->game->nonJudgeUsers()->first();
+});
 
-    /** @test */
-    public function game_relationship_brings_back_game_type()
-    {
-        $user = User::factory()
-            ->hasGames(1)
-            ->create();
-        $this->assertInstanceOf(Game::class, $user->games->first());
-    }
+test('game relationship brings back game type', function () {
+    $user = User::factory()
+        ->hasGames(1)
+        ->create();
+    expect($user->games->first())->toBeInstanceOf(Game::class);
+});
 
-    /** @test */
-    public function has_submitted_white_cards_attribute_brings_back_true_if_user_has_submitted_cards()
-    {
-        $this->selectAllPlayersCards($this->game);
-        $this->assertTrue($this->user->hasSubmittedWhiteCards);
-    }
+test('has submitted white cards attribute brings back true if user has submitted cards', function () {
+    $this->selectAllPlayersCards($this->game);
+    expect($this->user->hasSubmittedWhiteCards)->toBeTrue();
+});
 
-    /** @test */
-    public function has_submitted_white_cards_attribute_returns_false_when_no_cards_are_submitted()
-    {
-        $this->assertFalse($this->user->hasSubmittedWhiteCards);
-    }
+test('has submitted white cards attribute returns false when no cards are submitted', function () {
+    expect($this->user->hasSubmittedWhiteCards)->toBeFalse();
+});
 
-    /** @test */
-    public function it_returns_submitted_white_card_ids_when_user_has_submitted_cards()
-    {
-        $this->selectAllPlayersCards($this->game);
-        $submittedWhiteCardIds = $this->user->hand()->selected()->pluck('white_card_id');
-        $submittedWhiteCardIds->each(fn ($cardId) => $this->assertContains($cardId, $this->user->submittedWhiteCardIds));
-    }
+it('returns submitted white card ids when user has submitted cards', function () {
+    $this->selectAllPlayersCards($this->game);
+    $submittedWhiteCardIds = $this->user->hand()->selected()->pluck('white_card_id');
+    $submittedWhiteCardIds->each(fn ($cardId) => expect($this->user->submittedWhiteCardIds)->toContain($cardId));
+});
 
-    /** @test */
-    public function submitted_white_cards_returns_empty_array_when_there_are_no_submitted_cards()
-    {
-        $this->assertEmpty($this->user->submittedWhiteCardIds);
-    }
+test('submitted white cards returns empty array when there are no submitted cards', function () {
+    expect($this->user->submittedWhiteCardIds)->toBeEmpty();
+});
 
-    /** @test */
-    public function it_returns_number_of_rounds_user_has_won()
-    {
-        $this->selectAllPlayersCards($this->game);
-        $this->submitPlayerForRoundWinner($this->user, $this->game);
+it('returns number of rounds user has won', function () {
+    $this->selectAllPlayersCards($this->game);
+    $this->submitPlayerForRoundWinner($this->user, $this->game);
 
-        $this->assertEquals( 1 ,$this->user->score);
-    }
+    expect($this->user->score)->toEqual(1);
+});
 
-    /** @test */
-    public function it_return_score_of_zero_if_player_has_not_won()
-    {
-        $this->assertEquals( 0 ,$this->user->score);
-    }
-}
+it('return score of zero if player has not won', function () {
+    expect($this->user->score)->toEqual(0);
+});

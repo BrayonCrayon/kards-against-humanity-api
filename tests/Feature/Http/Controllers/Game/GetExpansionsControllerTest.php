@@ -1,28 +1,18 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Game;
-
 use App\Models\Expansion;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use function Pest\Laravel\{getJson};
 
-class GetExpansionsControllerTest extends TestCase
-{
-    /** @test */
-    public function it_can_fetch_expansions()
-    {
-        $expectedExpansion = Expansion::factory()->create();
+it('can fetch expansions', function () {
+    $expectedExpansion = Expansion::factory()->create();
 
-        $this->getJson(route('api.expansions.index'))
-            ->assertOk()
-            ->assertJsonCount(1, 'data')
-            ->assertJsonFragment([
-                'name' => $expectedExpansion->name,
-                'cardCount' => $expectedExpansion->card_count,
-                'created_at' => $expectedExpansion->created_at,
-                'updated_at' => $expectedExpansion->updated_at,
-            ]);
-    }
-}
+    expect(getJson(route('api.expansions.index')))
+        ->toBeOk()
+        ->assertJsonCount(1, 'data')
+        ->toHaveJsonFragment([
+            'name' => $expectedExpansion->name,
+            'cardCount' => $expectedExpansion->card_count,
+            'created_at' => $expectedExpansion->created_at,
+            'updated_at' => $expectedExpansion->updated_at,
+        ]);
+});
