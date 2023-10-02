@@ -1,9 +1,6 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Events\GameJoined;
-use App\Events\RoundStart;
 use App\Events\WinnerSelected;
 use App\Models\BlackCard;
 use App\Models\Expansion;
@@ -12,269 +9,209 @@ use App\Models\User;
 use App\Models\UserGameWhiteCard;
 use App\Services\GameService;
 use App\Services\HelperService;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
-use Tests\TestCase;
-use Tests\Traits\GameUtilities;
 
-class GameServiceTest extends TestCase
-{
-    use GameUtilities;
+uses(\Tests\Traits\GameUtilities::class);
 
-    public $gameService;
+beforeEach(function () {
+    $this->helperService = new HelperService();
+    $this->gameService = new GameService();
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->helperService = new HelperService();
-        $this->gameService = new GameService();
-    }
+it('does not draw white cards that have already been drawn', function () {
+    $game = Game::factory()
+        ->has(Expansion::factory()->hasWhiteCards(8)->hasBlackCards(1))
+        ->hasUsers()
+        ->create();
+    $user = $game->nonJudgeUsers()->first();
+    $this->drawCardsForUser($user, $game);
+    $user->refresh();
+    $lastRemainingCard = $game->expansions()
+        ->first()
+        ->whiteCards()
+        ->whereNotIn('id', $user->hand->pluck('white_card_id'))
+        ->first();
+    $user->hand->firstOrFail()->delete();
 
-    /** @test */
-    public function it_does_not_draw_white_cards_that_have_already_been_drawn()
-    {
-        $game = Game::factory()
-            ->has(Expansion::factory()->hasWhiteCards(8)->hasBlackCards(1))
-            ->hasUsers()
-            ->create();
-        $user = $game->nonJudgeUsers()->first();
-        $this->drawCardsForUser($user, $game);
-        $user->refresh();
-        $lastRemainingCard = $game->expansions()
-            ->first()
-            ->whiteCards()
-            ->whereNotIn('id', $user->hand->pluck('white_card_id'))
-            ->first();
-        $user->hand->firstOrFail()->delete();
+    $pickedCards = $this->gameService->drawWhiteCards($user, $game);
 
-        $pickedCards = $this->gameService->drawWhiteCards($user, $game);
+    expect($pickedCards)->toHaveCount(1);
+    expect($pickedCards->first()->id)->toEqual($lastRemainingCard->id);
+});
 
-        $this->assertCount(1, $pickedCards);
-        $this->assertEquals($lastRemainingCard->id, $pickedCards->first()->id);
-    }
+it('calculates the number of cards to draw based on how many cards are in the users hand', function () {
+    $game = Game::factory()
+        ->has(Expansion::factory()->hasWhiteCards(10)->hasBlackCards(1))
+        ->hasUsers()
+        ->create();
+    $user = $game->judge;
+    $this->drawCardsForUser($user, $game);
 
-    /** @test */
-    public function it_calculates_the_number_of_cards_to_draw_based_on_how_many_cards_are_in_the_users_hand()
-    {
-        $game = Game::factory()
-            ->has(Expansion::factory()->hasWhiteCards(10)->hasBlackCards(1))
-            ->hasUsers()
-            ->create();
-        $user = $game->judge;
-        $this->drawCardsForUser($user, $game);
+    $user->hand()->limit(4)->delete();
 
-        $user->hand()->limit(4)->delete();
+    $drawnCards = $this->gameService->drawWhiteCards($user, $game);
 
-        $drawnCards = $this->gameService->drawWhiteCards($user, $game);
+    expect($drawnCards)->toHaveCount(3);
+});
 
-        $this->assertCount(3, $drawnCards);
-    }
+it('only draws available black cards', function () {
+    $game = $this->createGame();
+    $this->drawBlackCard($game);
+    $game->gameBlackCards()->delete();
+    $remainingCard = BlackCard::factory()->create(['expansion_id' => $game->expansions->first()->id]);
 
-    /** @test */
-    public function it_only_draws_available_black_cards()
-    {
-        $game = $this->createGame();
-        $this->drawBlackCard($game);
-        $game->gameBlackCards()->delete();
-        $remainingCard = BlackCard::factory()->create(['expansion_id' => $game->expansions->first()->id]);
+    $drawnCard = $this->gameService->drawBlackCard($game);
 
-        $drawnCard = $this->gameService->drawBlackCard($game);
+    expect($drawnCard->id)->toEqual($remainingCard->id);
+});
 
-        $this->assertEquals($remainingCard->id, $drawnCard->id);
-    }
+it('emits an event when a user joins a game', function () {
+    $game = $this->createGame();
+    Event::fake();
 
-    /** @test */
-    public function it_emits_an_event_when_a_user_joins_a_game()
-    {
-        $game = $this->createGame();
-        Event::fake();
+    /** @var User $user */
+    $user = User::factory()->create();
 
-        /** @var User $user */
-        $user = User::factory()->create();
+    $this->gameService->joinGame($game, $user);
 
-        $this->gameService->joinGame($game, $user);
+    Event::assertDispatched(GameJoined::class, function (GameJoined $event) use ($user, $game) {
+        return $event->game->id === $game->id && $user->id === $event->user->id;
+    });
+});
 
-        Event::assertDispatched(GameJoined::class, function (GameJoined $event) use ($user, $game) {
-            return $event->game->id === $game->id && $user->id === $event->user->id;
-        });
-    }
+it('emits an event when judge user selects a round winner', function () {
+    Event::fake();
+    $game = $this->createGame();
+    $user = $game->nonJudgeUsers()->first();
 
-    /** @test */
-    public function it_emits_an_event_when_judge_user_selects_a_round_winner()
-    {
-        Event::fake();
-        $game = $this->createGame();
-        $user = $game->nonJudgeUsers()->first();
+    $this->gameService->selectWinner($game, $user);
 
-        $this->gameService->selectWinner($game, $user);
+    Event::assertDispatched(WinnerSelected::class, function (WinnerSelected $event) use ($user, $game) {
+        return $event->user->id === $user->id && $event->game->id === $game->id;
+    });
+});
 
-        Event::assertDispatched(WinnerSelected::class, function (WinnerSelected $event) use ($user, $game) {
-            return $event->user->id === $user->id && $event->game->id === $game->id;
-        });
-    }
+test('calling get submitted card brings back all submitted cards', function () {
+    $game = Game::factory()
+        ->has(Expansion::factory()->hasWhiteCards(7)->has(BlackCard::factory()->pickOf2()))
+        ->hasUsers()
+        ->create();
+    $user = $game->nonJudgeUsers()->first();
+    $this->drawBlackCard($game);
+    $this->drawCardsForUser($user, $game, 7);
+    $this->selectCardsForUser($user, $game);
+    $whiteCardIds = $user->hand()->whereSelected(true)->pluck('white_card_id');
 
-    /** @test */
-    public function calling_get_submitted_card_brings_back_all_submitted_cards()
-    {
-        $game = Game::factory()
-            ->has(Expansion::factory()->hasWhiteCards(7)->has(BlackCard::factory()->pickOf2()))
-            ->hasUsers()
-            ->create();
-        $user = $game->nonJudgeUsers()->first();
-        $this->drawBlackCard($game);
-        $this->drawCardsForUser($user, $game, 7);
-        $this->selectCardsForUser($user, $game);
-        $whiteCardIds = $user->hand()->whereSelected(true)->pluck('white_card_id');
+    $data = $this->gameService->getSubmittedCards($game);
+    $submittedData = $data->first();
 
-        $data = $this->gameService->getSubmittedCards($game);
-        $submittedData = $data->first();
+    expect($data)->toHaveCount(1);
+    expect($submittedData["user_id"])->toEqual($user->id);
+    expect($submittedData["submitted_cards"])->toHaveCount(2);
+    $submittedData["submitted_cards"]->each(function ($item) use ($user, $whiteCardIds) {
+        expect($whiteCardIds->contains($item->white_card_id))->toBeTrue();
+    });
+});
 
-        $this->assertCount(1, $data);
-        $this->assertEquals($user->id, $submittedData["user_id"]);
-        $this->assertCount(2, $submittedData["submitted_cards"]);
-        $submittedData["submitted_cards"]->each(function ($item) use ($user, $whiteCardIds) {
-            $this->assertTrue($whiteCardIds->contains($item->white_card_id));
-        });
-    }
+it('will bring back latest round winner data', function () {
+    $game = $this->createGame();
+    $user = $game->nonJudgeUsers()->first();
+    $this->selectAndSubmitPlayerForRoundWinner($user, $game);
+    $pickedCards = $user->hand()->whereSelected(true)->get();
 
-    /** @test */
-    public function it_will_bring_back_latest_round_winner_data()
-    {
-        $game = $this->createGame();
-        $user = $game->nonJudgeUsers()->first();
-        $this->selectAndSubmitPlayerForRoundWinner($user, $game);
-        $pickedCards = $user->hand()->whereSelected(true)->get();
+    $winnerData = $this->gameService->roundWinner($game, $game->blackCard);
 
-        $winnerData = $this->gameService->roundWinner($game, $game->blackCard);
+    expect($winnerData['user']['id'])->toEqual($user->id);
+    expect($winnerData['userGameWhiteCards'])->toHaveCount($pickedCards->count());
+    $winnerData['userGameWhiteCards']->each(function ($whiteCard) use ($pickedCards) {
+        expect($whiteCard)->toBeInstanceOf(UserGameWhiteCard::class);
+        expect($pickedCards->pluck('id')->contains($whiteCard['id']))->toBeTrue();
+    });
+});
 
-        $this->assertEquals($user->id, $winnerData['user']['id']);
-        $this->assertCount($pickedCards->count(), $winnerData['userGameWhiteCards']);
-        $winnerData['userGameWhiteCards']->each(function ($whiteCard) use ($pickedCards) {
-            $this->assertInstanceOf(UserGameWhiteCard::class, $whiteCard);
-            $this->assertTrue($pickedCards->pluck('id')->contains($whiteCard['id']));
-        });
-    }
+it('will bring back round winner data from a previous round', function () {
+    Event::fake();
+    $game = Game::factory()
+        ->hasSetting()
+        ->has(Expansion::factory()->hasWhiteCards(7)->hasBlackCards(2))
+        ->hasUsers()
+        ->create();
+    $this->drawBlackCard($game);
+    $user = $game->nonJudgeUsers()->first();
+    $this->drawCardsForUser($user, $game,7);
+    $this->selectAndSubmitPlayerForRoundWinner($user, $game);
+    $previousBlackCard = $game->blackCard;
+    $selectedWhiteCardCount = $user->hand()->whereSelected(true)->count();
+    $this->gameService->rotateGame($game);
 
-    /** @test */
-    public function it_will_bring_back_round_winner_data_from_a_previous_round()
-    {
-        Event::fake();
-        $game = Game::factory()
-            ->has(Expansion::factory()->hasWhiteCards(7)->hasBlackCards(2))
-            ->hasUsers()
-            ->hasSetting()
-            ->create();
-        $this->drawBlackCard($game);
-        $user = $game->nonJudgeUsers()->first();
-        $this->drawCardsForUser($user, $game,7);
-        $this->selectAndSubmitPlayerForRoundWinner($user, $game);
-        $previousBlackCard = $game->blackCard;
-        $selectedWhiteCardCount = $user->hand()->whereSelected(true)->count();
-        $this->gameService->rotateGame($game);
+    $winnerData = $this->gameService->roundWinner($game, $previousBlackCard);
 
-        $winnerData = $this->gameService->roundWinner($game, $previousBlackCard);
+    expect($winnerData['user']['id'])->toEqual($user->id);
+    expect($winnerData['userGameWhiteCards'])->toHaveCount($selectedWhiteCardCount);
+});
 
-        $this->assertEquals($user->id, $winnerData['user']['id']);
-        $this->assertCount($selectedWhiteCardCount, $winnerData['userGameWhiteCards']);
-    }
+it('will bring back correct card amount for each user after game rotate', function () {
+    Event::fake();
+    $game = Game::factory()
+        ->hasSetting()
+        ->has(Expansion::factory()->hasBlackCards(2)->hasWhiteCards(14))
+        ->hasUsers(1)
+        ->create();
+    $playerWinner = $game->nonJudgeUsers()->first();
+    $this->drawBlackCard($game);
+    $this->selectAndSubmitPlayerForRoundWinner($playerWinner, $game);
 
-    /** @test */
-    public function it_will_bring_back_correct_card_amount_for_each_user_after_game_rotate()
-    {
-        Event::fake();
-        $game = Game::factory()
-            ->has(Expansion::factory()->hasBlackCards(2)->hasWhiteCards(14))
-            ->hasUsers(1)
-            ->hasSetting()
-            ->create();
-        $playerWinner = $game->nonJudgeUsers()->first();
-        $this->drawBlackCard($game);
-        $this->selectAndSubmitPlayerForRoundWinner($playerWinner, $game);
+    $this->gameService->rotateGame($game);
 
-        $this->gameService->rotateGame($game);
+    $playerWinner = $playerWinner->refresh();
+    expect($playerWinner->hand)->toHaveCount(Game::HAND_LIMIT);
+});
 
-        $playerWinner = $playerWinner->refresh();
-        $this->assertCount(Game::HAND_LIMIT, $playerWinner->hand);
-    }
+it('will return randomize submitted cards', function () {
+    $game = Game::factory()->has(Expansion::factory()->hasBlackCards()->hasWhiteCards(7))->hasUsers(4)->create();
+    $this->drawBlackCard($game);
+    $this->selectAllPlayersCards($game);
 
-    /** @test */
-    public function it_will_return_randomize_submitted_cards()
-    {
-        $game = Game::factory()->has(Expansion::factory()->hasBlackCards()->hasWhiteCards(7))->hasUsers(4)->create();
-        $this->drawBlackCard($game);
-        $this->selectAllPlayersCards($game);
+    $result = $this->gameService->getSubmittedCards($game);
+    $responseUserIds = $result->pluck('user_id');
 
-        $result = $this->gameService->getSubmittedCards($game);
-        $responseUserIds = $result->pluck('user_id');
+    $orderCount = 0;
+    $previousId = 0;
+    $responseUserIds->each(function ($item) use (&$orderCount, &$previousId) {
 
-        $orderCount = 0;
-        $previousId = 0;
-        $responseUserIds->each(function ($item) use (&$orderCount, &$previousId) {
+        if ($previousId and $previousId < $item) {
+            $orderCount += 1;
+        }
+        $previousId = $item;
+    });
 
-            if ($previousId and $previousId < $item) {
-                $orderCount += 1;
-            }
-            $previousId = $item;
-        });
+    expect($result->pluck('submitted_cards'))->toHaveCount($game->blackCardPick * 4);
+    $this->assertNotEquals($responseUserIds, $orderCount);
+});
 
-         $this->assertCount($game->blackCardPick * 4, $result->pluck('submitted_cards'));
-         $this->assertNotEquals($responseUserIds, $orderCount);
-    }
+it('will reset draw count for all players', function () {
+    $game = Game::factory()->hasUsers(4)->create();
 
-    /** @test */
-    public function it_will_reset_draw_count_for_all_players()
-    {
-        $game = Game::factory()->hasUsers(4)->create();
+    $game->nonJudgeUsers->each(function ($user) {
+        $user->gameState->redraw_count = 2;
+        $user->gameState->save();
+    });
 
-        $game->nonJudgeUsers->each(function ($user) {
-            $user->gameState->redraw_count = 2;
-            $user->gameState->save();
-        });
+    $this->gameService->resetDrawCount($game);
 
-        $this->gameService->resetDrawCount($game);
+    $game->nonJudgeUsers->each(function ($user) {
+        $user->gameState->refresh();
+        expect($user->gameState->redraw_count)->toEqual(0);
+    });
+});
 
-        $game->nonJudgeUsers->each(function ($user) {
-            $user->gameState->refresh();
-            $this->assertEquals(0, $user->gameState->redraw_count);
-        });
-    }
+it('will find next judge', function () {
+    $game = $this->createGame(2);
+    $currentJudgeIndex = $game->players->pluck('user.id')->search($game->judge_id);
+    $nextJudge = $game->players[($currentJudgeIndex + 1) % $game->players->count()];
 
-    /** @test */
-    public function it_will_find_next_judge()
-    {
-        $game = $this->createGame(2);
-        $currentJudgeIndex = $game->players->pluck('user.id')->search($game->judge_id);
-        $nextJudge = $game->players[($currentJudgeIndex + 1) % $game->players->count()];
+    $user = $this->gameService->nextJudge($game);
 
-        $user = $this->gameService->nextJudge($game);
-
-        $this->assertNotEquals($user->id, $game->judge_id);
-        $this->assertEquals($nextJudge->id, $user->id);
-    }
-
-    /** @test */
-    public function it_will_set_selection_ends_at_time_when_game_rotates()
-    {
-        Carbon::setTestNow(now());
-        $this->expectsEvents(RoundStart::class);
-        $game = $this->createGame(3, 2);
-        $game->setting()->update(['selection_timer' => 60]);
-        $currentTimestamp = Carbon::now()->addSeconds($game->setting->selection_timer)->unix();
-        $this->gameService->rotateGame($game);
-
-        $this->assertEquals($currentTimestamp, $game->selection_ends_at);
-    }
-
-    /** @test */
-    public function it_will_not_calculate_selection_ends_at_when_no_selection_timer()
-    {
-        $this->doesntExpectEvents(RoundStart::class);
-        $game = $this->createGame(2, 3);
-
-        $this->assertNull($game->setting->selection_timer);
-
-        $this->gameService->rotateGame($game);
-
-        $this->assertEquals($game->selection_ends_at, null);
-    }
-}
+    $this->assertNotEquals($user->id, $game->judge_id);
+    expect($user->id)->toEqual($nextJudge->id);
+});

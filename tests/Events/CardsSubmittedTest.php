@@ -1,35 +1,25 @@
 <?php
 
-namespace Tests\Events;
-
 use App\Events\CardsSubmitted;
 use App\Models\Game;
-use App\Models\User;
-use Tests\TestCase;
 
-class CardsSubmittedTest extends TestCase
-{
-    /** @test */
-    public function it_sends_game_id_and_user_id() {
+it('sends game id and user id', function () {
+    $game = Game::factory()->create();
 
-        $game = Game::factory()->create();
+    $cardsSubmitted = new CardsSubmitted($game, $game->judge);
 
-        $cardsSubmitted = new CardsSubmitted($game, $game->judge);
+    $payload = [
+        'gameId' => $game->id,
+        'userId' => $game->judge->id,
+    ];
 
-        $payload = [
-            'gameId' => $game->id,
-            'userId' => $game->judge->id,
-        ];
+    expect($cardsSubmitted->broadcastWith())->toEqual($payload);
+});
 
-        $this->assertEquals($payload, $cardsSubmitted->broadcastWith());
-    }
+it('broadcasts on correct channel name', function () {
+    $game = Game::factory()->create();
 
-    /** @test */
-    public function it_broadcasts_on_correct_channel_name() {
-        $game = Game::factory()->create();
+    $cardsSubmitted = new CardsSubmitted($game, $game->judge);
 
-        $cardsSubmitted = new CardsSubmitted($game, $game->judge);
-
-        $this->assertEquals("cards.submitted", $cardsSubmitted->broadcastAs());
-    }
-}
+    expect($cardsSubmitted->broadcastAs())->toEqual("cards.submitted");
+});

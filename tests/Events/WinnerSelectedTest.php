@@ -1,51 +1,30 @@
 <?php
 
-namespace Tests\Events;
-
 use App\Events\WinnerSelected;
 use App\Models\Game;
 use App\Models\User;
-use Tests\TestCase;
 
-class WinnerSelectedTest extends TestCase
-{
-    private $game;
-    private $user;
-    private $event;
+beforeEach(function () {
+    $this->game = Game::factory()->create();
+    $this->user = User::factory()->create();
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->event = new WinnerSelected($this->game, $this->user);
+});
 
-        $this->game = Game::factory()->create();
-        $this->user = User::factory()->create();
+it('sends user id and game id in event payload', function () {
+    $payload = [
+        'gameId' => $this->game->id,
+        'userId' => $this->user->id,
+        'blackCardId' => $this->game->blackCard->id
+    ];
 
-        $this->event = new WinnerSelected($this->game, $this->user);
-    }
+    expect($this->event->broadcastWith())->toEqual($payload);
+});
 
-    /** @test */
-    public function it_sends_user_id_and_game_id_in_event_payload()
-    {
-        $payload = [
-            'gameId' => $this->game->id,
-            'userId' => $this->user->id,
-            'blackCardId' => $this->game->blackCard->id
-        ];
+it('broadcasts on correct channel name', function () {
+    expect($this->event->broadcastOn()->name)->toEqual("game-{$this->game->id}");
+});
 
-        $this->assertEquals($payload, $this->event->broadcastWith());
-    }
-
-    /** @test */
-    public function it_broadcasts_on_correct_channel_name()
-    {
-        $this->assertEquals("game-{$this->game->id}", $this->event->broadcastOn()->name);
-    }
-
-    /** @test */
-    public function it_broadcasts_on_correct_event_name()
-    {
-        $this->assertEquals("winner.selected", $this->event->broadcastAs());
-    }
-
-
-}
+it('broadcasts on correct event name', function () {
+    expect($this->event->broadcastAs())->toEqual("winner.selected");
+});

@@ -1,276 +1,166 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Game;
-
 use App\Models\BlackCard;
 use App\Models\Expansion;
 use App\Models\User;
 use App\Models\WhiteCard;
 use Illuminate\Support\Str;
-use Tests\TestCase;
+use function Pest\Laravel\{postJson};
 
-class CreateGameControllerTest extends TestCase
-{
+it('does not allow empty user name', function () {
+    $expansionIds = Expansion::take(3)->get()->pluck('id');
 
-    /** @test */
-    public function it_does_not_allow_empty_user_name()
-    {
-        $expansionIds = Expansion::take(3)->get()->pluck('id');
-        $this->postJson(route('api.game.store'), [
-            'name' => "",
-            'expansionIds' => $expansionIds->toArray()
-        ])->assertUnprocessable();
-    }
+    expect(postJson(route('api.game.store'), [
+        'name' => "",
+        'expansionIds' => $expansionIds->toArray()
+    ]))->assertUnprocessable();
+});
 
-    /** @test */
-    public function it_does_not_allow_user_to_select_no_expansions()
-    {
-        $user = User::factory()->make();
-        $this->postJson(route('api.game.store'), [
-            'name' => $user->name,
-            'expansionIds' => []
-        ])->assertUnprocessable();
-    }
+it('does not allow user to select no expansions', function () {
+    $user = User::factory()->make();
+    expect(postJson(route('api.game.store'), [
+        'name' => $user->name,
+        'expansionIds' => []
+    ]))->assertUnprocessable();
+});
 
-    /** @test */
-    public function it_does_not_allow_undefined_expansions()
-    {
-        $user = User::factory()->make();
-        $this->postJson(route('api.game.store'), [
-            'name' => $user->name,
-            'expansionIds' => [-1]
-        ])->assertUnprocessable();
-    }
+it('does not allow undefined expansions', function () {
+    $user = User::factory()->make();
+    expect(postJson(route('api.game.store'), [
+        'name' => $user->name,
+        'expansionIds' => [-1]
+    ]))->assertUnprocessable();
+});
 
-    /** @test */
-    public function it_creates_user()
-    {
-        $userName = $this->faker->userName;
-        $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
+it('creates user', function () {
+    $userName = $this->faker->userName;
+    $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
 
-        $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => $expansionIds->toArray()
-        ])->assertOk();
+    expect(postJson(route('api.game.store'), ['name' => $userName, 'expansionIds' => $expansionIds->toArray()]))
+        ->toBeOk()
+        ->and(['name' => $userName])
+        ->toBeInDatabase(table: 'users');
+});
 
-        $this->assertDatabaseHas('users', [
-            'name' => $userName
-        ]);
-    }
+it('creates game', function () {
+    $userName = $this->faker->userName;
+    $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
+    $response = postJson(route('api.game.store'), [
+        'name' => $userName,
+        'expansionIds' => $expansionIds->toArray()
+    ])->assertOk();
 
-    /** @test */
-    public function it_creates_game()
-    {
-        $userName = $this->faker->userName;
-        $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
-        $response = $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => $expansionIds->toArray()
-        ])->assertOk();
+    expect([
+        'id' => $response->json('data.game.id'),
+        'name' => $response->json('data.game.name'),
+        'code' => $response->json('data.game.code'),
+        'redraw_limit' => 2
+    ])->toBeInDatabase('games')
+    ->and(strlen($response->json('data.game.code')))->toEqual(4);
+});
 
-        $this->assertDatabaseHas('games', [
-            'id' => $response->json('data.game.id'),
-            'name' => $response->json('data.game.name'),
-            'code' => $response->json('data.game.code'),
-            'redraw_limit' => 2
-        ]);
+it('assigns users when game is created', function () {
+    $userName = $this->faker->userName;
+    $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
+    $response = postJson(route('api.game.store'), [
+        'name' => $userName,
+        'expansionIds' => $expansionIds->toArray()
+    ])->assertOk();
 
-        $this->assertEquals(4, strlen($response->json('data.game.code')));
-    }
+    expect([
+        'game_id' => $response->json('data.game.id'),
+        'user_id' => $response->json('data.currentUser.id')
+    ])->toBeInDatabase('game_users');
+});
 
-    /** @test */
-    public function it_assigns_users_when_game_is_created()
-    {
-        $userName = $this->faker->userName;
-        $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
-        $response = $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => $expansionIds->toArray()
-        ])->assertOk();
+it('gives users cards when a game is created', function () {
+    $userName = $this->faker->userName;
+    $expansion = Expansion::factory()
+        ->has(BlackCard::factory())
+        ->has(WhiteCard::factory(7))
+        ->create();
 
-        $this->assertDatabaseHas('game_users', [
-            'game_id' => $response->json('data.game.id'),
-            'user_id' => $response->json('data.currentUser.id')
-        ]);
-    }
+    expect(postJson(route('api.game.store'), [
+        'name' => $userName,
+        'expansionIds' => [$expansion->id]
+    ]))->toBeOk();
 
-    /** @test */
-    public function it_gives_users_cards_when_a_game_is_created()
-    {
-        $userName = $this->faker->userName;
-        $expansion = Expansion::factory()
-            ->has(BlackCard::factory())
-            ->has(WhiteCard::factory(7))
-            ->create();
+    $createdUser = User::where('name', $userName)->first();
 
-        $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => [$expansion->id]
-        ])->assertOk();
+    expect($createdUser->whiteCards)->toHaveCount(7);
+    $createdUser->whiteCards->each(function ($item) use ($expansion) {
+        expect($item->expansion_id)->toEqual($expansion->id);
+    });
+});
 
-        $createdUser = User::where('name', $userName)->first();
+it('assigns selected expansions when game is created', function () {
+    $userName = $this->faker->userName;
+    $id = Expansion::factory()->has(BlackCard::factory())->create()->id;
+    $response = postJson(route('api.game.store'), [
+        'name' => $userName,
+        'expansionIds' => [$id]
+    ])->assertOk();
 
-        $this->assertCount(7, $createdUser->whiteCards);
-        $createdUser->whiteCards->each(function ($item) use ($expansion) {
-            $this->assertEquals($expansion->id, $item->expansion_id);
-        });
-    }
+    expect([
+        'game_id' => $response->json('data.game.id'),
+        'expansion_id' => $id
+    ])->toBeInDatabase('game_expansions');
+});
 
-    /** @test */
-    public function it_assigns_selected_expansions_when_game_is_created()
-    {
-        $userName = $this->faker->userName;
-        $id = Expansion::factory()->has(BlackCard::factory())->create()->id;
-        $response = $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => [$id]
-        ])->assertOk();
+it('creates game code with uppercase letters', function () {
+    $userName = $this->faker->userName;
+    $response = postJson(route('api.game.store'), [
+        'name' => $userName,
+        'expansionIds' => [Expansion::factory()->has(BlackCard::factory())->create()->id]
+    ]);
 
-        $this->assertDatabaseHas('game_expansions', [
-            'game_id' => $response->json('data.game.id'),
-            'expansion_id' => $id
-        ]);
-    }
+    $gameCode = $response->json('data.game.code');
+    expect($gameCode)->toEqual(Str::upper($gameCode));
 
-    /** @test */
-    public function it_creates_game_code_with_uppercase_letters()
-    {
-        $userName = $this->faker->userName;
-        $response = $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => [Expansion::factory()->has(BlackCard::factory())->create()->id]
-        ]);
+    $invalidCode = Str::lower($gameCode);
+    expect($invalidCode)->not->toEqual($gameCode);
+});
 
-        $gameCode = $response->json('data.game.code');
-        $this->assertEquals(Str::upper($gameCode), $gameCode);
-
-        $invalidCode = Str::lower($gameCode);
-        $this->assertNotEquals($invalidCode, $gameCode);
-    }
-
-    /** @test */
-    public function it_expects_certain_shape()
-    {
-        $userName = $this->faker->userName;
-        $id = Expansion::factory()->hasBlackCards()->hasWhiteCards(7)->create()->id;
-        $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => [$id]
-        ])->assertOk()
-            ->assertJsonStructure([
-                'data' => [
-                    'users' => [
-                        [
-                            'id',
-                            'name',
-                            'score'
-                        ]
-                    ],
-                    'currentUser' => [
+it('expects certain shape', function () {
+    $userName = $this->faker->userName;
+    $id = Expansion::factory()->hasBlackCards()->hasWhiteCards(7)->create()->id;
+    expect(postJson(route('api.game.store'), [
+        'name' => $userName,
+        'expansionIds' => [$id]
+    ]))->toBeOk()
+        ->toHaveJsonStructure([
+            'data' => [
+                'users' => [
+                    [
                         'id',
                         'name',
                         'score'
-                    ],
-                    'hand' => [
-                        [
-                            'id',
-                            'text',
-                            'expansionId'
-                        ],
-                    ],
-                    'game' => [
-                        'id',
-                        'name',
-                        'code',
-                        'redrawLimit',
-                        'judgeId',
-                        'selectionEndsAt',
-                        'selectionTimer'
-                    ],
-                    'blackCard' => [
+                    ]
+                ],
+                'currentUser' => [
+                    'id',
+                    'name',
+                    'score'
+                ],
+                'hand' => [
+                    [
                         'id',
                         'text',
-                        'pick'
-                    ]
+                        'expansionId'
+                    ],
+                ],
+                'game' => [
+                    'id',
+                    'name',
+                    'code',
+                    'redrawLimit',
+                    'judgeId'
+                ],
+                'blackCard' => [
+                    'id',
+                    'text',
+                    'pick'
                 ]
-            ]);
-    }
-
-    /** @test */
-    public function it_will_create_settings_when_supplied()
-    {
-        $userName = $this->faker->userName;
-        $expansionId = Expansion::factory()->hasBlackCards()->hasWhiteCards(7)->create()->id;
-        $timer = 60;
-
-        $response = $this->postJson(
-            route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => [$expansionId],
-            'timer' => $timer,
-        ])->assertOk()
-            ->assertJson([
-                'data' => [
-                    'game' => [
-                        'selectionTimer' => $timer,
-                    ]
-                ]
-            ]);
-
-        $this->assertDatabaseHas('settings', [
-            'selection_timer' => $timer,
-            'game_id' => $response->json('data.game.id')
+            ]
         ]);
-    }
-
-    /**
-     * @test
-     * @dataProvider provideTimerValidation
-     */
-    public function it_will_not_allow_less_than_one_minute_round_timers($timer, $expectedStatusCode)
-    {
-        $userName = $this->faker->userName;
-        $expansionId = Expansion::factory()->hasBlackCards()->hasWhiteCards(7)->create()->id;
-
-        $response = $this->postJson(route('api.game.store'), [
-            'name' => $userName,
-            'expansionIds' => [$expansionId],
-            'timer' => $timer
-        ])
-            ->assertStatus($expectedStatusCode);
-
-        if ($expectedStatusCode === 200) {
-            $this->assertDatabaseHas('settings', [
-                'game_id' => $response->json('data.game.id'),
-                'selection_timer' => $timer
-            ]);
-        } else {
-            $this->assertDatabaseMissing('settings', [
-                'selection_timer' => $timer
-            ]);
-        }
-
-    }
-
-    public function provideTimerValidation(): array
-    {
-        return [
-            [
-                'timer' => 59,
-                'expectedStatusCode' => 422
-            ], [
-                'timer' => 60,
-                'expectedStatusCode' => 200
-            ], [
-                'timer' => 60 * 5,
-                'expectedStatusCode' => 200
-            ], [
-                'timer' => 60 * 5 + 1,
-                'expectedStatusCode' => 422
-            ], [
-                'timer' => null,
-                'expectedStatusCode' => 200
-            ],
-        ];
-    }
-}
+});

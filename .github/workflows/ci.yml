@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1.2'
+          php-version: '8.2.7'
       - name: Copy .env.example to .env
         run: cp .env.example .env
       - name: Copy .docker.env.example to .docker.env
@@ -36,7 +36,7 @@ jobs:
       - name: Run migrations
         run: docker-compose exec -T app php artisan migrate:fresh --env=testing --force
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: docker-compose exec -T app vendor/bin/phpunit
+        run: docker-compose exec -T app vendor/bin/pest
       - name: Spin down container
         if: always()
         run: docker-compose down -v

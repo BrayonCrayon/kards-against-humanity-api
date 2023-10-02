@@ -1,91 +1,71 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Game\Actions;
-
 use App\Models\Expansion;
 use App\Models\Game;
 use App\Models\UserGameWhiteCard;
 use App\Services\GameService;
-use Tests\TestCase;
-use Tests\Traits\GameUtilities;
+use Pest\Laravel\actingAs;
+use Pest\Laravel\postJson;
+use function Pest\Laravel\{actingAs, postJson};
 
-class KickPlayerControllerTest extends TestCase
-{
-    use GameUtilities;
+uses(\Tests\Traits\GameUtilities::class);
 
-    private $game;
-    public $gameService;
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->gameService = new GameService();
-        $this->game = Game::factory()->hasUsers(2)->create();
-    }
+beforeEach(function () {
+    $this->gameService = new GameService();
+    $this->game = Game::factory()->hasUsers(2)->create();
+});
 
-    /** @test */
-    public function it_will_not_allow_non_auth_users_to_kick_players()
-    {
-        $player = $this->game->nonJudgeUsers()->first();
-        $this->postJson(route('api.game.player.kick', [$this->game->id, $player->id]))
-            ->assertUnauthorized();
-    }
+it('will not allow non auth users to kick players', function () {
+    $player = $this->game->nonJudgeUsers()->first();
+    expect(postJson(route('api.game.player.kick', [$this->game->id, $player->id])))
+        ->toBeUnauthorized();
+});
 
-    /** @test */
-    public function it_will_not_allow_auth_user_to_kick_a_player_invalid_game()
-    {
-        $player = $this->game->nonJudgeUsers()->first();
-        $this->actingAs($this->game->judge)
-            ->postJson(route('api.game.player.kick', [$this->faker->uuid, $player->id]))
-            ->assertNotFound();
-    }
+it('will not allow auth user to kick a player invalid game', function () {
+    $player = $this->game->nonJudgeUsers()->first();
+    expect(actingAs($this->game->judge)
+        ->postJson(route('api.game.player.kick', [$this->faker->uuid, $player->id])))
+        ->toBeNotFound();
+});
 
-    /** @test */
-    public function it_will_reject_invalid_player_ids()
-    {
-        $this->actingAs($this->game->judge)
-            ->postJson(route('api.game.player.kick', [$this->game->id, 0]))
-            ->assertNotFound();
-    }
+it('will reject invalid player ids', function () {
+    expect(actingAs($this->game->judge)
+        ->postJson(route('api.game.player.kick', [$this->game->id, 0])))
+        ->toBeNotFound();
+});
 
-    /** @test */
-    public function it_will_reject_non_judge_players_from_kicking_users()
-    {
-        $player = $this->game->nonJudgeUsers()->first();
-        $this->actingAs($player)
-            ->postJson(route('api.game.player.kick', [$this->game, $player]))
-            ->assertForbidden();
-    }
+it('will reject non judge players from kicking users', function () {
+    $player = $this->game->nonJudgeUsers()->first();
+    expect(actingAs($player)
+        ->postJson(route('api.game.player.kick', [$this->game, $player])))
+        ->toBeForbidden();
+});
 
-    /** @test */
-    public function it_will_reject_judge_players_to_kick_other_players_of_another_game()
-    {
-        $differentGame = Game::factory()->create();
-        $playerToKick = $this->game->nonJudgeUsers()->first();
-        $this->actingAs($differentGame->judge)
-            ->postJson(route('api.game.player.kick', [$this->game, $playerToKick]))
-            ->assertForbidden();
-    }
+it('will reject judge players to kick other players of another game', function () {
+    $differentGame = Game::factory()->create();
+    $playerToKick = $this->game->nonJudgeUsers()->first();
+    expect(actingAs($differentGame->judge)
+        ->postJson(route('api.game.player.kick', [$this->game, $playerToKick])))
+        ->toBeForbidden();
+});
 
-    /** @test */
-    public function it_will_kick_player_from_game()
-    {
-        $game = Game::factory()
-            ->has(Expansion::factory()->hasWhiteCards(21)->hasBlackCards(1))
-            ->hasUsers(2)
-            ->create();
-        $this->drawBlackCard($game);
-        $game->players()->each(fn ($user) => $this->gameService->drawWhiteCards($user, $game));
-        $playerToKick = $game->nonJudgeUsers()->first();
-        $playerCount = $game->users()->count();
+it('will kick player from game', function () {
+    $game = Game::factory()
+        ->has(Expansion::factory()->hasWhiteCards(21)->hasBlackCards(1))
+        ->hasUsers(2)
+        ->create();
+    $this->drawBlackCard($game);
+    $game->players()->each(fn ($user) => $this->gameService->drawWhiteCards($user, $game));
+    $playerToKick = $game->nonJudgeUsers()->first();
+    $playerCount = $game->users()->count();
 
-        $this->actingAs($game->judge)
-            ->postJson(route('api.game.player.kick', [$game, $playerToKick]))
-            ->assertOK();
-        $game->refresh();
+    expect(actingAs($game->judge)
+        ->postJson(route('api.game.player.kick', [$game, $playerToKick])))
+        ->toBeOk();
+    $game->refresh();
 
-        $this->assertCount($playerCount - 1, $game->users);
-        $this->assertCount($game->players->count() * Game::HAND_LIMIT, UserGameWhiteCard::whereGameId($game->id)->get());
-    }
-
-
-}
+    expect($game->users)
+        ->toHaveCount($playerCount - 1)
+        ->and(UserGameWhiteCard::whereGameId($game->id)->get())
+        ->toHaveCount($game->players->count() * Game::HAND_LIMIT);
+});
