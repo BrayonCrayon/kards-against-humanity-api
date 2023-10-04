@@ -17,7 +17,6 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserGameWhiteCard;
 use App\Models\WhiteCard;
-use Carbon\Carbon;
 use Facades\App\Services\HelperService;
 use Nubs\RandomNameGenerator\All as NameGenerator;
 
@@ -202,9 +201,7 @@ class GameService
 
         $this->updateJudge($game, $nextJudge->id);
 
-        $game->update([
-            'selection_ends_at' => $game->setting->selection_timer ? Carbon::now()->addSeconds($game->setting->selection_timer)->unix() : null
-        ]);
+        $game->update(['selection_ends_at' => null]);
 
         event(new GameRotation($game));
     }

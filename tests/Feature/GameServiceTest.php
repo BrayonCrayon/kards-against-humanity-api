@@ -215,3 +215,15 @@ it('will find next judge', function () {
     $this->assertNotEquals($user->id, $game->judge_id);
     expect($user->id)->toEqual($nextJudge->id);
 });
+
+it('will set selection_ends_at to null when game rotates', function () {
+    Event::fake();
+    $game = $this->createGame(2, 2);
+    $game->setting()->update([
+        'selection_timer' => 60
+    ]);
+
+    $this->gameService->rotateGame($game);
+
+    expect($game->refresh()->selection_ends_at)->toBeNull();
+});
