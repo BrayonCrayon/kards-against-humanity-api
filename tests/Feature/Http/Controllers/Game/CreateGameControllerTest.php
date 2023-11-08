@@ -47,7 +47,8 @@ it('creates game', function () {
     $expansionIds = Expansion::factory(2)->has(BlackCard::factory())->create()->pluck('id');
     $response = postJson(route('api.game.store'), [
         'name' => $userName,
-        'expansionIds' => $expansionIds->toArray()
+        'expansionIds' => $expansionIds->toArray(),
+        'hasAnimations' => true
     ])->assertOk();
 
     expect([
@@ -56,7 +57,11 @@ it('creates game', function () {
         'code' => $response->json('data.game.code'),
         'redraw_limit' => 2
     ])->toBeInDatabase('games')
-    ->and(strlen($response->json('data.game.code')))->toEqual(4);
+    ->and(strlen($response->json('data.game.code')))->toEqual(4)
+    ->and([
+        'game_id' => $response->json('data.game.id'),
+        'has_animations' => $response->json('data.game.hasAnimations'),
+    ])->toBeInDatabase('settings');
 });
 
 it('assigns users when game is created', function () {

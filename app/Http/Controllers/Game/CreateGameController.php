@@ -21,7 +21,7 @@ class CreateGameController
             'name' => $request->get('name')
         ]);
         Auth::login($user);
-        $game = $this->gameService->createGame($user, $request->get('expansionIds'), $request->input('timer'));
+        $game = $this->gameService->createGame($user, $request->get('expansionIds'), $request->settings());
 
         $user->load('whiteCards');
 

@@ -29,7 +29,7 @@ class GameService
         $this->generator = NameGenerator::create();
     }
 
-    public function createGame($user, $expansionIds, $timer = null)
+    public function createGame(User $user, array $expansionIds, array $settings): Game
     {
         $game = Game::create([
             'name' => $this->generator->getName(),
@@ -47,8 +47,9 @@ class GameService
 
         Setting::create([
             'game_id' => $game->id,
-            'selection_timer' => $timer
+            ...$settings
         ]);
+
         return $game;
     }
 
