@@ -10,6 +10,7 @@ it('will update game settings', function () {
 
     $payload = [
         'selection_timer' => $this->faker->numberBetween(60, 300),
+        'has_animations' => true,
     ];
 
     $this
@@ -17,7 +18,8 @@ it('will update game settings', function () {
         ->postJson(route('api.game.settings.update', $game), $payload)
         ->assertOk();
 
-    expect($game->fresh()->setting->selection_timer)->toEqual($payload['selection_timer']);
+    expect($game->fresh()->setting->only(['selection_timer', 'has_animations']))
+        ->toEqual($payload);
 });
 
 it('will only users in the game to update game settings', function () {

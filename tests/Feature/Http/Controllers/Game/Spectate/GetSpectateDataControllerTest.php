@@ -27,7 +27,8 @@ it('will return spectation state', function () {
                 'code' => $game->code,
                 'redrawLimit' => $game->redraw_limit,
                 'selectionEndsAt' => $game->selection_ends_at,
-                'selectionTimer' => $game->setting->selection_timer
+                'selectionTimer' => $game->setting->selection_timer,
+                'hasAnimations' => $game->setting->has_animations
             ]
         ])->assertJsonFragment([
             'user' => [
