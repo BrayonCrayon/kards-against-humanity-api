@@ -15,7 +15,7 @@ class UpdateGameSettingsRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'selection_timer' => 'sometimes|integer|max:300|min:60',
+            'selection_timer' => 'nullable|int|gte:60|lte:300',
             'has_animations' => 'sometimes|boolean'
         ];
     }

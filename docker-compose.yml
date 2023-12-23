@@ -1,6 +1,7 @@
 version: '3'
 services:
   app:
+    container_name: 'kah-api'
     build:
       context: ./
       dockerfile: environment/dockerfiles/app.dockerfile
@@ -15,6 +16,7 @@ services:
     ports:
       - '9000:9000'
   web:
+    container_name: 'kah-web'
     build:
       context: ./
       dockerfile: environment/dockerfiles/web.dockerfile
@@ -25,9 +27,10 @@ services:
     ports:
       - '8080:80'
   database:
+    container_name: 'kah-db'
     image: 'postgres:latest'
     volumes:
-      - '/dbData:/var/lib/postgresql/data'
+      - '/var/dbData:/var/lib/postgresql/data'
     ports:
       - '3307:5432'
     environment:
@@ -35,9 +38,10 @@ services:
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=kards-against-humanity
   testdatabase:
+    container_name: 'kah-test-db'
     image: 'postgres:latest'
     volumes:
-      - '/dbDatatest:/var/lib/postgresql/data'
+      - '/var/dbDatatest:/var/lib/postgresql/data'
     ports:
       - '33071:5432'
     environment:
