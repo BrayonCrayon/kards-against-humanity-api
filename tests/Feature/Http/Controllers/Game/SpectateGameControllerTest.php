@@ -27,7 +27,8 @@ it('will return game data to spectator', function () {
                     'name' => $this->game->name,
                     'redrawLimit' => $this->game->redraw_limit,
                     'selectionEndsAt' => $this->game->selection_ends_at,
-                    'selectionTimer' => $this->game->setting->selection_timer
+                    'selectionTimer' => $this->game->setting->selection_timer,
+                    'hasAnimations' => $this->game->setting->has_animations,
                 ],
         ]);
 
