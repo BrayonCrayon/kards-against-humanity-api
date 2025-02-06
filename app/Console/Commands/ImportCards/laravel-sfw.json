@@ -1,0 +1,448 @@
+{
+    "expansions": [
+        {
+            "name": "Laravel (SFW)",
+            "id": 1
+        }
+    ],
+    "black_cards": [
+        {
+            "text": "The production server crashed because of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why is Composer taking so long?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The new middleware combines _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The pull request was rejected due to _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Taylor Otwell's next feature announcement: _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's causing these Eloquent errors?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The migration failed because _______, _______, and _______.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "The new package requires _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The service provider is throwing _______ at _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why won't Artisan serve work?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The documentation was updated to include _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The route model binding matched _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The .env file accidentally exposed _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Tinker responded with _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The blade template rendered _______ instead of _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's in the Laravel logs?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The queue worker is stuck processing _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The senior developer's code review revealed _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The deployment script accidentally _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why is Redis full of _______?",
+            "pick": 1,
+            "expansion_id": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "php artisan",
+            "expansion_id": 1
+        },
+        {
+            "text": "Facade magic",
+            "expansion_id": 1
+        },
+        {
+            "text": "Route caching",
+            "expansion_id": 1
+        },
+        {
+            "text": "Migration hell",
+            "expansion_id": 1
+        },
+        {
+            "text": "Composer update",
+            "expansion_id": 1
+        },
+        {
+            "text": "Eloquent models",
+            "expansion_id": 1
+        },
+        {
+            "text": "Blade directives",
+            "expansion_id": 1
+        },
+        {
+            "text": "Service containers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Queue workers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Tinker REPL",
+            "expansion_id": 1
+        },
+        {
+            "text": "A developer trying to explain dependency injection to their cat",
+            "expansion_id": 1
+        },
+        {
+            "text": "An Eloquent relationship that's just trying to find itself",
+            "expansion_id": 1
+        },
+        {
+            "text": "A middleware stack that reaches the stratosphere",
+            "expansion_id": 1
+        },
+        {
+            "text": "Taylor Otwell appearing in a puff of magic smoke",
+            "expansion_id": 1
+        },
+        {
+            "text": "A migration that's having an existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Seeders",
+            "expansion_id": 1
+        },
+        {
+            "text": "Factory states",
+            "expansion_id": 1
+        },
+        {
+            "text": "Event listeners",
+            "expansion_id": 1
+        },
+        {
+            "text": "Cache tags",
+            "expansion_id": 1
+        },
+        {
+            "text": "Test coverage",
+            "expansion_id": 1
+        },
+        {
+            "text": "A route parameter that identifies as a boolean",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's longest chain of nested relationships",
+            "expansion_id": 1
+        },
+        {
+            "text": "A validation rule that accepts everything except valid data",
+            "expansion_id": 1
+        },
+        {
+            "text": "Artisan",
+            "expansion_id": 1
+        },
+        {
+            "text": "Stack traces",
+            "expansion_id": 1
+        },
+        {
+            "text": "A collection that's collecting unemployment benefits",
+            "expansion_id": 1
+        },
+        {
+            "text": "The ghost of PHP 5 haunting the codebase",
+            "expansion_id": 1
+        },
+        {
+            "text": "Env files",
+            "expansion_id": 1
+        },
+        {
+            "text": "Query scopes",
+            "expansion_id": 1
+        },
+        {
+            "text": "Error logs",
+            "expansion_id": 1
+        },
+        {
+            "text": "A scheduled task that shows up fashionably late",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most elaborate service provider setup ever",
+            "expansion_id": 1
+        },
+        {
+            "text": "A policy that always returns true",
+            "expansion_id": 1
+        },
+        {
+            "text": "Gates",
+            "expansion_id": 1
+        },
+        {
+            "text": "Sanctum",
+            "expansion_id": 1
+        },
+        {
+            "text": "A notification that sends itself to the wrong channel",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most aggressive rate limiter",
+            "expansion_id": 1
+        },
+        {
+            "text": "Sail",
+            "expansion_id": 1
+        },
+        {
+            "text": "Vite config",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mix manifest",
+            "expansion_id": 1
+        },
+        {
+            "text": "A form request that validates its own existence",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most passive-aggressive PHPDoc comment",
+            "expansion_id": 1
+        },
+        {
+            "text": "A job that quietly fails upward",
+            "expansion_id": 1
+        },
+        {
+            "text": "Traits",
+            "expansion_id": 1
+        },
+        {
+            "text": "Pest tests",
+            "expansion_id": 1
+        },
+        {
+            "text": "A resource collection that hoards data",
+            "expansion_id": 1
+        },
+        {
+            "text": "The .gitignore file that ignores itself",
+            "expansion_id": 1
+        },
+        {
+            "text": "Horizon",
+            "expansion_id": 1
+        },
+        {
+            "text": "Nova panels",
+            "expansion_id": 1
+        },
+        {
+            "text": "A telescope entry that's watching you back",
+            "expansion_id": 1
+        },
+        {
+            "text": "The production server's therapy sessions",
+            "expansion_id": 1
+        },
+        {
+            "text": "Forge",
+            "expansion_id": 1
+        },
+        {
+            "text": "Vapor",
+            "expansion_id": 1
+        },
+        {
+            "text": "A database that's ghosting your queries",
+            "expansion_id": 1
+        },
+        {
+            "text": "The staging environment's identity crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Enums",
+            "expansion_id": 1
+        },
+        {
+            "text": "Value objects",
+            "expansion_id": 1
+        },
+        {
+            "text": "A cache that only remembers useless things",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most overengineered Hello World ever",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very confused database connection",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most optimistic deployment",
+            "expansion_id": 1
+        },
+        {
+            "text": "A cache that only remembers memes",
+            "expansion_id": 1
+        },
+        {
+            "text": "The queue worker's meditation retreat",
+            "expansion_id": 1
+        },
+        {
+            "text": "A route that leads to nowhere",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most passive-aggressive PR comment",
+            "expansion_id": 1
+        },
+        {
+            "text": "An authentication guard having an identity crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's longest method name",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very enthusiastic logging system",
+            "expansion_id": 1
+        },
+        {
+            "text": "The .gitignore file's existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "A middleware that only works on Tuesdays",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most unnecessary trait ever created",
+            "expansion_id": 1
+        },
+        {
+            "text": "A job that refuses to be dispatched",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most specific validation rule",
+            "expansion_id": 1
+        },
+        {
+            "text": "An observer that's seen too much",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most optimistic try-catch block",
+            "expansion_id": 1
+        },
+        {
+            "text": "A notification that nobody wanted",
+            "expansion_id": 1
+        },
+        {
+            "text": "The storage disk's spring cleaning",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very persistent memory leak",
+            "expansion_id": 1
+        },
+        {
+            "text": "The config file's dark secrets",
+            "expansion_id": 1
+        },
+        {
+            "text": "A seeder that only plants memes",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most redundant helper function",
+            "expansion_id": 1
+        },
+        {
+            "text": "A broadcast event that nobody's listening to",
+            "expansion_id": 1
+        },
+        {
+            "text": "The most aggressive auto-loader",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very philosophical exception handler",
+            "expansion_id": 1
+        }
+    ]
+} 

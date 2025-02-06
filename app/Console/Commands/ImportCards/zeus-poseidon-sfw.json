@@ -1,0 +1,352 @@
+{
+    "expansions": [
+        {
+            "name": "Zeus & Poseidon (SFW)",
+            "id": 1
+        }
+    ],
+    "black_cards": [
+        {
+            "text": "The city's appeal rating dropped because of _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why won't these philosophers stop complaining?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The colony request demands _______ in exchange for _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Hades sent _______ to destroy the neighborhood.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The sanctuary to Apollo requires _______, _______, and _______.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's causing the agora vendors to flee?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The hero's hall attracted _______ instead of _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Zeus demands a festival celebrating _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Poseidon flooded the docks because of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Oracle predicts _______ will destroy _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why are all the athletes running away?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Atlantean submarine discovered _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Ares blessed the city with _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The trading post is overflowing with _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Athena's olive trees produced _______ this year.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The maintenance office replaced _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's actually inside those amphoras?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The monster invasion was stopped by _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The city's culture rating skyrocketed thanks to _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Dionysus's latest party featured _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "Wandering sheep",
+            "expansion_id": 1
+        },
+        {
+            "text": "Fleece storage",
+            "expansion_id": 1
+        },
+        {
+            "text": "Marble columns",
+            "expansion_id": 1
+        },
+        {
+            "text": "Bronze ingots",
+            "expansion_id": 1
+        },
+        {
+            "text": "Agora gossip",
+            "expansion_id": 1
+        },
+        {
+            "text": "Roadblock philosophy",
+            "expansion_id": 1
+        },
+        {
+            "text": "Housing evolution",
+            "expansion_id": 1
+        },
+        {
+            "text": "Tax collectors",
+            "expansion_id": 1
+        },
+        {
+            "text": "Amphora delivery",
+            "expansion_id": 1
+        },
+        {
+            "text": "Sanctuary prayers",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very confused Minotaur trying to read a map",
+            "expansion_id": 1
+        },
+        {
+            "text": "Hermes delivering spam scrolls",
+            "expansion_id": 1
+        },
+        {
+            "text": "A Hydra with an identity crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Zeus's latest dating profile update",
+            "expansion_id": 1
+        },
+        {
+            "text": "Poseidon's swimming pool rules",
+            "expansion_id": 1
+        },
+        {
+            "text": "Olive oil spills",
+            "expansion_id": 1
+        },
+        {
+            "text": "Wine festivals",
+            "expansion_id": 1
+        },
+        {
+            "text": "Athlete training",
+            "expansion_id": 1
+        },
+        {
+            "text": "Oracle cookies",
+            "expansion_id": 1
+        },
+        {
+            "text": "Dock workers",
+            "expansion_id": 1
+        },
+        {
+            "text": "A philosopher debating with a goat",
+            "expansion_id": 1
+        },
+        {
+            "text": "Atlantean tech support",
+            "expansion_id": 1
+        },
+        {
+            "text": "Hades' underworld renovation plans",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very persistent peddler",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mythological pest control",
+            "expansion_id": 1
+        },
+        {
+            "text": "Ares' anger management class",
+            "expansion_id": 1
+        },
+        {
+            "text": "Athena's olive oil tasting party",
+            "expansion_id": 1
+        },
+        {
+            "text": "Underwater real estate",
+            "expansion_id": 1
+        },
+        {
+            "text": "Cyclops architecture",
+            "expansion_id": 1
+        },
+        {
+            "text": "Divine bureaucracy",
+            "expansion_id": 1
+        },
+        {
+            "text": "A hero's quest for better insurance coverage",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most optimistic tax collector",
+            "expansion_id": 1
+        },
+        {
+            "text": "Dionysus's wine quality control",
+            "expansion_id": 1
+        },
+        {
+            "text": "Maintenance walkers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Trade routes",
+            "expansion_id": 1
+        },
+        {
+            "text": "A Cerberus's obedience school graduation",
+            "expansion_id": 1
+        },
+        {
+            "text": "The Agora's customer service desk",
+            "expansion_id": 1
+        },
+        {
+            "text": "Pegasus parking tickets",
+            "expansion_id": 1
+        },
+        {
+            "text": "Cultural exchange",
+            "expansion_id": 1
+        },
+        {
+            "text": "Monster invasion",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very specific prophecy about olive oil prices",
+            "expansion_id": 1
+        },
+        {
+            "text": "The city planner's existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Competitive philosophy",
+            "expansion_id": 1
+        },
+        {
+            "text": "Atlantean submarine tours",
+            "expansion_id": 1
+        },
+        {
+            "text": "Divine favor",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly efficient bureaucrat",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most dramatic housing collapse",
+            "expansion_id": 1
+        },
+        {
+            "text": "Sanctuary maintenance fees",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very determined sheep",
+            "expansion_id": 1
+        },
+        {
+            "text": "The Agora's suggestion box",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mythological building permits",
+            "expansion_id": 1
+        },
+        {
+            "text": "A perfectly timed earthquake",
+            "expansion_id": 1
+        },
+        {
+            "text": "The colony's annual report",
+            "expansion_id": 1
+        },
+        {
+            "text": "Roadblock logistics",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very confused Atlas",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most inefficient trade route",
+            "expansion_id": 1
+        },
+        {
+            "text": "Philosophical graffiti",
+            "expansion_id": 1
+        },
+        {
+            "text": "A hero's unemployment benefits",
+            "expansion_id": 1
+        },
+        {
+            "text": "The Oracle's coffee addiction",
+            "expansion_id": 1
+        },
+        {
+            "text": "Poseidon's flood insurance policy",
+            "expansion_id": 1
+        }
+    ]
+} 

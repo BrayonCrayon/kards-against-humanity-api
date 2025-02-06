@@ -1,0 +1,352 @@
+{
+    "expansions": [
+        {
+            "name": "Time Travel Tourism (SFW)",
+            "id": 1
+        }
+    ],
+    "black_cards": [
+        {
+            "text": "The time tourist accidentally replaced _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why is there a smartphone in this Renaissance painting?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The temporal paradox combined _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The history book now says _______ invented _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The time machine malfunctioned because of _______, _______, and _______.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's causing the dinosaurs to dance?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The future museum displays _______ next to _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Ancient Rome's newest trend is _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The time travel agency banned _______ after the incident.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Medieval peasants discovered _______ thanks to _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The time traveler's Yelp review mentions _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What did the tourist accidentally leave in Ancient Egypt?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My historical selfie features _______, _______, and _______.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "The time travel agency's newest package combines _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The future museum's weirdest exhibit is just _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My time machine runs on _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why is Shakespeare asking for your autograph?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The temporal police confiscated _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The time traveler's souvenir shop sells _______ from _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The timeline split when _______ met _______.",
+            "pick": 2,
+            "expansion_id": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "A dinosaur with a TikTok account",
+            "expansion_id": 1
+        },
+        {
+            "text": "Shakespeare's Twitter feed",
+            "expansion_id": 1
+        },
+        {
+            "text": "Temporal jet lag",
+            "expansion_id": 1
+        },
+        {
+            "text": "Historical fact-checking",
+            "expansion_id": 1
+        },
+        {
+            "text": "Paradox insurance",
+            "expansion_id": 1
+        },
+        {
+            "text": "Future nostalgia",
+            "expansion_id": 1
+        },
+        {
+            "text": "Time tourist traps",
+            "expansion_id": 1
+        },
+        {
+            "text": "Anachronistic selfies",
+            "expansion_id": 1
+        },
+        {
+            "text": "Temporal souvenirs",
+            "expansion_id": 1
+        },
+        {
+            "text": "Causality violations",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very confused Neanderthal trying to use a smartphone",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's first time travel food critic",
+            "expansion_id": 1
+        },
+        {
+            "text": "A confused Victorian experiencing Wi-Fi",
+            "expansion_id": 1
+        },
+        {
+            "text": "A historically inaccurate meme",
+            "expansion_id": 1
+        },
+        {
+            "text": "A medieval influencer",
+            "expansion_id": 1
+        },
+        {
+            "text": "Accidentally becoming your own ancestor",
+            "expansion_id": 1
+        },
+        {
+            "text": "Ancient Egyptian Twitter drama",
+            "expansion_id": 1
+        },
+        {
+            "text": "Beethoven's Spotify playlist",
+            "expansion_id": 1
+        },
+        {
+            "text": "Charging your phone in the Stone Age",
+            "expansion_id": 1
+        },
+        {
+            "text": "DoorDash to the Roman Senate",
+            "expansion_id": 1
+        },
+        {
+            "text": "Future humans disappointed by our memes",
+            "expansion_id": 1
+        },
+        {
+            "text": "Giving King Arthur a smartwatch",
+            "expansion_id": 1
+        },
+        {
+            "text": "Historical figures reading their Wikipedia pages",
+            "expansion_id": 1
+        },
+        {
+            "text": "Leonardo da Vinci's gaming setup",
+            "expansion_id": 1
+        },
+        {
+            "text": "Marie Antoinette's food blog",
+            "expansion_id": 1
+        },
+        {
+            "text": "Medieval peasants discovering bubble wrap",
+            "expansion_id": 1
+        },
+        {
+            "text": "Neanderthal tech support",
+            "expansion_id": 1
+        },
+        {
+            "text": "Pirates downloading torrents",
+            "expansion_id": 1
+        },
+        {
+            "text": "Posting spoilers for historical events",
+            "expansion_id": 1
+        },
+        {
+            "text": "Renaissance art restoration with Photoshop",
+            "expansion_id": 1
+        },
+        {
+            "text": "Teaching cavemen about cryptocurrency",
+            "expansion_id": 1
+        },
+        {
+            "text": "The Crusades but everyone has Roombas",
+            "expansion_id": 1
+        },
+        {
+            "text": "Time traveling telemarketers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Trying to explain memes to Aristotle",
+            "expansion_id": 1
+        },
+        {
+            "text": "Vikings with GoPros",
+            "expansion_id": 1
+        },
+        {
+            "text": "Your future self leaving bad reviews",
+            "expansion_id": 1
+        },
+        {
+            "text": "Time cops on coffee break",
+            "expansion_id": 1
+        },
+        {
+            "text": "Future pizza delivery to the past",
+            "expansion_id": 1
+        },
+        {
+            "text": "Quantum socks that exist in multiple timelines",
+            "expansion_id": 1
+        },
+        {
+            "text": "Caesar's first iPad unboxing video",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly organized temporal bureaucracy",
+            "expansion_id": 1
+        },
+        {
+            "text": "The time travel agency's suggestion box",
+            "expansion_id": 1
+        },
+        {
+            "text": "Historical accuracy warnings",
+            "expansion_id": 1
+        },
+        {
+            "text": "Temporal diplomacy",
+            "expansion_id": 1
+        },
+        {
+            "text": "Time stream pollution",
+            "expansion_id": 1
+        },
+        {
+            "text": "A suspiciously specific prophecy about smartphones",
+            "expansion_id": 1
+        },
+        {
+            "text": "The temporal tourist's existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Competitive time traveling",
+            "expansion_id": 1
+        },
+        {
+            "text": "Historical social media",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly competent time agent",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most dramatic timeline split",
+            "expansion_id": 1
+        },
+        {
+            "text": "Time travel permits",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very determined chronologist",
+            "expansion_id": 1
+        },
+        {
+            "text": "The temporal agency's coffee machine",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mandatory timeline orientation",
+            "expansion_id": 1
+        },
+        {
+            "text": "A perfectly timed paradox",
+            "expansion_id": 1
+        },
+        {
+            "text": "The annual time travelers' convention",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emergency paradox protocols",
+            "expansion_id": 1
+        },
+        {
+            "text": "A time tourist's travel blog",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most inefficient time machine",
+            "expansion_id": 1
+        }
+    ]
+} 

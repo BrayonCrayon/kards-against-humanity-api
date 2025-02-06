@@ -1,0 +1,452 @@
+{
+    "expansions": [
+        {
+            "name": "Musical Mayhem (SFW)",
+            "id": 1
+        }
+    ],
+    "black_cards": [
+        {
+            "text": "The Broadway show was stopped mid-performance because of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why is the orchestra pit on fire?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The new musical combines _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The karaoke night ended after _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The pop star's rider demands _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What caused the choir to start crying?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The music video features _______, _______, and _______.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "The rock band's new album is just sounds of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The musical instrument of the future combines _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why did the conductor stop the performance?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Grammy was accidentally awarded to _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The street performer's act involves _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The wedding DJ accidentally played _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The opera was ruined by _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Instead of singing, the performer just _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The musical's big finale reveals _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The band broke up because of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's that sound coming from the recording studio?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The music festival was shut down due to _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The encore performance featured _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "Jazz hands",
+            "expansion_id": 1
+        },
+        {
+            "text": "Interpretive kazoo",
+            "expansion_id": 1
+        },
+        {
+            "text": "Stage fright",
+            "expansion_id": 1
+        },
+        {
+            "text": "Pitch perfect",
+            "expansion_id": 1
+        },
+        {
+            "text": "Dramatic cape",
+            "expansion_id": 1
+        },
+        {
+            "text": "Backup dancers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Sheet music",
+            "expansion_id": 1
+        },
+        {
+            "text": "Vocal warmups",
+            "expansion_id": 1
+        },
+        {
+            "text": "Spotlight drama",
+            "expansion_id": 1
+        },
+        {
+            "text": "Costume malfunction",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very confused pianist",
+            "expansion_id": 1
+        },
+        {
+            "text": "Aggressive triangle playing",
+            "expansion_id": 1
+        },
+        {
+            "text": "Breakdancing Mozart",
+            "expansion_id": 1
+        },
+        {
+            "text": "Competitive yodeling",
+            "expansion_id": 1
+        },
+        {
+            "text": "Dancing queen energy",
+            "expansion_id": 1
+        },
+        {
+            "text": "Electric accordion",
+            "expansion_id": 1
+        },
+        {
+            "text": "Freestyle recorder",
+            "expansion_id": 1
+        },
+        {
+            "text": "Gregorian trap music",
+            "expansion_id": 1
+        },
+        {
+            "text": "Headbanging violinist",
+            "expansion_id": 1
+        },
+        {
+            "text": "Intense tambourine",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very passionate cowbell",
+            "expansion_id": 1
+        },
+        {
+            "text": "Method acting extras",
+            "expansion_id": 1
+        },
+        {
+            "text": "Musical saw solos",
+            "expansion_id": 1
+        },
+        {
+            "text": "Opera in autotune",
+            "expansion_id": 1
+        },
+        {
+            "text": "Punk rock flutist",
+            "expansion_id": 1
+        },
+        {
+            "text": "Quantum harmonies",
+            "expansion_id": 1
+        },
+        {
+            "text": "Rapping Shakespeare",
+            "expansion_id": 1
+        },
+        {
+            "text": "Sad trombone noises",
+            "expansion_id": 1
+        },
+        {
+            "text": "Tap dancing ghosts",
+            "expansion_id": 1
+        },
+        {
+            "text": "Underwater bagpipes",
+            "expansion_id": 1
+        },
+        {
+            "text": "Viking metal choir",
+            "expansion_id": 1
+        },
+        {
+            "text": "Wireless air guitar",
+            "expansion_id": 1
+        },
+        {
+            "text": "Xylophone rage",
+            "expansion_id": 1
+        },
+        {
+            "text": "Yoga for conductors",
+            "expansion_id": 1
+        },
+        {
+            "text": "Zen drumming",
+            "expansion_id": 1
+        },
+        {
+            "text": "Backup dancers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Bass drop fail",
+            "expansion_id": 1
+        },
+        {
+            "text": "Concert selfies",
+            "expansion_id": 1
+        },
+        {
+            "text": "Dad rock revival",
+            "expansion_id": 1
+        },
+        {
+            "text": "Elevator muzak",
+            "expansion_id": 1
+        },
+        {
+            "text": "Festival fashion",
+            "expansion_id": 1
+        },
+        {
+            "text": "Guitar face",
+            "expansion_id": 1
+        },
+        {
+            "text": "Hip hop Mozart",
+            "expansion_id": 1
+        },
+        {
+            "text": "Indie folk drama",
+            "expansion_id": 1
+        },
+        {
+            "text": "Jazz hands fail",
+            "expansion_id": 1
+        },
+        {
+            "text": "K-pop covers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Lip sync battles",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mosh pit etiquette",
+            "expansion_id": 1
+        },
+        {
+            "text": "Musical chairs pro",
+            "expansion_id": 1
+        },
+        {
+            "text": "One-man band chaos",
+            "expansion_id": 1
+        },
+        {
+            "text": "Perfect pitch panic",
+            "expansion_id": 1
+        },
+        {
+            "text": "Queen bee soprano",
+            "expansion_id": 1
+        },
+        {
+            "text": "Rock star poses",
+            "expansion_id": 1
+        },
+        {
+            "text": "Stage dive mishap",
+            "expansion_id": 1
+        },
+        {
+            "text": "Theremin therapy",
+            "expansion_id": 1
+        },
+        {
+            "text": "Ukulele battle",
+            "expansion_id": 1
+        },
+        {
+            "text": "Vocal coach rage",
+            "expansion_id": 1
+        },
+        {
+            "text": "Wind section drama",
+            "expansion_id": 1
+        },
+        {
+            "text": "X Factor rejects",
+            "expansion_id": 1
+        },
+        {
+            "text": "Yodeling lessons",
+            "expansion_id": 1
+        },
+        {
+            "text": "A theremin having an existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's smallest orchestra",
+            "expansion_id": 1
+        },
+        {
+            "text": "Interpretive mime DJ",
+            "expansion_id": 1
+        },
+        {
+            "text": "The conductor's emergency baton",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very dramatic key change",
+            "expansion_id": 1
+        },
+        {
+            "text": "The ghost of disco past",
+            "expansion_id": 1
+        },
+        {
+            "text": "Experimental kazoo jazz",
+            "expansion_id": 1
+        },
+        {
+            "text": "The bass player's philosophy degree",
+            "expansion_id": 1
+        },
+        {
+            "text": "Interpretive dance fighting",
+            "expansion_id": 1
+        },
+        {
+            "text": "The orchestra's group therapy session",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly musical cactus",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's longest guitar solo",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very persistent groupie",
+            "expansion_id": 1
+        },
+        {
+            "text": "The roadie's secret opera career",
+            "expansion_id": 1
+        },
+        {
+            "text": "Passive-aggressive sheet music notation",
+            "expansion_id": 1
+        },
+        {
+            "text": "The backup dancer's PhD thesis",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly rhythmic sneeze",
+            "expansion_id": 1
+        },
+        {
+            "text": "The marching band's GPS",
+            "expansion_id": 1
+        },
+        {
+            "text": "Therapeutic triangle meditation",
+            "expansion_id": 1
+        },
+        {
+            "text": "The choir's coffee addiction",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very specific rider clause",
+            "expansion_id": 1
+        },
+        {
+            "text": "The stage manager's panic room",
+            "expansion_id": 1
+        },
+        {
+            "text": "Interpretive beat boxing",
+            "expansion_id": 1
+        },
+        {
+            "text": "The sound guy's existential dread",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly musical traffic jam",
+            "expansion_id": 1
+        }
+    ]
+} 

@@ -1,0 +1,356 @@
+{
+    "expansions": [
+        {
+            "name": "Majesty Fantasy Kingdom (SFW)",
+            "id": 1
+        }
+    ],
+    "black_cards": [
+        {
+            "text": "The Rangers Guild refused to attack because of _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why won't the heroes collect their reward flags?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Tax Collector died trying to _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Royal Advisor suggests combining _______, _______, and _______ to solve the crisis.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's causing the heroes to flee the marketplace?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Rogues Guild's latest heist targeted _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Palace Guard was distracted by _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Healing Potion vendor now accepts _______ as payment.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Wizards Guild's experiment combined _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why are the peasants rioting this time?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Royal Decree banned _______ in the marketplace.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Temple of Agrela now offers _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Blacksmith's new invention requires _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The monster lair was actually full of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Trading Post's bestseller is _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Royal Guard replaced _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's really inside that treasure chest?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The kingdom's defense budget was spent on _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The new hero class specializes in _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The Royal Cartographer discovered _______ next to _______.",
+            "pick": 2,
+            "expansion_id": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "Reward flag addiction",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very reluctant Tax Collector",
+            "expansion_id": 1
+        },
+        {
+            "text": "Strategic Guard Post placement",
+            "expansion_id": 1
+        },
+        {
+            "text": "Hero motivation issues",
+            "expansion_id": 1
+        },
+        {
+            "text": "Marketplace economics",
+            "expansion_id": 1
+        },
+        {
+            "text": "Bear attack insurance",
+            "expansion_id": 1
+        },
+        {
+            "text": "Competitive temple building",
+            "expansion_id": 1
+        },
+        {
+            "text": "Guild rivalry drama",
+            "expansion_id": 1
+        },
+        {
+            "text": "Royal treasury audit",
+            "expansion_id": 1
+        },
+        {
+            "text": "Monster lair zoning",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very confused Ranger trying to read a map",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most ineffective Guard Post",
+            "expansion_id": 1
+        },
+        {
+            "text": "A Rogue's guide to ethical thievery",
+            "expansion_id": 1
+        },
+        {
+            "text": "Excessive reward flag placement",
+            "expansion_id": 1
+        },
+        {
+            "text": "Peasant complaints",
+            "expansion_id": 1
+        },
+        {
+            "text": "Inn gossip",
+            "expansion_id": 1
+        },
+        {
+            "text": "Royal decree spam",
+            "expansion_id": 1
+        },
+        {
+            "text": "Healing potion addiction",
+            "expansion_id": 1
+        },
+        {
+            "text": "Marketplace haggling",
+            "expansion_id": 1
+        },
+        {
+            "text": "Guard patrol napping",
+            "expansion_id": 1
+        },
+        {
+            "text": "A wizard's experimental spell gone wrong",
+            "expansion_id": 1
+        },
+        {
+            "text": "Professional rat catching",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very serious discussion about sewers",
+            "expansion_id": 1
+        },
+        {
+            "text": "Strategic gold hoarding",
+            "expansion_id": 1
+        },
+        {
+            "text": "The same quest 57 times",
+            "expansion_id": 1
+        },
+        {
+            "text": "A bear wearing plate mail",
+            "expansion_id": 1
+        },
+        {
+            "text": "Suspicious marketplace transactions",
+            "expansion_id": 1
+        },
+        {
+            "text": "Monster migration patterns",
+            "expansion_id": 1
+        },
+        {
+            "text": "Dramatic quest completion",
+            "expansion_id": 1
+        },
+        {
+            "text": "Trading Post bankruptcy",
+            "expansion_id": 1
+        },
+        {
+            "text": "A hero's retirement party",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most elaborate tax evasion scheme",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very specific building placement strategy",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emergency castle repairs",
+            "expansion_id": 1
+        },
+        {
+            "text": "Monster diplomacy",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly organized bandit camp",
+            "expansion_id": 1
+        },
+        {
+            "text": "The Guard Post's suggestion box",
+            "expansion_id": 1
+        },
+        {
+            "text": "Royal treasury quality control",
+            "expansion_id": 1
+        },
+        {
+            "text": "Guild politics",
+            "expansion_id": 1
+        },
+        {
+            "text": "Quest completion anxiety",
+            "expansion_id": 1
+        },
+        {
+            "text": "A suspiciously specific prophecy about rats",
+            "expansion_id": 1
+        },
+        {
+            "text": "The blacksmith's existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Competitive questing",
+            "expansion_id": 1
+        },
+        {
+            "text": "Castle architecture",
+            "expansion_id": 1
+        },
+        {
+            "text": "Divine intervention via Tax Collector",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly competent peasant",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most dramatic Guard Post destruction",
+            "expansion_id": 1
+        },
+        {
+            "text": "Monster hunting permits",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very determined rat",
+            "expansion_id": 1
+        },
+        {
+            "text": "The Royal Advisor's coffee addiction",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mandatory hero training",
+            "expansion_id": 1
+        },
+        {
+            "text": "A perfectly timed retreat",
+            "expansion_id": 1
+        },
+        {
+            "text": "The annual monster convention",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emergency quest protocols",
+            "expansion_id": 1
+        },
+        {
+            "text": "A hero's guide to reward flag collection",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most inefficient trade route",
+            "expansion_id": 1
+        },
+        {
+            "text": "Royal manifestos",
+            "expansion_id": 1
+        },
+        {
+            "text": "A Guard Post's retirement plan",
+            "expansion_id": 1
+        },
+        {
+            "text": "The marketplace's therapy sessions",
+            "expansion_id": 1
+        },
+        {
+            "text": "Hero insurance policies",
+            "expansion_id": 1
+        },
+        {
+            "text": "The great peasant uprising",
+            "expansion_id": 1
+        }
+    ]
+} 

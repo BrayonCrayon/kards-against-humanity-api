@@ -1,0 +1,448 @@
+{
+    "expansions": [
+        {
+            "name": "DIY Disasters (SFW)",
+            "id": 1
+        }
+    ],
+    "black_cards": [
+        {
+            "text": "The home improvement show was canceled after _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why is the wall leaning?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My Pinterest fail combines _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The DIY video tutorial left out _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The hardware store banned me because of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My craft room emergency kit contains _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The building inspector found _______ in the walls.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My IKEA hack went wrong because of _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The 'easy' weekend project required _______, _______, and _______.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's making that noise in the ceiling?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The YouTube tutorial didn't mention needing _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My handmade gift turned into _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The craft fair was ruined by _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "Instead of following the instructions, I used _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The home renovation reveal shocked everyone with _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My Etsy shop specializes in _______ made from _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The 'before and after' photos revealed _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's actually holding up this shelf?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The contractor quit after discovering _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "My DIY life hack combines _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "A load-bearing poster",
+            "expansion_id": 1
+        },
+        {
+            "text": "Duct tape engineering",
+            "expansion_id": 1
+        },
+        {
+            "text": "Pinterest expectations",
+            "expansion_id": 1
+        },
+        {
+            "text": "Reality checks",
+            "expansion_id": 1
+        },
+        {
+            "text": "Missing instructions",
+            "expansion_id": 1
+        },
+        {
+            "text": "Extra screws",
+            "expansion_id": 1
+        },
+        {
+            "text": "Hot glue burns",
+            "expansion_id": 1
+        },
+        {
+            "text": "Decorative mold",
+            "expansion_id": 1
+        },
+        {
+            "text": "Structural glitter",
+            "expansion_id": 1
+        },
+        {
+            "text": "Wobbly tables",
+            "expansion_id": 1
+        },
+        {
+            "text": "Artisanal splinters",
+            "expansion_id": 1
+        },
+        {
+            "text": "Rustic tetanus",
+            "expansion_id": 1
+        },
+        {
+            "text": "Vintage asbestos",
+            "expansion_id": 1
+        },
+        {
+            "text": "Craft room chaos",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emergency googling",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very supportive spouse",
+            "expansion_id": 1
+        },
+        {
+            "text": "Questionable measurements",
+            "expansion_id": 1
+        },
+        {
+            "text": "Interpretive instructions",
+            "expansion_id": 1
+        },
+        {
+            "text": "Aggressive optimism",
+            "expansion_id": 1
+        },
+        {
+            "text": "YouTube confidence",
+            "expansion_id": 1
+        },
+        {
+            "text": "A five-minute project that took six months",
+            "expansion_id": 1
+        },
+        {
+            "text": "The wrong kind of paint",
+            "expansion_id": 1
+        },
+        {
+            "text": "Accidentally permanent marker",
+            "expansion_id": 1
+        },
+        {
+            "text": "A hammer used as every tool",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mysterious wall sounds",
+            "expansion_id": 1
+        },
+        {
+            "text": "That one IKEA piece left over",
+            "expansion_id": 1
+        },
+        {
+            "text": "Decorative duct tape",
+            "expansion_id": 1
+        },
+        {
+            "text": "A Pinterest board of regrets",
+            "expansion_id": 1
+        },
+        {
+            "text": "Spray paint in the wind",
+            "expansion_id": 1
+        },
+        {
+            "text": "Accidental wall removal",
+            "expansion_id": 1
+        },
+        {
+            "text": "The wrong size everything",
+            "expansion_id": 1
+        },
+        {
+            "text": "Crafting PTSD",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very expensive mistake",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emotional support power tools",
+            "expansion_id": 1
+        },
+        {
+            "text": "Passive-aggressive measuring tape",
+            "expansion_id": 1
+        },
+        {
+            "text": "Professional procrastination",
+            "expansion_id": 1
+        },
+        {
+            "text": "Artistic structural damage",
+            "expansion_id": 1
+        },
+        {
+            "text": "Experimental plumbing",
+            "expansion_id": 1
+        },
+        {
+            "text": "Creative wiring solutions",
+            "expansion_id": 1
+        },
+        {
+            "text": "Handyman horror stories",
+            "expansion_id": 1
+        },
+        {
+            "text": "A spirit level that lies",
+            "expansion_id": 1
+        },
+        {
+            "text": "Motivational paint fumes",
+            "expansion_id": 1
+        },
+        {
+            "text": "Therapeutic demolition",
+            "expansion_id": 1
+        },
+        {
+            "text": "Unidentified ceiling stains",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emergency room frequent flyer miles",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very understanding insurance agent",
+            "expansion_id": 1
+        },
+        {
+            "text": "Warranty-voiding innovations",
+            "expansion_id": 1
+        },
+        {
+            "text": "Ambitious weekend plans",
+            "expansion_id": 1
+        },
+        {
+            "text": "Premature celebration",
+            "expansion_id": 1
+        },
+        {
+            "text": "Improvised safety equipment",
+            "expansion_id": 1
+        },
+        {
+            "text": "A collection of bent nails",
+            "expansion_id": 1
+        },
+        {
+            "text": "Optimistic budget estimates",
+            "expansion_id": 1
+        },
+        {
+            "text": "The wrong shade of everything",
+            "expansion_id": 1
+        },
+        {
+            "text": "Decorative water damage",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very patient neighbor",
+            "expansion_id": 1
+        },
+        {
+            "text": "Aesthetic duct tape solutions",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mismatched everything",
+            "expansion_id": 1
+        },
+        {
+            "text": "Inspirational hardware store visits",
+            "expansion_id": 1
+        },
+        {
+            "text": "Questionable wood filler",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly sturdy mistake",
+            "expansion_id": 1
+        },
+        {
+            "text": "A rogue spirit level",
+            "expansion_id": 1
+        },
+        {
+            "text": "The forbidden third hand",
+            "expansion_id": 1
+        },
+        {
+            "text": "Motivational sawdust",
+            "expansion_id": 1
+        },
+        {
+            "text": "A philosophical screwdriver",
+            "expansion_id": 1
+        },
+        {
+            "text": "The mythical straight cut",
+            "expansion_id": 1
+        },
+        {
+            "text": "Therapeutic sanding",
+            "expansion_id": 1
+        },
+        {
+            "text": "A load-bearing houseplant",
+            "expansion_id": 1
+        },
+        {
+            "text": "The ghost of projects past",
+            "expansion_id": 1
+        },
+        {
+            "text": "Quantum carpentry",
+            "expansion_id": 1
+        },
+        {
+            "text": "Interpretive plumbing",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very determined spatula",
+            "expansion_id": 1
+        },
+        {
+            "text": "Artistic structural integrity",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emergency craft supplies",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly sturdy cardboard box",
+            "expansion_id": 1
+        },
+        {
+            "text": "The forbidden aisle at Home Depot",
+            "expansion_id": 1
+        },
+        {
+            "text": "Tactical procrastination",
+            "expansion_id": 1
+        },
+        {
+            "text": "Experimental feng shui",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very confused measuring tape",
+            "expansion_id": 1
+        },
+        {
+            "text": "The warranty that just expired",
+            "expansion_id": 1
+        },
+        {
+            "text": "Aspirational tool collection",
+            "expansion_id": 1
+        },
+        {
+            "text": "Creative interpretation of 'level'",
+            "expansion_id": 1
+        },
+        {
+            "text": "The missing manual",
+            "expansion_id": 1
+        },
+        {
+            "text": "Decorative structural support",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very persistent draft",
+            "expansion_id": 1
+        }
+    ]
+} 

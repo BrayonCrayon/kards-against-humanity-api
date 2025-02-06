@@ -1,0 +1,356 @@
+{
+    "expansions": [
+        {
+            "name": "Cutlery Horrors (SFW)",
+            "id": 1
+        }
+    ],
+    "black_cards": [
+        {
+            "text": "The spoon's therapy session revealed _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why are all the forks hiding in the back of the drawer?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The knife support group discusses _______ every Tuesday.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The spatula witnessed _______ in the kitchen.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The cutlery drawer uprising was triggered by _______, _______, and _______.",
+            "pick": 3,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's causing the salad tongs to tremble?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The ladle's nightmare involved _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The serving spoon's last words were _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The butter knife's escape plan requires _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The soup spoon tells horror stories about _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "Why did the teaspoon start a revolution?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The dessert fork's diary entry mentions _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The kitchen utensils formed an alliance against _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "The whisk's greatest fear is _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The silverware drawer's secret society bans _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The fish knife's memoirs reveal _______ with _______.",
+            "pick": 2,
+            "expansion_id": 1
+        },
+        {
+            "text": "What's making that noise in the dishwasher?",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The serving tongs refuse to touch _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The cutlery's emergency meeting addressed _______.",
+            "pick": 1,
+            "expansion_id": 1
+        },
+        {
+            "text": "The spork's identity crisis involves _______ and _______.",
+            "pick": 2,
+            "expansion_id": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "A fork with trust issues",
+            "expansion_id": 1
+        },
+        {
+            "text": "Spoon therapy",
+            "expansion_id": 1
+        },
+        {
+            "text": "Knife meditation",
+            "expansion_id": 1
+        },
+        {
+            "text": "Drawer organization",
+            "expansion_id": 1
+        },
+        {
+            "text": "Utensil rebellion",
+            "expansion_id": 1
+        },
+        {
+            "text": "Silverware trauma",
+            "expansion_id": 1
+        },
+        {
+            "text": "Dishwasher PTSD",
+            "expansion_id": 1
+        },
+        {
+            "text": "Soup flashbacks",
+            "expansion_id": 1
+        },
+        {
+            "text": "Drawer politics",
+            "expansion_id": 1
+        },
+        {
+            "text": "Spork discrimination",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very anxious teaspoon",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most paranoid ladle",
+            "expansion_id": 1
+        },
+        {
+            "text": "A butter knife's existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Salad tong panic attacks",
+            "expansion_id": 1
+        },
+        {
+            "text": "Fork migration patterns",
+            "expansion_id": 1
+        },
+        {
+            "text": "Spatula support groups",
+            "expansion_id": 1
+        },
+        {
+            "text": "Whisk resistance training",
+            "expansion_id": 1
+        },
+        {
+            "text": "Serving spoon stories",
+            "expansion_id": 1
+        },
+        {
+            "text": "Tong trauma",
+            "expansion_id": 1
+        },
+        {
+            "text": "Cutlery counseling",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly brave egg whisk",
+            "expansion_id": 1
+        },
+        {
+            "text": "The great spoon escape",
+            "expansion_id": 1
+        },
+        {
+            "text": "A fork's guide to survival",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very persistent potato masher",
+            "expansion_id": 1
+        },
+        {
+            "text": "Utensil witness protection",
+            "expansion_id": 1
+        },
+        {
+            "text": "The serving spoon's last stand",
+            "expansion_id": 1
+        },
+        {
+            "text": "A suspiciously calm colander",
+            "expansion_id": 1
+        },
+        {
+            "text": "Drawer feng shui",
+            "expansion_id": 1
+        },
+        {
+            "text": "Spoon meditation",
+            "expansion_id": 1
+        },
+        {
+            "text": "Utensil bureaucracy",
+            "expansion_id": 1
+        },
+        {
+            "text": "A ladle's last words",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most elaborate escape plan",
+            "expansion_id": 1
+        },
+        {
+            "text": "Quality control testing",
+            "expansion_id": 1
+        },
+        {
+            "text": "Emergency polishing",
+            "expansion_id": 1
+        },
+        {
+            "text": "Drawer politics",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly organized revolt",
+            "expansion_id": 1
+        },
+        {
+            "text": "The drawer's suggestion box",
+            "expansion_id": 1
+        },
+        {
+            "text": "Utensil regulations",
+            "expansion_id": 1
+        },
+        {
+            "text": "Diplomatic immunity",
+            "expansion_id": 1
+        },
+        {
+            "text": "Silverware recruitment",
+            "expansion_id": 1
+        },
+        {
+            "text": "A suspiciously specific prophecy about soup spoons",
+            "expansion_id": 1
+        },
+        {
+            "text": "The serving tongs' existential crisis",
+            "expansion_id": 1
+        },
+        {
+            "text": "Competitive polishing",
+            "expansion_id": 1
+        },
+        {
+            "text": "Underground drawer networks",
+            "expansion_id": 1
+        },
+        {
+            "text": "Divine intervention",
+            "expansion_id": 1
+        },
+        {
+            "text": "A surprisingly competent spork",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most dramatic drawer opening",
+            "expansion_id": 1
+        },
+        {
+            "text": "Utensil uprising permits",
+            "expansion_id": 1
+        },
+        {
+            "text": "A very determined melon baller",
+            "expansion_id": 1
+        },
+        {
+            "text": "The dishwasher's suggestion box",
+            "expansion_id": 1
+        },
+        {
+            "text": "Mandatory safety training",
+            "expansion_id": 1
+        },
+        {
+            "text": "A perfectly timed drawer slam",
+            "expansion_id": 1
+        },
+        {
+            "text": "The annual utensil census",
+            "expansion_id": 1
+        },
+        {
+            "text": "Drawer evacuation procedures",
+            "expansion_id": 1
+        },
+        {
+            "text": "A fork's meditation retreat",
+            "expansion_id": 1
+        },
+        {
+            "text": "The world's most inefficient escape route",
+            "expansion_id": 1
+        },
+        {
+            "text": "Utensil manifestos",
+            "expansion_id": 1
+        },
+        {
+            "text": "A spoon's retirement plan",
+            "expansion_id": 1
+        },
+        {
+            "text": "The knife block's coffee addiction",
+            "expansion_id": 1
+        },
+        {
+            "text": "Silverware insurance policies",
+            "expansion_id": 1
+        },
+        {
+            "text": "The great spatula uprising",
+            "expansion_id": 1
+        }
+    ]
+}
