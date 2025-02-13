@@ -17,23 +17,18 @@ When generating new cards for an expansion pack, the ratio of black to white car
 Cards should be returned in a consistent JSON format, as follows:
 
 {
-  "expansions": [
-    {
-      "name": "Expansion Name Here",
-      "id": 1
-    }
-  ],
+  "expansion": {
+      "name": "Expansion Name Here"
+  },
   "white_cards": [
     {
-      "text": "answer text here",
-      "expansion_id": 1
+      "text": "answer text here"
     }
   ],
   "black_cards": [
     {
       "text": "question text here",
-      "pick": 2,
-      "expansion_id": 1
+      "pick": 2
     }
   ]
 }

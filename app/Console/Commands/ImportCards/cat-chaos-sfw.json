@@ -1,356 +1,272 @@
 {
-    "expansions": [
-        {
-            "name": "Cat Chaos (SFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Cat Chaos (SFW)"
+    },
     "black_cards": [
         {
             "text": "The cat knocked over _______ while chasing _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is the cat staring at that corner?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The 3 AM zoomies resulted in _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The cat's new favorite box previously contained _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's morning routine involves _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "What did the cat drag in this time?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's Instagram is full of _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The expensive cat bed was replaced by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's latest conspiracy theory involves _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The vet visit revealed _______ in the cat's _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is the cat sitting like that?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's diary entry mentions _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's business plan combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The cat's revenge plot targeted _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The neighborhood cats formed a club about _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's Christmas list demands _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What's behind the cat dimension portal?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's YouTube tutorial explains _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's secret hobby involves _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The cat's midnight opera featured _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
         {
-            "text": "A perfectly good cardboard box",
-            "expansion_id": 1
+            "text": "A perfectly good cardboard box"
         },
         {
-            "text": "Gravity-defying parkour",
-            "expansion_id": 1
+            "text": "Gravity-defying parkour"
         },
         {
-            "text": "Invisible bug hunting",
-            "expansion_id": 1
+            "text": "Invisible bug hunting"
         },
         {
-            "text": "Keyboard walking",
-            "expansion_id": 1
+            "text": "Keyboard walking"
         },
         {
-            "text": "Sudden chaos mode",
-            "expansion_id": 1
+            "text": "Sudden chaos mode"
         },
         {
-            "text": "Bread loaf position",
-            "expansion_id": 1
+            "text": "Bread loaf position"
         },
         {
-            "text": "Laser pointer obsession",
-            "expansion_id": 1
+            "text": "Laser pointer obsession"
         },
         {
-            "text": "Catnip shenanigans",
-            "expansion_id": 1
+            "text": "Catnip shenanigans"
         },
         {
-            "text": "Treat container sounds",
-            "expansion_id": 1
+            "text": "Treat container sounds"
         },
         {
-            "text": "Window chirping",
-            "expansion_id": 1
+            "text": "Window chirping"
         },
         {
-            "text": "A very judgmental stare",
-            "expansion_id": 1
+            "text": "A very judgmental stare"
         },
         {
-            "text": "The world's most ineffective hunting stance",
-            "expansion_id": 1
+            "text": "The world's most ineffective hunting stance"
         },
         {
-            "text": "A cat-sized business suit",
-            "expansion_id": 1
+            "text": "A cat-sized business suit"
         },
         {
-            "text": "Excessive yarn hoarding",
-            "expansion_id": 1
+            "text": "Excessive yarn hoarding"
         },
         {
-            "text": "Paper bag adventures",
-            "expansion_id": 1
+            "text": "Paper bag adventures"
         },
         {
-            "text": "Sink napping",
-            "expansion_id": 1
+            "text": "Sink napping"
         },
         {
-            "text": "Toilet paper terrorism",
-            "expansion_id": 1
+            "text": "Toilet paper terrorism"
         },
         {
-            "text": "Dramatic food demands",
-            "expansion_id": 1
+            "text": "Dramatic food demands"
         },
         {
-            "text": "Laptop heat seeking",
-            "expansion_id": 1
+            "text": "Laptop heat seeking"
         },
         {
-            "text": "Curtain climbing",
-            "expansion_id": 1
+            "text": "Curtain climbing"
         },
         {
-            "text": "A cat's guide to quantum physics",
-            "expansion_id": 1
+            "text": "A cat's guide to quantum physics"
         },
         {
-            "text": "Professional plant knocker-over",
-            "expansion_id": 1
+            "text": "Professional plant knocker-over"
         },
         {
-            "text": "A very important Zoom meeting interruption",
-            "expansion_id": 1
+            "text": "A very important Zoom meeting interruption"
         },
         {
-            "text": "Strategic hairball placement",
-            "expansion_id": 1
+            "text": "Strategic hairball placement"
         },
         {
-            "text": "The same meow 57 times in a row",
-            "expansion_id": 1
+            "text": "The same meow 57 times in a row"
         },
         {
-            "text": "A water glass tipping ceremony",
-            "expansion_id": 1
+            "text": "A water glass tipping ceremony"
         },
         {
-            "text": "Suspicious cucumber encounters",
-            "expansion_id": 1
+            "text": "Suspicious cucumber encounters"
         },
         {
-            "text": "Greeble fighting",
-            "expansion_id": 1
+            "text": "Greeble fighting"
         },
         {
-            "text": "Dramatic window watching",
-            "expansion_id": 1
+            "text": "Dramatic window watching"
         },
         {
-            "text": "Food bowl politics",
-            "expansion_id": 1
+            "text": "Food bowl politics"
         },
         {
-            "text": "A cat's dramatic monologue",
-            "expansion_id": 1
+            "text": "A cat's dramatic monologue"
         },
         {
-            "text": "The world's most elaborate nap schedule",
-            "expansion_id": 1
+            "text": "The world's most elaborate nap schedule"
         },
         {
-            "text": "A very specific sitting box",
-            "expansion_id": 1
+            "text": "A very specific sitting box"
         },
         {
-            "text": "Emergency 4 AM zoomies",
-            "expansion_id": 1
+            "text": "Emergency 4 AM zoomies"
         },
         {
-            "text": "Treat negotiations",
-            "expansion_id": 1
+            "text": "Treat negotiations"
         },
         {
-            "text": "A surprisingly organized toy collection",
-            "expansion_id": 1
+            "text": "A surprisingly organized toy collection"
         },
         {
-            "text": "The cat's suggestion box",
-            "expansion_id": 1
+            "text": "The cat's suggestion box"
         },
         {
-            "text": "Selective hearing activation",
-            "expansion_id": 1
+            "text": "Selective hearing activation"
         },
         {
-            "text": "Feline diplomacy",
-            "expansion_id": 1
+            "text": "Feline diplomacy"
         },
         {
-            "text": "Midnight zoomies",
-            "expansion_id": 1
+            "text": "Midnight zoomies"
         },
         {
-            "text": "A suspiciously specific prophecy about dinner time",
-            "expansion_id": 1
+            "text": "A suspiciously specific prophecy about dinner time"
         },
         {
-            "text": "The cat's existential crisis",
-            "expansion_id": 1
+            "text": "The cat's existential crisis"
         },
         {
-            "text": "Competitive napping",
-            "expansion_id": 1
+            "text": "Competitive napping"
         },
         {
-            "text": "Cardboard box architecture",
-            "expansion_id": 1
+            "text": "Cardboard box architecture"
         },
         {
-            "text": "Divine intervention via cat",
-            "expansion_id": 1
+            "text": "Divine intervention via cat"
         },
         {
-            "text": "A surprisingly competent mouse negotiator",
-            "expansion_id": 1
+            "text": "A surprisingly competent mouse negotiator"
         },
         {
-            "text": "The world's most dramatic hairball",
-            "expansion_id": 1
+            "text": "The world's most dramatic hairball"
         },
         {
-            "text": "Cat dimension portal permits",
-            "expansion_id": 1
+            "text": "Cat dimension portal permits"
         },
         {
-            "text": "A very determined dust bunny",
-            "expansion_id": 1
+            "text": "A very determined dust bunny"
         },
         {
-            "text": "The cat's coffee table book",
-            "expansion_id": 1
+            "text": "The cat's coffee table book"
         },
         {
-            "text": "Mandatory lap inspection",
-            "expansion_id": 1
+            "text": "Mandatory lap inspection"
         },
         {
-            "text": "A perfectly timed photobomb",
-            "expansion_id": 1
+            "text": "A perfectly timed photobomb"
         },
         {
-            "text": "The annual cat convention",
-            "expansion_id": 1
+            "text": "The annual cat convention"
         },
         {
-            "text": "Emergency grooming protocols",
-            "expansion_id": 1
+            "text": "Emergency grooming protocols"
         },
         {
-            "text": "A cat's guide to world domination",
-            "expansion_id": 1
+            "text": "A cat's guide to world domination"
         },
         {
-            "text": "The world's most inefficient hunting strategy",
-            "expansion_id": 1
+            "text": "The world's most inefficient hunting strategy"
         },
         {
-            "text": "Feline manifestos",
-            "expansion_id": 1
+            "text": "Feline manifestos"
         },
         {
-            "text": "A cat's retirement plan",
-            "expansion_id": 1
+            "text": "A cat's retirement plan"
         },
         {
-            "text": "The scratching post's coffee addiction",
-            "expansion_id": 1
+            "text": "The scratching post's coffee addiction"
         },
         {
-            "text": "Catnip insurance policies",
-            "expansion_id": 1
+            "text": "Catnip insurance policies"
         },
         {
-            "text": "The great kibble uprising",
-            "expansion_id": 1
+            "text": "The great kibble uprising"
         }
     ]
 } 

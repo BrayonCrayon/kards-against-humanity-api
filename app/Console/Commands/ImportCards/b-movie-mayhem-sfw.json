@@ -1,356 +1,272 @@
 {
-    "expansions": [
-        {
-            "name": "B-Movie Mayhem (SFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "B-Movie Mayhem (SFW)"
+    },
     "black_cards": [
         {
             "text": "The scientist's experiment combined _______ with _______ to create a monster.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is the rubber monster suit melting?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The small town's only defense against the aliens was _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The low-budget special effects replaced _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The movie's plot twist revealed _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "What's causing the cardboard city to collapse?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The government's top-secret plan involved _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The creature feature was ruined by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The mad scientist's laboratory contains _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The invasion scene used _______ instead of _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why did the atomic mutant turn pink?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The drive-in movie was interrupted by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The flying saucer's landing gear was actually _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The monster suit actor quit because of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The beach monster scene was filmed using _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The prop department replaced _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What's actually inside the alien spacecraft?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The dramatic transformation scene revealed _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The movie's entire budget was spent on _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The final battle scene featured _______ versus _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
         {
-            "text": "Visible fishing line on the flying saucer",
-            "expansion_id": 1
+            "text": "Visible fishing line on the flying saucer"
         },
         {
-            "text": "A zipper on the monster's back",
-            "expansion_id": 1
+            "text": "A zipper on the monster's back"
         },
         {
-            "text": "Dramatic theremin music",
-            "expansion_id": 1
+            "text": "Dramatic theremin music"
         },
         {
-            "text": "Cardboard ray guns",
-            "expansion_id": 1
+            "text": "Cardboard ray guns"
         },
         {
-            "text": "Aluminum foil space suits",
-            "expansion_id": 1
+            "text": "Aluminum foil space suits"
         },
         {
-            "text": "Rubber tentacles",
-            "expansion_id": 1
+            "text": "Rubber tentacles"
         },
         {
-            "text": "Fog machine overload",
-            "expansion_id": 1
+            "text": "Fog machine overload"
         },
         {
-            "text": "Stock footage of lizards",
-            "expansion_id": 1
+            "text": "Stock footage of lizards"
         },
         {
-            "text": "Painted backdrop",
-            "expansion_id": 1
+            "text": "Painted backdrop"
         },
         {
-            "text": "Dramatic overacting",
-            "expansion_id": 1
+            "text": "Dramatic overacting"
         },
         {
-            "text": "A very sweaty actor in a gorilla suit",
-            "expansion_id": 1
+            "text": "A very sweaty actor in a gorilla suit"
         },
         {
-            "text": "The world's most obvious stunt double",
-            "expansion_id": 1
+            "text": "The world's most obvious stunt double"
         },
         {
-            "text": "A monster with googly eyes",
-            "expansion_id": 1
+            "text": "A monster with googly eyes"
         },
         {
-            "text": "Excessive dry ice effects",
-            "expansion_id": 1
+            "text": "Excessive dry ice effects"
         },
         {
-            "text": "Paper mache props",
-            "expansion_id": 1
+            "text": "Paper mache props"
         },
         {
-            "text": "Miniature city made of cereal boxes",
-            "expansion_id": 1
+            "text": "Miniature city made of cereal boxes"
         },
         {
-            "text": "Green face paint and pipe cleaners",
-            "expansion_id": 1
+            "text": "Green face paint and pipe cleaners"
         },
         {
-            "text": "Unconvincing screaming",
-            "expansion_id": 1
+            "text": "Unconvincing screaming"
         },
         {
-            "text": "Toy submarines in a bathtub",
-            "expansion_id": 1
+            "text": "Toy submarines in a bathtub"
         },
         {
-            "text": "Ketchup blood",
-            "expansion_id": 1
+            "text": "Ketchup blood"
         },
         {
-            "text": "A scientist's lab coat from the Halloween store",
-            "expansion_id": 1
+            "text": "A scientist's lab coat from the Halloween store"
         },
         {
-            "text": "Suspiciously familiar stock music",
-            "expansion_id": 1
+            "text": "Suspiciously familiar stock music"
         },
         {
-            "text": "A monster that's clearly just a dog in a costume",
-            "expansion_id": 1
+            "text": "A monster that's clearly just a dog in a costume"
         },
         {
-            "text": "Obvious model airplanes on strings",
-            "expansion_id": 1
+            "text": "Obvious model airplanes on strings"
         },
         {
-            "text": "The same actor playing twins",
-            "expansion_id": 1
+            "text": "The same actor playing twins"
         },
         {
-            "text": "A beach monster made of seaweed and bubble wrap",
-            "expansion_id": 1
+            "text": "A beach monster made of seaweed and bubble wrap"
         },
         {
-            "text": "Suspiciously empty streets",
-            "expansion_id": 1
+            "text": "Suspiciously empty streets"
         },
         {
-            "text": "Glitter as alien blood",
-            "expansion_id": 1
+            "text": "Glitter as alien blood"
         },
         {
-            "text": "Dramatic wind from a box fan",
-            "expansion_id": 1
+            "text": "Dramatic wind from a box fan"
         },
         {
-            "text": "Questionable science dialogue",
-            "expansion_id": 1
+            "text": "Questionable science dialogue"
         },
         {
-            "text": "A monster's dramatic monologue",
-            "expansion_id": 1
+            "text": "A monster's dramatic monologue"
         },
         {
-            "text": "The world's most elaborate exposition",
-            "expansion_id": 1
+            "text": "The world's most elaborate exposition"
         },
         {
-            "text": "A very obvious stagehand's hand",
-            "expansion_id": 1
+            "text": "A very obvious stagehand's hand"
         },
         {
-            "text": "Emergency costume repairs",
-            "expansion_id": 1
+            "text": "Emergency costume repairs"
         },
         {
-            "text": "Continuity errors",
-            "expansion_id": 1
+            "text": "Continuity errors"
         },
         {
-            "text": "A surprisingly organized monster invasion",
-            "expansion_id": 1
+            "text": "A surprisingly organized monster invasion"
         },
         {
-            "text": "The producer's car in every chase scene",
-            "expansion_id": 1
+            "text": "The producer's car in every chase scene"
         },
         {
-            "text": "Recycled footage",
-            "expansion_id": 1
+            "text": "Recycled footage"
         },
         {
-            "text": "Dramatic newspaper headlines",
-            "expansion_id": 1
+            "text": "Dramatic newspaper headlines"
         },
         {
-            "text": "Monster romance",
-            "expansion_id": 1
+            "text": "Monster romance"
         },
         {
-            "text": "A suspiciously specific prophecy about giant ants",
-            "expansion_id": 1
+            "text": "A suspiciously specific prophecy about giant ants"
         },
         {
-            "text": "The military stock footage that doesn't match",
-            "expansion_id": 1
+            "text": "The military stock footage that doesn't match"
         },
         {
-            "text": "Competitive screaming",
-            "expansion_id": 1
+            "text": "Competitive screaming"
         },
         {
-            "text": "Underground laboratory sets",
-            "expansion_id": 1
+            "text": "Underground laboratory sets"
         },
         {
-            "text": "Divine intervention via fishing line",
-            "expansion_id": 1
+            "text": "Divine intervention via fishing line"
         },
         {
-            "text": "A surprisingly competent janitor",
-            "expansion_id": 1
+            "text": "A surprisingly competent janitor"
         },
         {
-            "text": "The world's most dramatic weather report",
-            "expansion_id": 1
+            "text": "The world's most dramatic weather report"
         },
         {
-            "text": "Monster insurance claims",
-            "expansion_id": 1
+            "text": "Monster insurance claims"
         },
         {
-            "text": "A very determined newspaper boy",
-            "expansion_id": 1
+            "text": "A very determined newspaper boy"
         },
         {
-            "text": "The mayor's unconvincing denial",
-            "expansion_id": 1
+            "text": "The mayor's unconvincing denial"
         },
         {
-            "text": "Mandatory evacuation chaos",
-            "expansion_id": 1
+            "text": "Mandatory evacuation chaos"
         },
         {
-            "text": "A perfectly timed power outage",
-            "expansion_id": 1
+            "text": "A perfectly timed power outage"
         },
         {
-            "text": "The annual monster parade",
-            "expansion_id": 1
+            "text": "The annual monster parade"
         },
         {
-            "text": "Emergency monster protocols",
-            "expansion_id": 1
+            "text": "Emergency monster protocols"
         },
         {
-            "text": "A scientist's dramatic revelation",
-            "expansion_id": 1
+            "text": "A scientist's dramatic revelation"
         },
         {
-            "text": "The world's most inefficient escape plan",
-            "expansion_id": 1
+            "text": "The world's most inefficient escape plan"
         },
         {
-            "text": "Monster union negotiations",
-            "expansion_id": 1
+            "text": "Monster union negotiations"
         },
         {
-            "text": "A detective's retirement day",
-            "expansion_id": 1
+            "text": "A detective's retirement day"
         },
         {
-            "text": "The lab assistant's coffee addiction",
-            "expansion_id": 1
+            "text": "The lab assistant's coffee addiction"
         },
         {
-            "text": "Monster liability waivers",
-            "expansion_id": 1
+            "text": "Monster liability waivers"
         },
         {
-            "text": "The great creature feature uprising",
-            "expansion_id": 1
+            "text": "The great creature feature uprising"
         }
     ]
 } 

@@ -1,352 +1,269 @@
 {
-    "expansions": [
-        {
-            "name": "Workplace Hazards (NSFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Workplace Hazards (NSFW)"
+    },
     "black_cards": [
         {
             "text": "The lathe accident turned their body into _______ while the machine kept _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The paramedics found _______ still twitching in the machinery.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The pressure valve explosion embedded _______ into _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "They had to identify the victim by _______ because _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The factory floor drain clogged with _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "What's that red mist coming from the industrial fan?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The hydraulic press malfunction left _______ fused into _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The coroner's preliminary report simply reads: '_______.'",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The acid vat accident dissolved everything except _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "They found _______ still clutching _______ hours after the incident.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The conveyor belt kept running until _______ jammed the _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The new employee's screams were drowned out by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The forklift pinned them between _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The emergency stop button was just out of reach of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The industrial freezer door trapped _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What's that rhythmic thumping sound from the compactor?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The worker's compensation claim included photos of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The safety harness failed at _______ feet above _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The machine guard was removed to increase _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The lockout/tagout procedure was ignored because of _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
         {
-            "text": "A loose necktie caught in rotating machinery",
-            "expansion_id": 1
+            "text": "A loose necktie caught in rotating machinery"
         },
         {
-            "text": "Fingers scattered across the assembly line",
-            "expansion_id": 1
+            "text": "Fingers scattered across the assembly line"
         },
         {
-            "text": "A wedding ring fused into melted flesh",
-            "expansion_id": 1
+            "text": "A wedding ring fused into melted flesh"
         },
         {
-            "text": "Bone fragments in the gearbox",
-            "expansion_id": 1
+            "text": "Bone fragments in the gearbox"
         },
         {
-            "text": "A severed hand still gripping the controls",
-            "expansion_id": 1
+            "text": "A severed hand still gripping the controls"
         },
         {
-            "text": "High-pressure hydraulic fluid injection wounds",
-            "expansion_id": 1
+            "text": "High-pressure hydraulic fluid injection wounds"
         },
         {
-            "text": "Scalp and hair tangled in the drill press",
-            "expansion_id": 1
+            "text": "Scalp and hair tangled in the drill press"
         },
         {
-            "text": "A crushed ribcage still trying to breathe",
-            "expansion_id": 1
+            "text": "A crushed ribcage still trying to breathe"
         },
         {
-            "text": "Skin peeled off by the conveyor belt",
-            "expansion_id": 1
+            "text": "Skin peeled off by the conveyor belt"
         },
         {
-            "text": "A face pressed flat against hot metal",
-            "expansion_id": 1
+            "text": "A face pressed flat against hot metal"
         },
         {
-            "text": "The sound of bones being pulverized",
-            "expansion_id": 1
+            "text": "The sound of bones being pulverized"
         },
         {
-            "text": "A torso bisected by steel cable",
-            "expansion_id": 1
+            "text": "A torso bisected by steel cable"
         },
         {
-            "text": "Limbs twisted into impossible angles",
-            "expansion_id": 1
+            "text": "Limbs twisted into impossible angles"
         },
         {
-            "text": "A skull crushed like an empty eggshell",
-            "expansion_id": 1
+            "text": "A skull crushed like an empty eggshell"
         },
         {
-            "text": "The wet thud of falling from six stories",
-            "expansion_id": 1
+            "text": "The wet thud of falling from six stories"
         },
         {
-            "text": "Steam burns that stripped away all the skin",
-            "expansion_id": 1
+            "text": "Steam burns that stripped away all the skin"
         },
         {
-            "text": "A spinal cord severed at the neck",
-            "expansion_id": 1
+            "text": "A spinal cord severed at the neck"
         },
         {
-            "text": "Intestines caught in the drive shaft",
-            "expansion_id": 1
+            "text": "Intestines caught in the drive shaft"
         },
         {
-            "text": "Lungs filled with caustic chemicals",
-            "expansion_id": 1
+            "text": "Lungs filled with caustic chemicals"
         },
         {
-            "text": "An eyeball impaled on a metal shard",
-            "expansion_id": 1
+            "text": "An eyeball impaled on a metal shard"
         },
         {
-            "text": "The distinct crack of a skull meeting concrete",
-            "expansion_id": 1
+            "text": "The distinct crack of a skull meeting concrete"
         },
         {
-            "text": "A body compressed into a two-inch gap",
-            "expansion_id": 1
+            "text": "A body compressed into a two-inch gap"
         },
         {
-            "text": "Arterial spray painting the ceiling",
-            "expansion_id": 1
+            "text": "Arterial spray painting the ceiling"
         },
         {
-            "text": "Teeth embedded in the safety guard",
-            "expansion_id": 1
+            "text": "Teeth embedded in the safety guard"
         },
         {
-            "text": "A tongue bitten clean through",
-            "expansion_id": 1
+            "text": "A tongue bitten clean through"
         },
         {
-            "text": "Molten metal flowing into steel-toed boots",
-            "expansion_id": 1
+            "text": "Molten metal flowing into steel-toed boots"
         },
         {
-            "text": "The slow crush of a mechanical press",
-            "expansion_id": 1
+            "text": "The slow crush of a mechanical press"
         },
         {
-            "text": "A ribcage split open by a forklift tine",
-            "expansion_id": 1
+            "text": "A ribcage split open by a forklift tine"
         },
         {
-            "text": "Fingers frozen to industrial refrigerant pipes",
-            "expansion_id": 1
+            "text": "Fingers frozen to industrial refrigerant pipes"
         },
         {
-            "text": "A jaw shattered by flying debris",
-            "expansion_id": 1
+            "text": "A jaw shattered by flying debris"
         },
         {
-            "text": "The gurgling sound of drowning in chemicals",
-            "expansion_id": 1
+            "text": "The gurgling sound of drowning in chemicals"
         },
         {
-            "text": "A body folded backwards over machinery",
-            "expansion_id": 1
+            "text": "A body folded backwards over machinery"
         },
         {
-            "text": "Flesh stripped to bone by an abrasive belt",
-            "expansion_id": 1
+            "text": "Flesh stripped to bone by an abrasive belt"
         },
         {
-            "text": "The pop of a shoulder being dislocated",
-            "expansion_id": 1
+            "text": "The pop of a shoulder being dislocated"
         },
         {
-            "text": "A face dissolved by industrial acid",
-            "expansion_id": 1
+            "text": "A face dissolved by industrial acid"
         },
         {
-            "text": "The crunch of bones in the compactor",
-            "expansion_id": 1
+            "text": "The crunch of bones in the compactor"
         },
         {
-            "text": "A hand reduced to red pulp",
-            "expansion_id": 1
+            "text": "A hand reduced to red pulp"
         },
         {
-            "text": "The smell of burning hair and flesh",
-            "expansion_id": 1
+            "text": "The smell of burning hair and flesh"
         },
         {
-            "text": "A foot crushed into paste",
-            "expansion_id": 1
+            "text": "A foot crushed into paste"
         },
         {
-            "text": "The last gasp of a collapsed lung",
-            "expansion_id": 1
+            "text": "The last gasp of a collapsed lung"
         },
         {
-            "text": "A heartbeat slowly fading to nothing",
-            "expansion_id": 1
+            "text": "A heartbeat slowly fading to nothing"
         },
         {
-            "text": "Blood pooling around safety equipment",
-            "expansion_id": 1
+            "text": "Blood pooling around safety equipment"
         },
         {
-            "text": "A spine snapped like a dry twig",
-            "expansion_id": 1
+            "text": "A spine snapped like a dry twig"
         },
         {
-            "text": "The sound of screaming suddenly stopping",
-            "expansion_id": 1
+            "text": "The sound of screaming suddenly stopping"
         },
         {
-            "text": "Fingernails torn out by the roots",
-            "expansion_id": 1
+            "text": "Fingernails torn out by the roots"
         },
         {
-            "text": "A body turned inside out by machinery",
-            "expansion_id": 1
+            "text": "A body turned inside out by machinery"
         },
         {
-            "text": "The wet slap of viscera hitting concrete",
-            "expansion_id": 1
+            "text": "The wet slap of viscera hitting concrete"
         },
         {
-            "text": "A throat filled with metal shavings",
-            "expansion_id": 1
+            "text": "A throat filled with metal shavings"
         },
         {
-            "text": "Skin grafts that will never take",
-            "expansion_id": 1
+            "text": "Skin grafts that will never take"
         },
         {
-            "text": "The moment rigor mortis sets in",
-            "expansion_id": 1
+            "text": "The moment rigor mortis sets in"
         },
         {
-            "text": "A death rattle echoing through the factory",
-            "expansion_id": 1
+            "text": "A death rattle echoing through the factory"
         },
         {
-            "text": "The sizzle of flesh on hot steel",
-            "expansion_id": 1
+            "text": "The sizzle of flesh on hot steel"
         },
         {
-            "text": "A body cavity filled with shrapnel",
-            "expansion_id": 1
+            "text": "A body cavity filled with shrapnel"
         },
         {
-            "text": "The exact moment of brain death",
-            "expansion_id": 1
+            "text": "The exact moment of brain death"
         },
         {
-            "text": "A nervous system's final misfire",
-            "expansion_id": 1
+            "text": "A nervous system's final misfire"
         },
         {
-            "text": "The last twitch of severed muscles",
-            "expansion_id": 1
+            "text": "The last twitch of severed muscles"
         },
         {
-            "text": "A timecard punched for the last time",
-            "expansion_id": 1
+            "text": "A timecard punched for the last time"
         },
         {
-            "text": "The sound of bones being powdered",
-            "expansion_id": 1
+            "text": "The sound of bones being powdered"
         },
         {
-            "text": "A workplace fatality statistic",
-            "expansion_id": 1
+            "text": "A workplace fatality statistic"
         },
         {
-            "text": "An OSHA violation written in blood",
-            "expansion_id": 1
+            "text": "An OSHA violation written in blood"
         }
     ]
-} 
+}

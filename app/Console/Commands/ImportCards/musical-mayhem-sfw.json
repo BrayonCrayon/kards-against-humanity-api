@@ -1,113 +1,98 @@
 {
-    "expansions": [
-        {
-            "name": "Musical Mayhem (SFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Musical Mayhem (SFW)"
+    },
     "black_cards": [
         {
+            "text": "The orchestra's performance was ruined by _______ and _______.",
+            "pick": 2
+        },
+        {
             "text": "The Broadway show was stopped mid-performance because of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "Why is the orchestra pit on fire?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The new musical combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The karaoke night ended after _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The pop star's rider demands _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What caused the choir to start crying?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The music video features _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "The rock band's new album is just sounds of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The musical instrument of the future combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why did the conductor stop the performance?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Grammy was accidentally awarded to _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The street performer's act involves _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The wedding DJ accidentally played _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The opera was ruined by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "Instead of singing, the performer just _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The musical's big finale reveals _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The band broke up because of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "What's that sound coming from the recording studio?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The music festival was shut down due to _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The encore performance featured _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
+        {
+            "text": "A very confused triangle player",
+            "expansion_id": 1
+        },
         {
             "text": "Jazz hands",
             "expansion_id": 1
@@ -246,10 +231,6 @@
         },
         {
             "text": "Zen drumming",
-            "expansion_id": 1
-        },
-        {
-            "text": "Backup dancers",
             "expansion_id": 1
         },
         {

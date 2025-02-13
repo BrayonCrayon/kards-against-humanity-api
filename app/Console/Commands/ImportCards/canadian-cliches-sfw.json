@@ -1,352 +1,269 @@
 {
-    "expansions": [
-        {
-            "name": "Canadian Clichés (SFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Canadian Cliches (SFW)"
+    },
     "black_cards": [
         {
             "text": "The Tim Hortons drive-thru was backed up because of _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is the moose wearing _______?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The hockey game was delayed due to _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
-            "text": "The maple syrup heist involved _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "text": "The maple syrup heist involved _______ and _______.",
+            "pick": 2
         },
         {
             "text": "What's causing the beavers to protest?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Canadian passport office now requires _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Sorry, but _______ is actually _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The winter survival kit must include _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Canada Day parade featured _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The poutine food truck replaced _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is everyone suddenly speaking in 'eh's?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Canadian Heritage Minute dramatized _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The polar bear's morning routine includes _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The ice fishing shack is actually full of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The snowplow got stuck because of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The local curling team's secret weapon is _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "What's really inside that double-double?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Canadian goose uprising was triggered by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The new Canadian superhero fights crime with _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Great White North's newest trend combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
         {
-            "text": "Aggressive apologizing",
-            "expansion_id": 1
+            "text": "Aggressive apologizing"
         },
         {
-            "text": "A very polite road rage incident",
-            "expansion_id": 1
+            "text": "A very polite road rage incident"
         },
         {
-            "text": "Strategic maple syrup reserves",
-            "expansion_id": 1
+            "text": "Strategic maple syrup reserves"
         },
         {
-            "text": "Hockey stick diplomacy",
-            "expansion_id": 1
+            "text": "Hockey stick diplomacy"
         },
         {
-            "text": "Timbits for breakfast",
-            "expansion_id": 1
+            "text": "Timbits for breakfast"
         },
         {
-            "text": "Moose crossing etiquette",
-            "expansion_id": 1
+            "text": "Moose crossing etiquette"
         },
         {
-            "text": "Competitive snow shoveling",
-            "expansion_id": 1
+            "text": "Competitive snow shoveling"
         },
         {
-            "text": "Beaver dam building permits",
-            "expansion_id": 1
+            "text": "Beaver dam building permits"
         },
         {
-            "text": "Poutine perfection",
-            "expansion_id": 1
+            "text": "Poutine perfection"
         },
         {
-            "text": "Mandatory igloo inspection",
-            "expansion_id": 1
+            "text": "Mandatory igloo inspection"
         },
         {
-            "text": "A very confused American tourist",
-            "expansion_id": 1
+            "text": "A very confused American tourist"
         },
         {
-            "text": "The world's most passive-aggressive 'sorry'",
-            "expansion_id": 1
+            "text": "The world's most passive-aggressive 'sorry'"
         },
         {
-            "text": "A moose in a Mountie uniform",
-            "expansion_id": 1
+            "text": "A moose in a Mountie uniform"
         },
         {
-            "text": "Emergency toque deployment",
-            "expansion_id": 1
+            "text": "Emergency toque deployment"
         },
         {
-            "text": "Bagged milk rebellion",
-            "expansion_id": 1
+            "text": "Bagged milk rebellion"
         },
         {
-            "text": "Double-double addiction",
-            "expansion_id": 1
+            "text": "Double-double addiction"
         },
         {
-            "text": "Curling rock polishing",
-            "expansion_id": 1
+            "text": "Curling rock polishing"
         },
         {
-            "text": "Extreme politeness",
-            "expansion_id": 1
+            "text": "Extreme politeness"
         },
         {
-            "text": "Maple syrup chugging",
-            "expansion_id": 1
+            "text": "Maple syrup chugging"
         },
         {
-            "text": "Canadian goose warfare",
-            "expansion_id": 1
+            "text": "Canadian goose warfare"
         },
         {
-            "text": "A beaver's construction company",
-            "expansion_id": 1
+            "text": "A beaver's construction company"
         },
         {
-            "text": "Professional zamboni racing",
-            "expansion_id": 1
+            "text": "Professional zamboni racing"
         },
         {
-            "text": "A very serious discussion about ketchup chips",
-            "expansion_id": 1
+            "text": "A very serious discussion about ketchup chips"
         },
         {
-            "text": "Strategic poutine reserves",
-            "expansion_id": 1
+            "text": "Strategic poutine reserves"
         },
         {
-            "text": "The same 'eh' 57 times",
-            "expansion_id": 1
+            "text": "The same 'eh' 57 times"
         },
         {
-            "text": "A plaid-wearing moose",
-            "expansion_id": 1
+            "text": "A plaid-wearing moose"
         },
         {
-            "text": "Suspicious maple syrup transactions",
-            "expansion_id": 1
+            "text": "Suspicious maple syrup transactions"
         },
         {
-            "text": "Ice fishing conspiracy theories",
-            "expansion_id": 1
+            "text": "Ice fishing conspiracy theories"
         },
         {
-            "text": "Dramatic hockey commentary",
-            "expansion_id": 1
+            "text": "Dramatic hockey commentary"
         },
         {
-            "text": "Tim Hortons withdrawal",
-            "expansion_id": 1
+            "text": "Tim Hortons withdrawal"
         },
         {
-            "text": "A polar bear's summer vacation",
-            "expansion_id": 1
+            "text": "A polar bear's summer vacation"
         },
         {
-            "text": "The world's most elaborate snow fort",
-            "expansion_id": 1
+            "text": "The world's most elaborate snow fort"
         },
         {
-            "text": "A very specific winter tire recommendation",
-            "expansion_id": 1
+            "text": "A very specific winter tire recommendation"
         },
         {
-            "text": "Emergency long johns",
-            "expansion_id": 1
+            "text": "Emergency long johns"
         },
         {
-            "text": "Snowstorm diplomacy",
-            "expansion_id": 1
+            "text": "Snowstorm diplomacy"
         },
         {
-            "text": "A surprisingly organized beaver lodge",
-            "expansion_id": 1
+            "text": "A surprisingly organized beaver lodge"
         },
         {
-            "text": "The hockey arena's suggestion box",
-            "expansion_id": 1
+            "text": "The hockey arena's suggestion box"
         },
         {
-            "text": "Maple syrup quality control",
-            "expansion_id": 1
+            "text": "Maple syrup quality control"
         },
         {
-            "text": "Provincial rivalry",
-            "expansion_id": 1
+            "text": "Provincial rivalry"
         },
         {
-            "text": "Snow angel Olympics",
-            "expansion_id": 1
+            "text": "Snow angel Olympics"
         },
         {
-            "text": "A suspiciously specific prophecy about Tim Hortons",
-            "expansion_id": 1
+            "text": "A suspiciously specific prophecy about Tim Hortons"
         },
         {
-            "text": "The lumberjack's existential crisis",
-            "expansion_id": 1
+            "text": "The lumberjack's existential crisis"
         },
         {
-            "text": "Competitive apologizing",
-            "expansion_id": 1
+            "text": "Competitive apologizing"
         },
         {
-            "text": "Igloo architecture",
-            "expansion_id": 1
+            "text": "Igloo architecture"
         },
         {
-            "text": "Divine intervention via moose",
-            "expansion_id": 1
+            "text": "Divine intervention via moose"
         },
         {
-            "text": "A surprisingly competent beaver",
-            "expansion_id": 1
+            "text": "A surprisingly competent beaver"
         },
         {
-            "text": "The world's most dramatic zamboni entrance",
-            "expansion_id": 1
+            "text": "The world's most dramatic zamboni entrance"
         },
         {
-            "text": "Winter survival permits",
-            "expansion_id": 1
+            "text": "Winter survival permits"
         },
         {
-            "text": "A very determined snowplow",
-            "expansion_id": 1
+            "text": "A very determined snowplow"
         },
         {
-            "text": "The maple syrup cartel's manifesto",
-            "expansion_id": 1
+            "text": "The maple syrup cartel's manifesto"
         },
         {
-            "text": "Mandatory politeness training",
-            "expansion_id": 1
+            "text": "Mandatory politeness training"
         },
         {
-            "text": "A perfectly timed 'sorry'",
-            "expansion_id": 1
+            "text": "A perfectly timed 'sorry'"
         },
         {
-            "text": "The annual igloo convention",
-            "expansion_id": 1
+            "text": "The annual igloo convention"
         },
         {
-            "text": "Emergency poutine protocols",
-            "expansion_id": 1
+            "text": "Emergency poutine protocols"
         },
         {
-            "text": "A Canadian's guide to winter survival",
-            "expansion_id": 1
+            "text": "A Canadian's guide to winter survival"
         },
         {
-            "text": "The world's most inefficient snow removal",
-            "expansion_id": 1
+            "text": "The world's most inefficient snow removal"
         },
         {
-            "text": "Maple syrup manifestos",
-            "expansion_id": 1
+            "text": "Maple syrup manifestos"
         },
         {
-            "text": "A moose's retirement plan",
-            "expansion_id": 1
+            "text": "A moose's retirement plan"
         },
         {
-            "text": "The hockey stick's coffee addiction",
-            "expansion_id": 1
+            "text": "The hockey stick's coffee addiction"
         },
         {
-            "text": "Winter tire insurance policies",
-            "expansion_id": 1
+            "text": "Winter tire insurance policies"
         },
         {
             "text": "The great Timbits uprising",

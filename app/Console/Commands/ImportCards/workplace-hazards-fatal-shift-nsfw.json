@@ -1,352 +1,269 @@
 {
-    "expansions": [
-        {
-            "name": "Workplace Hazards: Fatal Shift (NSFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Workplace Hazards: Fatal Shift (NSFW)"
+    },
     "black_cards": [
         {
             "text": "The apprentice's long hair got caught and _______ before anyone could reach _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The family requested a closed casket after seeing _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The dashcam footage shows the crane operator _______ right before _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The 911 operator went silent after hearing _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The safety training video now includes actual footage of _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "The victim's children kept asking why daddy was _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The trapped worker's phone recorded _______ until _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The trauma counselor quit after witnessing _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The veteran EMT vomited when they discovered _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The victim's wedding ring was found inside _______ next to _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The machine kept operating for hours after _______ until _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The pregnant worker's last words were _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The rescue team found _______ still warm beside _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The victim's mother identified them by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The janitor discovered _______ mixed with _______ in the morning.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The suicide note simply mentioned _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The worker's last selfie showed _______ in the background.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The coworker's PTSD was triggered by _______ reminding them of _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The victim's child drew a picture of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The last text message mentioned _______ before _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
         {
-            "text": "A child's drawing of daddy's accident",
-            "expansion_id": 1
+            "text": "A child's drawing of daddy's accident"
         },
         {
-            "text": "The exact moment a family becomes eligible for workers' comp",
-            "expansion_id": 1
+            "text": "The exact moment a family becomes eligible for workers' comp"
         },
         {
-            "text": "A voicemail cut off by screaming",
-            "expansion_id": 1
+            "text": "A voicemail cut off by screaming"
         },
         {
-            "text": "A lunchbox that will never be opened",
-            "expansion_id": 1
+            "text": "A lunchbox that will never be opened"
         },
         {
-            "text": "The sound of a toddler asking when mommy's coming home",
-            "expansion_id": 1
+            "text": "The sound of a toddler asking when mommy's coming home"
         },
         {
-            "text": "A positive pregnancy test in a dead worker's locker",
-            "expansion_id": 1
+            "text": "A positive pregnancy test in a dead worker's locker"
         },
         {
-            "text": "A half-finished Father's Day card",
-            "expansion_id": 1
+            "text": "A half-finished Father's Day card"
         },
         {
-            "text": "The last family photo before the accident",
-            "expansion_id": 1
+            "text": "The last family photo before the accident"
         },
         {
-            "text": "A wedding ring embedded in machinery",
-            "expansion_id": 1
+            "text": "A wedding ring embedded in machinery"
         },
         {
-            "text": "The unfinished text message: 'I love y'",
-            "expansion_id": 1
+            "text": "The unfinished text message: 'I love y'"
         },
         {
-            "text": "A phone playing a child's voicemail on repeat",
-            "expansion_id": 1
+            "text": "A phone playing a child's voicemail on repeat"
         },
         {
-            "text": "The exact moment of realizing no one's coming to help",
-            "expansion_id": 1
+            "text": "The exact moment of realizing no one's coming to help"
         },
         {
-            "text": "A birthday cake in the break room that will never be eaten",
-            "expansion_id": 1
+            "text": "A birthday cake in the break room that will never be eaten"
         },
         {
-            "text": "The look in their eyes when they knew it was over",
-            "expansion_id": 1
+            "text": "The look in their eyes when they knew it was over"
         },
         {
-            "text": "A Christmas bonus check soaked in blood",
-            "expansion_id": 1
+            "text": "A Christmas bonus check soaked in blood"
         },
         {
-            "text": "The sound of a mother identifying her child's remains",
-            "expansion_id": 1
+            "text": "The sound of a mother identifying her child's remains"
         },
         {
-            "text": "A family photo falling from lifeless fingers",
-            "expansion_id": 1
+            "text": "A family photo falling from lifeless fingers"
         },
         {
-            "text": "The last breath forming the word 'sorry'",
-            "expansion_id": 1
+            "text": "The last breath forming the word 'sorry'"
         },
         {
-            "text": "A child's drawing found in the victim's pocket",
-            "expansion_id": 1
+            "text": "A child's drawing found in the victim's pocket"
         },
         {
-            "text": "The moment between accident and agony",
-            "expansion_id": 1
+            "text": "The moment between accident and agony"
         },
         {
-            "text": "A colleague's scream of recognition",
-            "expansion_id": 1
+            "text": "A colleague's scream of recognition"
         },
         {
-            "text": "The slow realization that the screaming is your own",
-            "expansion_id": 1
+            "text": "The slow realization that the screaming is your own"
         },
         {
-            "text": "A final paycheck delivered to a grieving widow",
-            "expansion_id": 1
+            "text": "A final paycheck delivered to a grieving widow"
         },
         {
-            "text": "The empty chair at a child's graduation",
-            "expansion_id": 1
+            "text": "The empty chair at a child's graduation"
         },
         {
-            "text": "A retirement party invitation never sent",
-            "expansion_id": 1
+            "text": "A retirement party invitation never sent"
         },
         {
-            "text": "The last kiss goodbye that morning",
-            "expansion_id": 1
+            "text": "The last kiss goodbye that morning"
         },
         {
-            "text": "A 'World's Best Dad' mug shattered in the wreckage",
-            "expansion_id": 1
+            "text": "A 'World's Best Dad' mug shattered in the wreckage"
         },
         {
-            "text": "The moment between consciousness and death",
-            "expansion_id": 1
+            "text": "The moment between consciousness and death"
         },
         {
-            "text": "A safety poster splattered with their coworker's blood",
-            "expansion_id": 1
+            "text": "A safety poster splattered with their coworker's blood"
         },
         {
-            "text": "The sound of a spouse's world shattering",
-            "expansion_id": 1
+            "text": "The sound of a spouse's world shattering"
         },
         {
-            "text": "A half-eaten lunch that became a last meal",
-            "expansion_id": 1
+            "text": "A half-eaten lunch that became a last meal"
         },
         {
-            "text": "The exact moment hope turns to horror",
-            "expansion_id": 1
+            "text": "The exact moment hope turns to horror"
         },
         {
-            "text": "A timecard that will never be punched again",
-            "expansion_id": 1
+            "text": "A timecard that will never be punched again"
         },
         {
-            "text": "The last joke they ever told",
-            "expansion_id": 1
+            "text": "The last joke they ever told"
         },
         {
-            "text": "A colleague's mental breakdown during identification",
-            "expansion_id": 1
+            "text": "A colleague's mental breakdown during identification"
         },
         {
-            "text": "The silence after the screaming stops",
-            "expansion_id": 1
+            "text": "The silence after the screaming stops"
         },
         {
-            "text": "A 'See You Tonight' text that became a lie",
-            "expansion_id": 1
+            "text": "A 'See You Tonight' text that became a lie"
         },
         {
-            "text": "The moment between hope and acceptance",
-            "expansion_id": 1
+            "text": "The moment between hope and acceptance"
         },
         {
-            "text": "An anniversary gift that will never be given",
-            "expansion_id": 1
+            "text": "An anniversary gift that will never be given"
         },
         {
-            "text": "The sound of a child asking about heaven",
-            "expansion_id": 1
+            "text": "The sound of a child asking about heaven"
         },
         {
-            "text": "A promotion letter delivered to a funeral",
-            "expansion_id": 1
+            "text": "A promotion letter delivered to a funeral"
         },
         {
-            "text": "The last family dinner they'll ever have",
-            "expansion_id": 1
+            "text": "The last family dinner they'll ever have"
         },
         {
-            "text": "A 'Happy Birthday Daddy' drawing never received",
-            "expansion_id": 1
+            "text": "A 'Happy Birthday Daddy' drawing never received"
         },
         {
-            "text": "The exact moment a dream job becomes a nightmare",
-            "expansion_id": 1
+            "text": "The exact moment a dream job becomes a nightmare"
         },
         {
-            "text": "A locker full of family photos to be cleaned out",
-            "expansion_id": 1
+            "text": "A locker full of family photos to be cleaned out"
         },
         {
-            "text": "The last 'I love you' left unsaid",
-            "expansion_id": 1
+            "text": "The last 'I love you' left unsaid"
         },
         {
-            "text": "A safety violation that orphaned three children",
-            "expansion_id": 1
+            "text": "A safety violation that orphaned three children"
         },
         {
-            "text": "The moment between accident and realization",
-            "expansion_id": 1
+            "text": "The moment between accident and realization"
         },
         {
-            "text": "A coffee mug that will stay full forever",
-            "expansion_id": 1
+            "text": "A coffee mug that will stay full forever"
         },
         {
-            "text": "The sound of a phone ringing at an empty desk",
-            "expansion_id": 1
+            "text": "The sound of a phone ringing at an empty desk"
         },
         {
-            "text": "A family vacation never taken",
-            "expansion_id": 1
+            "text": "A family vacation never taken"
         },
         {
-            "text": "The last photo on their phone",
-            "expansion_id": 1
+            "text": "The last photo on their phone"
         },
         {
-            "text": "A college fund that became funeral expenses",
-            "expansion_id": 1
+            "text": "A college fund that became funeral expenses"
         },
         {
-            "text": "The moment between life and death",
-            "expansion_id": 1
+            "text": "The moment between life and death"
         },
         {
-            "text": "A safety meeting scheduled for tomorrow",
-            "expansion_id": 1
+            "text": "A safety meeting scheduled for tomorrow"
         },
         {
-            "text": "The last time their children saw them smile",
-            "expansion_id": 1
+            "text": "The last time their children saw them smile"
         },
         {
-            "text": "An empty seat at the dinner table",
-            "expansion_id": 1
+            "text": "An empty seat at the dinner table"
         },
         {
-            "text": "The sound of a widow's first night alone",
-            "expansion_id": 1
+            "text": "The sound of a widow's first night alone"
         },
         {
-            "text": "A mortgage payment due after the funeral",
-            "expansion_id": 1
+            "text": "A mortgage payment due after the funeral"
         },
         {
-            "text": "The moment cost-cutting became manslaughter",
-            "expansion_id": 1
+            "text": "The moment cost-cutting became manslaughter"
         }
     ]
 } 

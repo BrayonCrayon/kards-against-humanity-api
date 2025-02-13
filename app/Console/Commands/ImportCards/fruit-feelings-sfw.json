@@ -1,356 +1,272 @@
 {
-    "expansions": [
-        {
-            "name": "Fruit Feelings (SFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Fruit Feelings (SFW)"
+    },
     "black_cards": [
         {
             "text": "The banana's therapy session revealed _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is the pineapple crying?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The fruit bowl support group discusses _______ every Wednesday.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The apple's dating profile lists _______ as a deal-breaker.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The fruit salad drama started because of _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "What's causing the grapes to gossip?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The strawberry's memoir reveals _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The orange's stand-up comedy routine is all about _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The watermelon's biggest fear is _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The mango's dream job combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why did the kiwi start a revolution?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The peach's social media is full of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The fruit basket committee banned _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The lemon's self-help book focuses on _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The fruit ninja incident resulted in _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The avocado's identity crisis involves _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What's in the forbidden fruit smoothie?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The fruit's motivational speech emphasized _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The produce aisle scandal exposed _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The fruit poetry slam featured _______ versus _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
         {
-            "text": "A perfectly ripe existential crisis",
-            "expansion_id": 1
+            "text": "A perfectly ripe existential crisis"
         },
         {
-            "text": "Banana bunch separation anxiety",
-            "expansion_id": 1
+            "text": "Banana bunch separation anxiety"
         },
         {
-            "text": "Grape cluster therapy",
-            "expansion_id": 1
+            "text": "Grape cluster therapy"
         },
         {
-            "text": "Citrus superiority complex",
-            "expansion_id": 1
+            "text": "Citrus superiority complex"
         },
         {
-            "text": "Bruised ego",
-            "expansion_id": 1
+            "text": "Bruised ego"
         },
         {
-            "text": "Fruit bowl politics",
-            "expansion_id": 1
+            "text": "Fruit bowl politics"
         },
         {
-            "text": "Ripening peer pressure",
-            "expansion_id": 1
+            "text": "Ripening peer pressure"
         },
         {
-            "text": "Organic identity crisis",
-            "expansion_id": 1
+            "text": "Organic identity crisis"
         },
         {
-            "text": "Seasonal depression",
-            "expansion_id": 1
+            "text": "Seasonal depression"
         },
         {
-            "text": "Produce aisle drama",
-            "expansion_id": 1
+            "text": "Produce aisle drama"
         },
         {
-            "text": "A very insecure apple",
-            "expansion_id": 1
+            "text": "A very insecure apple"
         },
         {
-            "text": "The world's most optimistic raisin",
-            "expansion_id": 1
+            "text": "The world's most optimistic raisin"
         },
         {
-            "text": "A strawberry's guide to self-care",
-            "expansion_id": 1
+            "text": "A strawberry's guide to self-care"
         },
         {
-            "text": "Competitive ripening",
-            "expansion_id": 1
+            "text": "Competitive ripening"
         },
         {
-            "text": "Fruit salad FOMO",
-            "expansion_id": 1
+            "text": "Fruit salad FOMO"
         },
         {
-            "text": "Refrigerator meditation",
-            "expansion_id": 1
+            "text": "Refrigerator meditation"
         },
         {
-            "text": "Smoothie blend anxiety",
-            "expansion_id": 1
+            "text": "Smoothie blend anxiety"
         },
         {
-            "text": "Dramatic shelf placement",
-            "expansion_id": 1
+            "text": "Dramatic shelf placement"
         },
         {
-            "text": "Farmers market gossip",
-            "expansion_id": 1
+            "text": "Farmers market gossip"
         },
         {
-            "text": "Organic certification pride",
-            "expansion_id": 1
+            "text": "Organic certification pride"
         },
         {
-            "text": "A pineapple's guide to assertiveness",
-            "expansion_id": 1
+            "text": "A pineapple's guide to assertiveness"
         },
         {
-            "text": "Professional fruit ninja dodging",
-            "expansion_id": 1
+            "text": "Professional fruit ninja dodging"
         },
         {
-            "text": "A very emotional pomegranate",
-            "expansion_id": 1
+            "text": "A very emotional pomegranate"
         },
         {
-            "text": "Strategic bruise hiding",
-            "expansion_id": 1
+            "text": "Strategic bruise hiding"
         },
         {
-            "text": "The same grape joke 57 times",
-            "expansion_id": 1
+            "text": "The same grape joke 57 times"
         },
         {
-            "text": "A kiwi's identity documents",
-            "expansion_id": 1
+            "text": "A kiwi's identity documents"
         },
         {
-            "text": "Suspicious fruit sticker placement",
-            "expansion_id": 1
+            "text": "Suspicious fruit sticker placement"
         },
         {
-            "text": "Composting fears",
-            "expansion_id": 1
+            "text": "Composting fears"
         },
         {
-            "text": "Dramatic ripening montage",
-            "expansion_id": 1
+            "text": "Dramatic ripening montage"
         },
         {
-            "text": "Fruit basket hierarchy",
-            "expansion_id": 1
+            "text": "Fruit basket hierarchy"
         },
         {
-            "text": "A banana's farewell speech",
-            "expansion_id": 1
+            "text": "A banana's farewell speech"
         },
         {
-            "text": "The world's most elaborate fruit arrangement",
-            "expansion_id": 1
+            "text": "The world's most elaborate fruit arrangement"
         },
         {
-            "text": "A very specific ripening timeline",
-            "expansion_id": 1
+            "text": "A very specific ripening timeline"
         },
         {
-            "text": "Emergency juice cleanse",
-            "expansion_id": 1
+            "text": "Emergency juice cleanse"
         },
         {
-            "text": "Fruit fly diplomacy",
-            "expansion_id": 1
+            "text": "Fruit fly diplomacy"
         },
         {
-            "text": "A surprisingly organized fruit rebellion",
-            "expansion_id": 1
+            "text": "A surprisingly organized fruit rebellion"
         },
         {
-            "text": "The fruit bowl's suggestion box",
-            "expansion_id": 1
+            "text": "The fruit bowl's suggestion box"
         },
         {
-            "text": "Pesticide-free activism",
-            "expansion_id": 1
+            "text": "Pesticide-free activism"
         },
         {
-            "text": "Produce section politics",
-            "expansion_id": 1
+            "text": "Produce section politics"
         },
         {
-            "text": "Fruit sticker collection",
-            "expansion_id": 1
+            "text": "Fruit sticker collection"
         },
         {
-            "text": "A suspiciously specific prophecy about avocado toast",
-            "expansion_id": 1
+            "text": "A suspiciously specific prophecy about avocado toast"
         },
         {
-            "text": "The melon's existential crisis",
-            "expansion_id": 1
+            "text": "The melon's existential crisis"
         },
         {
-            "text": "Competitive freshness",
-            "expansion_id": 1
+            "text": "Competitive freshness"
         },
         {
-            "text": "Fruit basket architecture",
-            "expansion_id": 1
+            "text": "Fruit basket architecture"
         },
         {
-            "text": "Divine intervention via fruit fly",
-            "expansion_id": 1
+            "text": "Divine intervention via fruit fly"
         },
         {
-            "text": "A surprisingly competent lime",
-            "expansion_id": 1
+            "text": "A surprisingly competent lime"
         },
         {
-            "text": "The world's most dramatic browning",
-            "expansion_id": 1
+            "text": "The world's most dramatic browning"
         },
         {
-            "text": "Produce aisle permits",
-            "expansion_id": 1
+            "text": "Produce aisle permits"
         },
         {
-            "text": "A very determined fig",
-            "expansion_id": 1
+            "text": "A very determined fig"
         },
         {
-            "text": "The fruit's coffee table book",
-            "expansion_id": 1
+            "text": "The fruit's coffee table book"
         },
         {
-            "text": "Mandatory ripeness inspection",
-            "expansion_id": 1
+            "text": "Mandatory ripeness inspection"
         },
         {
-            "text": "A perfectly timed fruit drop",
-            "expansion_id": 1
+            "text": "A perfectly timed fruit drop"
         },
         {
-            "text": "The annual fruit convention",
-            "expansion_id": 1
+            "text": "The annual fruit convention"
         },
         {
-            "text": "Emergency preservation protocols",
-            "expansion_id": 1
+            "text": "Emergency preservation protocols"
         },
         {
-            "text": "A fruit's guide to immortality",
-            "expansion_id": 1
+            "text": "A fruit's guide to immortality"
         },
         {
-            "text": "The world's most inefficient juicing process",
-            "expansion_id": 1
+            "text": "The world's most inefficient juicing process"
         },
         {
-            "text": "Fruit manifesto",
-            "expansion_id": 1
+            "text": "Fruit manifesto"
         },
         {
-            "text": "A peach's retirement plan",
-            "expansion_id": 1
+            "text": "A peach's retirement plan"
         },
         {
-            "text": "The fruit bowl's therapy sessions",
-            "expansion_id": 1
+            "text": "The fruit bowl's therapy sessions"
         },
         {
-            "text": "Organic certification anxiety",
-            "expansion_id": 1
+            "text": "Organic certification anxiety"
         },
         {
-            "text": "The great produce uprising",
-            "expansion_id": 1
+            "text": "The great produce uprising"
         }
     ]
 } 

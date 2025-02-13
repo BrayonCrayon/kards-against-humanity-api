@@ -1,63 +1,57 @@
 {
-    "expansions": [
-        {
-            "name": "Pet Problems",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Pet Problems (SFW)"
+    },
     "black_cards": [
         {
+            "text": "The vet's report mentioned _______ and _______.",
+            "pick": 2
+        },
+        {
             "text": "My cat's new Instagram account features _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is the dog hiding under the bed___?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The vet was surprised to find _______ in my pet's X-ray.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "My pet's new trick combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The reason my goldfish looks depressed: _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "This year's pet fashion show features _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The hamster escaped and now it's _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "My parrot won't stop saying '_______.'",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The pet psychic says your animal's spirit animal is _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "What's really in that premium pet food___?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         }
     ],
     "white_cards": [
+        {
+            "text": "A very judgmental hamster"
+        },
         {
             "text": "A cat plotting world domination",
             "expansion_id": 1

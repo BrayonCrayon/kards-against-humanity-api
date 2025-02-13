@@ -1,452 +1,351 @@
 {
-    "expansions": [
-        {
-            "name": "Warhammer 40K (SFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Warhammer 40,000 (SFW)"
+    },
     "black_cards": [
         {
+            "text": "The Space Marine's battle cry was interrupted by _______ and _______.",
+            "pick": 2
+        },
+        {
             "text": "The Inquisition discovered _______ in the underhive.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "Why are the Space Marines laughing?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Mechanicus's latest invention combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The Commissar's motivational speech mentioned _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What caused the Warp anomaly this time?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Space Wolves banned _______ after the incident.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Tau's latest propaganda features _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Ork Mekboy's new creation is powered by _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The Emperor is actually _______ in disguise.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Eldar Farseer predicted _______, _______, and _______.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "Why did the Tyranids turn around?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Chapter Master's secret hobby is _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The new Chaos God of _______ has emerged.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Necrons woke up and immediately _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "Games Workshop's next price increase was blamed on _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Dark Angels are definitely not hiding _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What's actually inside a bolter shell?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Administratum lost _______ in their paperwork.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Blood Ravens 'acquired' _______ from _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The real reason Magnus did nothing wrong: _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         }
     ],
     "white_cards": [
         {
-            "text": "Heresy",
-            "expansion_id": 1
+            "text": "Excessive purity seals"
         },
         {
-            "text": "More dakka",
-            "expansion_id": 1
+            "text": "Heresy"
         },
         {
-            "text": "Tactical rocks",
-            "expansion_id": 1
+            "text": "More dakka"
         },
         {
-            "text": "Fallen angels",
-            "expansion_id": 1
+            "text": "Tactical rocks"
         },
         {
-            "text": "Purity seals",
-            "expansion_id": 1
+            "text": "Fallen angels"
         },
         {
-            "text": "Thin paints",
-            "expansion_id": 1
+            "text": "Purity seals"
         },
         {
-            "text": "Space book",
-            "expansion_id": 1
+            "text": "Thin paints"
         },
         {
-            "text": "Plastic crack",
-            "expansion_id": 1
+            "text": "Space book"
         },
         {
-            "text": "Angry lasguns",
-            "expansion_id": 1
+            "text": "Plastic crack"
         },
         {
-            "text": "Warp dust",
-            "expansion_id": 1
+            "text": "Angry lasguns"
         },
         {
-            "text": "A Mechanicus tech-priest trying to seduce a toaster",
-            "expansion_id": 1
+            "text": "Warp dust"
         },
         {
-            "text": "Three Tyranids in a trench coat pretending to be an Inquisitor",
-            "expansion_id": 1
+            "text": "A Mechanicus tech-priest trying to seduce a toaster"
         },
         {
-            "text": "A Space Wolf who accidentally ate the Chapter Master's homework",
-            "expansion_id": 1
+            "text": "Three Tyranids in a trench coat pretending to be an Inquisitor"
         },
         {
-            "text": "Duncan Rhodes applying two thin coats to literally everything",
-            "expansion_id": 1
+            "text": "A Space Wolf who accidentally ate the Chapter Master's homework"
         },
         {
-            "text": "An Ork WAAAGH! that got lost and ended up at a tea party",
-            "expansion_id": 1
+            "text": "Duncan Rhodes applying two thin coats to literally everything"
         },
         {
-            "text": "Ultramarines",
-            "expansion_id": 1
+            "text": "An Ork WAAAGH! that got lost and ended up at a tea party"
         },
         {
-            "text": "Chaos spawn",
-            "expansion_id": 1
+            "text": "Ultramarines"
         },
         {
-            "text": "Shovel warfare",
-            "expansion_id": 1
+            "text": "Chaos spawn"
         },
         {
-            "text": "Webway GPS",
-            "expansion_id": 1
+            "text": "Shovel warfare"
         },
         {
-            "text": "Servo skulls",
-            "expansion_id": 1
+            "text": "Webway GPS"
         },
         {
-            "text": "A Necron Lord who just wants to talk about the good old days",
-            "expansion_id": 1
+            "text": "Servo skulls"
         },
         {
-            "text": "The Emperor's personal collection of dad jokes",
-            "expansion_id": 1
+            "text": "A Necron Lord who just wants to talk about the good old days"
         },
         {
-            "text": "A surprisingly polite Khorne Berserker",
-            "expansion_id": 1
+            "text": "The Emperor's personal collection of dad jokes"
         },
         {
-            "text": "Bureaucratic warfare",
-            "expansion_id": 1
+            "text": "A surprisingly polite Khorne Berserker"
         },
         {
-            "text": "Paint prices",
-            "expansion_id": 1
+            "text": "Bureaucratic warfare"
         },
         {
-            "text": "A Dark Angel nervously whistling while hiding something",
-            "expansion_id": 1
+            "text": "Paint prices"
         },
         {
-            "text": "The Tau trying to explain anime to the Imperium",
-            "expansion_id": 1
+            "text": "A Dark Angel nervously whistling while hiding something"
         },
         {
-            "text": "Bolter shells",
-            "expansion_id": 1
+            "text": "The Tau trying to explain anime to the Imperium"
         },
         {
-            "text": "Plasma guns",
-            "expansion_id": 1
+            "text": "Bolter shells"
         },
         {
-            "text": "Warp storms",
-            "expansion_id": 1
+            "text": "Plasma guns"
         },
         {
-            "text": "A Guardsman's last-minute vacation to Catachan",
-            "expansion_id": 1
+            "text": "Warp storms"
         },
         {
-            "text": "The Blood Ravens' totally legitimate acquisition forms",
-            "expansion_id": 1
+            "text": "A Guardsman's last-minute vacation to Catachan"
         },
         {
-            "text": "Tzeentch's unnecessarily complicated coffee order",
-            "expansion_id": 1
+            "text": "The Blood Ravens' totally legitimate acquisition forms"
         },
         {
-            "text": "Melta bombs",
-            "expansion_id": 1
+            "text": "Tzeentch's unnecessarily complicated coffee order"
         },
         {
-            "text": "Power armor",
-            "expansion_id": 1
+            "text": "Melta bombs"
         },
         {
-            "text": "An Eldar Farseer's crystal ball made of recycled Wraithbone",
-            "expansion_id": 1
+            "text": "Power armor"
         },
         {
-            "text": "The Administratum's guide to efficient paperwork (missing)",
-            "expansion_id": 1
+            "text": "An Eldar Farseer's crystal ball made of recycled Wraithbone"
         },
         {
-            "text": "Forge World",
-            "expansion_id": 1
+            "text": "The Administratum's guide to efficient paperwork (missing)"
         },
         {
-            "text": "Gene-seed",
-            "expansion_id": 1
+            "text": "Forge World"
         },
         {
-            "text": "Nurgle's garden",
-            "expansion_id": 1
+            "text": "Gene-seed"
         },
         {
-            "text": "A Genestealer cult's family reunion gone horribly wrong",
-            "expansion_id": 1
+            "text": "Nurgle's garden"
         },
         {
-            "text": "The Inquisition's annual talent show",
-            "expansion_id": 1
+            "text": "A Genestealer cult's family reunion gone horribly wrong"
         },
         {
-            "text": "Exterminatus",
-            "expansion_id": 1
+            "text": "The Inquisition's annual talent show"
         },
         {
-            "text": "Null maidens",
-            "expansion_id": 1
+            "text": "Exterminatus"
         },
         {
-            "text": "Promethium",
-            "expansion_id": 1
+            "text": "Null maidens"
         },
         {
-            "text": "A Custodian Guard's guide to proper oil application",
-            "expansion_id": 1
+            "text": "Promethium"
         },
         {
-            "text": "The Imperium's most passive-aggressive Post-It note",
-            "expansion_id": 1
+            "text": "A Custodian Guard's guide to proper oil application"
         },
         {
-            "text": "Slaanesh's completely normal and innocent tea party",
-            "expansion_id": 1
+            "text": "The Imperium's most passive-aggressive Post-It note"
         },
         {
-            "text": "Ceramite",
-            "expansion_id": 1
+            "text": "Slaanesh's completely normal and innocent tea party"
         },
         {
-            "text": "Drop pods",
-            "expansion_id": 1
+            "text": "Ceramite"
         },
         {
-            "text": "A Commissar's inspirational kitten poster collection",
-            "expansion_id": 1
+            "text": "Drop pods"
         },
         {
-            "text": "The Omnissiah's sacred WD-40",
-            "expansion_id": 1
+            "text": "A Commissar's inspirational kitten poster collection"
         },
         {
-            "text": "Warp travel",
-            "expansion_id": 1
+            "text": "The Omnissiah's sacred WD-40"
         },
         {
-            "text": "Titan steps",
-            "expansion_id": 1
+            "text": "Warp travel"
         },
         {
-            "text": "A perfectly normal meeting of the Alpha Legion",
-            "expansion_id": 1
+            "text": "Titan steps"
         },
         {
-            "text": "The Golden Throne's 'out of order' sign",
-            "expansion_id": 1
+            "text": "A perfectly normal meeting of the Alpha Legion"
         },
         {
-            "text": "Gellar fields",
-            "expansion_id": 1
+            "text": "The Golden Throne's 'out of order' sign"
         },
         {
-            "text": "Chain swords",
-            "expansion_id": 1
+            "text": "Gellar fields"
         },
         {
-            "text": "An Ork's guide to proper grammar and etiquette",
-            "expansion_id": 1
+            "text": "Chain swords"
         },
         {
-            "text": "The Imperium's most efficient procurement form (in triplicate)",
-            "expansion_id": 1
+            "text": "An Ork's guide to proper grammar and etiquette"
         },
         {
-            "text": "The Imperium's customer service department",
-            "expansion_id": 1
+            "text": "The Imperium's most efficient procurement form (in triplicate)"
         },
         {
-            "text": "A very enthusiastic servitor",
-            "expansion_id": 1
+            "text": "The Imperium's customer service department"
         },
         {
-            "text": "The Hive Mind's cookbook",
-            "expansion_id": 1
+            "text": "A very enthusiastic servitor"
         },
         {
-            "text": "Nurgle's gardening tips",
-            "expansion_id": 1
+            "text": "The Hive Mind's cookbook"
         },
         {
-            "text": "An Eldar's guide to human dating",
-            "expansion_id": 1
+            "text": "Nurgle's gardening tips"
         },
         {
-            "text": "The Inquisition's holiday party",
-            "expansion_id": 1
+            "text": "An Eldar's guide to human dating"
         },
         {
-            "text": "A Chaos Space Marine's self-help group",
-            "expansion_id": 1
+            "text": "The Inquisition's holiday party"
         },
         {
-            "text": "The Golden Throne's maintenance manual",
-            "expansion_id": 1
+            "text": "A Chaos Space Marine's self-help group"
         },
         {
-            "text": "A Genestealer's family reunion",
-            "expansion_id": 1
+            "text": "The Golden Throne's maintenance manual"
         },
         {
-            "text": "The Ork's guide to proper grammar",
-            "expansion_id": 1
+            "text": "A Genestealer's family reunion"
         },
         {
-            "text": "A Sister of Battle's dating profile",
-            "expansion_id": 1
+            "text": "The Ork's guide to proper grammar"
         },
         {
-            "text": "The Mechanicus's yoga class",
-            "expansion_id": 1
+            "text": "A Sister of Battle's dating profile"
         },
         {
-            "text": "A Primarch's childhood photos",
-            "expansion_id": 1
+            "text": "The Mechanicus's yoga class"
         },
         {
-            "text": "The Warp's lost and found",
-            "expansion_id": 1
+            "text": "A Primarch's childhood photos"
         },
         {
-            "text": "A Commissar's motivational poster collection",
-            "expansion_id": 1
+            "text": "The Warp's lost and found"
         },
         {
-            "text": "The Tyranid's vegetarian cookbook",
-            "expansion_id": 1
+            "text": "A Commissar's motivational poster collection"
         },
         {
-            "text": "An Imperial Guard's retirement plan",
-            "expansion_id": 1
+            "text": "The Tyranid's vegetarian cookbook"
         },
         {
-            "text": "The Necron's guide to modern slang",
-            "expansion_id": 1
+            "text": "An Imperial Guard's retirement plan"
         },
         {
-            "text": "A Space Marine's knitting circle",
-            "expansion_id": 1
+            "text": "The Necron's guide to modern slang"
         },
         {
-            "text": "The Administratum's efficiency award",
-            "expansion_id": 1
+            "text": "A Space Marine's knitting circle"
         },
         {
-            "text": "A Chaos cultist's pottery class",
-            "expansion_id": 1
+            "text": "The Administratum's efficiency award"
         },
         {
-            "text": "The Emperor's social media manager",
-            "expansion_id": 1
+            "text": "A Chaos cultist's pottery class"
         },
         {
-            "text": "A Tau's guide to close combat",
-            "expansion_id": 1
+            "text": "The Emperor's social media manager"
         },
         {
-            "text": "The Inquisition's suggestion box",
-            "expansion_id": 1
+            "text": "A Tau's guide to close combat"
         },
         {
-            "text": "A Custodian's cleaning schedule",
-            "expansion_id": 1
+            "text": "The Inquisition's suggestion box"
+        },
+        {
+            "text": "A Custodian's cleaning schedule"
         }
     ]
 } 

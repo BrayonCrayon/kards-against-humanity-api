@@ -1,352 +1,269 @@
 {
-    "expansions": [
-        {
-            "name": "Heroes of Might & Magic III (SFW)",
-            "id": 1
-        }
-    ],
+    "expansion": {
+        "name": "Heroes of Might & Magic III (SFW)"
+    },
     "black_cards": [
         {
             "text": "The enemy hero escaped because of _______ and _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why are all the peasants running from the Dragon Utopia?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Necropolis hired _______ to deal with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The mysterious artifact turned out to be _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Castle town upgraded its _______, _______, and _______ this week.",
-            "pick": 3,
-            "expansion_id": 1
+            "pick": 3
         },
         {
             "text": "What's blocking the underground tunnel?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Conflux elemental spawned _______ instead of _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The Dungeon's weekly creature is _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Angel's resurrection spell accidentally summoned _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Seer's Quest requires _______ in exchange for _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "Why is there a Black Dragon in the tavern?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Witch Hut taught the hero _______ instead of Chain Lightning.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Rampart's new defense strategy combines _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "The resource collector is stuck gathering _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The diplomacy attempt failed because of _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Tower's library replaced _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         },
         {
             "text": "What's actually inside that Pandora's Box?",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Inferno's recruitment day was ruined by _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The hero's army fled after seeing _______.",
-            "pick": 1,
-            "expansion_id": 1
+            "pick": 1
         },
         {
             "text": "The Stronghold's barbarian feast featured _______ with _______.",
-            "pick": 2,
-            "expansion_id": 1
+            "pick": 2
         }
     ],
     "white_cards": [
         {
-            "text": "Wandering Pikemen",
-            "expansion_id": 1
+            "text": "Wandering Pikemen"
         },
         {
-            "text": "Wood shortage",
-            "expansion_id": 1
+            "text": "Wood shortage"
         },
         {
-            "text": "Mercury stockpile",
-            "expansion_id": 1
+            "text": "Mercury stockpile"
         },
         {
-            "text": "Crystal dragons",
-            "expansion_id": 1
+            "text": "Crystal dragons"
         },
         {
-            "text": "Tavern rumors",
-            "expansion_id": 1
+            "text": "Tavern rumors"
         },
         {
-            "text": "Morale penalties",
-            "expansion_id": 1
+            "text": "Morale penalties"
         },
         {
-            "text": "Castle upgrades",
-            "expansion_id": 1
+            "text": "Castle upgrades"
         },
         {
-            "text": "Resource silos",
-            "expansion_id": 1
+            "text": "Resource silos"
         },
         {
-            "text": "Creature portals",
-            "expansion_id": 1
+            "text": "Creature portals"
         },
         {
-            "text": "Magic resistance",
-            "expansion_id": 1
+            "text": "Magic resistance"
         },
         {
-            "text": "A very confused Behemoth trying to use a teleport",
-            "expansion_id": 1
+            "text": "A very confused Behemoth trying to use a teleport"
         },
         {
-            "text": "Archangel's life insurance policy",
-            "expansion_id": 1
+            "text": "Archangel's life insurance policy"
         },
         {
-            "text": "A Skeleton Warrior's identity crisis",
-            "expansion_id": 1
+            "text": "A Skeleton Warrior's identity crisis"
         },
         {
-            "text": "Lord Haart's retirement plan",
-            "expansion_id": 1
+            "text": "Lord Haart's retirement plan"
         },
         {
-            "text": "Catherine's leadership seminar",
-            "expansion_id": 1
+            "text": "Catherine's leadership seminar"
         },
         {
-            "text": "Gem hoarding",
-            "expansion_id": 1
+            "text": "Gem hoarding"
         },
         {
-            "text": "Sulfur mines",
-            "expansion_id": 1
+            "text": "Sulfur mines"
         },
         {
-            "text": "Experience points",
-            "expansion_id": 1
+            "text": "Experience points"
         },
         {
-            "text": "Mage guilds",
-            "expansion_id": 1
+            "text": "Mage guilds"
         },
         {
-            "text": "War machines",
-            "expansion_id": 1
+            "text": "War machines"
         },
         {
-            "text": "A Phoenix having a mid-life crisis",
-            "expansion_id": 1
+            "text": "A Phoenix having a mid-life crisis"
         },
         {
-            "text": "Dungeon tech support",
-            "expansion_id": 1
+            "text": "Dungeon tech support"
         },
         {
-            "text": "The Ghost Dragon's therapy session",
-            "expansion_id": 1
+            "text": "The Ghost Dragon's therapy session"
         },
         {
-            "text": "A very persistent Sprite",
-            "expansion_id": 1
+            "text": "A very persistent Sprite"
         },
         {
-            "text": "Magical pest control",
-            "expansion_id": 1
+            "text": "Magical pest control"
         },
         {
-            "text": "The Titan's anger management class",
-            "expansion_id": 1
+            "text": "The Titan's anger management class"
         },
         {
-            "text": "A Dragon's gold counting obsession",
-            "expansion_id": 1
+            "text": "A Dragon's gold counting obsession"
         },
         {
-            "text": "Underground real estate",
-            "expansion_id": 1
+            "text": "Underground real estate"
         },
         {
-            "text": "Cyclops target practice",
-            "expansion_id": 1
+            "text": "Cyclops target practice"
         },
         {
-            "text": "Magical bureaucracy",
-            "expansion_id": 1
+            "text": "Magical bureaucracy"
         },
         {
-            "text": "A Genie's workplace complaints",
-            "expansion_id": 1
+            "text": "A Genie's workplace complaints"
         },
         {
-            "text": "The world's most optimistic Peasant",
-            "expansion_id": 1
+            "text": "The world's most optimistic Peasant"
         },
         {
-            "text": "Pit Lord's quality assurance",
-            "expansion_id": 1
+            "text": "Pit Lord's quality assurance"
         },
         {
-            "text": "First Aid Tent",
-            "expansion_id": 1
+            "text": "First Aid Tent"
         },
         {
-            "text": "Trade routes",
-            "expansion_id": 1
+            "text": "Trade routes"
         },
         {
-            "text": "A Unicorn's horn polishing routine",
-            "expansion_id": 1
+            "text": "A Unicorn's horn polishing routine"
         },
         {
-            "text": "The Tavern's suggestion scroll",
-            "expansion_id": 1
+            "text": "The Tavern's suggestion scroll"
         },
         {
-            "text": "Griffin flight regulations",
-            "expansion_id": 1
+            "text": "Griffin flight regulations"
         },
         {
-            "text": "Diplomatic immunity",
-            "expansion_id": 1
+            "text": "Diplomatic immunity"
         },
         {
-            "text": "Monster recruitment",
-            "expansion_id": 1
+            "text": "Monster recruitment"
         },
         {
-            "text": "A suspiciously specific prophecy about gold mines",
-            "expansion_id": 1
+            "text": "A suspiciously specific prophecy about gold mines"
         },
         {
-            "text": "The garrison's existential crisis",
-            "expansion_id": 1
+            "text": "The garrison's existential crisis"
         },
         {
-            "text": "Competitive spellcasting",
-            "expansion_id": 1
+            "text": "Competitive spellcasting"
         },
         {
-            "text": "Subterranean gate tours",
-            "expansion_id": 1
+            "text": "Subterranean gate tours"
         },
         {
-            "text": "Divine artifacts",
-            "expansion_id": 1
+            "text": "Divine artifacts"
         },
         {
-            "text": "A surprisingly competent imp",
-            "expansion_id": 1
+            "text": "A surprisingly competent imp"
         },
         {
-            "text": "The world's most dramatic castle siege",
-            "expansion_id": 1
+            "text": "The world's most dramatic castle siege"
         },
         {
-            "text": "Grail excavation permits",
-            "expansion_id": 1
+            "text": "Grail excavation permits"
         },
         {
-            "text": "A very determined Halfling",
-            "expansion_id": 1
+            "text": "A very determined Halfling"
         },
         {
-            "text": "The marketplace's price fixing scandal",
-            "expansion_id": 1
+            "text": "The marketplace's price fixing scandal"
         },
         {
-            "text": "Mystical construction permits",
-            "expansion_id": 1
+            "text": "Mystical construction permits"
         },
         {
-            "text": "A perfectly timed Dimension Door",
-            "expansion_id": 1
+            "text": "A perfectly timed Dimension Door"
         },
         {
-            "text": "The Necropolis's annual audit",
-            "expansion_id": 1
+            "text": "The Necropolis's annual audit"
         },
         {
-            "text": "Obelisk navigation",
-            "expansion_id": 1
+            "text": "Obelisk navigation"
         },
         {
-            "text": "A Dendroid Guard's meditation session",
-            "expansion_id": 1
+            "text": "A Dendroid Guard's meditation session"
         },
         {
-            "text": "The world's most inefficient caravan",
-            "expansion_id": 1
+            "text": "The world's most inefficient caravan"
         },
         {
-            "text": "Magical graffiti",
-            "expansion_id": 1
+            "text": "Magical graffiti"
         },
         {
-            "text": "A Dragon's retirement fund",
-            "expansion_id": 1
+            "text": "A Dragon's retirement fund"
         },
         {
-            "text": "The Witch Hut's potion addiction",
-            "expansion_id": 1
+            "text": "The Witch Hut's potion addiction"
         },
         {
-            "text": "Conflux's elemental insurance policy",
-            "expansion_id": 1
+            "text": "Conflux's elemental insurance policy"
         }
     ]
 } 
