@@ -16,7 +16,9 @@ class LoadCardsSeeder extends Seeder
     public function run()
     {
         Telescope::stopRecording();
-        Artisan::call('kah:import-cards');
+        Artisan::call('kah:import-cards --dir=expansions/existing');
+        Artisan::call('kah:import-cards --dir=expansions/nsfw');
+        Artisan::call('kah:import-cards --dir=expansions/sfw');
         Telescope::startRecording();
     }
 }

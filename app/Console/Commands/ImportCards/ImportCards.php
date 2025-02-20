@@ -15,7 +15,7 @@ use PHPUnit\Runner\FileDoesNotExistException;
 class ImportCards extends Command
 {
     protected $signature = 'kah:import-cards {--file=} {--dir=}]';
-    protected $description = 'Import all cards';
+    protected $description = 'Import all cards from a json file or folder with multiple json files';
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ class ImportCards extends Command
         }
 
         $endLoading = now();
-        $this->info("Loading Deck: {$endLoading->diffInMilliseconds($startLoading)}}");
+        $this->info("Loading Deck: {$endLoading->diffInMilliseconds($startLoading)} ms");
 
         return 0;
     }
