@@ -1,0 +1,276 @@
+{
+    "expansion":
+        {
+            "name": "Teenagers"
+        },
+    "black_cards": [
+        {
+            "text": "My high school yearbook quote combines _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "?",
+            "pick": 1
+        },
+        {
+            "text": "The school principal banned _______ after finding _______ in the cafeteria.",
+            "pick": 2
+        },
+        {
+            "text": "My excuse for not doing homework: _______.",
+            "pick": 1
+        },
+        {
+            "text": "The real reason the popular kids are popular: _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "The school dance theme this year___?",
+            "pick": 1
+        },
+        {
+            "text": "My parents don't understand why I need _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The substitute teacher quit after seeing _______.",
+            "pick": 1
+        },
+        {
+            "text": "The new TikTok challenge: _______, _______, and _______ while at school.",
+            "pick": 3
+        },
+        {
+            "text": "What's in my backpack___?",
+            "pick": 1
+        },
+        {
+            "text": "The school's new club combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The cafeteria's mystery meat is actually _______.",
+            "pick": 1
+        },
+        {
+            "text": "My parents found _______, _______, and _______ in my room.",
+            "pick": 3
+        },
+        {
+            "text": "Why am I grounded___?",
+            "pick": 1
+        },
+        {
+            "text": "The school talent show was ruined by _______.",
+            "pick": 1
+        },
+        {
+            "text": "My college application essay: How _______ changed my life.",
+            "pick": 1
+        },
+        {
+            "text": "The real reason I changed schools: _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "The group chat is blowing up because of _______.",
+            "pick": 1
+        },
+        {
+            "text": "My summer job involves _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The school's security camera caught _______ in the hallway at midnight.",
+            "pick": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "The back of the school bus"
+        },
+        {
+            "text": "That one bathroom no one uses"
+        },
+        {
+            "text": "The mall food court at 3 PM"
+        },
+        {
+            "text": "Behind the gym during lunch"
+        },
+        {
+            "text": "The local Starbucks with free WiFi"
+        },
+        {
+            "text": "An empty parking lot after midnight"
+        },
+        {
+            "text": "The principal's secret mini-fridge"
+        },
+        {
+            "text": "A bedroom covered in band posters"
+        },
+        {
+            "text": "The abandoned MySpace headquarters"
+        },
+        {
+            "text": "A Discord server for homework help"
+        },
+        {
+            "text": "That one teacher who tries too hard to be cool"
+        },
+        {
+            "text": "The kid who peaked in middle school"
+        },
+        {
+            "text": "A guidance counselor having an existential crisis"
+        },
+        {
+            "text": "The gym teacher who can't do push-ups"
+        },
+        {
+            "text": "A mumble rapper with straight A's"
+        },
+        {
+            "text": "The cafeteria lady with a secret recipe"
+        },
+        {
+            "text": "A teen influencer with 12 followers"
+        },
+        {
+            "text": "Parents who think they're still hip"
+        },
+        {
+            "text": "The school mascot with an identity crisis"
+        },
+        {
+            "text": "A professional Minecraft YouTuber"
+        },
+        {
+            "text": "A calculator full of game cheats"
+        },
+        {
+            "text": "An energy drink collection"
+        },
+        {
+            "text": "A phone with a cracked screen protector"
+        },
+        {
+            "text": "Homework eaten by a virtual dog"
+        },
+        {
+            "text": "A playlist that's just one song 100 times"
+        },
+        {
+            "text": "Limited edition anime socks"
+        },
+        {
+            "text": "A diary full of emoji"
+        },
+        {
+            "text": "A TI-84 calculator with Doom installed"
+        },
+        {
+            "text": "Vintage 2022 memes"
+        },
+        {
+            "text": "A yearbook full of AI-generated students"
+        },
+        {
+            "text": "Pretending to understand Shakespeare"
+        },
+        {
+            "text": "Writing essays at 3 AM"
+        },
+        {
+            "text": "Staging a protest against Monday mornings"
+        },
+        {
+            "text": "Trying to make fetch happen"
+        },
+        {
+            "text": "Starting a band that only plays kazoos"
+        },
+        {
+            "text": "Practicing TikTok dances during class"
+        },
+        {
+            "text": "Turning everything into a meme"
+        },
+        {
+            "text": "Speed-running college applications"
+        },
+        {
+            "text": "Organizing a flash mob in the library"
+        },
+        {
+            "text": "Becoming famous for eating a pencil"
+        },
+        {
+            "text": "A secret club in the AV room"
+        },
+        {
+            "text": "The school's haunted vending machine"
+        },
+        {
+            "text": "A treehouse with better WiFi than the school"
+        },
+        {
+            "text": "The debate team's underground fight club"
+        },
+        {
+            "text": "A substitute teacher who's actually an alien"
+        },
+        {
+            "text": "The student who's secretly 300 years old"
+        },
+        {
+            "text": "A backpack that's actually a portal"
+        },
+        {
+            "text": "Textbooks written in meme format"
+        },
+        {
+            "text": "A scientific calculator that predicts the future"
+        },
+        {
+            "text": "Starting a pyramid scheme with lunch trades"
+        },
+        {
+            "text": "Turning homework into NFTs"
+        },
+        {
+            "text": "Creating a social media platform for plants"
+        },
+        {
+            "text": "A PhD in procrastination"
+        },
+        {
+            "text": "Professional chair spinning"
+        },
+        {
+            "text": "The ancient art of note passing"
+        },
+        {
+            "text": "Quantum physics explained with emojis"
+        },
+        {
+            "text": "A conspiracy theory about the lunch lady"
+        },
+        {
+            "text": "The school's secret underground arcade"
+        },
+        {
+            "text": "A resume written in Comic Sans"
+        },
+        {
+            "text": "The world's longest yeah boi"
+        },
+        {
+            "text": "A PowerPoint presentation about memes"
+        },
+        {
+            "text": "The lost AirPod graveyard"
+        }
+    ]
+}

@@ -1,0 +1,139 @@
+{
+    "expansion": {
+        "name": "Internet Culture (SFW)"
+    },
+    "black_cards": [
+        {
+            "text": "The latest viral TikTok trend combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "What's trending on Twitter today___?",
+            "pick": 1
+        },
+        {
+            "text": "My YouTube apology video addresses _______.",
+            "pick": 1
+        },
+        {
+            "text": "The Reddit moderator banned me for _______.",
+            "pick": 1
+        },
+        {
+            "text": "That awkward moment when _______ meets _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why is this meme so relatable___?",
+            "pick": 1
+        },
+        {
+            "text": "The new viral challenge involves _______.",
+            "pick": 1
+        },
+        {
+            "text": "My Instagram feed is full of _______.",
+            "pick": 1
+        },
+        {
+            "text": "The Twitch streamer got canceled for _______.",
+            "pick": 1
+        },
+        {
+            "text": "This Discord server is dedicated to _______.",
+            "pick": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "A very confused boomer"
+        },
+        {
+            "text": "Accidentally liking an ex's post from 2015"
+        },
+        {
+            "text": "An army of keyboard warriors"
+        },
+        {
+            "text": "Being left on read"
+        },
+        {
+            "text": "Clickbait thumbnails"
+        },
+        {
+            "text": "Conspiracy theory TikToks"
+        },
+        {
+            "text": "Cringe compilation videos"
+        },
+        {
+            "text": "Cursed emojis"
+        },
+        {
+            "text": "Dancing to inappropriate songs"
+        },
+        {
+            "text": "Doomscrolling at 3 AM"
+        },
+        {
+            "text": "Failed influencer partnerships"
+        },
+        {
+            "text": "Filter malfunctions"
+        },
+        {
+            "text": "First world internet problems"
+        },
+        {
+            "text": "Forgetting to mute yourself"
+        },
+        {
+            "text": "Internet explorer being slow"
+        },
+        {
+            "text": "Living for the drama"
+        },
+        {
+            "text": "Meme economy crashes"
+        },
+        {
+            "text": "NFT regrets"
+        },
+        {
+            "text": "Posting cringe"
+        },
+        {
+            "text": "Professional meme critics"
+        },
+        {
+            "text": "Ratio'd tweets"
+        },
+        {
+            "text": "Reddit karma farming"
+        },
+        {
+            "text": "Sliding into DMs"
+        },
+        {
+            "text": "Social media detox"
+        },
+        {
+            "text": "Suspicious download links"
+        },
+        {
+            "text": "That one viral cat video"
+        },
+        {
+            "text": "The comment section war"
+        },
+        {
+            "text": "The dislike button"
+        },
+        {
+            "text": "Trending hashtag fails"
+        },
+        {
+            "text": "Unfollowing sprees"
+        }
+    ]
+} 

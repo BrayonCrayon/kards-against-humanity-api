@@ -1,0 +1,345 @@
+{
+    "expansion": {
+        "name": "Laravel (SFW)"
+    },
+    "black_cards": [
+        {
+            "text": "The deployment failed because of _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The production server crashed because of _______.",
+            "pick": 1
+        },
+        {
+            "text": "Why is Composer taking so long?",
+            "pick": 1
+        },
+        {
+            "text": "The new middleware combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The pull request was rejected due to _______.",
+            "pick": 1
+        },
+        {
+            "text": "Taylor Otwell's next feature announcement: _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "What's causing these Eloquent errors?",
+            "pick": 1
+        },
+        {
+            "text": "The migration failed because _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "The new package requires _______.",
+            "pick": 1
+        },
+        {
+            "text": "The service provider is throwing _______ at _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why won't Artisan serve work?",
+            "pick": 1
+        },
+        {
+            "text": "The documentation was updated to include _______.",
+            "pick": 1
+        },
+        {
+            "text": "The route model binding matched _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The .env file accidentally exposed _______.",
+            "pick": 1
+        },
+        {
+            "text": "Tinker responded with _______.",
+            "pick": 1
+        },
+        {
+            "text": "The blade template rendered _______ instead of _______.",
+            "pick": 2
+        },
+        {
+            "text": "What's in the Laravel logs?",
+            "pick": 1
+        },
+        {
+            "text": "The queue worker is stuck processing _______.",
+            "pick": 1
+        },
+        {
+            "text": "The senior developer's code review revealed _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The deployment script accidentally _______.",
+            "pick": 1
+        },
+        {
+            "text": "Why is Redis full of _______?",
+            "pick": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "Artisan command confusion"
+        },
+        {
+            "text": "php artisan"
+        },
+        {
+            "text": "Facade magic"
+        },
+        {
+            "text": "Route caching"
+        },
+        {
+            "text": "Migration hell"
+        },
+        {
+            "text": "Composer update"
+        },
+        {
+            "text": "Eloquent models"
+        },
+        {
+            "text": "Blade directives"
+        },
+        {
+            "text": "Service containers"
+        },
+        {
+            "text": "Queue workers"
+        },
+        {
+            "text": "Tinker REPL"
+        },
+        {
+            "text": "A developer trying to explain dependency injection to their cat"
+        },
+        {
+            "text": "An Eloquent relationship that's just trying to find itself"
+        },
+        {
+            "text": "A middleware stack that reaches the stratosphere"
+        },
+        {
+            "text": "Taylor Otwell appearing in a puff of magic smoke"
+        },
+        {
+            "text": "A migration that's having an existential crisis"
+        },
+        {
+            "text": "Seeders"
+        },
+        {
+            "text": "Factory states"
+        },
+        {
+            "text": "Event listeners"
+        },
+        {
+            "text": "Cache tags"
+        },
+        {
+            "text": "Test coverage"
+        },
+        {
+            "text": "A route parameter that identifies as a boolean"
+        },
+        {
+            "text": "The world's longest chain of nested relationships"
+        },
+        {
+            "text": "A validation rule that accepts everything except valid data"
+        },
+        {
+            "text": "Stack traces"
+        },
+        {
+            "text": "A collection that's collecting unemployment benefits"
+        },
+        {
+            "text": "The ghost of PHP 5 haunting the codebase"
+        },
+        {
+            "text": "Env files"
+        },
+        {
+            "text": "Query scopes"
+        },
+        {
+            "text": "Error logs"
+        },
+        {
+            "text": "A scheduled task that shows up fashionably late"
+        },
+        {
+            "text": "The most elaborate service provider setup ever"
+        },
+        {
+            "text": "A policy that always returns true"
+        },
+        {
+            "text": "Gates"
+        },
+        {
+            "text": "Sanctum"
+        },
+        {
+            "text": "A notification that sends itself to the wrong channel"
+        },
+        {
+            "text": "The world's most aggressive rate limiter"
+        },
+        {
+            "text": "Sail"
+        },
+        {
+            "text": "Vite config"
+        },
+        {
+            "text": "Mix manifest"
+        },
+        {
+            "text": "A form request that validates its own existence"
+        },
+        {
+            "text": "The most passive-aggressive PHPDoc comment"
+        },
+        {
+            "text": "A job that quietly fails upward"
+        },
+        {
+            "text": "Traits"
+        },
+        {
+            "text": "Pest tests"
+        },
+        {
+            "text": "A resource collection that hoards data"
+        },
+        {
+            "text": "The .gitignore file that ignores itself"
+        },
+        {
+            "text": "Horizon"
+        },
+        {
+            "text": "Nova panels"
+        },
+        {
+            "text": "A telescope entry that's watching you back"
+        },
+        {
+            "text": "The production server's therapy sessions"
+        },
+        {
+            "text": "Forge"
+        },
+        {
+            "text": "Vapor"
+        },
+        {
+            "text": "A database that's ghosting your queries"
+        },
+        {
+            "text": "The staging environment's identity crisis"
+        },
+        {
+            "text": "Enums"
+        },
+        {
+            "text": "Value objects"
+        },
+        {
+            "text": "A cache that only remembers useless things"
+        },
+        {
+            "text": "The most overengineered Hello World ever"
+        },
+        {
+            "text": "A very confused database connection"
+        },
+        {
+            "text": "The world's most optimistic deployment"
+        },
+        {
+            "text": "A cache that only remembers memes"
+        },
+        {
+            "text": "The queue worker's meditation retreat"
+        },
+        {
+            "text": "A route that leads to nowhere"
+        },
+        {
+            "text": "The most passive-aggressive PR comment"
+        },
+        {
+            "text": "An authentication guard having an identity crisis"
+        },
+        {
+            "text": "The world's longest method name"
+        },
+        {
+            "text": "A very enthusiastic logging system"
+        },
+        {
+            "text": "The .gitignore file's existential crisis"
+        },
+        {
+            "text": "A middleware that only works on Tuesdays"
+        },
+        {
+            "text": "The most unnecessary trait ever created"
+        },
+        {
+            "text": "A job that refuses to be dispatched"
+        },
+        {
+            "text": "The world's most specific validation rule"
+        },
+        {
+            "text": "An observer that's seen too much"
+        },
+        {
+            "text": "The most optimistic try-catch block"
+        },
+        {
+            "text": "A notification that nobody wanted"
+        },
+        {
+            "text": "The storage disk's spring cleaning"
+        },
+        {
+            "text": "A very persistent memory leak"
+        },
+        {
+            "text": "The config file's dark secrets"
+        },
+        {
+            "text": "A seeder that only plants memes"
+        },
+        {
+            "text": "The most redundant helper function"
+        },
+        {
+            "text": "A broadcast event that nobody's listening to"
+        },
+        {
+            "text": "The most aggressive auto-loader"
+        },
+        {
+            "text": "A very philosophical exception handler"
+        }
+    ]
+} 

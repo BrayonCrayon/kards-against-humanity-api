@@ -1,0 +1,429 @@
+{
+    "expansion": {
+        "name": "Lord of the Rings Movies (SFW)"
+    },
+    "black_cards": [
+        {
+            "text": "The Fellowship was delayed by _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The extended edition added a scene about _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why is Gandalf late?",
+            "pick": 1
+        },
+        {
+            "text": "The Fellowship broke up because of _______.",
+            "pick": 1
+        },
+        {
+            "text": "Instead of eagles, the ring was almost delivered by _______.",
+            "pick": 1
+        },
+        {
+            "text": "The behind-the-scenes footage revealed _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "What's in Aragorn's pipe?",
+            "pick": 1
+        },
+        {
+            "text": "The new 8K remaster clearly shows _______.",
+            "pick": 1
+        },
+        {
+            "text": "Gollum's original name for the ring was _______.",
+            "pick": 1
+        },
+        {
+            "text": "The Balrog's weakness turned out to be _______.",
+            "pick": 1
+        },
+        {
+            "text": "Peter Jackson replaced _______ with _______ in post-production.",
+            "pick": 2
+        },
+        {
+            "text": "What do they serve at Second Breakfast?",
+            "pick": 1
+        },
+        {
+            "text": "The Mouth of Sauron's dental plan covers _______.",
+            "pick": 1
+        },
+        {
+            "text": "Saruman's deleted scene featured _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why did Viggo really break his toe?",
+            "pick": 1
+        },
+        {
+            "text": "The Shire's best-kept secret is _______.",
+            "pick": 1
+        },
+        {
+            "text": "Legolas's stunt double was replaced by _______.",
+            "pick": 1
+        },
+        {
+            "text": "The One Ring's inscription actually says _______.",
+            "pick": 1
+        },
+        {
+            "text": "Shelob's cave was full of _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "What's actually in the Elvish wine?",
+            "pick": 1
+        },
+        {
+            "text": "The CGI team spent six months animating _______.",
+            "pick": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "Second breakfast"
+        },
+        {
+            "text": "Tiny Hobbit shoes"
+        },
+        {
+            "text": "Scale doubles"
+        },
+        {
+            "text": "Elf wigs"
+        },
+        {
+            "text": "Uruk snacks"
+        },
+        {
+            "text": "Wizard fireworks"
+        },
+        {
+            "text": "Orc dentistry"
+        },
+        {
+            "text": "Hobbit feet"
+        },
+        {
+            "text": "Ring polish"
+        },
+        {
+            "text": "Dwarf tossing"
+        },
+        {
+            "text": "Viggo's toe"
+        },
+        {
+            "text": "Elvish spam"
+        },
+        {
+            "text": "Method orcs"
+        },
+        {
+            "text": "Gandalf's vape"
+        },
+        {
+            "text": "Precious memes"
+        },
+        {
+            "text": "Andy Serkis in a mocap suit having an emotional breakdown"
+        },
+        {
+            "text": "A very method Aragorn who hasn't showered in months"
+        },
+        {
+            "text": "Sean Bean dying in deleted scenes"
+        },
+        {
+            "text": "Christopher Lee's heavy metal album about Saruman"
+        },
+        {
+            "text": "Peter Jackson's endless collection of Hawaiian shirts"
+        },
+        {
+            "text": "Gollum's fish-flavored protein shake"
+        },
+        {
+            "text": "Miniature sets made of breakfast cereal"
+        },
+        {
+            "text": "Orlando Bloom counting his kills"
+        },
+        {
+            "text": "Gandalf's Instagram filters"
+        },
+        {
+            "text": "The Eye of Sauron's eye drops"
+        },
+        {
+            "text": "Aragorn's royal conditioner"
+        },
+        {
+            "text": "Gimli's beard extensions"
+        },
+        {
+            "text": "Frodo's stunt double"
+        },
+        {
+            "text": "Sam's emotional support potatoes"
+        },
+        {
+            "text": "Legolas surfing physics"
+        },
+        {
+            "text": "A very tired Sean Astin"
+        },
+        {
+            "text": "Hobbit-sized craft services"
+        },
+        {
+            "text": "New Zealand tourism"
+        },
+        {
+            "text": "Orc makeup removal"
+        },
+        {
+            "text": "Elvish auto-tune"
+        },
+        {
+            "text": "Balrog wings debate"
+        },
+        {
+            "text": "Nazgûl therapy"
+        },
+        {
+            "text": "Ringwraith dry cleaning"
+        },
+        {
+            "text": "Treebeard's coffee"
+        },
+        {
+            "text": "Mount Doom tourism"
+        },
+        {
+            "text": "Weta Workshop chaos"
+        },
+        {
+            "text": "Sting's blue light"
+        },
+        {
+            "text": "Shelob's web design"
+        },
+        {
+            "text": "Merry and Pippin's podcast"
+        },
+        {
+            "text": "Rivendell room service"
+        },
+        {
+            "text": "Mordor's HR department"
+        },
+        {
+            "text": "The One Ring's Twitter account"
+        },
+        {
+            "text": "Galadriel's mirror selfies"
+        },
+        {
+            "text": "Boromir's meme potential"
+        },
+        {
+            "text": "Practical effects"
+        },
+        {
+            "text": "Green screen mishaps"
+        },
+        {
+            "text": "Forced perspective"
+        },
+        {
+            "text": "Prop continuity"
+        },
+        {
+            "text": "Foam swords"
+        },
+        {
+            "text": "Catering bills"
+        },
+        {
+            "text": "Makeup chairs"
+        },
+        {
+            "text": "Prosthetic ears"
+        },
+        {
+            "text": "Craft services"
+        },
+        {
+            "text": "Stunt pads"
+        },
+        {
+            "text": "MY PRECIOUS"
+        },
+        {
+            "text": "And my axe"
+        },
+        {
+            "text": "Toss me"
+        },
+        {
+            "text": "Elevenses"
+        },
+        {
+            "text": "Mellon"
+        },
+        {
+            "text": "You shall not pass"
+        },
+        {
+            "text": "One does not simply"
+        },
+        {
+            "text": "So it begins"
+        },
+        {
+            "text": "They're taking the hobbits to Isengard"
+        },
+        {
+            "text": "A wizard is never late"
+        },
+        {
+            "text": "Share the load"
+        },
+        {
+            "text": "What about second breakfast"
+        },
+        {
+            "text": "Fly, you fools"
+        },
+        {
+            "text": "My brother, my captain, my king"
+        },
+        {
+            "text": "A red sun rises"
+        },
+        {
+            "text": "That still only counts as one"
+        },
+        {
+            "text": "Boil 'em, mash 'em, stick 'em in a stew"
+        },
+        {
+            "text": "Very dangerous over short distances"
+        },
+        {
+            "text": "Nobody tosses a dwarf"
+        },
+        {
+            "text": "It comes in pints?"
+        },
+        {
+            "text": "A chance for Faramir"
+        },
+        {
+            "text": "They have a cave troll"
+        },
+        {
+            "text": "The salted pork is particularly good"
+        },
+        {
+            "text": "What's taters, precious?"
+        },
+        {
+            "text": "I ain't been droppin' no eaves"
+        },
+        {
+            "text": "A surprisingly accurate historical consultant"
+        },
+        {
+            "text": "The world's most dedicated hobbit foot artist"
+        },
+        {
+            "text": "Elrond's secret recipe for lembas bread"
+        },
+        {
+            "text": "A very confused tourism board of Mordor"
+        },
+        {
+            "text": "The Nazgûl's team-building exercises"
+        },
+        {
+            "text": "Bilbo's extensive meme collection"
+        },
+        {
+            "text": "The Witch-king's self-help book"
+        },
+        {
+            "text": "Treebeard's coffee addiction"
+        },
+        {
+            "text": "An overly enthusiastic film extra"
+        },
+        {
+            "text": "The Ring's social media manager"
+        },
+        {
+            "text": "A very specific NDA violation"
+        },
+        {
+            "text": "The Prancing Pony's health inspection"
+        },
+        {
+            "text": "Boromir's motivational speeches"
+        },
+        {
+            "text": "The Rohirrim's horse grooming tips"
+        },
+        {
+            "text": "The Shire's underground fight club"
+        },
+        {
+            "text": "Faramir's therapy sessions"
+        },
+        {
+            "text": "Denethor's tomato addiction"
+        },
+        {
+            "text": "The Eagles' union contract"
+        },
+        {
+            "text": "Weathertop's tourist brochure"
+        },
+        {
+            "text": "The Doors of Durin's riddle hotline"
+        },
+        {
+            "text": "Aragorn's royal Twitter account"
+        },
+        {
+            "text": "The Balrog's morning routine"
+        },
+        {
+            "text": "Shelob's web design portfolio"
+        },
+        {
+            "text": "Mount Doom's safety regulations"
+        },
+        {
+            "text": "The One Ring's terms of service"
+        },
+        {
+            "text": "Gandalf's Uber rating"
+        },
+        {
+            "text": "Rivendell's parking policy"
+        },
+        {
+            "text": "The Watcher in the Water's swimming lessons"
+        }
+    ]
+} 
