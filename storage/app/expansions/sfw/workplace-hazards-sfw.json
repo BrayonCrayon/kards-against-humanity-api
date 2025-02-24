@@ -1,0 +1,272 @@
+{
+    "expansion": {
+        "name": "Workplace Hazards (SFW)"
+    },
+    "black_cards": [
+        {
+            "text": "The OSHA inspector found _______ and _______ in the break room.",
+            "pick": 2
+        },
+        {
+            "text": "Why is the safety training video trending on TikTok?",
+            "pick": 1
+        },
+        {
+            "text": "The new workplace safety policy bans _______ during meetings.",
+            "pick": 1
+        },
+        {
+            "text": "The emergency evacuation was triggered by _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "What's causing the office printer to make that noise?",
+            "pick": 1
+        },
+        {
+            "text": "The workplace wellness program now includes _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The safety mascot was fired for _______.",
+            "pick": 1
+        },
+        {
+            "text": "The mandatory training video warns against combining _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The incident report cites _______ as the root cause.",
+            "pick": 1
+        },
+        {
+            "text": "The new ergonomic chairs were recalled due to _______.",
+            "pick": 1
+        },
+        {
+            "text": "HR's latest memo addresses _______ in the supply closet.",
+            "pick": 1
+        },
+        {
+            "text": "The safety committee replaced _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The workplace hazard assessment discovered _______ near _______.",
+            "pick": 2
+        },
+        {
+            "text": "The first aid kit now includes emergency _______.",
+            "pick": 1
+        },
+        {
+            "text": "The new safety slogan combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "What's really in the office water cooler?",
+            "pick": 1
+        },
+        {
+            "text": "The workplace safety bingo card features _______.",
+            "pick": 1
+        },
+        {
+            "text": "The safety consultant quit after seeing _______.",
+            "pick": 1
+        },
+        {
+            "text": "The employee handbook specifically prohibits _______.",
+            "pick": 1
+        },
+        {
+            "text": "The annual safety award went to _______ for _______.",
+            "pick": 2
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "A surprisingly dangerous stapler"
+        },
+        {
+            "text": "Aggressive paper cuts"
+        },
+        {
+            "text": "Motivational safety posters"
+        },
+        {
+            "text": "Ergonomic chair racing"
+        },
+        {
+            "text": "Coffee maker violations"
+        },
+        {
+            "text": "Passive-aggressive safety reminders"
+        },
+        {
+            "text": "Emergency snack protocols"
+        },
+        {
+            "text": "Printer toner incidents"
+        },
+        {
+            "text": "Keyboard crumb inspection"
+        },
+        {
+            "text": "Safety dance competitions"
+        },
+        {
+            "text": "A very enthusiastic safety officer"
+        },
+        {
+            "text": "The world's most ineffective safety goggles"
+        },
+        {
+            "text": "A hard hat made of sticky notes"
+        },
+        {
+            "text": "Competitive incident reporting"
+        },
+        {
+            "text": "Water cooler conspiracies"
+        },
+        {
+            "text": "Mandatory jazz hands"
+        },
+        {
+            "text": "Extreme paper filing"
+        },
+        {
+            "text": "Safety compliance interpretive dance"
+        },
+        {
+            "text": "Cubicle fortification"
+        },
+        {
+            "text": "Break room politics"
+        },
+        {
+            "text": "A PowerPoint about PowerPoint safety"
+        },
+        {
+            "text": "Professional bubble wrap popping"
+        },
+        {
+            "text": "A very serious discussion about proper stapler technique"
+        },
+        {
+            "text": "Strategic office chair positioning"
+        },
+        {
+            "text": "The same safety video from 1987"
+        },
+        {
+            "text": "A standing desk uprising"
+        },
+        {
+            "text": "Suspicious vending machine noises"
+        },
+        {
+            "text": "Emergency meeting protocols"
+        },
+        {
+            "text": "Dramatic safety demonstrations"
+        },
+        {
+            "text": "Office supply inventory drama"
+        },
+        {
+            "text": "A safety mascot's existential crisis"
+        },
+        {
+            "text": "The world's most elaborate safety sign"
+        },
+        {
+            "text": "A very specific paper clip policy"
+        },
+        {
+            "text": "Emergency coffee supplies"
+        },
+        {
+            "text": "Workplace wellness yoga"
+        },
+        {
+            "text": "A surprisingly organized safety committee"
+        },
+        {
+            "text": "The suggestion box's therapy sessions"
+        },
+        {
+            "text": "Mandatory fun activities"
+        },
+        {
+            "text": "Risk assessment karaoke"
+        },
+        {
+            "text": "Office plant hazards"
+        },
+        {
+            "text": "A suspiciously specific memo about microwave etiquette"
+        },
+        {
+            "text": "The printer's revenge plot"
+        },
+        {
+            "text": "Competitive safety compliance"
+        },
+        {
+            "text": "Workplace wellness interpretive dance"
+        },
+        {
+            "text": "Divine intervention via IT support"
+        },
+        {
+            "text": "A surprisingly competent intern"
+        },
+        {
+            "text": "The world's most dramatic paper jam"
+        },
+        {
+            "text": "Safety violation bingo"
+        },
+        {
+            "text": "A very determined office plant"
+        },
+        {
+            "text": "The break room's suggestion box"
+        },
+        {
+            "text": "Mandatory mindfulness meetings"
+        },
+        {
+            "text": "A perfectly timed fire drill"
+        },
+        {
+            "text": "The annual safety awards ceremony"
+        },
+        {
+            "text": "Emergency snack protocols"
+        },
+        {
+            "text": "A safety manual written entirely in emojis"
+        },
+        {
+            "text": "The world's most inefficient evacuation route"
+        },
+        {
+            "text": "Workplace safety manifestos"
+        },
+        {
+            "text": "A safety cone's retirement party"
+        },
+        {
+            "text": "The first aid kit's existential crisis"
+        },
+        {
+            "text": "Workplace hazard insurance policies"
+        },
+        {
+            "text": "The great office supply uprising"
+        }
+    ]
+}

@@ -1,0 +1,266 @@
+{
+    "expansion": {
+        "name": "Trees (SFW)"
+    },
+    "black_cards": [
+        {
+            "text": "The arborist discovered _______ and _______ in the ancient oak.",
+            "pick": 2
+        },
+        {
+            "text": "Scientists discovered a new species of tree that produces _______.",
+            "pick": 1
+        },
+        {
+            "text": "The secret to growing a perfect bonsai is _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why is that tree making weird noises___?",
+            "pick": 1
+        },
+        {
+            "text": "The world's oldest tree was just caught _______.",
+            "pick": 1
+        },
+        {
+            "text": "Breaking news: Deforestation rates drop 90% due to _______.",
+            "pick": 1
+        },
+        {
+            "text": "My treehouse renovation combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The Ents are marching because of _______.",
+            "pick": 1
+        },
+        {
+            "text": "What's actually living in that hollow tree___?",
+            "pick": 1
+        },
+        {
+            "text": "The new sustainable building material: _______ mixed with _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why did the maple syrup taste like _______?",
+            "pick": 1
+        },
+        {
+            "text": "The arborist's secret technique involves _______.",
+            "pick": 1
+        },
+        {
+            "text": "This year's Christmas tree is decorated with _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The squirrels in my yard keep stealing _______.",
+            "pick": 1
+        },
+        {
+            "text": "What's making all these leaves turn _______?",
+            "pick": 1
+        },
+        {
+            "text": "The new tree-planting robot runs on _______.",
+            "pick": 1
+        },
+        {
+            "text": "My family tree reveals an unexpected history of _______.",
+            "pick": 1
+        },
+        {
+            "text": "The forbidden fruit of this tree tastes like _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why is there a treant in my _______?",
+            "pick": 1
+        },
+        {
+            "text": "The new logging company slogan: '_______ for a better tomorrow!'",
+            "pick": 1
+        },
+        {
+            "text": "This tree-ring dating reveals evidence of _______.",
+            "pick": 1
+        },
+        {
+            "text": "The secret message carved in this tree says '_______.'",
+            "pick": 1
+        },
+        {
+            "text": "My redwood viewing tour was interrupted by _______.",
+            "pick": 1
+        },
+        {
+            "text": "The new eco-friendly fertilizer combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The real reason trees communicate using _______.",
+            "pick": 1
+        },
+        {
+            "text": "What's actually at the top of the tallest tree___?",
+            "pick": 1
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "Photosynthesis anxiety"
+        },
+        {
+            "text": "A very apologetic lumberjack"
+        },
+        {
+            "text": "Accidentally hugging a cactus"
+        },
+        {
+            "text": "An army of militant vegans"
+        },
+        {
+            "text": "Artisanal pine cones"
+        },
+        {
+            "text": "Bark-flavored energy drinks"
+        },
+        {
+            "text": "Becoming one with the forest"
+        },
+        {
+            "text": "Composting your enemies"
+        },
+        {
+            "text": "Confused maple syrup farmers"
+        },
+        {
+            "text": "Dancing with dryads"
+        },
+        {
+            "text": "Deeply philosophical tree stumps"
+        },
+        {
+            "text": "Environmentally conscious termites"
+        },
+        {
+            "text": "Extreme tree-climbing championships"
+        },
+        {
+            "text": "Fair-trade acorns"
+        },
+        {
+            "text": "Free-range pine needles"
+        },
+        {
+            "text": "Gluten-free tree bark"
+        },
+        {
+            "text": "Hipster birch trees"
+        },
+        {
+            "text": "Instagram-worthy tree poses"
+        },
+        {
+            "text": "Interpretive tree dancing"
+        },
+        {
+            "text": "Leaf-counting meditation"
+        },
+        {
+            "text": "Living in a tree to avoid responsibilities"
+        },
+        {
+            "text": "Luxury treehouse timeshares"
+        },
+        {
+            "text": "Maple syrup moonshine"
+        },
+        {
+            "text": "Millennial succulents"
+        },
+        {
+            "text": "Motivational speeches for saplings"
+        },
+        {
+            "text": "Organic, free-range splinters"
+        },
+        {
+            "text": "Passive-aggressive tree huggers"
+        },
+        {
+            "text": "Professional acorn collectors"
+        },
+        {
+            "text": "Rebellious young saplings"
+        },
+        {
+            "text": "Recycled tree jokes"
+        },
+        {
+            "text": "Retirement homes for old growth forests"
+        },
+        {
+            "text": "Seasonal affective disorder in evergreens"
+        },
+        {
+            "text": "Secret treehouse society meetings"
+        },
+        {
+            "text": "Self-aware Christmas trees"
+        },
+        {
+            "text": "Squirrel real estate developers"
+        },
+        {
+            "text": "Sustainable woodchuck chucking"
+        },
+        {
+            "text": "That one tree from Pokemon"
+        },
+        {
+            "text": "The ghost of Johnny Appleseed"
+        },
+        {
+            "text": "The Great Deciduous Uprising"
+        },
+        {
+            "text": "The secret lives of bark beetles"
+        },
+        {
+            "text": "Tree dating apps"
+        },
+        {
+            "text": "Tree law experts"
+        },
+        {
+            "text": "Tree rings telling inappropriate stories"
+        },
+        {
+            "text": "Trees with commitment issues"
+        },
+        {
+            "text": "Underground root networking parties"
+        },
+        {
+            "text": "Vegan wooden furniture"
+        },
+        {
+            "text": "Vintage pine cone collections"
+        },
+        {
+            "text": "Weeping willow support groups"
+        },
+        {
+            "text": "Whispering sweet nothings to plants"
+        },
+        {
+            "text": "Yoga classes for old oaks"
+        },
+        {
+            "text": "Zen garden speed running"
+        }
+    ]
+} 

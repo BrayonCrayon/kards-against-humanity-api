@@ -1,0 +1,272 @@
+{
+    "expansion": {
+        "name": "The Godfather (SFW)"
+    },
+    "black_cards": [
+        {
+            "text": "I'm gonna make him _______ he can't refuse.",
+            "pick": 1
+        },
+        {
+            "text": "Why is there a horse head-shaped box in my bed?",
+            "pick": 1
+        },
+        {
+            "text": "The family business now involves _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Leave the gun, take the _______.",
+            "pick": 1
+        },
+        {
+            "text": "The wedding reception was ruined by _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "What's really in that Italian restaurant?",
+            "pick": 1
+        },
+        {
+            "text": "The Don's latest business venture combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "The family meeting was interrupted by _______.",
+            "pick": 1
+        },
+        {
+            "text": "The consigliere's advice involves _______.",
+            "pick": 1
+        },
+        {
+            "text": "Michael's trip to Sicily revealed _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why is Luca Brasi sleeping with the _______?",
+            "pick": 1
+        },
+        {
+            "text": "The new family tradition requires _______.",
+            "pick": 1
+        },
+        {
+            "text": "The baptism was scheduled at the same time as _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Fredo's fishing trip included _______.",
+            "pick": 1
+        },
+        {
+            "text": "The Senate committee is investigating _______.",
+            "pick": 1
+        },
+        {
+            "text": "The olive oil import business is actually _______.",
+            "pick": 1
+        },
+        {
+            "text": "What's really in that cannoli?",
+            "pick": 1
+        },
+        {
+            "text": "The family loyalty test involves _______.",
+            "pick": 1
+        },
+        {
+            "text": "The Don's garden is hiding _______.",
+            "pick": 1
+        },
+        {
+            "text": "The new family motto combines _______ with _______.",
+            "pick": 2
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "An offer you can't refuse"
+        },
+        {
+            "text": "A very confused horse costume"
+        },
+        {
+            "text": "Strategic cannoli placement"
+        },
+        {
+            "text": "Family meeting minutes"
+        },
+        {
+            "text": "Olive oil economics"
+        },
+        {
+            "text": "Wedding photography drama"
+        },
+        {
+            "text": "Competitive godfather-ing"
+        },
+        {
+            "text": "Restaurant reservations"
+        },
+        {
+            "text": "Sicilian retirement plans"
+        },
+        {
+            "text": "Orange-related anxiety"
+        },
+        {
+            "text": "A very reluctant consigliere"
+        },
+        {
+            "text": "The world's most ineffective threat"
+        },
+        {
+            "text": "A fish wrapped in yesterday's newspaper"
+        },
+        {
+            "text": "Excessive hand gestures"
+        },
+        {
+            "text": "Family recipe secrets"
+        },
+        {
+            "text": "Suspicious pasta sauce"
+        },
+        {
+            "text": "Dramatic door closing"
+        },
+        {
+            "text": "Baptism scheduling conflicts"
+        },
+        {
+            "text": "Garden tomato politics"
+        },
+        {
+            "text": "Respect-based economics"
+        },
+        {
+            "text": "A surprisingly peaceful negotiation"
+        },
+        {
+            "text": "Professional wedding guest services"
+        },
+        {
+            "text": "A very serious discussion about pasta"
+        },
+        {
+            "text": "Strategic favor collection"
+        },
+        {
+            "text": "The same threat 57 times"
+        },
+        {
+            "text": "A cat in a tuxedo"
+        },
+        {
+            "text": "Suspicious wedding cake transactions"
+        },
+        {
+            "text": "Family loyalty testing"
+        },
+        {
+            "text": "Dramatic violin music"
+        },
+        {
+            "text": "Restaurant table politics"
+        },
+        {
+            "text": "A consigliere's self-help book"
+        },
+        {
+            "text": "The world's most elaborate family dinner"
+        },
+        {
+            "text": "A very specific pasta preference"
+        },
+        {
+            "text": "Emergency cannoli supplies"
+        },
+        {
+            "text": "Family meeting diplomacy"
+        },
+        {
+            "text": "A surprisingly organized crime family"
+        },
+        {
+            "text": "The Don's suggestion box"
+        },
+        {
+            "text": "Olive oil quality control"
+        },
+        {
+            "text": "Inter-family politics"
+        },
+        {
+            "text": "Wedding invitation anxiety"
+        },
+        {
+            "text": "A suspiciously specific prophecy about cannolis"
+        },
+        {
+            "text": "The consigliere's existential crisis"
+        },
+        {
+            "text": "Competitive respect earning"
+        },
+        {
+            "text": "Family compound architecture"
+        },
+        {
+            "text": "Divine intervention via Italian grandmother"
+        },
+        {
+            "text": "A surprisingly competent bodyguard"
+        },
+        {
+            "text": "The world's most dramatic family meeting"
+        },
+        {
+            "text": "Respect-based permits"
+        },
+        {
+            "text": "A very determined wedding photographer"
+        },
+        {
+            "text": "The family's coffee addiction"
+        },
+        {
+            "text": "Mandatory respect training"
+        },
+        {
+            "text": "A perfectly timed dramatic pause"
+        },
+        {
+            "text": "The annual family reunion"
+        },
+        {
+            "text": "Emergency respect protocols"
+        },
+        {
+            "text": "A godfather's guide to gardening"
+        },
+        {
+            "text": "The world's most inefficient threat delivery"
+        },
+        {
+            "text": "Family business manifestos"
+        },
+        {
+            "text": "A consigliere's retirement plan"
+        },
+        {
+            "text": "The restaurant's therapy sessions"
+        },
+        {
+            "text": "Horse head insurance policies"
+        },
+        {
+            "text": "The great cannoli uprising"
+        }
+    ]
+} 

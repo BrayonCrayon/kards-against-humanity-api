@@ -20,24 +20,24 @@ jobs:
         run: cp .env.example .env
       - name: Copy .docker.env.example to .docker.env
         run: cp environment/.docker.env.example environment/docker.env
-      - run: docker-compose pull
+      - run: docker compose pull
       - uses: satackey/action-docker-layer-caching@v0.0.11
         continue-on-error: true
       - name: make vendor folder placeholder
         run: mkdir vendor
       - name: Spin up container
-        run: docker-compose up -d
+        run: docker compose up -d
       - name: Install Composer Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: Fix Permissions
         run: chmod -R 777 ./
       - name: Generate Application Key
-        run: docker-compose exec -T app php artisan key:generate
+        run: docker compose exec -T app php artisan key:generate
       - name: Run migrations
-        run: docker-compose exec -T app php artisan migrate:fresh --env=testing --force
+        run: docker compose exec -T app php artisan migrate:fresh --env=testing --force
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: docker-compose exec -T app vendor/bin/pest
+        run: docker compose exec -T app vendor/bin/pest
       - name: Spin down container
         if: always()
-        run: docker-compose down -v
+        run: docker compose down -v
 

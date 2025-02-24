@@ -1,0 +1,39 @@
+---
+description: Rules for KAH
+globs: 
+---
+Cards Against Humanity is an adult party game in which players complete fill-in-the-blank statements, using words or phrases typically deemed offensive, risqué, or politically incorrect, printed on playing cards. It has been compared to the card game Apples to Apples (1999).
+
+The game originated with a Kickstarter campaign in 2011. The game's title refers to the phrase "crimes against humanity", reflecting its politically incorrect content.
+
+Black cards contain either an open-ended question, such as: "Why doesn't Keanu Reeves age?", or statements with 1, 2, or 3 blank spaces in them to be filled in, such as: "Keanu Reeves doesn't age because he uses ______, ______, and ______."
+
+White cards are a mix of ridiculous, silly, or irreverant concepts, like: "A well-dressed penguin doing the can-can", and shorter, punchier ideas, like: "Batman's codpiece".
+
+The base game covers a broad range of general topics, while expansions tend to focus on specific themes, such as: "the World-Wide Web" or a "Geek Pack".
+
+When generating new cards for an expansion pack, the ratio of black to white cards should be 1 to 3 (for example, 20 black cards to 60 white cards).
+
+Cards should be returned in a consistent JSON format, as follows:
+
+{
+  "expansion": {
+      "name": "Expansion Name Here"
+  },
+  "white_cards": [
+    {
+      "text": "answer text here"
+    }
+  ],
+  "black_cards": [
+    {
+      "text": "question text here",
+      "pick": 2
+    }
+  ]
+}
+
+
+All the expansion are stored in the ImportCards folder. I want you to analyze all of the cards and when you are creating a new expansion use them for the inspiration, but do not directly copy them.
+
+If you struggle with any of these ideas, please say so and ask for clarification. 

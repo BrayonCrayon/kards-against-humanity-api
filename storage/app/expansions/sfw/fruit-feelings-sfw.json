@@ -1,0 +1,272 @@
+{
+    "expansion": {
+        "name": "Fruit Feelings (SFW)"
+    },
+    "black_cards": [
+        {
+            "text": "The banana's therapy session revealed _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why is the pineapple crying?",
+            "pick": 1
+        },
+        {
+            "text": "The fruit bowl support group discusses _______ every Wednesday.",
+            "pick": 1
+        },
+        {
+            "text": "The apple's dating profile lists _______ as a deal-breaker.",
+            "pick": 1
+        },
+        {
+            "text": "The fruit salad drama started because of _______, _______, and _______.",
+            "pick": 3
+        },
+        {
+            "text": "What's causing the grapes to gossip?",
+            "pick": 1
+        },
+        {
+            "text": "The strawberry's memoir reveals _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The orange's stand-up comedy routine is all about _______.",
+            "pick": 1
+        },
+        {
+            "text": "The watermelon's biggest fear is _______.",
+            "pick": 1
+        },
+        {
+            "text": "The mango's dream job combines _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "Why did the kiwi start a revolution?",
+            "pick": 1
+        },
+        {
+            "text": "The peach's social media is full of _______.",
+            "pick": 1
+        },
+        {
+            "text": "The fruit basket committee banned _______ and _______.",
+            "pick": 2
+        },
+        {
+            "text": "The lemon's self-help book focuses on _______.",
+            "pick": 1
+        },
+        {
+            "text": "The fruit ninja incident resulted in _______.",
+            "pick": 1
+        },
+        {
+            "text": "The avocado's identity crisis involves _______ with _______.",
+            "pick": 2
+        },
+        {
+            "text": "What's in the forbidden fruit smoothie?",
+            "pick": 1
+        },
+        {
+            "text": "The fruit's motivational speech emphasized _______.",
+            "pick": 1
+        },
+        {
+            "text": "The produce aisle scandal exposed _______.",
+            "pick": 1
+        },
+        {
+            "text": "The fruit poetry slam featured _______ versus _______.",
+            "pick": 2
+        }
+    ],
+    "white_cards": [
+        {
+            "text": "A perfectly ripe existential crisis"
+        },
+        {
+            "text": "Banana bunch separation anxiety"
+        },
+        {
+            "text": "Grape cluster therapy"
+        },
+        {
+            "text": "Citrus superiority complex"
+        },
+        {
+            "text": "Bruised ego"
+        },
+        {
+            "text": "Fruit bowl politics"
+        },
+        {
+            "text": "Ripening peer pressure"
+        },
+        {
+            "text": "Organic identity crisis"
+        },
+        {
+            "text": "Seasonal depression"
+        },
+        {
+            "text": "Produce aisle drama"
+        },
+        {
+            "text": "A very insecure apple"
+        },
+        {
+            "text": "The world's most optimistic raisin"
+        },
+        {
+            "text": "A strawberry's guide to self-care"
+        },
+        {
+            "text": "Competitive ripening"
+        },
+        {
+            "text": "Fruit salad FOMO"
+        },
+        {
+            "text": "Refrigerator meditation"
+        },
+        {
+            "text": "Smoothie blend anxiety"
+        },
+        {
+            "text": "Dramatic shelf placement"
+        },
+        {
+            "text": "Farmers market gossip"
+        },
+        {
+            "text": "Organic certification pride"
+        },
+        {
+            "text": "A pineapple's guide to assertiveness"
+        },
+        {
+            "text": "Professional fruit ninja dodging"
+        },
+        {
+            "text": "A very emotional pomegranate"
+        },
+        {
+            "text": "Strategic bruise hiding"
+        },
+        {
+            "text": "The same grape joke 57 times"
+        },
+        {
+            "text": "A kiwi's identity documents"
+        },
+        {
+            "text": "Suspicious fruit sticker placement"
+        },
+        {
+            "text": "Composting fears"
+        },
+        {
+            "text": "Dramatic ripening montage"
+        },
+        {
+            "text": "Fruit basket hierarchy"
+        },
+        {
+            "text": "A banana's farewell speech"
+        },
+        {
+            "text": "The world's most elaborate fruit arrangement"
+        },
+        {
+            "text": "A very specific ripening timeline"
+        },
+        {
+            "text": "Emergency juice cleanse"
+        },
+        {
+            "text": "Fruit fly diplomacy"
+        },
+        {
+            "text": "A surprisingly organized fruit rebellion"
+        },
+        {
+            "text": "The fruit bowl's suggestion box"
+        },
+        {
+            "text": "Pesticide-free activism"
+        },
+        {
+            "text": "Produce section politics"
+        },
+        {
+            "text": "Fruit sticker collection"
+        },
+        {
+            "text": "A suspiciously specific prophecy about avocado toast"
+        },
+        {
+            "text": "The melon's existential crisis"
+        },
+        {
+            "text": "Competitive freshness"
+        },
+        {
+            "text": "Fruit basket architecture"
+        },
+        {
+            "text": "Divine intervention via fruit fly"
+        },
+        {
+            "text": "A surprisingly competent lime"
+        },
+        {
+            "text": "The world's most dramatic browning"
+        },
+        {
+            "text": "Produce aisle permits"
+        },
+        {
+            "text": "A very determined fig"
+        },
+        {
+            "text": "The fruit's coffee table book"
+        },
+        {
+            "text": "Mandatory ripeness inspection"
+        },
+        {
+            "text": "A perfectly timed fruit drop"
+        },
+        {
+            "text": "The annual fruit convention"
+        },
+        {
+            "text": "Emergency preservation protocols"
+        },
+        {
+            "text": "A fruit's guide to immortality"
+        },
+        {
+            "text": "The world's most inefficient juicing process"
+        },
+        {
+            "text": "Fruit manifesto"
+        },
+        {
+            "text": "A peach's retirement plan"
+        },
+        {
+            "text": "The fruit bowl's therapy sessions"
+        },
+        {
+            "text": "Organic certification anxiety"
+        },
+        {
+            "text": "The great produce uprising"
+        }
+    ]
+} 
