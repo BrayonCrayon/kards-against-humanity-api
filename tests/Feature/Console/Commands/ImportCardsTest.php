@@ -31,7 +31,7 @@ describe('ImportCards command', function () {
     });
 
     it('imports cards from a file', function () {
-        Storage::disk('local')->put('test.json', json_encode($this->validData));
+        Storage::disk()->put('test.json', json_encode($this->validData));
 
         artisan('kah:import-cards --file=test.json')->assertSuccessful();
 
@@ -63,7 +63,7 @@ describe('ImportCards command', function () {
             });
 
         $expansions->each(function (array $fileData, int $index) {
-            Storage::disk('local')->put("testDir/test{$index}.json", json_encode($fileData));
+            Storage::disk()->put("testDir/test{$index}.json", json_encode($fileData));
         });
 
         artisan('kah:import-cards --dir=testDir')->assertSuccessful();

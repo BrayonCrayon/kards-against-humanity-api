@@ -78,12 +78,12 @@ class ImportCards extends Command
 
     private function validateFiles(string $path): Collection
     {
-        if (!Storage::disk('local')->exists($path)) {
+        if (!Storage::disk()->exists($path)) {
             throw new FileDoesNotExistException($path);
         }
 
-        if(Storage::disk('local')->directoryExists($path)) {
-            return collect(Storage::disk('local')->allFiles($path))
+        if(Storage::disk()->directoryExists($path)) {
+            return collect(Storage::disk()->allFiles($path))
                 ->filter(fn($file) => Str::endsWith($file, '.json'));
         }
 
