@@ -17,11 +17,6 @@ class ImportCards extends Command
     protected $signature = 'kah:import-cards {--file=} {--dir=}]';
     protected $description = 'Import all cards from a json file or folder with multiple json files';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function handle(): int
     {
         $startLoading = now();
@@ -30,13 +25,13 @@ class ImportCards extends Command
             $this->loadExpansions();
         } catch (FileDoesNotExistException|InvalidArgumentException $e) {
             $this->error($e->getMessage());
-            return 1;
+            return self::FAILURE;
         }
 
         $endLoading = now();
         $this->info("Loading Deck: {$endLoading->diffInMilliseconds($startLoading)} ms");
 
-        return 0;
+        return self::SUCCESS;
     }
 
     private function loadExpansions(): void
