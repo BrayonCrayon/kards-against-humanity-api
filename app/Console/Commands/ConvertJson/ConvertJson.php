@@ -42,14 +42,14 @@ class ConvertJson extends Command
             ];
 
             $fileName = Str::kebab(Str::replace(["/", ":", ",", "[", "]", "(", ")", "\"", "*", "!", "?"],"", $expansion['name'])) . '.json';
-            Storage::disk('local')->put('expansions/existing/' . $fileName, json_encode($expansionData));
+            Storage::disk()->put('expansions/existing/' . $fileName, json_encode($expansionData));
         });
         $this->info("Finished Importing Expansions");
     }
 
     private function loadJsonFile(): void
     {
-        $jsonString = file_get_contents(app_path('Console/Commands/ConvertJson/card-data.json'));
+        $jsonString = Storage::disk()->get('card-data.json');
 
         $this->cahData = collect(json_decode($jsonString, true));
     }
