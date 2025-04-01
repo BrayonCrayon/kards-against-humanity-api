@@ -21,7 +21,8 @@ class GameStateResource extends JsonResource
             'blackCard' => BlackCardResource::make($this->resource->black_card),
             'hasSubmittedWhiteCards' => auth()->user()->hasSubmittedWhiteCards,
             'submittedWhiteCardIds' => auth()->user()->submittedWhiteCardIds,
-            'hand' => UserGameWhiteCardResource::collection(auth()->user()->hand)
+            'hand' => UserGameWhiteCardResource::collection(auth()->user()->hand),
+            'hasSpectator' => $this->resource->spectators()->count() > 0,
         ];
     }
 }
