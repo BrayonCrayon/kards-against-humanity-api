@@ -1,6 +1,8 @@
 <?php
 
+use App\Events\GameJoined;
 use App\Models\GameUser;
+use Illuminate\Support\Facades\Event;
 
 uses(\Tests\Traits\GameUtilities::class);
 
@@ -9,6 +11,7 @@ beforeEach(function () {
 });
 
 it('will allow a user to spectate a game', function () {
+    Event::fake();
     $this->postJson(route('api.game.spectate', $this->game->code))
         ->assertSuccessful();
 
@@ -16,6 +19,7 @@ it('will allow a user to spectate a game', function () {
 });
 
 it('will return game data to spectator', function () {
+    Event::fake();
     $blackCard = $this->game->blackCard;
     $response = $this->postJson(route('api.game.spectate', $this->game->code))
         ->assertSuccessful()
@@ -59,4 +63,5 @@ it('will return game data to spectator', function () {
             'expansionId' => $blackCard->expansion_id,
         ]
     ]);
+    Event::assertDispatched(GameJoined::class);
 });
