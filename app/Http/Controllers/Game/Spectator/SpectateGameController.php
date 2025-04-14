@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Game\Spectator;
 
+use App\Events\GameJoined;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SpectateGameResource;
 use App\Models\Game;
@@ -12,13 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SpectateGameController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return SpectateGameResource
-     */
-    public function __invoke(Request $request, Game $game)
+    public function __invoke(Request $request, Game $game): SpectateGameResource
     {
         $user = User::create(['name' => 'Spectator X']);
         GameUser::create([
@@ -27,6 +22,8 @@ class SpectateGameController extends Controller
             'is_spectator' => true
         ]);
         Auth::login($user);
+        event(new GameJoined($game, $user));
+
         return SpectateGameResource::make($game);
     }
 }
