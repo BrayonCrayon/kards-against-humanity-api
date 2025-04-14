@@ -85,4 +85,22 @@ it('returns current game state', function () {
             'redrawCount' => $loggedInUser->gameState->redraw_count
         ]
     ]);
+
+    $response->assertJsonFragment([
+        'hasSpectator' => false
+    ]);
+});
+
+it('returns an indication that there are spectators in the game', function () {
+    $game = $this->createGame(4);
+    $user = $game->nonJudgeUsers()->first();
+    $spectator = User::factory()->create();
+    $game->players()->save($spectator, ['is_spectator' => true]);
+
+    $this->actingAs($user)
+        ->getJson(route('api.game.show', $game->id))
+        ->assertOk()
+        ->assertJsonFragment([
+            'hasSpectator' => true,
+        ]);
 });
