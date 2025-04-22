@@ -1,6 +1,6 @@
 <?php
 
-use App\Events\GameJoined;
+use App\Events\SpectatorJoined;
 use App\Models\GameUser;
 use Illuminate\Support\Facades\Event;
 
@@ -63,5 +63,5 @@ it('will return game data to spectator', function () {
             'expansionId' => $blackCard->expansion_id,
         ]
     ]);
-    Event::assertDispatched(GameJoined::class);
+    Event::assertDispatched(SpectatorJoined::class);
 });
