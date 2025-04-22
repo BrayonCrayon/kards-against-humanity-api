@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Game\Spectator;
 
-use App\Events\GameJoined;
+use App\Events\SpectatorJoined;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SpectateGameResource;
 use App\Models\Game;
@@ -22,7 +22,7 @@ class SpectateGameController extends Controller
             'is_spectator' => true
         ]);
         Auth::login($user);
-        event(new GameJoined($game, $user));
+        event(new SpectatorJoined($game));
 
         return SpectateGameResource::make($game);
     }
