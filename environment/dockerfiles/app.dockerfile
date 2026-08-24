@@ -1,4 +1,4 @@
-FROM php:8.2.7-fpm-buster
+FROM php:8.2.7-fpm
 
 ARG xdebug=true
 ARG tinker=false
