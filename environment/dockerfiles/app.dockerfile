@@ -1,4 +1,4 @@
-FROM php:8.2.7-fpm-buster
+FROM php:8.2.7-fpm
 
 ARG xdebug=true
 ARG tinker=false
@@ -13,6 +13,8 @@ ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0" \
     PHP_XDEBUG_MODE="debug"
 
 RUN docker-php-ext-install opcache
+
+RUN groupadd -g 1000 sail && useradd -u 1000 -g sail -m -s /bin/bash sail
 
 RUN apt-get update && apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \

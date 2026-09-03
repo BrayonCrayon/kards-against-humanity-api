@@ -30,7 +30,7 @@ services:
     container_name: 'kah-db'
     image: 'postgres:latest'
     volumes:
-      - '/var/dbData:/var/lib/postgresql/data'
+      - '/var/dbData:/var/lib/postgresql'
     ports:
       - '3307:5432'
     environment:
@@ -41,7 +41,7 @@ services:
     container_name: 'kah-test-db'
     image: 'postgres:latest'
     volumes:
-      - '/var/dbDatatest:/var/lib/postgresql/data'
+      - '/var/dbDatatest:/var/lib/postgresql'
     ports:
       - '33071:5432'
     environment:
